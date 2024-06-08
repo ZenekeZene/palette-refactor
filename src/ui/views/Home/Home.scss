@@ -1,0 +1,36 @@
+.home {
+
+	&__title {
+		font-weight: 1000;
+		text-transform: uppercase;
+		text-align: left;
+
+		&-color {
+			color: var(--accent-color);
+		}
+	}
+
+	&__illustration {
+		margin-bottom: var(--spacing);
+	}
+
+	&__buttons {
+		display: flex;
+    flex-direction: column;
+    gap: var(--spacing);
+	}
+
+	&__button {
+
+	}
+
+	&__button--play {
+		color: white;
+		background-color: var(--primary-color);
+	}
+
+	&__button--ranking {
+		color: var(--primary-color);
+		background-color: white;
+	}
+}

@@ -1,4 +1,4 @@
-const Tutorial = () => {
+const TutorialView = () => {
 	return (
 		<div>
 			<h1>Tutorial</h1>
@@ -6,4 +6,4 @@ const Tutorial = () => {
 	);
 };
 
-export { Tutorial };
+export { TutorialView };
