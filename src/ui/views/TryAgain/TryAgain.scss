@@ -9,15 +9,12 @@
 
 	&__subtitle {
 		color: hsl(40, 17%, 79%);
+		font-size: 1.2rem;
 	}
 
 	&__title {
 		color: var(--primary-color);
 		text-transform: uppercase;
 		font-weight: 1000;
-	}
-
-	&__replay {
-		margin-bottom: var(--spacing);
 	}
 }
