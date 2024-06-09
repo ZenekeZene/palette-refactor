@@ -4,7 +4,8 @@ import { devtools } from 'zustand/middleware'
 type State = {
 	lives: number,
 	score: number,
-	level: number,
+	currentLevel: number,
+	levels: any[],
 	tutorialIsWatched: boolean,
 }
 
@@ -19,7 +20,8 @@ type Store = State & Actions;
 const useStore = create<Store>()(devtools((set) => ({
 		lives: 10,
 		score: 0,
-		level: 1,
+		currentLevel: 1,
+		levels: ['fake level', 'fake level', 'fake level', 'fake level', 'fake level'],
 		tutorialIsWatched: false,
 		incrementLive: (qty = 1) => set((state) => ({ lives: state.lives + qty })),
 		decrementLive: (qty = 1) => set((state) => ({ lives: state.lives - qty })),
