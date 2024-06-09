@@ -1,0 +1,23 @@
+.next-level {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	place-items: center;
+	text-align: center;
+	text-wrap: balance;
+	background-color: var(--paper-color);
+
+	&__subtitle {
+		margin-block-end: var(--spacing);
+		color: hsl(40, 17%, 79%);
+		font-size: 1.2rem;
+	}
+
+	&__title {
+		margin-block-end: 0;
+		color: var(--primary-color);
+		text-transform: uppercase;
+		font-weight: 700;
+    font-style: italic;
+	}
+}
