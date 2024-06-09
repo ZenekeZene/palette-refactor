@@ -30,7 +30,7 @@ const Progression = ({ currentLevel, totalLevels }: Props) => {
   return (
     <article className="progression">
       <p className="progression__text">
-        Game progression:
+        Game progression: &nbsp;
         <span className="progression__percent">{percent}%</span>
       </p>
       <ProgressionList currentLevel={currentLevel} totalLevels={totalLevels} />
