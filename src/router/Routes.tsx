@@ -3,7 +3,7 @@ import { HomeView } from "../ui/views/Home/Home";
 import { GameView } from "../ui/views/Game";
 import { TutorialView } from "../ui/views/Tutorial/Tutorial";
 import { TryAgainView } from "../ui/views/TryAgain";
-import { FinalView } from "../ui/views/Final";
+import { FinalView } from "../ui/views/Final/Final";
 
 const routes:RouteObject[] = [
 	{ path: "/", element: <HomeView /> },

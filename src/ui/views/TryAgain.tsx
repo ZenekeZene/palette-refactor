@@ -1,8 +1,8 @@
 const TryAgainView = () => {
 	return (
-		<div>
+		<article className="view">
 			<h1>Try Again</h1>
-		</div>
+		</article>
 	);
 };
 

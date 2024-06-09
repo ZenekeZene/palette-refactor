@@ -1,6 +1,8 @@
 const GameView = () => {
 	return (
-		<><h1>Game</h1></>
+		<article className="view">
+			<h1>Game</h1>
+		</article>
 	);
 };
 
