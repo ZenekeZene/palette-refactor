@@ -15,7 +15,7 @@ const ProgressionList = ({ currentLevel, totalLevels }: Props) => {
   return (
     <ul className="progression__list">
       {new Array(totalLevels).fill("").map((_, index) => (
-        <li className={`progression__item ${isCompleted(index) ? '--completed' : ''}`}
+        <li key={`level-${index}`} className={`progression__item ${isCompleted(index) ? '--completed' : ''}`}
 					aria-label={`Level ${index} ${isCompleted(index) ? 'unfinished ': 'completed' }`}
 				>{}</li>
       ))}
