@@ -8,17 +8,17 @@ initial:
 # Levels config and his prizes:
 levels:
   - id: 'Level 1'
-    chips: 2
+    numberOfChips: 2
     prize:
       - lives: 0
       - bonus: 0
   - id: 'Level 2'
-    chips: 3
+    numberOfChips: 3
     prize:
       - lives: 0
       - bonus: 0
   - id: 'Level 3'
-    chips: 4
+    numberOfChips: 4
     prize:
       - lives: 0
       - bonus: 1

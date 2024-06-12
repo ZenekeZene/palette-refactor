@@ -1,18 +1,32 @@
 import { v4 as uuidv4 } from 'uuid'
+import { Prize } from '@/domain/Prize/Prize'
+
+interface LevelProps {
+	numberOfChips: number,
+	prize: Prize,
+}
 
 class Level {
-	readonly id:string
-	readonly index:number;
-	readonly numberOfChips:number;
+	private readonly id:string
+	readonly numberOfChips:number
+	readonly prize:Prize
 
-	constructor({ index }: { index: number }) {
+	constructor({ numberOfChips, prize }: LevelProps) {
 		this.id = uuidv4()
-		this.index = index
-		this.numberOfChips = index
+		this.numberOfChips = numberOfChips
+		this.prize = prize
 	}
 
 	getId() {
 		return this.id
+	}
+
+	getPrize() {
+		return this.prize
+	}
+
+	getNumberOfChips() {
+		return this.numberOfChips
 	}
 }
 
