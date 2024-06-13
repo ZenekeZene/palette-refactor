@@ -2,12 +2,13 @@ import { Table } from '@/domain/Table/Table'
 import { LevelsRepository } from '@/infra/LevelsRepository/LevelsRepository'
 
 interface UseCase<T> {
-  execute: () => T;
+  execute: () => Promise<T>;
 }
 
-const StartGame = (): UseCase<Table>=> ({
-	execute: (): Table => {
-		const levelsConfig = new LevelsRepository().getLevels()
+const StartGameUseCase = (): UseCase<Table> => ({
+	execute: async (): Promise<Table> => {
+		const repository = new LevelsRepository()
+		const levelsConfig = await repository.getLevels()
 
 		const table = new Table()
 		table.generateLevels(levelsConfig)
@@ -15,4 +16,4 @@ const StartGame = (): UseCase<Table>=> ({
 	}
 })
 
-export { StartGame }
+export { StartGameUseCase }
