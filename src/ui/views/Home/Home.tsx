@@ -1,15 +1,13 @@
-import { Link } from "react-router-dom";
-import { FaPlay } from "react-icons/fa";
-import { FaStar } from "react-icons/fa";
-import { Title } from "@/ui/components/Title/Title";
-import { useClassnameOfRoute } from '@/ui/hooks/useClassnameOfRoute/useClassnameOfRoute';
-import { useStore } from "@/store/store";
+import { Link } from "react-router-dom"
+import { FaPlay } from "react-icons/fa"
+import { FaStar } from "react-icons/fa"
+import { Title } from "@/ui/components/Title/Title"
+import { useClassnameOfRoute } from '@/ui/hooks/useClassnameOfRoute/useClassnameOfRoute'
+import { useStore } from "@/store/store"
 import "./Home.scss";
 
 const HomeView = () => {
   useClassnameOfRoute()
-  const count = useStore(state => state.lives)
-  const increment = useStore(state => state.incrementLive)
   const tutorialIsWatched = useStore(state => state.tutorialIsWatched)
 
   return (
@@ -27,7 +25,6 @@ const HomeView = () => {
         >
           <FaStar />Ranking
         </Link>
-        <p onClick={() => increment()}>{count}</p>
       </section>
     </article>
   );
