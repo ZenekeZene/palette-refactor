@@ -8,9 +8,9 @@ import "./NextLevel.scss"
 
 const NextLevelView = () => {
 	const state = useStore(
-    useShallow(({ currentLevel, levels }) => ({
+    useShallow(({ currentLevel, table }) => ({
       currentLevel,
-      totalLevels: levels.length,
+      totalLevels: table.getNumberOfLevels(),
     })));
 
 	return (
