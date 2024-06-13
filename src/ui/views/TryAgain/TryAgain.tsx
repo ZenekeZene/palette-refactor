@@ -8,9 +8,9 @@ import "./TryAgain.scss";
 
 const TryAgainView = () => {
   const state = useStore(
-    useShallow(({ currentLevel, levels }) => ({
+    useShallow(({ currentLevel, table }) => ({
       currentLevel,
-      totalLevels: levels.length,
+      totalLevels: table.getNumberOfLevels(),
     })));
 
   return (
