@@ -3,7 +3,8 @@ import { devtools } from 'zustand/middleware'
 import { Table } from '@/domain/Table/Table'
 import { StartGameUseCase } from '@/application/startGame.usecase'
 import { Store, InitialState } from './store.types'
-import Lives from '/config/Lives.yaml'
+import InitialLives from '/config/Lives.yaml'
+const Lives = InitialLives.initial
 
 const initialState: InitialState = {
 	lives: Lives.lives,
@@ -27,7 +28,5 @@ const useStore = create<Store>()(devtools((set) => ({
 		resetGame: () => set(() => initialState),
 	}),
 ))
-
-useStore.getState().startGame()
 
 export { useStore }
