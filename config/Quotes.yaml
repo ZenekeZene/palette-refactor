@@ -1,0 +1,160 @@
+quotes:
+  - id: "quote1"
+    text: "Creativity takes courage"
+    author: "Henry Matisse"
+
+  - id: "quote2"
+    text: "What I need most of all is color, always, always"
+    author: "Claude Monet"
+
+  - id: "quote3"
+    text: "Every child is an artist"
+    author: "Pablo Picasso"
+
+  - id: "quote4"
+    text: "Art is either revolution or plagiarism"
+    author: "Paul Gauguin"
+
+  - id: "quote5"
+    text: "The great artist is the simplifier"
+    author: "Vincent Van Gogh"
+
+  - id: "quote6"
+    text: "To draw you must close your eyes and sing"
+    author: "Pablo Picasso"
+
+  - id: "quote7"
+    text: "Art is meant to disturb, science reassures"
+    author: "Georges Braque"
+
+  - id: "quote8"
+    text: "Every act of creation is first an act of destruction"
+    author: "Pablo Picasso"
+
+  - id: "quote9"
+    text: "Tell your own story, and you will be interesting"
+    author: "Louise Bourgeois"
+
+  - id: "quote10"
+    text: "Without atmosphere a painting is nothing"
+    author: "Rembrandt"
+
+  - id: "quote11"
+    text: "Everything that is contradictory creates life"
+    author: "Salvador Dalí"
+
+  - id: "quote12"
+    text: "No great work of art is ever finished"
+    author: "Michelangelo"
+
+  - id: "quote13"
+    text: "To be an artist, you need to exist in a world of silence"
+    author: "Louise Bourgeois"
+
+  - id: "quote14"
+    text: "Art evokes the mystery without which the world would not exist"
+    author: "René Magritte"
+
+  - id: "quote15"
+    text: "A work is finished when an artist realizes his intentions"
+    author: "Rembrandt"
+
+  - id: "quote16"
+    text: "Art is never finished, only abandoned"
+    author: "Leonardo da Vinci"
+
+  - id: "quote17"
+    text: "Bad artists copy. Good artists steal"
+    author: "Pablo Picasso"
+
+  - id: "quote18"
+    text: "Everything you can imagine is real"
+    author: "Pablo Picasso"
+
+  - id: "quote19"
+    text: "I dream of painting and then I paint my dream"
+    author: "Vincent Van Gogh"
+
+  - id: "quote20"
+    text: "Art is my life and my life is art"
+    author: "Yoko Ono"
+
+  - id: "quote21"
+    text: "Art is a way of recognizing oneself"
+    author: "Louise Bourgeois"
+
+  - id: "quote22"
+    text: "You study, you learn, but you guard the original naivete"
+    author: "Henri Matisse"
+
+  - id: "quote23"
+    text: "Art lives from constraints and dies from freedom"
+    author: "Leonardo da Vinci"
+
+  - id: "quote24"
+    text: "Sometimes with art, it is important just to look"
+    author: "Marina Abramović"
+
+  - id: "quote25"
+    text: "Every good painter paints what he is"
+    author: "Jackson Pollock"
+
+  - id: "quote26"
+    text: "To be an artist is to believe in life"
+    author: "Henry Moore"
+
+  - id: "quote27"
+    text: "Art is a lie that makes us realize truth"
+    author: "Pablo Picasso"
+
+  - id: "quote28"
+    text: "Art is a line around your thoughts"
+    author: "Gustav Klimt"
+
+  - id: "quote29"
+    text: "Choose only one master: Nature"
+    author: "Rembrandt"
+
+  - id: "quote30"
+    text: "Great art picks up where nature ends"
+    author: "Marc Chagall"
+
+  - id: "quote31"
+    text: "It is absurd to look for perfection"
+    author: "Camille Pissarro"
+
+  - id: "quote32"
+    text: "Knowing how to look is a way of inventing"
+    author: "Salvador Dalí"
+
+  - id: "quote33"
+    text: "Everything starts from a dot"
+    author: "Wassily Kandinsky"
+
+  - id: "quote34"
+    text: "Inspiration does exist, but it must find you working"
+    author: "Pablo Picasso"
+
+  - id: "quote35"
+    text: "I would like to paint the way a bird sings"
+    author: "Claude Monet"
+
+  - id: "quote36"
+    text: "If I could say it in words there would be no reason to paint"
+    author: "Edward Hopper"
+
+  - id: "quote37"
+    text: "Art is not what you see, but what you make others see"
+    author: "Edgar Degas"
+
+  - id: "quote38"
+    text: "Color is a power which directly influences the soul"
+    author: "Wassily Kandinsky"
+
+  - id: "quote39"
+    text: "Color is my day-long obsession, joy and torment"
+    author: "Claude Monet"
+
+  - id: "quote40"
+    text: "I never paint dreams or nightmares. I paint my own reality"
+    author: "Frida Kahlo"
