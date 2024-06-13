@@ -19,6 +19,7 @@ type Actions = {
 	setScore: (value: number) => void,
 	startGame: () => void,
 	getQuote: () => void,
+	getInitialLives: () => void,
 }
 
 export type Store = State & Actions;
