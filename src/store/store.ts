@@ -1,42 +1,33 @@
 import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
-import { Levels } from '@/domain/Table/Table'
 import { Table } from '@/domain/Table/Table'
-import { StartGame } from '@/application/startGame.usecase'
+import { StartGameUseCase } from '@/application/startGame.usecase'
+import { Store, InitialState } from './store.types'
+import Lives from '/config/Lives.yaml'
 
-StartGame()
-
-type State = {
-	lives: number,
-	score: number,
-	currentLevel: number,
-	levels: Levels,
-	tutorialIsWatched: boolean,
+const initialState: InitialState = {
+	lives: Lives.lives,
+	bonus: Lives.bonus,
+	score: Lives.score,
+	currentLevel: Lives.level,
 }
-
-type Actions = {
-	incrementLive: (qty?: number) => void,
-	decrementLive: (qty?: number ) => void,
-	setTutorialIsLaunched: (value: boolean) => void,
-}
-
-type Store = State & Actions;
 
 const useStore = create<Store>()(devtools((set) => ({
-		lives: 10,
-		score: 0,
-		currentLevel: 1,
-		levels: new Map(),
+	...initialState,
+		table: new Table(),
 		tutorialIsWatched: false,
-		startGame: () => {
-			const table: Table = StartGame().execute()
-			set(() => ({ levels: table.getLevels() }))
+		startGame: async () => {
+			const startGame = StartGameUseCase()
+			const table = await startGame.execute()
+			set(() => ({ table }))
 		},
-		setLevels: (levels: Levels) => set(() => ({ levels })),
-		incrementLive: (qty = 1) => set((state) => ({ lives: state.lives + qty })),
-		decrementLive: (qty = 1) => set((state) => ({ lives: state.lives - qty })),
 		setTutorialIsLaunched: (value) => set(() => ({ tutorialIsWatched: value })),
+		setScore: (value) => set(() => ({ score: value })),
+		nextLevel: () => set((state) => ({ currentLevel: state.currentLevel + 1 })),
+		resetGame: () => set(() => initialState),
 	}),
 ))
+
+useStore.getState().startGame()
 
 export { useStore }
