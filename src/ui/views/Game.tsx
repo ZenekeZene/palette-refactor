@@ -6,4 +6,4 @@ const GameView = () => {
 	);
 };
 
-export { GameView };
+export { GameView }
