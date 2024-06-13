@@ -8,15 +8,18 @@ import "./NextLevel.scss"
 
 const NextLevelView = () => {
 	const state = useStore(
-    useShallow(({ currentLevel, table }) => ({
+    useShallow(({ currentLevel, table, quote }) => ({
       currentLevel,
       totalLevels: table.getNumberOfLevels(),
+      quote,
     })));
 
 	return (
 		<article className="next-level view">
-      <h1 className="next-level__title">”To be an artist is to believe in life”</h1>
-      <h2 className="next-level__subtitle">—HENRY MORE—</h2>
+      { state.quote && (<>
+        <h1 className="next-level__title">”{state.quote.text}”</h1>
+        <h2 className="next-level__subtitle">—{state.quote.author}—</h2>
+      </>)}
       <Link to="/game" className="next-level__play button --square"
         aria-label="Next level"
       >
