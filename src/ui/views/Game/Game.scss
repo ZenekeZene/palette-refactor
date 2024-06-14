@@ -1,0 +1,12 @@
+.game {
+	position: relative;
+
+	&__bonus {
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+    width: 5rem;
+    height: 5rem;
+    font-size: 2rem;
+	}
+}
