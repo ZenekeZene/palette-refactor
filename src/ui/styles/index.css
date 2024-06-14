@@ -2,12 +2,15 @@
   --primary-color: hsl(189, 64%, 59%);
 	--accent-color: hsl(324, 64%, 59%);
   --paper-color: hsl(300, 100%, 100%);
+  --cream-color: hsl(40, 17%, 79%);
   --font-family: 'Nunito', sans-serif;
   --spacing: 1rem;
   --spacing-half: 0.5rem;
   --spacing-double: 2rem;
   --border-radius: 4px;
+  --border-radius-large: 12px;
   --max-width: 29rem;
+  --box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 
   font-family: var(--font-family);
   line-height: 1.5;
