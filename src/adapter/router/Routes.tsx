@@ -1,6 +1,6 @@
 import { RouteObject } from "react-router-dom"
 import { HomeView } from "@/ui/views/Home/Home"
-import { GameView } from "@/ui/views/Game"
+import { GameView } from "@/ui/views/Game/Game"
 import { TutorialView } from "@/ui/views/Tutorial/Tutorial"
 import { TryAgainView } from "@/ui/views/TryAgain/TryAgain"
 import { NextLevelView } from "@/ui/views/NextLevel/NextLevel"
