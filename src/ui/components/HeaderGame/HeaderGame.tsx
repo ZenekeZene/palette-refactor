@@ -12,7 +12,7 @@ interface HeaderGameProps {
 const HeaderGame = (props: HeaderGameProps) => {
 	return (
 		<header className="header-game">
-			<div className="header-game__back">
+			<div className="header-game__back" onClick={props.onBack}>
 				<IconBack />
 			</div>
 			<div className="header-game__level">
