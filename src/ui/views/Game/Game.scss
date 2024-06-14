@@ -1,12 +1,22 @@
 .game {
 	position: relative;
 
+    &__divider {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 68%;
+        height: 0.1rem;
+        background-color: var(--cream-color);
+    }
+
 	&__bonus {
-    position: absolute;
-    bottom: 2rem;
-    right: 2rem;
-    width: 5rem;
-    height: 5rem;
-    font-size: 2rem;
+        position: absolute;
+        bottom: 2rem;
+        right: 2rem;
+        width: 5rem;
+        height: 5rem;
+        font-size: 2rem;
 	}
 }

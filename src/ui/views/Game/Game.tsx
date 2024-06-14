@@ -20,6 +20,8 @@ const GameView = () => {
     <article className="game view">
       <HeaderGame {...state} onBack={() => navigate("/")} />
 
+      <div className="game__divider"></div>
+
 			<section className="game__footer">
 				<div className="game__bonus">
 					<Bonus bonus={state.bonus} />
