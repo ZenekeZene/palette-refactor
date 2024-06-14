@@ -3,7 +3,7 @@ import { FaPlay } from "react-icons/fa"
 import { FaStar } from "react-icons/fa"
 import { Title } from "@/ui/components/Title/Title"
 import { useClassnameOfRoute } from '@/ui/hooks/useClassnameOfRoute/useClassnameOfRoute'
-import { useStore } from "@/store/store"
+import { useStore } from "@/adapter/store/store"
 import "./Home.scss";
 
 const HomeView = () => {

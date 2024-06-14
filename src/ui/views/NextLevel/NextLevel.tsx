@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 import { FaPlay } from "react-icons/fa"
 import { useShallow } from "zustand/react/shallow"
 import { Progression } from "@/ui/components/Progression/Progression"
-import { useStore } from "@/store/store"
+import { useStore } from "@/adapter/store/store"
 import { LocationDisplay } from "@/ui/components/LocationDisplay/LocationDisplay";
 import "./NextLevel.scss"
 
@@ -12,7 +12,7 @@ const NextLevelView = () => {
       currentLevel,
       totalLevels: table.getNumberOfLevels(),
       quote,
-    })));
+    })))
 
 	return (
 		<article className="next-level view">

@@ -1,4 +1,4 @@
-import { useStore } from "@/store/store"
+import { useStore } from "@/adapter/store/store"
 import { useShallow } from "zustand/react/shallow"
 import "./Final.scss"
 
