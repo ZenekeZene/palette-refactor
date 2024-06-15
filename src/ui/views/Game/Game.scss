@@ -1,22 +1,41 @@
 .game {
 	position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
     &__divider {
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        width: 68%;
+        width: 80%;
         height: 0.1rem;
         background-color: var(--cream-color);
     }
 
+    &__footer {
+        position: relative;
+        bottom: 1rem;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
 	&__bonus {
         position: absolute;
-        bottom: 2rem;
-        right: 2rem;
+        right: 4rem;
+        top: 0.5rem;
+        width: 4rem;
+        height: 4rem;
+        font-size: 2rem;
+	}
+
+    &__chip {
         width: 5rem;
         height: 5rem;
         font-size: 2rem;
-	}
+        box-shadow: var(--box-shadow);
+	    border-radius: 50%;
+    }
 }
