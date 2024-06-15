@@ -1,13 +1,12 @@
 import { Life } from '@/domain/Life/Life'
-import { LivesRepository } from '@/infra/LivesRepository/LivesRepository'
+import { ILivesRepository } from '@/domain/Life/ILivesRepository'
 
 interface UseCase<T> {
 	execute: () => Promise<T>;
 }
 
-const GetLivesUseCase = (): UseCase<Life> => ({
+const GetLivesUseCase = (repository: ILivesRepository): UseCase<Life> => ({
 	execute: async (): Promise<Life> => {
-		const repository = new LivesRepository()
 		const initialLives = await repository.getLives()
 		return initialLives
 	}

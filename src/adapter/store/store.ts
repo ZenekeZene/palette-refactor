@@ -1,9 +1,15 @@
 import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
 import { Table } from '@/domain/Table/Table'
+
+import { LivesRepository } from '@/infra/LivesRepository/LivesRepository'
+import { QuotesRepository } from '@/infra/QuotesRepository/QuotesRepository'
+import { LevelsRepository } from '@/infra/LevelsRepository/LevelsRepository'
+
 import { GetLivesUseCase } from '@/application/getLives.usecase'
 import { StartGameUseCase } from '@/application/startGame.usecase'
 import { GetQuoteUseCase } from '@/application/getQuote.usecase'
+
 import { Store, InitialState } from './store.types'
 
 const getInitialState = ():InitialState => ({
@@ -19,7 +25,7 @@ const useStore = create<Store>()(devtools((set, get) => ({
 		tutorialIsWatched: false,
 		quote: null,
 		startGame: async () => {
-			const startGame = StartGameUseCase()
+			const startGame = StartGameUseCase(new LevelsRepository())
 			const table = await startGame.execute()
 			set(() => ({ table }))
 			get().getQuote()
@@ -33,12 +39,12 @@ const useStore = create<Store>()(devtools((set, get) => ({
 		},
 		resetGame: () => get().getInitialLives(),
 		getQuote: async () => {
-			const getQuote = GetQuoteUseCase()
+			const getQuote = GetQuoteUseCase(new QuotesRepository())
 			const quote = await getQuote.execute()
 			set(() => ({ quote }))
 		},
 		getInitialLives: async () => {
-			const getLives = GetLivesUseCase()
+			const getLives = GetLivesUseCase(new LivesRepository())
 			const initialLives = await getLives.execute()
 			set(() => ({ ...initialLives }))
 		},

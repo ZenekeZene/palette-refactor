@@ -1,13 +1,12 @@
 import { Quote } from '@/domain/Quote/Quote'
-import { QuotesRepository } from '@/infra/QuotesRepository/QuotesRepository'
+import { IQuotesRepository } from '@/domain/Quote/IQuotesRepository'
 
 interface UseCase<T> {
 	execute: () => Promise<T>;
 }
 
-const GetQuoteUseCase = (): UseCase<Quote> => ({
+const GetQuoteUseCase = (repository: IQuotesRepository): UseCase<Quote> => ({
 	execute: async (): Promise<Quote> => {
-		const repository = new QuotesRepository()
 		const quotes = await repository.getQuotes()
 
 		const randomIndex = Math.floor(Math.random() * quotes.length)
