@@ -1,5 +1,5 @@
-import { v4 as uuidv4 } from 'uuid'
 import { Prize } from '@/domain/Prize/Prize'
+import { Id } from '@/domain/shared/Id'
 
 interface LevelProps {
 	numberOfChips: number,
@@ -7,12 +7,12 @@ interface LevelProps {
 }
 
 class Level {
-	private readonly id:string
+	private readonly id:Id
 	readonly numberOfChips:number
 	readonly prize:Prize
 
 	constructor({ numberOfChips, prize }: LevelProps) {
-		this.id = uuidv4()
+		this.id = Id.random()
 		this.numberOfChips = numberOfChips
 		this.prize = prize
 	}
