@@ -1,5 +1,4 @@
-import { v4 as uuidv4 } from 'uuid'
-import validate from 'uuid-validate'
+import { v4 as uuidv4, validate } from 'uuid'
 
 class Id {
 	private readonly id:string

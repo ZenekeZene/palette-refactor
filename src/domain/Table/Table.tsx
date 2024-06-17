@@ -1,7 +1,8 @@
 import { Level } from '../Level/Level'
 import { Prize } from '@/domain/Prize/Prize'
+import { Id } from '@/domain/shared/Id'
 
-export type Levels = Map<string, Level>
+export type Levels = Map<Id, Level>
 
 class Table {
 	private readonly levels:Levels = new Map()
@@ -19,7 +20,7 @@ class Table {
 	}
 
 	getNumberOfLevels() {
-		return this.levels.size
+		return this.levels.size || 0
 	}
 }
 
