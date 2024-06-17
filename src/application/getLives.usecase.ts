@@ -1,9 +1,6 @@
+import { UseCase } from '@/domain/shared/UseCase'
 import { Life } from '@/domain/Life/Life'
 import { ILivesRepository } from '@/domain/Life/ILivesRepository'
-
-interface UseCase<T> {
-	execute: () => Promise<T>;
-}
 
 const GetLivesUseCase = (repository: ILivesRepository): UseCase<Life> => ({
 	execute: async (): Promise<Life> => {

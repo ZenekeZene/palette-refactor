@@ -1,9 +1,6 @@
+import { UseCase } from '@/domain/shared/UseCase'
 import { Quote } from '@/domain/Quote/Quote'
 import { IQuotesRepository } from '@/domain/Quote/IQuotesRepository'
-
-interface UseCase<T> {
-	execute: () => Promise<T>;
-}
 
 const GetQuoteUseCase = (repository: IQuotesRepository): UseCase<Quote> => ({
 	execute: async (): Promise<Quote> => {
