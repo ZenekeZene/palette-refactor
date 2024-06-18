@@ -8,18 +8,18 @@ interface LevelProps {
 }
 
 class Level {
-	private readonly id:LevelId
+	private readonly _id:LevelId
 	readonly numberOfChips:LevelChips
 	readonly prize:Prize
 
 	constructor({ numberOfChips, prize }: LevelProps) {
-		this.id = LevelId.random()
+		this._id = LevelId.random()
 		this.numberOfChips = numberOfChips
 		this.prize = prize
 	}
 
-	getId() {
-		return this.id
+	get id() {
+		return this._id
 	}
 
 	getPrize() {
