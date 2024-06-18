@@ -3,4 +3,4 @@ initial:
   lives: 3
   score: 0
   level: 0
-  bonus: 0
+  bonus: 1
