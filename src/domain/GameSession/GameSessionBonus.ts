@@ -1,6 +1,9 @@
 export class GameSessionBonus {
+	private initialBonus: number
+
 	constructor(private _bonus: number) {
 		this.validate(_bonus)
+		this.initialBonus = _bonus
 	}
 
 	validate(value: number) {
@@ -11,5 +14,19 @@ export class GameSessionBonus {
 
 	get bonus() {
 		return this._bonus
+	}
+
+	increment(value: number) {
+		this._bonus += value
+		this.validate(this._bonus)
+	}
+
+	decrement() {
+		this._bonus--
+		this.validate(this._bonus)
+	}
+
+	reset() {
+		this._bonus = this.initialBonus
 	}
 }

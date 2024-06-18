@@ -1,18 +1,27 @@
 export class GameSessionScore {
-	private _score: number;
+	private initialScore: number
 
-	constructor(score: number) {
-		this._score = score;
-		this.validate(score);
+	constructor(private _score: number) {
+		this.validate(_score)
+		this.initialScore = _score
 	}
 
 	validate(value: number) {
 		if (value < 0) {
-			throw new Error('Score cannot be negative');
+			throw new Error('Score cannot be negative')
 		}
 	}
 
 	get score() {
-		return this._score;
+		return this._score
+	}
+
+	increment(value: number) {
+		this._score += value
+		this.validate(this._score)
+	}
+
+	reset() {
+		this._score = this.initialScore
 	}
 }

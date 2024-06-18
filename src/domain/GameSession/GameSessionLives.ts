@@ -1,6 +1,9 @@
 export class GameSessionLives {
+	private _initialLives: number
+
 	constructor(private _lives: number) {
 		this.validate(_lives)
+		this._initialLives = _lives
 	}
 
 	validate(value: number) {
@@ -11,5 +14,14 @@ export class GameSessionLives {
 
 	get lives() {
 		return this._lives
+	}
+
+	decrement() {
+		this._lives--
+		this.validate(this._lives)
+	}
+
+	reset() {
+		this._lives = this._initialLives
 	}
 }
