@@ -1,13 +1,16 @@
-class Quote {
-	readonly id: string
-	readonly text: string
-	readonly author: string
+import { QuoteId } from './QuoteId'
 
-	constructor(id: string, quote: string, author: string) {
-		this.id = id
-		this.text = quote
-		this.author = author
+class Quote {
+	private readonly _id:QuoteId
+
+	constructor(public text: string, public author: string) {
+		this._id = QuoteId.random()
 	}
+
+	get id() {
+		return this._id
+	}
+
 }
 
 export { Quote }

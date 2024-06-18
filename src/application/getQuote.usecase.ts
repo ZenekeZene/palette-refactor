@@ -1,16 +1,20 @@
-import { UseCase } from '@/domain/shared/UseCase'
+import { QuotesCollection } from '@/domain/Quote/QuotesCollection'
 import { Quote } from '@/domain/Quote/Quote'
-import { IQuotesRepository } from '@/domain/Quote/IQuotesRepository'
 
-const GetQuoteUseCase = (repository: IQuotesRepository): UseCase<Quote> => ({
-	execute: async (): Promise<Quote> => {
-		const quotes = await repository.getQuotes()
+export class GetQuoteUseCase {
+	private _currentQuote: Quote
+	private _quotesCollection: QuotesCollection
 
-		const randomIndex = Math.floor(Math.random() * quotes.length)
-		const quote = quotes[randomIndex]
-
-		return new Quote(quote.id, quote.text, quote.author)
+	constructor(quotesCollection: QuotesCollection) {
+		this._quotesCollection = quotesCollection
+		this._currentQuote = this._quotesCollection.getNextQuote()
 	}
-})
 
-export { GetQuoteUseCase }
+	get currentQuote(): Quote {
+		return this._currentQuote
+	}
+
+	moveToNextQuote() {
+		this._currentQuote = this._quotesCollection.getNextQuote()
+	}
+}

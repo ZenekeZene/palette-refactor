@@ -1,5 +1,5 @@
-import { Quote } from '@/domain/Quote/Quote'
+import { QuotesCollection } from '@/domain/Quote/QuotesCollection'
 
 export interface IQuotesRepository {
-	getQuotes(): Promise<Quote[]>
+	getQuotes(): Promise<QuotesCollection>
 }
