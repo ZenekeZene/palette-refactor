@@ -11,7 +11,7 @@ class Table {
 		levelsConfig.map((levelConfig: Level) => {
 			const { prize } = levelConfig
 			const level = new Level({ numberOfChips: levelConfig.numberOfChips, prize: new Prize(prize) })
-			this.levels.set(level.getId(), level)
+			this.levels.set(level.id, level)
 		})
 	}
 
