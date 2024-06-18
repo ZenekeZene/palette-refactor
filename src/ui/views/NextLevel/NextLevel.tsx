@@ -8,8 +8,8 @@ import "./NextLevel.scss"
 
 const NextLevelView = () => {
 	const state = useStore(
-    useShallow(({ currentLevel, table, quote }) => ({
-      currentLevel,
+    useShallow(({ gameSession, table, quote }) => ({
+      level: gameSession.level,
       totalLevels: table.getNumberOfLevels(),
       quote,
     })))
@@ -26,7 +26,7 @@ const NextLevelView = () => {
         <FaPlay />
       </Link>
       <Progression
-        currentLevel={state.currentLevel}
+        currentLevel={state.level}
         totalLevels={state.totalLevels}
       />
       <LocationDisplay />
