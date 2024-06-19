@@ -17,7 +17,7 @@ const getGameSession = async ():GetGameSessionExecution => {
 	return await getGameSession.execute()
 }
 
-const getTable = async ():StartGameUseCaseExecution => {
+const getLevels = async ():StartGameUseCaseExecution => {
 	const startGame = StartGameUseCase(new LevelsRepository())
 	return await startGame.execute()
 }
@@ -36,11 +36,11 @@ export const createInitialState = async (): Promise<State> => {
 	const quotes = await getQuotes()
 	const quote = getQuote(quotes)
 	const gameSession = await getGameSession()
-	const table = await getTable()
+	const levels = await getLevels()
 
 	return ({
 		gameSession,
-		table,
+		levels,
 		tutorialIsWatched: false,
 		quotes,
 		quote,

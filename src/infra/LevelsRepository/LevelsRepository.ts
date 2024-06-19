@@ -1,14 +1,15 @@
 import { ILevelsRepository } from '@/domain/Level/ILevelsRepository'
-import { Level } from '@/domain/Level/Level'
+import { LevelsCollection } from '@/domain/Level/LevelsCollection'
 
 class LevelsRepository implements ILevelsRepository {
-	async getLevels(): Promise<Level[]> {
+	async getLevels(): Promise<LevelsCollection> {
 		try {
 			const LevelsConfig = await import('/config/Levels.yaml')
-			return LevelsConfig.default.levels
+			const levels = LevelsConfig.default.levels
+			return LevelsCollection.fromArray(levels)
 		} catch (error) {
 			console.error('Error loading levels config', error)
-			return []
+			return new LevelsCollection()
 		}
 	}
 }

@@ -1,11 +1,11 @@
-import { Table } from '@/domain/Table/Table'
+import { LevelsCollection } from '@/domain/Level/LevelsCollection'
 import { Quote } from '@/domain/Quote/Quote'
 import { QuotesCollection } from '@/domain/Quote/QuotesCollection'
 import { GameSession } from '@/domain/GameSession/GameSession'
 
 export type State = {
 	gameSession: GameSession,
-	table: Table,
+	levels: LevelsCollection,
 	tutorialIsWatched: boolean,
 	quotes: QuotesCollection,
 	quote: Quote,
@@ -16,7 +16,6 @@ type Actions = {
 	setScore: (value: number) => void,
 	nextQuote: () => void,
 	nextLevel: () => void,
-	resetGame: () => void,
 }
 
 export type Store = State & Actions;

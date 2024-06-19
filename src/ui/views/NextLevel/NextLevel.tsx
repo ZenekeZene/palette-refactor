@@ -8,25 +8,27 @@ import "./NextLevel.scss"
 
 const NextLevelView = () => {
 	const state = useStore(
-    useShallow(({ gameSession, table, quote, nextLevel }) => ({
+    useShallow(({ gameSession, levels, quote, nextLevel }) => ({
       level: gameSession.toPrimitive().level,
-      totalLevels: table.getNumberOfLevels(),
+      totalLevels: levels.getNumberOfLevels(),
       quote,
       nextLevel,
     })))
 
 	return (
 		<article className="next-level view">
-      { state.quote && (<>
-        <h1 className="next-level__title">”{state.quote.text}”</h1>
-        <h2 className="next-level__subtitle">—{state.quote.author}—</h2>
-      </>)}
-      <Link to="/game" className="next-level__play button --square"
-        aria-label="Next level"
-      >
-        <FaPlay />
-      </Link>
-      <button onClick={() => state.nextLevel()} className="game__next">Next</button>
+      <header className="next-level__header">
+        { state.quote && (<>
+          <h1 className="next-level__title">”{state.quote.text}”</h1>
+          <h2 className="next-level__subtitle">—{state.quote.author}—</h2>
+        </>)}
+        <Link to="/game" className="next-level__play button --square"
+          aria-label="Next level"
+        >
+          <FaPlay />
+        </Link>
+      </header>
+      <button onClick={() => state.nextLevel()} className="next-level__next">Next</button>
       <Progression
         currentLevel={state.level}
         totalLevels={state.totalLevels}

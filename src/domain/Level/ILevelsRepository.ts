@@ -1,6 +1,6 @@
-import { Level } from '@/domain/Level/Level'
+import { LevelsCollection } from '@/domain/Level/LevelsCollection'
 
 export interface ILevelsRepository {
-	getLevels(): Promise<Level[]>
+	getLevels(): Promise<LevelsCollection>
 }
 
