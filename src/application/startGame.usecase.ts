@@ -1,16 +1,13 @@
 import { UseCase } from '@/domain/shared/UseCase'
-import { Table } from '@/domain/Table/Table'
+import { LevelsCollection } from '@/domain/Level/LevelsCollection'
 import { ILevelsRepository } from '@/domain/Level/ILevelsRepository'
 
-export type StartGameUseCaseExecution = Promise<Table>
+export type StartGameUseCaseExecution = Promise<LevelsCollection>
 
-const StartGameUseCase = (repository: ILevelsRepository): UseCase<Table> => ({
+const StartGameUseCase = (repository: ILevelsRepository): UseCase<LevelsCollection> => ({
 	execute: async (): StartGameUseCaseExecution => {
-		const levelsConfig = await repository.getLevels()
-
-		const table = new Table()
-		table.generateLevels(levelsConfig)
-		return table
+		const levelsCollection = await repository.getLevels()
+		return levelsCollection
 	}
 })
 
