@@ -1,19 +1,11 @@
-export class GameSessionLives {
+import { NotNegative } from '@/domain/shared/NotNegative'
+
+export class GameSessionLives extends NotNegative {
 	private _initialLives: number
 
 	constructor(private _lives: number) {
-		this.validate(_lives)
+		super(_lives)
 		this._initialLives = _lives
-	}
-
-	validate(value: number) {
-		if (value < 0) {
-			throw new Error('Lives cannot be negative')
-		}
-	}
-
-	get lives() {
-		return this._lives
 	}
 
 	decrement() {
@@ -23,9 +15,5 @@ export class GameSessionLives {
 
 	reset() {
 		this._lives = this._initialLives
-	}
-
-	toPrimitive() {
-		return this._lives
 	}
 }

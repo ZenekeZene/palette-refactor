@@ -1,19 +1,11 @@
-export class GameSessionScore {
+import { NotNegative } from '@/domain/shared/NotNegative'
+
+export class GameSessionScore extends NotNegative {
 	private initialScore: number
 
 	constructor(private _score: number) {
-		this.validate(_score)
+		super(_score)
 		this.initialScore = _score
-	}
-
-	validate(value: number) {
-		if (value < 0) {
-			throw new Error('Score cannot be negative')
-		}
-	}
-
-	get score() {
-		return this._score
 	}
 
 	increment(value: number) {
@@ -23,9 +15,5 @@ export class GameSessionScore {
 
 	reset() {
 		this._score = this.initialScore
-	}
-
-	toPrimitive() {
-		return this._score
 	}
 }
