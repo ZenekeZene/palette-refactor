@@ -37,7 +37,6 @@ export const createInitialState = async (): Promise<State> => {
 	const quote = getQuote(quotes)
 	const gameSession = await getGameSession()
 	const table = await getTable()
-	console.log('gameSession', gameSession)
 
 	return ({
 		gameSession,
