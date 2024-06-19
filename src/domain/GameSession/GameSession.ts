@@ -12,26 +12,19 @@ export class GameSession {
   ) {}
 
   nextLevel() {
-    this.level.increment(1)
+    this.level = this.level.increment()
   }
 
   incrementScore(value: number) {
-    this.score.increment(value)
+    this.score = this.score.increment(value)
   }
 
   incrementBonus(value: number) {
-    this.bonus.increment(value)
+    this.bonus = this.bonus.increment(value)
   }
 
   decrementLives() {
-    this.lives.decrement()
-  }
-
-  reset() {
-    this.lives.reset()
-    this.score.reset()
-    this.level.reset()
-    this.bonus.reset()
+    this.lives = this.lives.decrement()
   }
 
   toPrimitive() {

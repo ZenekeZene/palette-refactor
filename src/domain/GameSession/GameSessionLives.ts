@@ -1,19 +1,11 @@
 import { NotNegative } from '@/domain/shared/NotNegative'
 
 export class GameSessionLives extends NotNegative {
-	private _initialLives: number
-
-	constructor(private _lives: number) {
-		super(_lives)
-		this._initialLives = _lives
+	increment(value: number) {
+		return new GameSessionLives(this.valueOf() + value)
 	}
 
 	decrement() {
-		this._lives--
-		this.validate(this._lives)
-	}
-
-	reset() {
-		this._lives = this._initialLives
+		return new GameSessionLives(this.valueOf() - 1)
 	}
 }

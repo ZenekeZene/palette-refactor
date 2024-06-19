@@ -14,7 +14,6 @@ function createStore (propsState: State) {
 			get().nextQuote()
 			get().gameSession.nextLevel()
 		},
-		resetGame: () => get().gameSession.reset(),
 	})))
 	return useStore
 }

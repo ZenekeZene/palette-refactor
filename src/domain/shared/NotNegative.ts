@@ -1,8 +1,9 @@
-import { VO } from './VO'
+import { ValueObject } from './ValueObject'
 
-class NotNegative implements VO {
-	constructor(private _value: number) {
-		this.validate(_value)
+class NotNegative extends ValueObject<number> {
+	constructor(value: number) {
+		super(value)
+		this.validate(value)
 	}
 
 	validate(value: number) {
@@ -11,12 +12,8 @@ class NotNegative implements VO {
 		}
 	}
 
-	get value() {
-		return this._value
-	}
-
 	toPrimitive() {
-		return this._value
+		return this.valueOf().valueOf()
 	}
 }
 
