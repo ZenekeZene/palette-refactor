@@ -3,7 +3,7 @@ import { IconHeart } from "../IconHearth/IconHearth";
 import './HeaderGame.scss'
 
 interface HeaderGameProps {
-	currentLevel: number;
+	level: number;
 	score: number;
 	lives: number;
 	onBack: () => void;
@@ -16,7 +16,7 @@ const HeaderGame = (props: HeaderGameProps) => {
 				<IconBack />
 			</div>
 			<div className="header-game__level">
-				<span>Level {props.currentLevel}</span>
+				<span>Level {props.level}</span>
 			</div>
 			<div className="header-game__score">
 				<span>{props.score}</span>

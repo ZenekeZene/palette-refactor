@@ -8,8 +8,8 @@ import "./TryAgain.scss";
 
 const TryAgainView = () => {
   const state = useStore(
-    useShallow(({ currentLevel, table }) => ({
-      currentLevel,
+    useShallow(({ gameSession, table }) => ({
+      level: gameSession.toPrimitive().level,
       totalLevels: table.getNumberOfLevels(),
     })));
 
@@ -23,7 +23,7 @@ const TryAgainView = () => {
         <ReplayIcon />
       </Link>
       <Progression
-        currentLevel={state.currentLevel}
+        currentLevel={state.level}
         totalLevels={state.totalLevels}
       />
       <LocationDisplay />

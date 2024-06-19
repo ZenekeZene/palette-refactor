@@ -7,19 +7,21 @@ import { useShallow } from "zustand/react/shallow"
 import "./Game.scss"
 
 const GameView = () => {
-  const navigate = useNavigate();
-  const livesAndFriends = useStore(
-    useShallow((state) => ({
-      currentLevel: state.currentLevel,
-      score: state.score,
-      lives: state.lives,
-      bonus: state.bonus,
-    }))
+  const navigate = useNavigate()
+  const gameSession = useStore(
+    useShallow(({ gameSession }) => {
+      return ({ ...gameSession.toPrimitive() })
+    })
   )
 
   return (
     <article className="game view">
-      <HeaderGame {...livesAndFriends} onBack={() => navigate("/")} />
+      <HeaderGame
+        level={gameSession.level}
+        lives={gameSession.lives}
+        score={gameSession.score}
+        onBack={() => navigate("/")}
+      />
 
       <div className="game__divider"></div>
 
@@ -27,9 +29,10 @@ const GameView = () => {
         <div className="game__chip">
           <GameChip />
         </div>
-        { livesAndFriends.bonus > 0 && (
+
+        { gameSession.bonus > 0 && (
           <div className="game__bonus">
-            <Bonus bonus={livesAndFriends.bonus} />
+            <Bonus bonus={gameSession.bonus} />
           </div>
         )}
 			</section>
