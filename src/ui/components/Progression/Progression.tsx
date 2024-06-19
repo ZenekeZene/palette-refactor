@@ -28,13 +28,13 @@ const Progression = ({ currentLevel, totalLevels }: Props) => {
   const percent = Math.floor((currentLevel / totalLevels) * 100);
 
   return (
-    <article className="progression">
+    <section className="progression">
       <p className="progression__text">
         Game progression: &nbsp;
         <span className="progression__percent">{percent}%</span>
       </p>
       <ProgressionList currentLevel={currentLevel} totalLevels={totalLevels} />
-    </article>
+    </section>
   );
 };
 

@@ -7,10 +7,22 @@
 	text-wrap: balance;
 	background-color: var(--paper-color);
 
+	&__header {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		place-items: center;
+	}
+
 	&__subtitle {
 		margin-block-end: var(--spacing);
 		color: hsl(40, 17%, 79%);
 		font-size: 1.2rem;
+		text-wrap: balance;
 	}
 
 	&__title {
@@ -19,5 +31,12 @@
 		text-transform: uppercase;
 		font-weight: 700;
     font-style: italic;
+		text-wrap: balance;
+	}
+
+	.next-level__next {
+		position: fixed;
+		bottom: 2rem;
+		right: 2rem;
 	}
 }
