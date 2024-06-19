@@ -29,4 +29,12 @@ export class QuotesCollection {
 	private resetQueue() {
 		this._queue = Array.from(this._quotes.keys())
 	}
+
+	static fromArray(quotes: Quote[]) {
+		const quotesCollection = new QuotesCollection()
+		quotes.forEach((quote) => {
+			quotesCollection.add(new Quote(quote.text, quote.author))
+		})
+		return quotesCollection
+	}
 }
