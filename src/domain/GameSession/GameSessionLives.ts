@@ -24,4 +24,8 @@ export class GameSessionLives {
 	reset() {
 		this._lives = this._initialLives
 	}
+
+	toPrimitive() {
+		return this._lives
+	}
 }

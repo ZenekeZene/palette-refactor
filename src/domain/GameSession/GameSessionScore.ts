@@ -24,4 +24,8 @@ export class GameSessionScore {
 	reset() {
 		this._score = this.initialScore
 	}
+
+	toPrimitive() {
+		return this._score
+	}
 }

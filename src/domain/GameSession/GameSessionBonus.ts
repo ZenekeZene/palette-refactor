@@ -29,4 +29,8 @@ export class GameSessionBonus {
 	reset() {
 		this._bonus = this.initialBonus
 	}
+
+	toPrimitive() {
+		return this._bonus
+	}
 }
