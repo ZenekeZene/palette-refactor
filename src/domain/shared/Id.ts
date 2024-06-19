@@ -1,16 +1,14 @@
 import { v4 as uuidv4, validate as validateUuid } from 'uuid'
-import { VO } from './VO'
+import { ValueObject } from './ValueObject'
 
-class Id implements VO {
-	private readonly _id:string
-
-	constructor(value: string) {
-		this._id = value
-		this.validate(value)
+class Id extends ValueObject<string> {
+	constructor (id: string) {
+		super(id)
+		this.validate(id)
 	}
 
 	get id () {
-		return this._id
+		return this.valueOf()
 	}
 
 	static random (): Id {
@@ -18,11 +16,13 @@ class Id implements VO {
 	}
 
 	validate (id: string): void {
-		if (!validateUuid(id)) throw new Error('Invalid id')
+		if (!validateUuid(id)) {
+			throw new Error('Invalid id')
+		}
 	}
 
-	toPrimitive() {
-		return this._id.toString()
+	toPrimitive () {
+		return this.valueOf().toString()
 	}
 }
 
