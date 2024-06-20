@@ -1,5 +1,5 @@
 import { toBeVisible } from '@testing-library/jest-dom/matchers'
-import { describe, test, expect, spyOn, afterEach } from 'bun:test'
+import { describe, test, expect, vi, afterEach } from 'vitest'
 import { render, screen, cleanup } from '@testing-library/react'
 import { Progression } from './Progression'
 
@@ -10,7 +10,7 @@ afterEach(() => {
 describe('Progression component', () => {
   test(`given a prop "currentLevel" major than "totalLevels,"
 		then throw an Error`, () => {
-    const consoleSpy = spyOn(console, 'error')
+    const consoleSpy = vi.spyOn(console, 'error')
     consoleSpy.mockImplementation(() => {})
 
     const props = {

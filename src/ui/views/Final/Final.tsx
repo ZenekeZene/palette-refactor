@@ -4,9 +4,9 @@ import './Final.scss'
 
 const FinalView = () => {
   const state = useStore(
-    useShallow(({ currentLevel, score }) => ({
-      currentLevel,
-      score,
+    useShallow(({ gameSession }) => ({
+      level: gameSession.toPrimitive().level,
+      score: gameSession.toPrimitive().score,
     }))
   )
 
@@ -20,7 +20,7 @@ const FinalView = () => {
           <span className="final__score">{state.score} points at level</span>
         </h2>
         <div className="final__level">
-          <p className="final__level-score">{state.currentLevel}</p>
+          <p className="final__level-score">{state.level}</p>
           <img className="final__laurel" src="/laurel.svg" alt="" />
           <a className="final__share">SHARE YOUR RECORD</a>
         </div>

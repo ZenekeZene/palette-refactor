@@ -15,7 +15,6 @@ export class QuotesCollection {
   }
 
   getNextQuote() {
-    console.log(this._queue)
     if (this._queue.length === 0) {
       this.resetQueue()
     }
