@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom"
+import { useLocation } from 'react-router-dom'
 import './LocationDisplay.scss'
 
 export const LocationDisplay = () => {

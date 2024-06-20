@@ -1,20 +1,20 @@
 .try-again {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	place-items: center;
-	text-align: center;
-	text-wrap: balance;
-	background-color: var(--paper-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  place-items: center;
+  text-align: center;
+  text-wrap: balance;
+  background-color: var(--paper-color);
 
-	&__subtitle {
-		color: hsl(40, 17%, 79%);
-		font-size: 1.2rem;
-	}
+  &__subtitle {
+    color: hsl(40, 17%, 79%);
+    font-size: 1.2rem;
+  }
 
-	&__title {
-		color: var(--primary-color);
-		text-transform: uppercase;
-		font-weight: 1000;
-	}
+  &__title {
+    color: var(--primary-color);
+    text-transform: uppercase;
+    font-weight: 1000;
+  }
 }

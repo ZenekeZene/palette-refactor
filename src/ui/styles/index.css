@@ -1,6 +1,6 @@
 :root {
   --primary-color: hsl(189, 64%, 59%);
-	--accent-color: hsl(324, 64%, 59%);
+  --accent-color: hsl(324, 64%, 59%);
   --paper-color: hsl(300, 100%, 100%);
   --cream-color: hsl(40, 17%, 79%);
   --font-family: 'Nunito', sans-serif;
@@ -68,7 +68,7 @@ h1 {
   line-height: 0.9;
   color: var(--primary-color);
   margin-bottom: var(--spacing);
-  font-size: clamp(1.5rem, 3vw + 1rem, 2.25rem);;
+  font-size: clamp(1.5rem, 3vw + 1rem, 2.25rem);
   line-height: 1;
 }
 

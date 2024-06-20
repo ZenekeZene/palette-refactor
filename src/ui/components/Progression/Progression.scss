@@ -1,31 +1,31 @@
 .progression {
-	position: absolute;
-	bottom: 2rem;
+  position: absolute;
+  bottom: 2rem;
 
-	&__text {
-		color: var(--primary-color);
-	}
+  &__text {
+    color: var(--primary-color);
+  }
 
-	&__percent {
-		font-weight: 700;
-	}
+  &__percent {
+    font-weight: 700;
+  }
 
-	&__list {
-		list-style: none;
-		display: flex;
-		justify-content: center;
-		gap: 0.2rem;
-		padding: 0.5rem;
-	}
+  &__list {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 0.2rem;
+    padding: 0.5rem;
+  }
 
-	&__item {
-		width: 0.5rem;
-		height: 0.5rem;
-		border-radius: 50%;
-		background-color: hsl(40, 17%, 79%);
+  &__item {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background-color: hsl(40, 17%, 79%);
 
-		&.--completed {
-			background-color: var(--primary-color)
-		}
-	}
+    &.--completed {
+      background-color: var(--primary-color);
+    }
+  }
 }

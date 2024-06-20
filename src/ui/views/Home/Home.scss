@@ -1,48 +1,48 @@
 .home {
-	max-width: 29rem;
-	height: 100%;
-	margin: 0 auto;
-	padding: var(--spacing-double);
+  max-width: 29rem;
+  height: 100%;
+  margin: 0 auto;
+  padding: var(--spacing-double);
 
-	&__title {
-		font-weight: 1000;
-		text-transform: uppercase;
-		text-align: left;
+  &__title {
+    font-weight: 1000;
+    text-transform: uppercase;
+    text-align: left;
 
-		&-color {
-			color: var(--accent-color);
-		}
-	}
+    &-color {
+      color: var(--accent-color);
+    }
+  }
 
-	&__illustration {
-		width: 100%;
-		margin-bottom: var(--spacing);
-	}
+  &__illustration {
+    width: 100%;
+    margin-bottom: var(--spacing);
+  }
 
-	&__buttons {
-		display: flex;
+  &__buttons {
+    display: flex;
     flex-direction: column;
     gap: var(--spacing);
-	}
+  }
 
-	.button {
-		display: flex;
-		place-items: center;
-		justify-content: center;
-		gap: var(--spacing)
-	}
+  .button {
+    display: flex;
+    place-items: center;
+    justify-content: center;
+    gap: var(--spacing);
+  }
 
-	.button--play {
-		color: white;
-		background-color: var(--primary-color);
-	}
+  .button--play {
+    color: white;
+    background-color: var(--primary-color);
+  }
 
-	.button--ranking {
-		color: var(--primary-color);
-		background-color: white;
-	}
+  .button--ranking {
+    color: var(--primary-color);
+    background-color: white;
+  }
 
-	@at-root &-view {
-		background: linear-gradient(white 0, white 45%, var(--primary-color) 150%);
-	}
+  @at-root &-view {
+    background: linear-gradient(white 0, white 45%, var(--primary-color) 150%);
+  }
 }

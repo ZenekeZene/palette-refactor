@@ -1,9 +1,7 @@
-import "./GameChip.scss"
+import './GameChip.scss'
 
 const GameChip = () => {
-	return (
-		<div className="game-chip"></div>
-	)
+  return <div className="game-chip"></div>
 }
 
 export { GameChip }

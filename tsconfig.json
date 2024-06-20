@@ -21,11 +21,9 @@
     "noFallthroughCasesInSwitch": true,
 
     "paths": {
-      "@/*": ["./src/*"],
+      "@/*": ["./src/*"]
     },
-    "types": [
-      "@modyfi/vite-plugin-yaml/modules"
-    ]
+    "types": ["@modyfi/vite-plugin-yaml/modules"]
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]

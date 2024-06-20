@@ -9,7 +9,8 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "test": "bun test",
-    "test:watch": "bun test --watch"
+    "test:watch": "bun test --watch",
+    "format": "prettier --write . --config prettierrc.yaml"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -39,6 +40,7 @@
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
+    "prettier": "^3.3.2",
     "sass": "^1.77.4",
     "typescript": "^5.2.2",
     "url": "^0.11.3",
