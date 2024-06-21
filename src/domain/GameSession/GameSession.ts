@@ -36,7 +36,7 @@ export class GameSession {
     }
   }
 
-  static fromPrimitives(data: any) {
+  static fromPrimitives(data: any): GameSession {
     return new GameSession(
       new GameSessionLives(data.lives),
       new GameSessionScore(data.score),

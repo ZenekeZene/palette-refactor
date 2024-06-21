@@ -6,17 +6,15 @@ import { LevelId } from '@/domain/Level/LevelId'
 export class LevelsCollection {
   private _levels: Map<LevelId, Level> = new Map()
 
-  constructor() {}
-
   add(level: Level) {
     this._levels.set(level.id, level)
   }
 
-  static fromArray(quotes: any[]): LevelsCollection {
+  static fromArray(levels: any[]): LevelsCollection {
     const levelsCollection = new LevelsCollection()
-    quotes.forEach((quote) => {
-      const numberOfChips = new LevelChips(quote.numberOfChips)
-      const prize = new Prize(quote.prize)
+    levels.forEach((level) => {
+      const numberOfChips = new LevelChips(level.numberOfChips)
+      const prize = new Prize(level.prize)
       levelsCollection.add(new Level(numberOfChips, prize))
     })
     return levelsCollection
