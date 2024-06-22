@@ -32,7 +32,7 @@ const Progression = ({ currentLevel, totalLevels }: Props) => {
   const percent = Math.floor((currentLevel / totalLevels) * 100)
 
   return (
-    <section className="progression">
+    <section className="progression" role="progressbar" aria-valuenow={percent}>
       <p className="progression__text">
         Game progression: &nbsp;
         <span className="progression__percent">{percent}%</span>
