@@ -5,9 +5,9 @@ import { LevelId } from './LevelId'
 class Level {
   private readonly _id: LevelId
   readonly numberOfChips: LevelChips
-  readonly prize: Prize
+  readonly prize: Prize | undefined
 
-  constructor(numberOfChips: LevelChips, prize: Prize) {
+  constructor(numberOfChips: LevelChips, prize?: Prize) {
     this._id = LevelId.random()
     this.numberOfChips = numberOfChips
     this.prize = prize
@@ -21,7 +21,7 @@ class Level {
     return this.numberOfChips
   }
 
-  static fromPrimitive(level: any) {
+  static fromPrimitive(level: { numberOfChips: number; prize: Prize }) {
     return new Level(
       new LevelChips(level.numberOfChips),
       new Prize(level.prize)
