@@ -3,18 +3,12 @@ import { MemoryRouter } from 'react-router-dom'
 import { screen, render, cleanup } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { NextLevelView } from './NextLevel'
-import { StoreMother } from '@/adapter/store/__mocks__/store.mother'
-import { State } from '@/adapter/store/store.types'
+import { mockStore } from '@/adapter/store/__mocks__/store.mother'
 
 const useStore = vi.hoisted(() => vi.fn())
 vi.mock("@/adapter/store/store", () => ({
   useStore,
 }))
-
-const mockStore = (payload?: State) => {
-  const store = StoreMother.createStore(payload)
-  useStore.mockImplementation(store)
-}
 
 const renderNextLevelView = () => render(<NextLevelView />, { wrapper: MemoryRouter })
 
@@ -25,7 +19,7 @@ describe('Next Level view', () => {
 
   test(`if the user clicks on the "Play" button,
 		then she is directed to the game`, async () => {
-    mockStore()
+    mockStore(useStore)
     const user = userEvent.setup()
     renderNextLevelView()
 
@@ -39,7 +33,7 @@ describe('Next Level view', () => {
   test(`if the user clicks on the "Next" button,
     then the progression bar is filled to 100%
     `, async () => {
-    mockStore()
+    mockStore(useStore)
     const user = userEvent.setup()
     const { rerender } = renderNextLevelView()
 
@@ -51,5 +45,17 @@ describe('Next Level view', () => {
     rerender(<NextLevelView />)
 
     expect(progression).toHaveAttribute('aria-valuenow', '100')
+  })
+
+  test(`given a quote, it is displayed in the view`, async () => {
+    const quote = { text: 'This is a fabolous quote', author: 'Zeneke' }
+    mockStore(useStore, { quote })
+    renderNextLevelView()
+
+    const title = screen.getByText('”This is a fabolous quote”')
+    const subtitle = screen.getByText('—Zeneke—')
+
+    expect(title).toBeInTheDocument()
+    expect(subtitle).toBeInTheDocument()
   })
 })
