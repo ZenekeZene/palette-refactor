@@ -1,13 +1,8 @@
-interface PrizeProps {
+export class Prize {
   readonly lives: number
   readonly bonus: number
-}
 
-export class Prize {
-  lives: number
-  bonus: number
-
-  constructor({ lives, bonus }: PrizeProps) {
+  constructor(lives: number, bonus: number) {
     this.lives = lives
     this.bonus = bonus
   }

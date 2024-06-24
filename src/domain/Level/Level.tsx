@@ -21,10 +21,15 @@ class Level {
     return this.numberOfChips
   }
 
-  static fromPrimitive(level: { numberOfChips: number; prize: Prize }) {
+  static fromPrimitive(level: { numberOfChips: number; prize?: Prize }) {
+    if (!level.prize) {
+      return new Level(
+        new LevelChips(level.numberOfChips)
+      )
+    }
     return new Level(
       new LevelChips(level.numberOfChips),
-      new Prize(level.prize)
+      new Prize(level.prize.lives, level.prize.bonus)
     )
   }
 }

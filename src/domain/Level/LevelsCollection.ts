@@ -14,7 +14,7 @@ export class LevelsCollection {
     const levelsCollection = new LevelsCollection()
     levels.forEach((level) => {
       const numberOfChips = new LevelChips(level.numberOfChips)
-      const prize = new Prize(level.prize)
+      const prize = new Prize(level.prize, level.bonus)
       levelsCollection.add(new Level(numberOfChips, prize))
     })
     return levelsCollection
