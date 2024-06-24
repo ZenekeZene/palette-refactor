@@ -13,6 +13,10 @@ class Quote {
   get id() {
     return this._id
   }
+
+  static fromPrimitives({ text, author }: { text: string, author: string }) {
+    return new Quote(text, author)
+  }
 }
 
 export { Quote }
