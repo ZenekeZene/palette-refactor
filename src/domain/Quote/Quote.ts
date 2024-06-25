@@ -1,5 +1,10 @@
 import { QuoteId } from './QuoteId'
 
+export interface QuoteProps {
+  text: string
+  author: string
+}
+
 class Quote {
   private readonly _id: QuoteId
 
@@ -14,7 +19,7 @@ class Quote {
     return this._id
   }
 
-  static fromPrimitives({ text, author }: { text: string, author: string }) {
+  static fromPrimitives({ text, author }: QuoteProps) {
     return new Quote(text, author)
   }
 }
