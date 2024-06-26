@@ -34,7 +34,7 @@ export class StoreMother {
     return builder
   }
 
-  private static createStore(
+  private static mockStore(
     useStore: StoreMother.UseStore,
     state: State
   ): void {
@@ -45,7 +45,7 @@ export class StoreMother {
 
   public static minimalStore(useStore: StoreMother.UseStore): void {
     const builder = StoreMother.createDefaultBuilder()
-    StoreMother.createStore(useStore, builder.currentState)
+    StoreMother.mockStore(useStore, builder.currentState)
   }
 
   public static storeWithQuote(
@@ -54,7 +54,7 @@ export class StoreMother {
   ): void {
     const builder = StoreMother.createDefaultBuilder()
     builder.withQuote(quote)
-    StoreMother.createStore(useStore, builder.currentState)
+    StoreMother.mockStore(useStore, builder.currentState)
   }
 
   public static storeMultipleLevels(
@@ -75,7 +75,7 @@ export class StoreMother {
       level: options.level,
     })
     builder.withGameSession(gameSession)
-    StoreMother.createStore(useStore, builder.currentState)
+    StoreMother.mockStore(useStore, builder.currentState)
   }
 }
 

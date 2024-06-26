@@ -20,7 +20,12 @@ class StoreBuilder {
     const quotes = new QuotesCollection()
     quotes.add(quote)
 
-    const gameSession = GameSession.fromPrimitives({ lives: 0, score: 0, level: 0, bonus: 0 })
+    const gameSession = GameSession.fromPrimitives({
+      lives: 0,
+      score: 0,
+      level: 0,
+      bonus: 0,
+    })
 
     return {
       gameSession,
@@ -31,17 +36,17 @@ class StoreBuilder {
     }
   }
 
-  withLevels(levels: LevelsCollection) {
+  withLevels(levels: LevelsCollection): StoreBuilder {
     this.state.levels = levels
     return this
   }
 
-  withQuote(quote: QuoteProps) {
+  withQuote(quote: QuoteProps): StoreBuilder {
     this.state.quote = new Quote(quote.text, quote.author)
     return this
   }
 
-  withGameSession(gameSession: GameSession) {
+  withGameSession(gameSession: GameSession): StoreBuilder {
     this.state.gameSession = gameSession
     return this
   }
