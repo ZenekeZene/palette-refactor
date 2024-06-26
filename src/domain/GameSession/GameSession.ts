@@ -27,7 +27,7 @@ export class GameSession {
     this.lives = this.lives.decrement()
   }
 
-  toPrimitive() {
+  toPrimitive(): GameSession.Primitive {
     return {
       lives: this.lives.toPrimitive(),
       score: this.score.toPrimitive(),
@@ -36,12 +36,21 @@ export class GameSession {
     }
   }
 
-  static fromPrimitives(data: any): GameSession {
+  static fromPrimitives(data: GameSession.Primitive): GameSession {
     return new GameSession(
       new GameSessionLives(data.lives),
       new GameSessionScore(data.score),
       new GameSessionLevel(data.level),
       new GameSessionBonus(data.bonus)
     )
+  }
+}
+
+export namespace GameSession {
+  export type Primitive = {
+    lives: number
+    score: number
+    level: number
+    bonus: number
   }
 }
