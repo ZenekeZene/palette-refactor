@@ -30,7 +30,7 @@ export class QuotesCollection {
     this._queue = Array.from(this._quotes.keys())
   }
 
-  static fromArray(quotes: { text: string, author: string }[]) {
+  static fromArray(quotes: { text: string; author: string }[]) {
     const quotesCollection = new QuotesCollection()
     quotes.forEach((quote) => {
       quotesCollection.add(new Quote(quote.text, quote.author))
