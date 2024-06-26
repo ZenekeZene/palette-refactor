@@ -13,7 +13,7 @@ class NotNegative extends ValueObject<number> {
   }
 
   toPrimitive() {
-    return this.valueOf().valueOf()
+    return this.valueOf()
   }
 }
 
