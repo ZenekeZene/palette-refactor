@@ -6,9 +6,10 @@ import { NextLevelView } from './NextLevel'
 import { StoreMother } from '@/adapter/store/__mocks__/store.mother'
 
 const useStore = vi.hoisted(() => vi.fn())
-vi.mock("@/adapter/store/store", () => ({ useStore }))
+vi.mock('@/adapter/store/store', () => ({ useStore }))
 
-const renderNextLevelView = () => render(<NextLevelView />, { wrapper: MemoryRouter })
+const renderNextLevelView = () =>
+  render(<NextLevelView />, { wrapper: MemoryRouter })
 
 describe('Next Level view', () => {
   afterEach(() => {
@@ -34,7 +35,6 @@ describe('Next Level view', () => {
     StoreMother.minimalStore(useStore)
     const user = userEvent.setup()
     const { rerender } = renderNextLevelView()
-
 
     const progression = screen.getByRole('progressbar')
     expect(progression).toHaveAttribute('aria-valuenow', '0')

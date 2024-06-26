@@ -6,7 +6,7 @@ import { StoreMother } from '@/adapter/store/__mocks__/store.mother'
 import { TryAgainView } from './TryAgain'
 
 const useStore: Mock<any, any> = vi.hoisted(() => vi.fn())
-vi.mock("@/adapter/store/store", () => ({
+vi.mock('@/adapter/store/store', () => ({
   useStore,
 }))
 
