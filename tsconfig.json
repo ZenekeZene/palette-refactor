@@ -21,7 +21,8 @@
     "noFallthroughCasesInSwitch": true,
 
     "paths": {
-      "@/*": ["./src/*"]
+      "@gameContext/*": ["./src/*"],
+      "@frontend/*": ["./applications/frontend/*"]
     },
     "types": [
       "@modyfi/vite-plugin-yaml/modules",
@@ -30,6 +31,8 @@
       "@testing-library/jest-dom"
     ]
   },
-  "include": ["src"],
+  "include": [
+    "src", "applications/frontend"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
