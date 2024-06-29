@@ -1,9 +1,11 @@
+import './Title.scss'
+
 const Title = () => {
   return (
-    <h1 className="home__title">
+    <h1 className="title">
       The
       <br />
-      <span className="home__title-color">color</span>
+      <span className="title-color">color</span>
       <br />
       alchemist
     </h1>

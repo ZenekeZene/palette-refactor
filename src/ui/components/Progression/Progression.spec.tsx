@@ -8,7 +8,7 @@ afterEach(() => {
 })
 
 describe('Progression component', () => {
-  test(`given a prop "currentLevel" major than "totalLevels,"
+  test(`given a prop "currentLevel" major than "totalLevels",
 		then throw an Error`, () => {
     const consoleSpy = vi.spyOn(console, 'error')
     consoleSpy.mockImplementation(() => {})
