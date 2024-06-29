@@ -1,11 +1,11 @@
 import { Mock } from 'vitest'
-import { State } from '@/adapter/store/store.types'
-import { LevelsCollection } from '@/domain/Level/LevelsCollection'
-import { Level } from '@/domain/Level/Level'
-import { QuoteProps } from '@/domain/Quote/Quote'
-import { GameSession } from '@/domain/GameSession/GameSession'
-import { createStore } from '@/adapter/store/useStore'
-import { StoreBuilder } from '@/adapter/store/__mocks__/store.builder'
+import { LevelsCollection } from '@gameContext/domain/Level/LevelsCollection'
+import { Level } from '@gameContext/domain/Level/Level'
+import { QuoteProps } from '@gameContext/domain/Quote/Quote'
+import { GameSession } from '@gameContext/domain/GameSession/GameSession'
+import { State } from '@frontend/adapter/store/store.types'
+import { createStore } from '@frontend/adapter/store/useStore'
+import { StoreBuilder } from '@frontend/adapter/store/__mocks__/store.builder'
 
 export class StoreMother {
   private static createDefaultLevels(): LevelsCollection {

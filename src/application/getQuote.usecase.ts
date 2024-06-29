@@ -1,5 +1,5 @@
-import { QuotesCollection } from '@/domain/Quote/QuotesCollection'
-import { Quote } from '@/domain/Quote/Quote'
+import { QuotesCollection } from '@gameContext/domain/Quote/QuotesCollection'
+import { Quote } from '@gameContext/domain/Quote/Quote'
 
 export class GetQuoteUseCase {
   private _currentQuote: Quote

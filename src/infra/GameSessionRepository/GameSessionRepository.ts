@@ -1,5 +1,5 @@
-import { IGameSessionRepository } from '@/domain/GameSession/IGameSessionRepository'
-import { GameSession } from '@/domain/GameSession/GameSession'
+import { IGameSessionRepository } from '@gameContext/domain/GameSession/IGameSessionRepository'
+import { GameSession } from '@gameContext/domain/GameSession/GameSession'
 
 class GameSessionRepository implements IGameSessionRepository {
   async getGameSession(): Promise<GameSession> {

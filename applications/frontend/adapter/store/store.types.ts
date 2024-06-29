@@ -1,7 +1,7 @@
-import { LevelsCollection } from '@/domain/Level/LevelsCollection'
-import { Quote } from '@/domain/Quote/Quote'
-import { QuotesCollection } from '@/domain/Quote/QuotesCollection'
-import { GameSession } from '@/domain/GameSession/GameSession'
+import { LevelsCollection } from '@gameContext/domain/Level/LevelsCollection'
+import { Quote } from '@gameContext/domain/Quote/Quote'
+import { QuotesCollection } from '@gameContext/domain/Quote/QuotesCollection'
+import { GameSession } from '@gameContext/domain/GameSession/GameSession'
 
 export type State = {
   gameSession: GameSession

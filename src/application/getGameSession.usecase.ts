@@ -1,7 +1,6 @@
-import { UseCase } from '@/domain/shared/UseCase'
-import { GameSession } from '@/domain/GameSession/GameSession'
-
-import { IGameSessionRepository } from '@/domain/GameSession/IGameSessionRepository'
+import { UseCase } from '@gameContext/domain/shared/UseCase'
+import { GameSession } from '@gameContext/domain/GameSession/GameSession'
+import { IGameSessionRepository } from '@gameContext/domain/GameSession/IGameSessionRepository'
 
 export type GetGameSessionExecution = Promise<GameSession>
 

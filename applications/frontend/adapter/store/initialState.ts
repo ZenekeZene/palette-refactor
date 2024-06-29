@@ -1,25 +1,25 @@
-import { QuotesCollection } from '@/domain/Quote/QuotesCollection'
-import { Quote } from '@/domain/Quote/Quote'
+import { QuotesCollection } from '@gameContext/domain/Quote/QuotesCollection'
+import { Quote } from '@gameContext/domain/Quote/Quote'
 
-import { GameSessionRepository } from '@/infra/GameSessionRepository/GameSessionRepository'
-import { QuotesRepository } from '@/infra/QuotesRepository/QuotesRepository'
-import { LevelsRepository } from '@/infra/LevelsRepository/LevelsRepository'
+import { GameSessionRepository } from '@gameContext/infra/GameSessionRepository/GameSessionRepository'
+import { QuotesRepository } from '@gameContext/infra/QuotesRepository/QuotesRepository'
+import { LevelsRepository } from '@gameContext/infra/LevelsRepository/LevelsRepository'
 
 import {
   GetGameSessionUseCase,
   GetGameSessionExecution,
-} from '@/application/getGameSession.usecase'
+} from '@gameContext/application/getGameSession.usecase'
 import {
   StartGameUseCase,
   StartGameUseCaseExecution,
-} from '@/application/startGame.usecase'
+} from '@gameContext/application/startGame.usecase'
 import {
   GetQuotesUseCase,
   GetQuotesUseCaseExecution,
-} from '@/application/getQuotes.usecase'
-import { GetQuoteUseCase } from '@/application/getQuote.usecase'
+} from '@gameContext/application/getQuotes.usecase'
+import { GetQuoteUseCase } from '@gameContext/application/getQuote.usecase'
 
-import { State } from '@/adapter/store/store.types'
+import { State } from '@gameContext/adapter/store/store.types'
 
 const getGameSession = async (): GetGameSessionExecution => {
   const getGameSession = GetGameSessionUseCase(new GameSessionRepository())

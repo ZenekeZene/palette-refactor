@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom'
 import { FaPlay } from 'react-icons/fa'
 import { useShallow } from 'zustand/react/shallow'
-import { Progression } from '@/ui/components/Progression/Progression'
-import { useStore } from '@/adapter/store/store'
-import { LocationDisplay } from '@/ui/components/LocationDisplay/LocationDisplay'
+import { Progression } from '@frontend/ui/components/Progression/Progression'
+import { useStore } from '@frontend/adapter/store/store'
+import { LocationDisplay } from '@frontend/ui/components/LocationDisplay/LocationDisplay'
 import './NextLevel.scss'
 
 const NextLevelView = () => {

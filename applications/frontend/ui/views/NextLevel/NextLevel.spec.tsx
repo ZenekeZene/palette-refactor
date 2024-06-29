@@ -3,10 +3,10 @@ import { MemoryRouter } from 'react-router-dom'
 import { screen, render, cleanup } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { NextLevelView } from './NextLevel'
-import { StoreMother } from '@/adapter/store/__mocks__/store.mother'
+import { StoreMother } from '@frontend/adapter/store/__mocks__/store.mother'
 
 const useStore = vi.hoisted(() => vi.fn())
-vi.mock('@/adapter/store/store', () => ({ useStore }))
+vi.mock('@frontend/adapter/store/store', () => ({ useStore }))
 
 const renderNextLevelView = () =>
   render(<NextLevelView />, { wrapper: MemoryRouter })

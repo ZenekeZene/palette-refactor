@@ -1,9 +1,9 @@
-import { State } from '@/adapter/store/store.types'
-import { LevelsCollection } from '@/domain/Level/LevelsCollection'
-import { Level } from '@/domain/Level/Level'
-import { Quote, QuoteProps } from '@/domain/Quote/Quote'
-import { QuotesCollection } from '@/domain/Quote/QuotesCollection'
-import { GameSession } from '@/domain/GameSession/GameSession'
+import { State } from '@frontend/adapter/store/store.types'
+import { LevelsCollection } from '@gameContext/domain/Level/LevelsCollection'
+import { Level } from '@gameContext/domain/Level/Level'
+import { Quote, QuoteProps } from '@gameContext/domain/Quote/Quote'
+import { QuotesCollection } from '@gameContext/domain/Quote/QuotesCollection'
+import { GameSession } from '@gameContext/domain/GameSession/GameSession'
 
 class StoreBuilder {
   private state: State

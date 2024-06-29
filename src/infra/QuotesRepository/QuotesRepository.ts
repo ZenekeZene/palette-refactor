@@ -1,5 +1,5 @@
-import { IQuotesRepository } from '@/domain/Quote/IQuotesRepository'
-import { QuotesCollection } from '@/domain/Quote/QuotesCollection'
+import { IQuotesRepository } from '@gameContext/domain/Quote/IQuotesRepository'
+import { QuotesCollection } from '@gameContext/domain/Quote/QuotesCollection'
 
 class QuotesRepository implements IQuotesRepository {
   async getQuotes(): Promise<QuotesCollection> {

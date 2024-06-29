@@ -1,5 +1,5 @@
-import { Quote } from '@/domain/Quote/Quote'
-import { QuoteId } from '@/domain/Quote/QuoteId'
+import { Quote } from '@gameContext/domain/Quote/Quote'
+import { QuoteId } from '@gameContext/domain/Quote/QuoteId'
 
 export class QuotesCollection {
   private _quotes: Map<QuoteId, Quote> = new Map()

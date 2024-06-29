@@ -1,4 +1,4 @@
-import { NotNegative } from '@/domain/shared/NotNegative'
+import { NotNegative } from '@gameContext/domain/shared/NotNegative'
 
 export class GameSessionLevel extends NotNegative {
   increment(): GameSessionLevel {

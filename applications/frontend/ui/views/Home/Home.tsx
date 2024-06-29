@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom'
 import { FaPlay } from 'react-icons/fa'
 import { FaStar } from 'react-icons/fa'
-import { Title } from '@/ui/components/Title/Title'
-import { useClassnameOfRoute } from '@/ui/hooks/useClassnameOfRoute/useClassnameOfRoute'
-import { useStore } from '@/adapter/store/store'
+import { Title } from '@frontend/ui/components/Title/Title'
+import { useClassnameOfRoute } from '@frontend/ui/hooks/useClassnameOfRoute/useClassnameOfRoute'
+import { useStore } from '@frontend/adapter/store/store'
 import './Home.scss'
 
 const HomeView = () => {

@@ -1,6 +1,6 @@
-import { UseCase } from '@/domain/shared/UseCase'
-import { LevelsCollection } from '@/domain/Level/LevelsCollection'
-import { ILevelsRepository } from '@/domain/Level/ILevelsRepository'
+import { UseCase } from '@gameContext/domain/shared/UseCase'
+import { LevelsCollection } from '@gameContext/domain/Level/LevelsCollection'
+import { ILevelsRepository } from '@gameContext/domain/Level/ILevelsRepository'
 
 export type StartGameUseCaseExecution = Promise<LevelsCollection>
 

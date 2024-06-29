@@ -1,7 +1,7 @@
-import { GameSessionLives } from '@/domain/GameSession/GameSessionLives'
-import { GameSessionScore } from '@/domain/GameSession/GameSessionScore'
-import { GameSessionLevel } from '@/domain/GameSession/GameSessionLevel'
-import { GameSessionBonus } from '@/domain/GameSession/GameSessionBonus'
+import { GameSessionLives } from '@gameContext/domain/GameSession/GameSessionLives'
+import { GameSessionScore } from '@gameContext/domain/GameSession/GameSessionScore'
+import { GameSessionLevel } from '@gameContext/domain/GameSession/GameSessionLevel'
+import { GameSessionBonus } from '@gameContext/domain/GameSession/GameSessionBonus'
 
 export class GameSession {
   constructor(
