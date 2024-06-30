@@ -1,7 +1,7 @@
 import { Mock } from 'vitest'
 import { LevelsCollection } from '@gameContext/level/domain/LevelsCollection'
 import { Level } from '@gameContext/level/domain/Level'
-import { QuoteProps } from '@gameContext/domain/Quote/Quote'
+import { QuoteProps } from '@gameContext/quote/domain/Quote'
 import { Player } from '@gameContext/player/domain/Player'
 import { State } from '@frontend/adapter/store/store.types'
 import { createStore } from '@frontend/adapter/store/useStore'

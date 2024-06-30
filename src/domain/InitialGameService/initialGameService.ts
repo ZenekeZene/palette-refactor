@@ -1,5 +1,5 @@
 import { IPlayerRepository } from '@gameContext/player/domain/IPlayerRepository'
-import { IQuotesRepository } from '@gameContext/domain/Quote/IQuotesRepository'
+import { IQuotesRepository } from '@gameContext/quote/domain/IQuotesRepository'
 import { ILevelsRepository } from '@gameContext/level/domain/ILevelsRepository'
 
 export class InitialGameService {

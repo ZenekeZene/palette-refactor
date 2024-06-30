@@ -1,4 +1,4 @@
-import { Id } from '@gameContext/domain/shared/Id'
+import { Id } from '@gameContext/shared/Id'
 
 class LevelId extends Id {
   constructor(value: string) {

@@ -1,4 +1,4 @@
-import { UseCase } from '@gameContext/domain/shared/UseCase'
+import { UseCase } from '@gameContext/shared/UseCase'
 import { LevelsCollection } from '@gameContext/domain/Level/LevelsCollection'
 import { ILevelsRepository } from '@gameContext/domain/Level/ILevelsRepository'
 

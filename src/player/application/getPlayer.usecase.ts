@@ -1,4 +1,4 @@
-import { UseCase } from '@gameContext/domain/shared/UseCase'
+import { UseCase } from '@gameContext/shared/UseCase'
 import { Player } from '@gameContext/player/domain/Player'
 import { IPlayerRepository } from '@gameContext/player/domain/IPlayerRepository'
 

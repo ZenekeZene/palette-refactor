@@ -1,8 +1,8 @@
 import { State } from '@frontend/adapter/store/store.types'
 import { LevelsCollection } from '@gameContext/level/domain/LevelsCollection'
 import { Level } from '@gameContext/level/domain/Level'
-import { Quote, QuoteProps } from '@gameContext/domain/Quote/Quote'
-import { QuotesCollection } from '@gameContext/domain/Quote/QuotesCollection'
+import { Quote, QuoteProps } from '@gameContext/quote/domain/Quote'
+import { QuotesCollection } from '@gameContext/quote/domain/QuotesCollection'
 import { Player } from '@gameContext/player/domain/Player'
 
 class StoreBuilder {

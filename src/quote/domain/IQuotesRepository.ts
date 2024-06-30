@@ -1,4 +1,4 @@
-import { QuotesCollection } from '@gameContext/domain/Quote/QuotesCollection'
+import { QuotesCollection } from '@gameContext/quote/domain/QuotesCollection'
 
 export interface IQuotesRepository {
   getQuotes(): Promise<QuotesCollection>

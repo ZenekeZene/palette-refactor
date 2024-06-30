@@ -1,4 +1,4 @@
-import { NotNegative } from '@gameContext/domain/shared/NotNegative'
+import { NotNegative } from '@gameContext/shared/NotNegative'
 
 export class PlayerBonus extends NotNegative {
   increment(value: number) {

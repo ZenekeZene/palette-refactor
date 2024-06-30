@@ -1,8 +1,8 @@
-import { QuotesCollection } from '@gameContext/domain/Quote/QuotesCollection'
-import { Quote } from '@gameContext/domain/Quote/Quote'
+import { QuotesCollection } from '@gameContext/quote/domain/QuotesCollection'
+import { Quote } from '@gameContext/quote/domain/Quote'
 
 import { PlayerRepository } from '@gameContext/player/infrastructure/PlayerRepository'
-import { QuotesRepository } from '@gameContext/infra/QuotesRepository/QuotesRepository'
+import { QuotesRepository } from '@gameContext/quote/infrastructure/QuotesRepository'
 import { LevelsRepository } from '@gameContext/level/infrastructure/LevelsRepository'
 
 import {
@@ -16,8 +16,8 @@ import {
 import {
   GetQuotesUseCase,
   GetQuotesUseCaseExecution,
-} from '@gameContext/application/getQuotes.usecase'
-import { GetQuoteUseCase } from '@gameContext/application/getQuote.usecase'
+} from '@gameContext/quote/application/getQuotes.usecase'
+import { GetQuoteUseCase } from '@gameContext/quote/application/getQuote.usecase'
 
 import { State } from '@frontend/adapter/store/store.types'
 

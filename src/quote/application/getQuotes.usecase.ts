@@ -1,6 +1,6 @@
-import { UseCase } from '@gameContext/domain/shared/UseCase'
-import { QuotesCollection } from '@gameContext/domain/Quote/QuotesCollection'
-import { IQuotesRepository } from '@gameContext/domain/Quote/IQuotesRepository'
+import { UseCase } from '@gameContext/shared/UseCase'
+import { QuotesCollection } from '@gameContext/quote/domain/QuotesCollection'
+import { IQuotesRepository } from '@gameContext/quote/domain/IQuotesRepository'
 
 export type GetQuotesUseCaseExecution = Promise<QuotesCollection>
 
