@@ -1,4 +1,4 @@
-import { LevelsCollection } from '@gameContext/domain/Level/LevelsCollection'
+import { LevelsCollection } from '@gameContext/level/domain/LevelsCollection'
 
 export interface ILevelsRepository {
   getLevels(): Promise<LevelsCollection>

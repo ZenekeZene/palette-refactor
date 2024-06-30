@@ -5,37 +5,10 @@ import { PlayerRepository } from '@gameContext/player/infrastructure/PlayerRepos
 import { QuotesRepository } from '@gameContext/quote/infrastructure/QuotesRepository'
 import { LevelsRepository } from '@gameContext/level/infrastructure/LevelsRepository'
 
-import {
-  GetPlayer,
-  GetPlayerExecution,
-} from '@gameContext/player/application/getPlayer.usecase'
-import {
-  LoadLevelsUseCase,
-  LoadLevelsUseCaseExecution,
-} from '@gameContext/level/application/loadLevels.usecase'
-import {
-  GetQuotesUseCase,
-  GetQuotesUseCaseExecution,
-} from '@gameContext/quote/application/getQuotes.usecase'
 import { GetQuoteUseCase } from '@gameContext/quote/application/getQuote.usecase'
 
+import { LoadGame } from '@gameContext/shared/application/loadGame'
 import { State } from '@frontend/adapter/store/store.types'
-
-const getPlayer = async (): GetPlayerExecution => {
-  const getPlayer = GetPlayer(new PlayerRepository())
-  return await getPlayer.execute()
-}
-
-const getLevels = async (): LoadLevelsUseCaseExecution => {
-  const loadLevels = LoadLevelsUseCase(new LevelsRepository())
-  return await loadLevels.execute()
-}
-
-const getQuotes = async (): GetQuotesUseCaseExecution => {
-  const getQuotes = GetQuotesUseCase(new QuotesRepository())
-  const quotes = await getQuotes.execute()
-  return quotes
-}
 
 const getQuote = (quotesCollection: QuotesCollection): Quote => {
   const getQuote = new GetQuoteUseCase(quotesCollection)
@@ -43,7 +16,11 @@ const getQuote = (quotesCollection: QuotesCollection): Quote => {
 }
 
 export const createInitialState = async (): Promise<State> => {
-  const [player, levels, quotes ] = await Promise.all([getPlayer(), getLevels(), getQuotes()])
+  const levelsRepository = new LevelsRepository()
+  const playerRepository = new PlayerRepository()
+  const quotesRepository = new QuotesRepository()
+  const loadGame = new LoadGame(playerRepository, quotesRepository, levelsRepository)
+  const { player, levels, quotes } = await loadGame.launch()
   const quote = getQuote(quotes)
 
   return {
