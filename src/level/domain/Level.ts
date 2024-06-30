@@ -1,4 +1,4 @@
-import { Prize } from '@gameContext/domain/Prize/Prize'
+import { Prize } from '@gameContext/Prize/domain/Prize'
 import { LevelChips } from './LevelChips'
 import { LevelId } from './LevelId'
 

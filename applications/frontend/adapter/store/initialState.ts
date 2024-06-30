@@ -10,9 +10,9 @@ import {
   GetPlayerExecution,
 } from '@gameContext/player/application/getPlayer.usecase'
 import {
-  StartGameUseCase,
-  StartGameUseCaseExecution,
-} from '@gameContext/application/startGame.usecase'
+  LoadLevelsUseCase,
+  LoadLevelsUseCaseExecution,
+} from '@gameContext/level/application/loadLevels.usecase'
 import {
   GetQuotesUseCase,
   GetQuotesUseCaseExecution,
@@ -26,9 +26,9 @@ const getPlayer = async (): GetPlayerExecution => {
   return await getPlayer.execute()
 }
 
-const getLevels = async (): StartGameUseCaseExecution => {
-  const startGame = StartGameUseCase(new LevelsRepository())
-  return await startGame.execute()
+const getLevels = async (): LoadLevelsUseCaseExecution => {
+  const loadLevels = LoadLevelsUseCase(new LevelsRepository())
+  return await loadLevels.execute()
 }
 
 const getQuotes = async (): GetQuotesUseCaseExecution => {
