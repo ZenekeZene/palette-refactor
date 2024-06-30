@@ -1,4 +1,4 @@
-import { Id } from '@gameContext/shared/Id'
+import { Id } from '@gameContext/shared/utils/Id'
 
 class QuoteId extends Id {}
 
