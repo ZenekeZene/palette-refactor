@@ -8,8 +8,8 @@ import './TryAgain.scss'
 
 const TryAgainView = () => {
   const state = useStore(
-    useShallow(({ gameSession, levels }) => ({
-      level: gameSession.toPrimitive().level,
+    useShallow(({ player, levels }) => ({
+      level: player.toPrimitive().level,
       totalLevels: levels.getNumberOfLevels(),
     }))
   )

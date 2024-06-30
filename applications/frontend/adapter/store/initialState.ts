@@ -1,14 +1,14 @@
 import { QuotesCollection } from '@gameContext/domain/Quote/QuotesCollection'
 import { Quote } from '@gameContext/domain/Quote/Quote'
 
-import { GameSessionRepository } from '@gameContext/infra/GameSessionRepository/GameSessionRepository'
+import { PlayerRepository } from '@gameContext/infra/PlayerRepository/PlayerRepository'
 import { QuotesRepository } from '@gameContext/infra/QuotesRepository/QuotesRepository'
 import { LevelsRepository } from '@gameContext/infra/LevelsRepository/LevelsRepository'
 
 import {
-  GetGameSessionUseCase,
-  GetGameSessionExecution,
-} from '@gameContext/application/getGameSession.usecase'
+  GetPlayer,
+  GetPlayerExecution,
+} from '@gameContext/application/getPlayer.usecase'
 import {
   StartGameUseCase,
   StartGameUseCaseExecution,
@@ -21,9 +21,9 @@ import { GetQuoteUseCase } from '@gameContext/application/getQuote.usecase'
 
 import { State } from '@frontend/adapter/store/store.types'
 
-const getGameSession = async (): GetGameSessionExecution => {
-  const getGameSession = GetGameSessionUseCase(new GameSessionRepository())
-  return await getGameSession.execute()
+const getPlayer = async (): GetPlayerExecution => {
+  const getPlayer = GetPlayer(new PlayerRepository())
+  return await getPlayer.execute()
 }
 
 const getLevels = async (): StartGameUseCaseExecution => {
@@ -43,11 +43,11 @@ const getQuote = (quotesCollection: QuotesCollection): Quote => {
 }
 
 export const createInitialState = async (): Promise<State> => {
-  const [gameSession, levels, quotes ] = await Promise.all([getGameSession(), getLevels(), getQuotes()])
+  const [player, levels, quotes ] = await Promise.all([getPlayer(), getLevels(), getQuotes()])
   const quote = getQuote(quotes)
 
   return {
-    gameSession,
+    player,
     levels,
     tutorialIsWatched: false,
     quotes,

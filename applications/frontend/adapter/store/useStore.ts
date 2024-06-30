@@ -14,7 +14,7 @@ function createStore(propsState: State) {
       },
       nextLevel: () => {
         get().nextQuote()
-        get().gameSession.nextLevel()
+        get().player.passLevel()
       },
     }))
   )

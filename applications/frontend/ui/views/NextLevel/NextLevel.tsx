@@ -8,8 +8,8 @@ import './NextLevel.scss'
 
 const NextLevelView = () => {
   const state = useStore(
-    useShallow(({ gameSession, levels, quote, nextLevel }) => ({
-      level: gameSession.toPrimitive().level,
+    useShallow(({ player, levels, quote, nextLevel }) => ({
+      level: player.toPrimitive().level,
       totalLevels: levels.getNumberOfLevels(),
       quote,
       nextLevel,

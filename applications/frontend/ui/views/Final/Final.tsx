@@ -4,9 +4,9 @@ import './Final.scss'
 
 const FinalView = () => {
   const state = useStore(
-    useShallow(({ gameSession }) => ({
-      level: gameSession.toPrimitive().level,
-      score: gameSession.toPrimitive().score,
+    useShallow(({ player }) => ({
+      level: player.toPrimitive().level,
+      score: player.toPrimitive().score,
     }))
   )
 

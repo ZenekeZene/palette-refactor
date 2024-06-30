@@ -2,7 +2,7 @@ import { Mock } from 'vitest'
 import { LevelsCollection } from '@gameContext/domain/Level/LevelsCollection'
 import { Level } from '@gameContext/domain/Level/Level'
 import { QuoteProps } from '@gameContext/domain/Quote/Quote'
-import { GameSession } from '@gameContext/domain/GameSession/GameSession'
+import { Player } from '@gameContext/domain/Player/Player'
 import { State } from '@frontend/adapter/store/store.types'
 import { createStore } from '@frontend/adapter/store/useStore'
 import { StoreBuilder } from '@frontend/adapter/store/__mocks__/store.builder'
@@ -17,9 +17,9 @@ export class StoreMother {
     return levels
   }
 
-  private static createDefaultGameSession(): GameSession {
+  private static createDefaultPlayer(): Player {
     const { LIVES, SCORE, LEVEL, BONUS } = StoreMother.DEFAULT
-    return GameSession.fromPrimitives({
+    return Player.fromPrimitives({
       lives: LIVES,
       score: SCORE,
       level: LEVEL,
@@ -30,7 +30,7 @@ export class StoreMother {
   private static createDefaultBuilder(): StoreBuilder {
     const builder = new StoreBuilder()
     builder.withLevels(StoreMother.createDefaultLevels())
-    builder.withGameSession(StoreMother.createDefaultGameSession())
+    builder.withPlayer(StoreMother.createDefaultPlayer())
     return builder
   }
 
@@ -68,13 +68,13 @@ export class StoreMother {
     }
     builder.withLevels(levels)
     const { LIVES, SCORE, BONUS } = StoreMother.DEFAULT
-    const gameSession = GameSession.fromPrimitives({
+    const player = Player.fromPrimitives({
       lives: LIVES,
       score: SCORE,
       bonus: BONUS,
       level: options.level,
     })
-    builder.withGameSession(gameSession)
+    builder.withPlayer(player)
     StoreMother.mockStore(useStore, builder.currentState)
   }
 }

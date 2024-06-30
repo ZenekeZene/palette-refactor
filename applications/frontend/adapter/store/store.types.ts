@@ -1,10 +1,10 @@
 import { LevelsCollection } from '@gameContext/domain/Level/LevelsCollection'
 import { Quote } from '@gameContext/domain/Quote/Quote'
 import { QuotesCollection } from '@gameContext/domain/Quote/QuotesCollection'
-import { GameSession } from '@gameContext/domain/GameSession/GameSession'
+import { Player } from '@gameContext/domain/Player/Player'
 
 export type State = {
-  gameSession: GameSession
+  player: Player
   levels: LevelsCollection
   tutorialIsWatched: boolean
   quotes: QuotesCollection

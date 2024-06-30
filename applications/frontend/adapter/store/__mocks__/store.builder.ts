@@ -3,7 +3,7 @@ import { LevelsCollection } from '@gameContext/domain/Level/LevelsCollection'
 import { Level } from '@gameContext/domain/Level/Level'
 import { Quote, QuoteProps } from '@gameContext/domain/Quote/Quote'
 import { QuotesCollection } from '@gameContext/domain/Quote/QuotesCollection'
-import { GameSession } from '@gameContext/domain/GameSession/GameSession'
+import { Player } from '@gameContext/domain/Player/Player'
 
 class StoreBuilder {
   private state: State
@@ -20,7 +20,7 @@ class StoreBuilder {
     const quotes = new QuotesCollection()
     quotes.add(quote)
 
-    const gameSession = GameSession.fromPrimitives({
+    const player = Player.fromPrimitives({
       lives: 0,
       score: 0,
       level: 0,
@@ -28,7 +28,7 @@ class StoreBuilder {
     })
 
     return {
-      gameSession,
+      player,
       levels,
       tutorialIsWatched: false,
       quotes,
@@ -46,8 +46,8 @@ class StoreBuilder {
     return this
   }
 
-  withGameSession(gameSession: GameSession): StoreBuilder {
-    this.state.gameSession = gameSession
+  withPlayer(player: Player): StoreBuilder {
+    this.state.player = player
     return this
   }
 

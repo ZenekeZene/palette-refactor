@@ -8,18 +8,18 @@ import './Game.scss'
 
 const GameView = () => {
   const navigate = useNavigate()
-  const gameSession = useStore(
-    useShallow(({ gameSession }) => {
-      return { ...gameSession.toPrimitive() }
+  const player = useStore(
+    useShallow(({ player }) => {
+      return { ...player.toPrimitive() }
     })
   )
 
   return (
     <article className="game view">
       <HeaderGame
-        level={gameSession.level}
-        lives={gameSession.lives}
-        score={gameSession.score}
+        level={player.level}
+        lives={player.lives}
+        score={player.score}
         onBack={() => navigate('/')}
       />
 
@@ -30,9 +30,9 @@ const GameView = () => {
           <GameChip />
         </div>
 
-        {gameSession.bonus > 0 && (
+        {player.bonus > 0 && (
           <div className="game__bonus">
-            <Bonus bonus={gameSession.bonus} />
+            <Bonus bonus={player.bonus} />
           </div>
         )}
       </section>
