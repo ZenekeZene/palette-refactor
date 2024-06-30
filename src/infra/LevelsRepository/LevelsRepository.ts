@@ -4,7 +4,7 @@ import { LevelsCollection } from '@gameContext/domain/Level/LevelsCollection'
 class LevelsRepository implements ILevelsRepository {
   async getLevels(): Promise<LevelsCollection> {
     try {
-      const LevelsConfig = await import('/config/Levels.yaml')
+      const LevelsConfig = await import('@resources/Levels.yaml')
       const levels = LevelsConfig.default.levels
       return LevelsCollection.fromArray(levels)
     } catch (error) {

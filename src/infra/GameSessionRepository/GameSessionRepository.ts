@@ -4,7 +4,7 @@ import { GameSession } from '@gameContext/domain/GameSession/GameSession'
 class GameSessionRepository implements IGameSessionRepository {
   async getGameSession(): Promise<GameSession> {
     try {
-      const GameSessionConfig = await import('/config/GameSession.yaml')
+      const GameSessionConfig = await import('@resources/GameSession.yaml')
       return GameSession.fromPrimitives(GameSessionConfig.default.initial)
     } catch (error) {
       throw new Error('Error loading game session config')

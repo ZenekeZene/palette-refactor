@@ -19,7 +19,7 @@ import {
 } from '@gameContext/application/getQuotes.usecase'
 import { GetQuoteUseCase } from '@gameContext/application/getQuote.usecase'
 
-import { State } from '@gameContext/adapter/store/store.types'
+import { State } from '@frontend/adapter/store/store.types'
 
 const getGameSession = async (): GetGameSessionExecution => {
   const getGameSession = GetGameSessionUseCase(new GameSessionRepository())
@@ -43,10 +43,8 @@ const getQuote = (quotesCollection: QuotesCollection): Quote => {
 }
 
 export const createInitialState = async (): Promise<State> => {
-  const quotes = await getQuotes()
+  const [gameSession, levels, quotes ] = await Promise.all([getGameSession(), getLevels(), getQuotes()])
   const quote = getQuote(quotes)
-  const gameSession = await getGameSession()
-  const levels = await getLevels()
 
   return {
     gameSession,
