@@ -1,7 +1,7 @@
-import { PlayerLives } from '@gameContext/domain/Player/PlayerLives'
-import { PlayerScore } from '@gameContext/domain/Player/PlayerScore'
-import { PlayerLevel } from '@gameContext/domain/Player/PlayerLevel'
-import { PlayerBonus } from '@gameContext/domain/Player/PlayerBonus'
+import { PlayerLives } from './PlayerLives'
+import { PlayerScore } from './PlayerScore'
+import { PlayerLevel } from './PlayerLevel'
+import { PlayerBonus } from './PlayerBonus'
 
 export class Player {
   constructor(
