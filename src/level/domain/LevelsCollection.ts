@@ -1,7 +1,7 @@
-import { Level } from '@gameContext/domain/Level/Level'
-import { LevelChips } from '@gameContext/domain/Level/LevelChips'
+import { Level } from './Level'
+import { LevelChips } from './LevelChips'
 import { Prize } from '@gameContext/domain/Prize/Prize'
-import { LevelId } from '@gameContext/domain/Level/LevelId'
+import { LevelId } from './LevelId'
 
 export class LevelsCollection {
   private _levels: Map<LevelId, Level> = new Map()

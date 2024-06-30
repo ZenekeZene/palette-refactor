@@ -3,7 +3,7 @@ import { Quote } from '@gameContext/domain/Quote/Quote'
 
 import { PlayerRepository } from '@gameContext/infra/PlayerRepository/PlayerRepository'
 import { QuotesRepository } from '@gameContext/infra/QuotesRepository/QuotesRepository'
-import { LevelsRepository } from '@gameContext/infra/LevelsRepository/LevelsRepository'
+import { LevelsRepository } from '@gameContext/level/infrastructure/LevelsRepository'
 
 import {
   GetPlayer,

@@ -1,5 +1,5 @@
-import { ILevelsRepository } from '@gameContext/domain/Level/ILevelsRepository'
-import { LevelsCollection } from '@gameContext/domain/Level/LevelsCollection'
+import { ILevelsRepository } from '@gameContext/level/domain/ILevelsRepository'
+import { LevelsCollection } from '@gameContext/level/domain/LevelsCollection'
 
 class LevelsRepository implements ILevelsRepository {
   async getLevels(): Promise<LevelsCollection> {
