@@ -1,6 +1,6 @@
 import { UseCase } from '@gameContext/domain/shared/UseCase'
-import { Player } from '@gameContext/domain/Player/Player'
-import { IPlayerRepository } from '@gameContext/domain/Player/IPlayerRepository'
+import { Player } from '@gameContext/player/domain/Player'
+import { IPlayerRepository } from '@gameContext/player/domain/IPlayerRepository'
 
 export type GetPlayerExecution = Promise<Player>
 

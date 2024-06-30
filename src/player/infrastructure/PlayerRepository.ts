@@ -1,5 +1,5 @@
-import { IPlayerRepository } from '@gameContext/domain/Player/IPlayerRepository'
-import { Player } from '@gameContext/domain/Player/Player'
+import { IPlayerRepository } from '@gameContext/player/domain/IPlayerRepository'
+import { Player } from '@gameContext/player/domain/Player'
 
 class PlayerRepository implements IPlayerRepository {
   async getPlayer(): Promise<Player> {

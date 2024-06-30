@@ -1,6 +1,6 @@
-import { IPlayerRepository } from '@gameContext/domain/Player/IPlayerRepository'
+import { IPlayerRepository } from '@gameContext/player/domain/IPlayerRepository'
 import { IQuotesRepository } from '@gameContext/domain/Quote/IQuotesRepository'
-import { ILevelsRepository } from '@gameContext/domain/Level/ILevelsRepository'
+import { ILevelsRepository } from '@gameContext/level/domain/ILevelsRepository'
 
 export class InitialGameService {
   constructor(private playerRepository: IPlayerRepository, private quotesRepository: IQuotesRepository, private levelsRepository: ILevelsRepository) {

@@ -1,14 +1,14 @@
 import { QuotesCollection } from '@gameContext/domain/Quote/QuotesCollection'
 import { Quote } from '@gameContext/domain/Quote/Quote'
 
-import { PlayerRepository } from '@gameContext/infra/PlayerRepository/PlayerRepository'
+import { PlayerRepository } from '@gameContext/player/infrastructure/PlayerRepository'
 import { QuotesRepository } from '@gameContext/infra/QuotesRepository/QuotesRepository'
 import { LevelsRepository } from '@gameContext/level/infrastructure/LevelsRepository'
 
 import {
   GetPlayer,
   GetPlayerExecution,
-} from '@gameContext/application/getPlayer.usecase'
+} from '@gameContext/player/application/getPlayer.usecase'
 import {
   StartGameUseCase,
   StartGameUseCaseExecution,
