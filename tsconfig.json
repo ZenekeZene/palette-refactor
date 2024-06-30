@@ -22,7 +22,8 @@
 
     "paths": {
       "@gameContext/*": ["./src/*"],
-      "@frontend/*": ["./applications/frontend/*"]
+      "@frontend/*": ["./applications/frontend/*"],
+      "@resources/*": ["./resources/*"],
     },
     "types": [
       "@modyfi/vite-plugin-yaml/modules",
