@@ -1,6 +1,7 @@
 import { injectable } from "tsyringe"
 import { ILevelsRepository } from '@gameContext/level/domain/ILevelsRepository'
 import type { Level } from '@gameContext/level/domain/Level'
+import type { LevelId } from '@gameContext/level/domain/LevelId'
 import type { LevelsCollection } from '@gameContext/level/domain/LevelsCollection'
 
 @injectable()
@@ -15,8 +16,8 @@ class LevelsInMemoryRepository implements ILevelsRepository {
     levels.forEach((level) => this.add(level))
   }
 
-  async searchById(id: string): Promise<Level | undefined> {
-    return this._levels.get(id)
+  async searchById(id: LevelId): Promise<Level | undefined> {
+    return this._levels.get(id.toPrimitive())
   }
 }
 

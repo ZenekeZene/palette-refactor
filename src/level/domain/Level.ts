@@ -1,6 +1,6 @@
+import { PrizeId } from '@gameContext/shared/domain/PrizeId'
 import { LevelChips } from './LevelChips'
 import { LevelId } from './LevelId'
-import { PrizeId } from '@gameContext/shared/domain/PrizeId'
 
 export interface LevelRawModel {
   id: string
@@ -39,7 +39,7 @@ class Level {
     return level
   }
 
-  static toRaw(level: Level): LevelRawModel {
+  static toPrimitive(level: Level): LevelRawModel {
     return {
       id: level.id.toPrimitive(),
       numberOfChips: level.numberOfChips.toPrimitive(),

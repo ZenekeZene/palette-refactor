@@ -1,10 +1,12 @@
+import { AggregateRoot } from '@gameContext/shared/domain/utils/AggregateRoot'
 import { Level, LevelRawModel } from './Level'
 import { PrizeRawModel } from '@gameContext/prize/domain/Prize'
 
-export class LevelsCollection {
+export class LevelsCollection extends AggregateRoot {
   private levels: Level[] = []
 
   constructor(_levels: LevelRawModel[] = [], _prizes: PrizeRawModel[] = []) {
+    super()
     this.associatePrizesIdToLevels(_levels, _prizes)
   }
 

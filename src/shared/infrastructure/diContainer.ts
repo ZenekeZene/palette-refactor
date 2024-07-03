@@ -1,6 +1,6 @@
 import { container } from "tsyringe"
 import { Types } from "./identifiers"
-import { UseCase } from '@gameContext/shared/utils/UseCase'
+import { UseCase } from '@gameContext/shared/domain/utils/UseCase'
 import { IPlayerRepository } from "@gameContext/player/domain/IPlayerRepository"
 import { PlayerRepository } from "@gameContext/player/infrastructure/PlayerRepository"
 import { IQuotesRepository } from "@gameContext/quote/domain/IQuotesRepository"

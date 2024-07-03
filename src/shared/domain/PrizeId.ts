@@ -1,4 +1,4 @@
-import { Id } from '@gameContext/shared/utils/Id'
+import { Id } from '@gameContext/shared/domain/utils/Id'
 
 class PrizeId extends Id {
   constructor(value: string) {

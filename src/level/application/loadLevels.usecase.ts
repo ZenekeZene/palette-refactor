@@ -1,6 +1,6 @@
 import { injectable, inject } from 'tsyringe'
 import { Types } from '@gameContext/shared/infrastructure/identifiers'
-import type { UseCase } from '@gameContext/shared/utils/UseCase'
+import type { UseCase } from '@gameContext/shared/domain/utils/UseCase'
 import { LevelsCollection } from '@gameContext/level/domain/LevelsCollection'
 import { PrizesCollection } from '@gameContext/prize/domain/PrizesCollection'
 import type { ILevelsLoaderRepository } from '@gameContext/level/domain/ILevelsLoaderRepository'

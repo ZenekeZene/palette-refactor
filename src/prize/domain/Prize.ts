@@ -18,7 +18,7 @@ export class Prize {
     public readonly levelId: LevelId
   ) {}
 
-  public static fromPrimitive(prize: PrizeRawModel) {
+  public static fromPrimitive(prize: PrizeRawModel): Prize {
     const prizeId = new PrizeId(prize.id)
     const lives = new PrizeLives(prize.lives)
     const bonus = new PrizeBonus(prize.bonus)
@@ -26,7 +26,7 @@ export class Prize {
     return new Prize(prizeId, lives, bonus, levelId)
   }
 
-  public static toRaw(prize: Prize): PrizeRawModel {
+  public static toPrimitive(prize: Prize): PrizeRawModel {
     return {
       id: prize.id.toPrimitive(),
       lives: prize.lives.toPrimitive(),

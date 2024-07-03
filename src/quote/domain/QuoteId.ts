@@ -1,4 +1,4 @@
-import { Uuid } from '@gameContext/shared/utils/Uuid'
+import { Uuid } from '@gameContext/shared/domain/utils/Uuid'
 
 class QuoteId extends Uuid {}
 

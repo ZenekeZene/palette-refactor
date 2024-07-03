@@ -1,4 +1,4 @@
-import { UseCase } from '@gameContext/shared/utils/UseCase'
+import { UseCase } from '@gameContext/shared/domain/utils/UseCase'
 import { QuotesCollection } from '@gameContext/quote/domain/QuotesCollection'
 import { IQuotesRepository } from '@gameContext/quote/domain/IQuotesRepository'
 
