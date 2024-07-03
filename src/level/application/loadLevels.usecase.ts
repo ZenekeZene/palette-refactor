@@ -11,12 +11,15 @@ class LoadLevelsUseCase implements UseCase<LevelsCollection> {
   ) {}
 
   async execute(): Promise<LevelsCollection> {
-    const levelsRaw = await this.levelsRepository.loadAll()
-    const prizesRaw = await this.prizesRepository.loadAll()
+    const levelsRaw = await this.levelsRepository.loadAllFromFile()
+    const prizesRaw = await this.prizesRepository.loadAllFromFile()
+
     const levelsCollection = new LevelsCollection(levelsRaw, prizesRaw)
     const prizesCollection = new PrizesCollection(prizesRaw)
+
     this.levelsRepository.saveAllInMemory(levelsCollection)
     this.prizesRepository.saveAllInMemory(prizesCollection)
+
     return levelsCollection
   }
 }

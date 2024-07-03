@@ -13,7 +13,7 @@ class PrizesRepository implements IPrizesRepository {
     prizes.forEach((prize) => this.add(prize))
   }
 
-  async loadAll(): Promise<PrizeRawModel[]> {
+  async loadAllFromFile(): Promise<PrizeRawModel[]> {
     try {
       const PrizesConfig = await import('@resources/Prizes.yaml')
       const prizes = PrizesConfig.default.prizes as Array<PrizeRawModel>

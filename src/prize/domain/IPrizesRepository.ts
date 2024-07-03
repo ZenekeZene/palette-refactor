@@ -3,5 +3,5 @@ import { PrizesCollection } from './PrizesCollection'
 
 export interface IPrizesRepository {
   saveAllInMemory(levels: PrizesCollection): Promise<void>
-  loadAll(): Promise<PrizeRawModel[]>
+  loadAllFromFile(): Promise<PrizeRawModel[]>
 }
