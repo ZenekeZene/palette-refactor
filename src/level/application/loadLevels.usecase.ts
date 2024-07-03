@@ -1,4 +1,5 @@
 import { injectable, inject } from 'tsyringe'
+import { Types } from '@gameContext/shared/infrastructure/identifiers'
 import type { UseCase } from '@gameContext/shared/utils/UseCase'
 import { LevelsCollection } from '@gameContext/level/domain/LevelsCollection'
 import { PrizesCollection } from '@gameContext/prize/domain/PrizesCollection'
@@ -9,9 +10,9 @@ import type { IPrizesRepository } from '@gameContext/prize/domain/IPrizesReposit
 @injectable()
 class LoadLevelsUseCase implements UseCase<LevelsCollection> {
   constructor(
-    @inject('ILevelsLoaderRepository') private loaderLevelsRepository: ILevelsLoaderRepository,
-    @inject('ILevelsRepository') private levelsRepository: ILevelsRepository,
-    @inject('IPrizesRepository') private prizesRepository: IPrizesRepository
+    @inject(Types.ILevelsLoaderRepository) private loaderLevelsRepository: ILevelsLoaderRepository,
+    @inject(Types.ILevelsRepository) private levelsRepository: ILevelsRepository,
+    @inject(Types.IPrizesRepository) private prizesRepository: IPrizesRepository
   ) {}
 
   async execute(): Promise<LevelsCollection> {

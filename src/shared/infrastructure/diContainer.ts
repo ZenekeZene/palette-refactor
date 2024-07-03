@@ -1,4 +1,5 @@
 import { container } from "tsyringe"
+import { Types } from "./identifiers"
 import { UseCase } from '@gameContext/shared/utils/UseCase'
 import { IPlayerRepository } from "@gameContext/player/domain/IPlayerRepository"
 import { PlayerRepository } from "@gameContext/player/infrastructure/PlayerRepository"
@@ -13,9 +14,9 @@ import { PrizesRepository } from "@gameContext/prize/infrastructure/PrizesReposi
 import { ILevelsRepository } from "@gameContext/level/domain/ILevelsRepository"
 import { LevelsInMemoryRepository } from "@gameContext/level/infrastructure/LevelsInMemoryRepository"
 
-container.registerSingleton<IPlayerRepository>('IPlayerRepository', PlayerRepository)
-container.registerSingleton<IQuotesRepository>('IQuotesRepository', QuotesRepository)
-container.registerSingleton<UseCase<LevelsCollection>>('LoadLevelsUseCase', LoadLevelsUseCase)
-container.registerSingleton<ILevelsLoaderRepository>('ILevelsLoaderRepository', LevelsLoaderFromFileRepository)
-container.registerSingleton<ILevelsRepository>('ILevelsRepository', LevelsInMemoryRepository)
-container.registerSingleton<IPrizesRepository>('IPrizesRepository', PrizesRepository)
+container.registerSingleton<IPlayerRepository>(Types.IPlayerRepository, PlayerRepository)
+container.registerSingleton<IQuotesRepository>(Types.IQuotesRepository, QuotesRepository)
+container.registerSingleton<UseCase<LevelsCollection>>(Types.LoadLevelsUseCase, LoadLevelsUseCase)
+container.registerSingleton<ILevelsLoaderRepository>(Types.ILevelsLoaderRepository, LevelsLoaderFromFileRepository)
+container.registerSingleton<ILevelsRepository>(Types.ILevelsRepository, LevelsInMemoryRepository)
+container.registerSingleton<IPrizesRepository>(Types.IPrizesRepository, PrizesRepository)
