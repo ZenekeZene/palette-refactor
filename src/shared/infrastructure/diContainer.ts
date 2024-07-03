@@ -9,8 +9,6 @@ import { LoadLevelsUseCase } from "@gameContext/level/application/loadLevels.use
 import { LevelsCollection } from '@gameContext/level/domain/LevelsCollection'
 import { ILevelsLoaderRepository } from "@gameContext/level/domain/ILevelsLoaderRepository"
 import { LevelsLoaderFromFileRepository } from "@gameContext/level/infrastructure/LevelsLoaderFromFileRepository"
-import { IPrizesRepository } from "@gameContext/prize/domain/IPrizesRepository"
-import { PrizesRepository } from "@gameContext/prize/infrastructure/PrizesRepository"
 import { ILevelsRepository } from "@gameContext/level/domain/ILevelsRepository"
 import { LevelsInMemoryRepository } from "@gameContext/level/infrastructure/LevelsInMemoryRepository"
 
@@ -19,4 +17,3 @@ container.registerSingleton<IQuotesRepository>(Types.IQuotesRepository, QuotesRe
 container.registerSingleton<UseCase<LevelsCollection>>(Types.LoadLevelsUseCase, LoadLevelsUseCase)
 container.registerSingleton<ILevelsLoaderRepository>(Types.ILevelsLoaderRepository, LevelsLoaderFromFileRepository)
 container.registerSingleton<ILevelsRepository>(Types.ILevelsRepository, LevelsInMemoryRepository)
-container.registerSingleton<IPrizesRepository>(Types.IPrizesRepository, PrizesRepository)

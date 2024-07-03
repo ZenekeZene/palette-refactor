@@ -1,45 +1,90 @@
 levels:
   - id: 'level-1'
     numberOfChips: 1
+    prize:
+      lives: 0
+      bonus: 0
 
   - id: 'level-2'
     numberOfChips: 2
+    prize:
+      lives: 0
+      bonus: 0
 
   - id: 'level-3'
     numberOfChips: 3
+    prize:
+      lives: 0
+      bonus: 1
 
   - id: 'level-4'
     numberOfChips: 4
+    prize:
+      lives: 0
+      bonus: 1
 
   - id: 'level-5'
     numberOfChips: 5
+    prize:
+      lives: 0
+      bonus: 1
 
   - id: 'level-6'
     numberOfChips: 6
+    prize:
+      lives: 1
+      bonus: 1
 
   - id: 'level-7'
     numberOfChips: 7
+    prize:
+      lives: 1
+      bonus: 1
 
   - id: 'level-8'
     numberOfChips: 8
+    prize:
+      lives: 1
+      bonus: 1
 
   - id: 'level-9'
     numberOfChips: 9
+    prize:
+      lives: 1
+      bonus: 1
 
   - id: 'level-10'
     numberOfChips: 10
+    prize:
+      lives: 1
+      bonus: 1
 
   - id: 'level-11'
     numberOfChips: 11
+    prize:
+      lives: 1
+      bonus: 2
 
   - id: 'level-12'
     numberOfChips: 12
+    prize:
+      lives: 2
+      bonus: 3
 
   - id: 'level-13'
     numberOfChips: 13
+    prize:
+      lives: 2
+      bonus: 3
 
   - id: 'level-14'
     numberOfChips: 14
+    prize:
+      lives: 2
+      bonus: 3
 
   - id: 'level-15'
     numberOfChips: 15
+    prize:
+      lives: 2
+      bonus: 3

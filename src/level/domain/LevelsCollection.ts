@@ -1,20 +1,18 @@
 import { AggregateRoot } from '@gameContext/shared/domain/utils/AggregateRoot'
-import { Level, LevelRawModel } from './Level'
-import { PrizeRawModel } from '@gameContext/prize/domain/Prize'
+import { LevelPrize } from './levelPrize/LevelPrize'
+import { Level, LevelRawModel } from './level/Level'
 
 export class LevelsCollection extends AggregateRoot {
   private levels: Level[] = []
 
-  constructor(_levels: LevelRawModel[] = [], _prizes: PrizeRawModel[] = []) {
+  constructor(_levels: LevelRawModel[] = []) {
     super()
-    this.associatePrizesIdToLevels(_levels, _prizes)
+    this.generate(_levels)
   }
 
-  private associatePrizesIdToLevels(_levels: LevelRawModel[], _prizes: PrizeRawModel[]): void {
+  private generate(_levels: LevelRawModel[]): void {
     _levels.forEach((_level): void => {
-      const prizeId = this.getPrizeIdByLevelId(_prizes, _level.id)
-      if (!prizeId) return
-      const level = Level.fromPrimitive(_level.id, _level.numberOfChips, prizeId)
+      const level = Level.fromPrimitive(_level.id, _level.numberOfChips, _level.prize)
       this.levels.push(level)
     })
   }
@@ -27,8 +25,8 @@ export class LevelsCollection extends AggregateRoot {
     return this.levels.length
   }
 
-  private getPrizeIdByLevelId(_prizes: PrizeRawModel[], levelId: string): string | undefined {
-    return _prizes.find((prize) => prize.levelId === levelId)?.id
+  getLevelPrizeByLevelId(levelId: string): LevelPrize | undefined {
+    return this.levels.find((level) => level.getId().toPrimitive() === levelId)?.getLevelPrize()
   }
 
   forEach(callback: (level: Level) => void): void {

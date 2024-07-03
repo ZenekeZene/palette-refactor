@@ -4,5 +4,4 @@ export const Types = {
   LoadLevelsUseCase: Symbol.for('LoadLevelsUseCase'),
   ILevelsLoaderRepository: Symbol.for('ILevelsLoaderRepository'),
   ILevelsRepository: Symbol.for('ILevelsRepository'),
-  IPrizesRepository: Symbol.for('IPrizesRepository'),
 }
