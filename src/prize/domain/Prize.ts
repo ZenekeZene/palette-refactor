@@ -1,5 +1,5 @@
 import { LevelId } from '@gameContext/level/domain/LevelId'
-import { PrizeId } from './PrizeId'
+import { PrizeId } from '@gameContext/shared/domain/PrizeId'
 import { PrizeLives } from './PrizeLives'
 import { PrizeBonus } from './PrizeBonus'
 

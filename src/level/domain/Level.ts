@@ -1,6 +1,6 @@
 import { LevelChips } from './LevelChips'
 import { LevelId } from './LevelId'
-import { PrizeId } from '@gameContext/prize/domain/PrizeId'
+import { PrizeId } from '@gameContext/shared/domain/PrizeId'
 
 export interface LevelRawModel {
   id: string
