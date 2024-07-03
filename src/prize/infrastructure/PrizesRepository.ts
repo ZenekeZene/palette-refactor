@@ -1,8 +1,9 @@
+import { injectable } from "tsyringe"
 import { IPrizesRepository } from '@gameContext/prize/domain/IPrizesRepository'
-import type { Prize } from '@gameContext/prize/domain/Prize'
-import { PrizeRawModel } from '@gameContext/prize/domain/Prize'
+import type { Prize, PrizeRawModel } from '@gameContext/prize/domain/Prize'
 import type { PrizesCollection } from '@gameContext/prize/domain/PrizesCollection'
 
+@injectable()
 class PrizesRepository implements IPrizesRepository {
   private _prizes: Map<string, Prize> = new Map()
 

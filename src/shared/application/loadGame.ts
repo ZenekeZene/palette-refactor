@@ -1,5 +1,6 @@
-import { IPlayerRepository } from '@gameContext/player/domain/IPlayerRepository'
-import { IQuotesRepository } from '@gameContext/quote/domain/IQuotesRepository'
+import { injectable, inject } from "tsyringe"
+import type { IPlayerRepository } from '@gameContext/player/domain/IPlayerRepository'
+import type { IQuotesRepository } from '@gameContext/quote/domain/IQuotesRepository'
 import { Player } from '@gameContext/player/domain/Player'
 import { LevelsCollection } from '@gameContext/level/domain/LevelsCollection'
 import { QuotesCollection } from '@gameContext/quote/domain/QuotesCollection'
@@ -7,16 +8,13 @@ import { LoadLevelsUseCase } from '@gameContext/level/application/loadLevels.use
 
 type LoadGameType = { player: Player, levels: LevelsCollection, quotes: QuotesCollection }
 
+@injectable()
 export class LoadGame {
   constructor(
-    private playerRepository: IPlayerRepository,
-    private quotesRepository: IQuotesRepository,
-    private loadLevelsUseCase: LoadLevelsUseCase,
-  ) {
-    this.playerRepository = playerRepository
-    this.quotesRepository = quotesRepository
-    this.loadLevelsUseCase = loadLevelsUseCase
-  }
+    @inject('IPlayerRepository') private playerRepository: IPlayerRepository,
+    @inject('IQuotesRepository') private quotesRepository: IQuotesRepository,
+    @inject('LoadLevelsUseCase') private loadLevelsUseCase: LoadLevelsUseCase,
+  ) {}
 
   async launch(): Promise<LoadGameType> {
     const player = await this.getPlayer()

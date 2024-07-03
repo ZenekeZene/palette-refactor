@@ -1,6 +1,8 @@
+import { injectable } from 'tsyringe'
 import { IPlayerRepository } from '@gameContext/player/domain/IPlayerRepository'
 import { Player } from '@gameContext/player/domain/Player'
 
+@injectable()
 class PlayerRepository implements IPlayerRepository {
   async getPlayer(): Promise<Player> {
     try {

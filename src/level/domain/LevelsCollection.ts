@@ -9,17 +9,20 @@ export class LevelsCollection {
   }
 
   private associatePrizesIdToLevels(_levels: LevelRawModel[], _prizes: PrizeRawModel[]): void {
-    _levels.forEach((_level) => {
+    _levels.forEach((_level): void => {
       const prizeId = this.getPrizeIdByLevelId(_prizes, _level.id)
-      if (prizeId) {
-        const level = Level.fromPrimitive(_level.id, _level.numberOfChips, prizeId)
-        this.levels.push(level)
-      }
+      if (!prizeId) return
+      const level = Level.fromPrimitive(_level.id, _level.numberOfChips, prizeId)
+      this.levels.push(level)
     })
   }
 
   getLevels(): Level[] {
     return this.levels
+  }
+
+  getNumberOfLevels(): number {
+    return this.levels.length
   }
 
   private getPrizeIdByLevelId(_prizes: PrizeRawModel[], levelId: string): string | undefined {

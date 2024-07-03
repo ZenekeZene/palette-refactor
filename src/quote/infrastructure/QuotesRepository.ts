@@ -1,6 +1,8 @@
+import { injectable } from 'tsyringe'
 import { IQuotesRepository } from '@gameContext/quote/domain/IQuotesRepository'
 import { QuotesCollection } from '@gameContext/quote/domain/QuotesCollection'
 
+@injectable()
 class QuotesRepository implements IQuotesRepository {
   async getQuotes(): Promise<QuotesCollection> {
     try {
