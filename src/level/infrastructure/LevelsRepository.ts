@@ -1,6 +1,6 @@
 import { ILevelsRepository } from '@gameContext/level/domain/ILevelsRepository'
-import { Level, LevelRawModel } from '@gameContext/level/domain/Level'
-import { LevelsCollection } from '@gameContext/level/domain/LevelsCollection'
+import type { Level, LevelRawModel } from '@gameContext/level/domain/Level'
+import type { LevelsCollection } from '@gameContext/level/domain/LevelsCollection'
 
 class LevelsRepository implements ILevelsRepository {
   private _levels: Map<string, Level> = new Map()

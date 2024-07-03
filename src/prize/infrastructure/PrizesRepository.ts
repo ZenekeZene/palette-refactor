@@ -1,6 +1,7 @@
 import { IPrizesRepository } from '@gameContext/prize/domain/IPrizesRepository'
-import { Prize, PrizeRawModel } from '@gameContext/prize/domain/Prize'
-import { PrizesCollection } from '@gameContext/prize/domain/PrizesCollection'
+import type { Prize } from '@gameContext/prize/domain/Prize'
+import { PrizeRawModel } from '@gameContext/prize/domain/Prize'
+import type { PrizesCollection } from '@gameContext/prize/domain/PrizesCollection'
 
 class PrizesRepository implements IPrizesRepository {
   private _prizes: Map<string, Prize> = new Map()
