@@ -1,26 +1,32 @@
-import { Level } from './Level'
-import { LevelChips } from './LevelChips'
-import { Prize } from '@gameContext/prize/domain/Prize'
-import { LevelId } from './LevelId'
+import { Level, LevelRawModel } from './Level'
+import { PrizeRawModel } from '@gameContext/prize/domain/Prize'
 
 export class LevelsCollection {
-  private _levels: Map<LevelId, Level> = new Map()
+  private levels: Level[] = []
 
-  add(level: Level) {
-    this._levels.set(level.id, level)
+  constructor(_levels: LevelRawModel[] = [], _prizes: PrizeRawModel[] = []) {
+    this.associatePrizesIdToLevels(_levels, _prizes)
   }
 
-  static fromArray(levels: any[]): LevelsCollection {
-    const levelsCollection = new LevelsCollection()
-    levels.forEach((level) => {
-      const numberOfChips = new LevelChips(level.numberOfChips)
-      const prize = new Prize(level.prize, level.bonus)
-      levelsCollection.add(new Level(numberOfChips, prize))
+  private associatePrizesIdToLevels(_levels: LevelRawModel[], _prizes: PrizeRawModel[]): void {
+    _levels.forEach((_level) => {
+      const prizeId = this.getPrizeIdByLevelId(_prizes, _level.id)
+      if (prizeId) {
+        const level = Level.fromPrimitive(_level.id, _level.numberOfChips, prizeId)
+        this.levels.push(level)
+      }
     })
-    return levelsCollection
   }
 
-  getNumberOfLevels() {
-    return this._levels.size || 0
+  getLevels(): Level[] {
+    return this.levels
+  }
+
+  private getPrizeIdByLevelId(_prizes: PrizeRawModel[], levelId: string): string | undefined {
+    return _prizes.find((prize) => prize.levelId === levelId)?.id
+  }
+
+  forEach(callback: (level: Level) => void): void {
+    return this.levels.forEach(callback)
   }
 }

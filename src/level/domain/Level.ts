@@ -1,34 +1,50 @@
-import { Prize } from '@gameContext/prize/domain/Prize'
 import { LevelChips } from './LevelChips'
 import { LevelId } from './LevelId'
+import { PrizeId } from '@gameContext/prize/domain/PrizeId'
+
+export interface LevelRawModel {
+  id: string
+  numberOfChips: number
+  prizeId: string
+}
 
 class Level {
   private readonly _id: LevelId
-  readonly numberOfChips: LevelChips
-  readonly prize: Prize | undefined
+  private readonly _numberOfChips: LevelChips
+  readonly _prizeId: PrizeId
 
-  constructor(numberOfChips: LevelChips, prize?: Prize) {
-    this._id = LevelId.random()
-    this.numberOfChips = numberOfChips
-    this.prize = prize
+  constructor(id: LevelId, numberOfChips: LevelChips, prizeId: PrizeId) {
+    this._id = id
+    this._numberOfChips = numberOfChips
+    this._prizeId = prizeId
   }
 
   get id() {
     return this._id
   }
 
-  getNumberOfChips() {
-    return this.numberOfChips
+  get numberOfChips() {
+    return this._numberOfChips
   }
 
-  static fromPrimitive(level: { numberOfChips: number; prize?: Prize }) {
-    if (!level.prize) {
-      return new Level(new LevelChips(level.numberOfChips))
+  get prizeId() {
+    return this._prizeId
+  }
+
+  static fromPrimitive(idValue: string, numberOfChips: number, prizeIdValue: string): Level {
+    const levelId = new LevelId(idValue)
+    const levelChips = new LevelChips(numberOfChips)
+    const prizeId = new PrizeId(prizeIdValue)
+    const level = new Level(levelId, levelChips, prizeId)
+    return level
+  }
+
+  static toRaw(level: Level): LevelRawModel {
+    return {
+      id: level.id.toPrimitive(),
+      numberOfChips: level.numberOfChips.toPrimitive(),
+      prizeId: level.prizeId.toPrimitive(),
     }
-    return new Level(
-      new LevelChips(level.numberOfChips),
-      new Prize(level.prize.lives, level.prize.bonus)
-    )
   }
 }
 

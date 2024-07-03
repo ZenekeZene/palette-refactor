@@ -1,5 +1,7 @@
-import { LevelsCollection } from '@gameContext/level/domain/LevelsCollection'
+import { LevelRawModel } from './Level'
+import { LevelsCollection } from './LevelsCollection'
 
 export interface ILevelsRepository {
-  getLevels(): Promise<LevelsCollection>
+  saveAllInMemory(levels: LevelsCollection): Promise<void>
+  loadAll(): Promise<LevelRawModel[]>
 }

@@ -1,14 +1,5 @@
-class LevelChips {
-  numberOfChips: number
+import { NotNegative } from "@gameContext/shared/utils/NotNegative"
 
-  constructor(numberOfChips: number) {
-    this.numberOfChips = numberOfChips
-    this.validate(numberOfChips)
-  }
-
-  private validate(numberOfChips: number) {
-    if (numberOfChips < 0) throw new Error('Invalid number of chips')
-  }
-}
+class LevelChips extends NotNegative {}
 
 export { LevelChips }

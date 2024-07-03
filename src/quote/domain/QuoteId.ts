@@ -1,5 +1,5 @@
-import { Id } from '@gameContext/shared/utils/Id'
+import { Uuid } from '@gameContext/shared/utils/Uuid'
 
-class QuoteId extends Id {}
+class QuoteId extends Uuid {}
 
 export { QuoteId }
