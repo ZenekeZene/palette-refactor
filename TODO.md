@@ -5,3 +5,4 @@
 - [] Research a i18n library.
 - [] Move Vite and config relationated with frontend to his folder (applications/frontend).
 - [] Create a contructor with filePath:URL in LevelsLoaderFromFileRepository. Bug with dynamic import with Vite.
+- [] Create the event bus

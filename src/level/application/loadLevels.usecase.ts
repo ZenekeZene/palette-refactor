@@ -10,13 +10,14 @@ class LoadLevelsUseCase implements UseCase<LevelsCollection> {
   constructor(
     @inject(Types.ILevelsLoaderRepository) private loaderLevelsRepository: ILevelsLoaderRepository,
     @inject(Types.ILevelsRepository) private levelsRepository: ILevelsRepository,
+    // @inject(Types.IEventBus) private eventBus: IEventBus,
   ) {}
 
   async execute(): Promise<LevelsCollection> {
     try {
       const levelsRaw = await this.loaderLevelsRepository.loadAllFromFile()
       const levelsCollection = new LevelsCollection(levelsRaw)
-      console.log('Levels loaded', levelsCollection)
+      // this.eventBus.publish(levelsCollection.pullDomainEvents())
       this.levelsRepository.saveAllInMemory(levelsCollection)
 
       return levelsCollection

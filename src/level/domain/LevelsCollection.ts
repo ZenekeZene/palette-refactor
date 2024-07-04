@@ -1,12 +1,16 @@
 import { AggregateRoot } from '@gameContext/shared/domain/utils/AggregateRoot'
+import { Uuid } from '@gameContext/shared/domain/utils/Uuid'
 import { LevelPrize } from './levelPrize/LevelPrize'
 import { Level, LevelRawModel } from './level/Level'
+import { LevelsCollectionCreated } from './events/LevelsCollectionCreated'
 
 export class LevelsCollection extends AggregateRoot {
   private levels: Level[] = []
+  private aggregateId: Uuid
 
   constructor(_levels: LevelRawModel[] = []) {
     super()
+    this.aggregateId = Uuid.random()
     this.generate(_levels)
   }
 
@@ -15,6 +19,7 @@ export class LevelsCollection extends AggregateRoot {
       const level = Level.fromPrimitive(_level.id, _level.numberOfChips, _level.prize)
       this.levels.push(level)
     })
+    this.recordLevelsCollectionCreated()
   }
 
   getLevels(): Level[] {
@@ -31,5 +36,10 @@ export class LevelsCollection extends AggregateRoot {
 
   forEach(callback: (level: Level) => void): void {
     return this.levels.forEach(callback)
+  }
+
+  private recordLevelsCollectionCreated(): void {
+    const levelsCollectionCreated = new LevelsCollectionCreated(this.levels, this.aggregateId.toPrimitive())
+    this.record(levelsCollectionCreated)
   }
 }

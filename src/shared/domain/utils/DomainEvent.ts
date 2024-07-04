@@ -1,26 +1,27 @@
 import { Uuid } from '@gameContext/shared/domain/utils/Uuid'
 
 abstract class DomainEvent {
-  private readonly _eventId: string
-  private readonly _occurredOn: Date
+  // private static FULL_QUALIFIED_EVENT_NAME:string
+  private readonly eventId: string
+  private readonly occurredOn: Date
 
-  constructor(private _aggregateId: string, eventId?: string, occurredOn?: Date) {
-    this._eventId = eventId ? eventId: Uuid.random().toString()
-    this._occurredOn = occurredOn ? occurredOn: new Date()
+  constructor(private aggregateId: string, eventId: string, occurredOn?: Date) {
+    this.eventId = eventId ? eventId: Uuid.random().toString()
+    this.occurredOn = occurredOn ? occurredOn: new Date()
   }
 
   abstract eventName(): string;
 
-  public aggregateId(): string {
-    return this._aggregateId
+  public getAggregateId(): string {
+    return this.aggregateId
   }
 
-  public eventId(): string {
-    return this._eventId
+  public getEventId(): string {
+    return this.eventId
   }
 
-  public occurredOn(): Date {
-    return this._occurredOn
+  public getOccurredOn(): Date {
+    return this.occurredOn
   }
 }
 
