@@ -1,10 +1,10 @@
 import { injectable } from 'tsyringe'
-import { IQuotesRepository } from '@gameContext/quote/domain/IQuotesRepository'
+import { IQuotesLoaderRepository } from '@gameContext/quote/domain/IQuotesLoaderRepository'
 import { QuotesCollection } from '@gameContext/quote/domain/QuotesCollection'
 
 @injectable()
-class QuotesRepository implements IQuotesRepository {
-  async getQuotes(): Promise<QuotesCollection> {
+class QuotesRepository implements IQuotesLoaderRepository {
+  async loadAllFromFile(): Promise<QuotesCollection> {
     try {
       const QuotesConfig = await import('@resources/Quotes.yaml')
       const quotes = QuotesConfig.default.quotes

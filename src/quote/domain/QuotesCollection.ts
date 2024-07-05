@@ -1,11 +1,14 @@
+import { AggregateRoot } from '@gameContext/shared/domain/utils/AggregateRoot'
 import { Quote } from '@gameContext/quote/domain/Quote'
 import type { QuoteId } from '@gameContext/quote/domain/QuoteId'
 
-export class QuotesCollection {
+export class QuotesCollection extends AggregateRoot {
   private _quotes: Map<QuoteId, Quote> = new Map()
   private _queue: QuoteId[] = []
 
-  constructor() {}
+  constructor() {
+    super()
+  }
 
   add(quote: Quote) {
     if (!this._quotes.has(quote.id)) {

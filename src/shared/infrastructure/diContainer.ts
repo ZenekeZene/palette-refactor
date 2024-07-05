@@ -1,19 +1,26 @@
 import { container } from "tsyringe"
 import { Types } from "./identifiers"
-import { UseCase } from '@gameContext/shared/domain/utils/UseCase'
-import { IPlayerRepository } from "@gameContext/player/domain/IPlayerRepository"
-import { PlayerRepository } from "@gameContext/player/infrastructure/PlayerRepository"
-import { IQuotesRepository } from "@gameContext/quote/domain/IQuotesRepository"
-import { QuotesRepository } from "@gameContext/quote/infrastructure/QuotesRepository"
-import { LoadLevelsUseCase } from "@gameContext/level/application/loadLevels.usecase"
-import { LevelsCollection } from '@gameContext/level/domain/LevelsCollection'
+
+import { IPlayerLoaderRepository } from "@gameContext/player/domain/IPlayerLoaderRepository"
+import { IQuotesLoaderRepository } from "@gameContext/quote/domain/IQuotesLoaderRepository"
 import { ILevelsLoaderRepository } from "@gameContext/level/domain/ILevelsLoaderRepository"
-import { LevelsLoaderFromFileRepository } from "@gameContext/level/infrastructure/LevelsLoaderFromFileRepository"
 import { ILevelsRepository } from "@gameContext/level/domain/ILevelsRepository"
+
+import { PlayerLoaderRepository } from "@gameContext/player/infrastructure/PlayerLoaderRepository"
+import { QuotesRepository } from "@gameContext/quote/infrastructure/QuotesRepository"
+import { LevelsLoaderFromFileRepository } from "@gameContext/level/infrastructure/LevelsLoaderFromFileRepository"
 import { LevelsInMemoryRepository } from "@gameContext/level/infrastructure/LevelsInMemoryRepository"
 
-container.registerSingleton<IPlayerRepository>(Types.IPlayerRepository, PlayerRepository)
-container.registerSingleton<IQuotesRepository>(Types.IQuotesRepository, QuotesRepository)
-container.registerSingleton<UseCase<LevelsCollection>>(Types.LoadLevelsUseCase, LoadLevelsUseCase)
+import { LoadPlayerUseCase, LoadPlayerUseCaseType } from "@gameContext/player/application/loadPlayer.usecase"
+import { LoadLevelsUseCase, LoadLevelsUseCaseType } from "@gameContext/level/application/loadLevels.usecase"
+import { LoadQuotesUseCase, LoadQuotesUseCaseType } from "@gameContext/quote/application/loadQuotes.usecase"
+
+container.registerSingleton<IPlayerLoaderRepository>(Types.IPlayerRepository, PlayerLoaderRepository)
+container.registerSingleton<IQuotesLoaderRepository>(Types.IQuotesLoaderRepository, QuotesRepository)
+
+container.registerSingleton<LoadPlayerUseCaseType>(Types.LoadPlayerUseCase, LoadPlayerUseCase)
+container.registerSingleton<LoadQuotesUseCaseType>(Types.LoadQuotesUseCase, LoadQuotesUseCase)
+container.registerSingleton<LoadLevelsUseCaseType>(Types.LoadLevelsUseCase, LoadLevelsUseCase)
+
 container.registerSingleton<ILevelsLoaderRepository>(Types.ILevelsLoaderRepository, LevelsLoaderFromFileRepository)
 container.registerSingleton<ILevelsRepository>(Types.ILevelsRepository, LevelsInMemoryRepository)
