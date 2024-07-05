@@ -1,15 +1,20 @@
+import { AggregateRoot } from '@gameContext/shared/domain/utils/AggregateRoot'
+import { PlayerId } from './PlayerId'
 import { PlayerLives } from './PlayerLives'
 import { PlayerScore } from './PlayerScore'
 import { PlayerLevel } from './PlayerLevel'
 import { PlayerBonus } from './PlayerBonus'
 
-export class Player {
+export class Player extends AggregateRoot {
   constructor(
+    private id: PlayerId,
     public lives: PlayerLives,
     public score: PlayerScore,
     public level: PlayerLevel,
     public bonus: PlayerBonus
-  ) {}
+  ) {
+    super()
+  }
 
   passLevel() {
     this.level = this.level.increment()
@@ -36,8 +41,13 @@ export class Player {
     }
   }
 
+  getId(): PlayerId {
+    return this.id
+  }
+
   static fromPrimitives(data: Player.Primitive): Player {
     return new Player(
+      new PlayerId(),
       new PlayerLives(data.lives),
       new PlayerScore(data.score),
       new PlayerLevel(data.level),
