@@ -6,10 +6,10 @@ import type { LevelsCollection } from '@gameContext/level/domain/LevelsCollectio
 
 @injectable()
 class LevelsInMemoryRepository implements ILevelsRepository {
-  private _levels: Map<string, Level> = new Map()
+  private _levels: Map<LevelId, Level> = new Map()
 
   private add(level: Level) {
-    this._levels.set(level.getId().toPrimitive(), level)
+    this._levels.set(level.getId(), level)
   }
 
   async saveAllInMemory(levels: LevelsCollection): Promise<void> {
@@ -17,7 +17,7 @@ class LevelsInMemoryRepository implements ILevelsRepository {
   }
 
   async searchById(id: LevelId): Promise<Level | undefined> {
-    return this._levels.get(id.toPrimitive())
+    return this._levels.get(id)
   }
 }
 
