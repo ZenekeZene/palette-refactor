@@ -1,19 +1,20 @@
 import { injectable, inject } from "tsyringe"
 import { Types } from "@gameContext/shared/infrastructure/identifiers"
-import type { IPlayerRepository } from '@gameContext/player/domain/IPlayerRepository'
-import type { IQuotesRepository } from '@gameContext/quote/domain/IQuotesRepository'
-import { Player } from '@gameContext/player/domain/Player'
-import { LevelsCollection } from '@gameContext/level/domain/LevelsCollection'
-import { QuotesCollection } from '@gameContext/quote/domain/QuotesCollection'
-import { LoadLevelsUseCase } from '@gameContext/level/application/loadLevels.usecase'
+import type { Player } from '@gameContext/player/domain/Player'
+import type { LevelsCollection } from '@gameContext/level/domain/LevelsCollection'
+import type { QuotesCollection } from '@gameContext/quote/domain/QuotesCollection'
+
+import type { LoadPlayerUseCase } from '@gameContext/player/application/loadPlayer.usecase'
+import type { LoadLevelsUseCase } from '@gameContext/level/application/loadLevels.usecase'
+import type { LoadQuotesUseCase } from '@gameContext/quote/application/loadQuotes.usecase'
 
 type LoadGameType = { player: Player, levels: LevelsCollection, quotes: QuotesCollection }
 
 @injectable()
 export class LoadGame {
   constructor(
-    @inject(Types.IPlayerRepository) private playerRepository: IPlayerRepository,
-    @inject(Types.IQuotesRepository) private quotesRepository: IQuotesRepository,
+    @inject(Types.LoadPlayerUseCase) private playerRepository: LoadPlayerUseCase,
+    @inject(Types.LoadQuotesUseCase) private loadQuotesUseCase: LoadQuotesUseCase,
     @inject(Types.LoadLevelsUseCase) private loadLevelsUseCase: LoadLevelsUseCase,
   ) {}
 
@@ -25,7 +26,7 @@ export class LoadGame {
   }
 
   private async getPlayer(): Promise<Player> {
-    return await this.playerRepository.getPlayer()
+    return await this.playerRepository.execute()
   }
 
   private async getLevels(): Promise<LevelsCollection> {
@@ -33,6 +34,6 @@ export class LoadGame {
   }
 
   private async getQuotes(): Promise<QuotesCollection> {
-    return await this.quotesRepository.getQuotes()
+    return await this.loadQuotesUseCase.execute()
   }
 }
