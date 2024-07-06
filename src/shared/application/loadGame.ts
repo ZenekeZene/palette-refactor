@@ -13,7 +13,7 @@ type LoadGameType = { player: Player, levels: LevelsCollection, quotes: QuotesCo
 @injectable()
 export class LoadGame {
   constructor(
-    @inject(Types.LoadPlayerUseCase) private playerRepository: LoadPlayerUseCase,
+    @inject(Types.LoadPlayerUseCase) private loadPlayerUseCase: LoadPlayerUseCase,
     @inject(Types.LoadQuotesUseCase) private loadQuotesUseCase: LoadQuotesUseCase,
     @inject(Types.LoadLevelsUseCase) private loadLevelsUseCase: LoadLevelsUseCase,
   ) {}
@@ -26,7 +26,7 @@ export class LoadGame {
   }
 
   private async getPlayer(): Promise<Player> {
-    return await this.playerRepository.execute()
+    return await this.loadPlayerUseCase.execute()
   }
 
   private async getLevels(): Promise<LevelsCollection> {
