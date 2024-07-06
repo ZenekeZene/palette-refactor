@@ -1,6 +1,5 @@
 import { State } from '@frontend/adapter/store/store.types'
 import { LevelsCollection } from '@gameContext/level/domain/LevelsCollection'
-import { Level } from '@gameContext/level/domain/Level'
 import { Quote, QuoteProps } from '@gameContext/quote/domain/Quote'
 import { QuotesCollection } from '@gameContext/quote/domain/QuotesCollection'
 import { Player } from '@gameContext/player/domain/Player'
@@ -13,8 +12,10 @@ class StoreBuilder {
   }
 
   private createInitialState(): State {
-    const levels = new LevelsCollection()
-    levels.add(Level.fromPrimitive({ numberOfChips: 0 }))
+    const levelsRaw = [
+      { id: '1', numberOfChips: 0, prize: { lives: 0, bonus: 0 } },
+    ]
+    const levels = new LevelsCollection(levelsRaw)
 
     const quote = new Quote('author', 'quote')
     const quotes = new QuotesCollection()
