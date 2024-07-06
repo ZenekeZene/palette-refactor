@@ -19,6 +19,10 @@ class Id extends ValueObject<string> {
   toPrimitive() {
     return this.valueOf().toString()
   }
+
+  equals(id: Id): boolean {
+    return this.valueOf() === id.valueOf()
+  }
 }
 
 export { Id }

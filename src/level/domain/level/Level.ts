@@ -1,3 +1,4 @@
+import { Entity } from '@gameContext/shared/domain/utils/Entity'
 import { LevelPrizeBonus } from '../levelPrize/LevelPrizeBonus'
 import { LevelPrizeLives } from '../levelPrize/LevelPrizeLives'
 import { LevelPrize, LevelPrizeRawModel } from '../levelPrize/LevelPrize'
@@ -10,15 +11,13 @@ export interface LevelRawModel {
   prize: LevelPrizeRawModel
 }
 
-class Level {
+class Level extends Entity {
   constructor(
-    private readonly id: LevelId,
+    protected id: LevelId,
     private readonly numberOfChips: LevelChips,
     private readonly levelPrize: LevelPrize
-  ) { }
-
-  getId() {
-    return this.id
+  ) {
+    super()
   }
 
   getNumberOfChips() {

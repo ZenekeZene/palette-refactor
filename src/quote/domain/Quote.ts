@@ -1,3 +1,4 @@
+import { Entity } from '@gameContext/shared/domain/utils/Entity'
 import { QuoteId } from './QuoteId'
 
 export interface QuoteProps {
@@ -5,18 +6,15 @@ export interface QuoteProps {
   author: string
 }
 
-class Quote {
-  private readonly _id: QuoteId
+class Quote extends Entity {
+  protected id: QuoteId
 
   constructor(
     public text: string,
     public author: string
   ) {
-    this._id = QuoteId.random()
-  }
-
-  get id() {
-    return this._id
+    super()
+    this.id = QuoteId.random()
   }
 
   static fromPrimitives({ text, author }: QuoteProps) {
