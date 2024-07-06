@@ -1,5 +1,5 @@
-import { Level } from './level/Level'
-import { LevelId } from './level/LevelId'
+import type { Level } from './level/Level'
+import type { LevelId } from './level/LevelId'
 import type { LevelsCollection } from './LevelsCollection'
 
 export interface ILevelsRepository {

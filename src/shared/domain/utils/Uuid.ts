@@ -24,6 +24,10 @@ class Uuid extends ValueObject<string> {
   toPrimitive() {
     return this.valueOf().toString()
   }
+
+  equals(id: Uuid): boolean {
+    return this.valueOf() === id.valueOf()
+  }
 }
 
 export { Uuid }
