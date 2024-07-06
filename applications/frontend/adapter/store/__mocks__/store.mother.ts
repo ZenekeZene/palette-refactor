@@ -1,6 +1,5 @@
 import { Mock } from 'vitest'
 import { LevelsCollection } from '@gameContext/level/domain/LevelsCollection'
-import { Level } from '@gameContext/level/domain/Level'
 import { QuoteProps } from '@gameContext/quote/domain/Quote'
 import { Player } from '@gameContext/player/domain/Player'
 import { State } from '@frontend/adapter/store/store.types'
@@ -9,11 +8,12 @@ import { StoreBuilder } from '@frontend/adapter/store/__mocks__/store.builder'
 
 export class StoreMother {
   private static createDefaultLevels(): LevelsCollection {
-    const levels = new LevelsCollection()
     const { LEVELS_COUNT } = StoreMother.DEFAULT
+    const levelsRaw = []
     for (let i = 0; i < LEVELS_COUNT; i++) {
-      levels.add(Level.fromPrimitive({ numberOfChips: 0 }))
+      levelsRaw.push({ id: 'level' + i, numberOfChips: 1, prize: { lives: 0, bonus: 0 } })
     }
+    const levels = new LevelsCollection(levelsRaw)
     return levels
   }
 
@@ -62,10 +62,11 @@ export class StoreMother {
     options: StoreMother.MultipleLevels
   ): void {
     const builder = new StoreBuilder()
-    const levels = new LevelsCollection()
+    const levelsRaw = []
     for (let i = 0; i < options.levelsCount; i++) {
-      levels.add(Level.fromPrimitive({ numberOfChips: 0 }))
+      levelsRaw.push({ id: 'level' + i, numberOfChips: 1, prize: { lives: 0, bonus: 0 } })
     }
+    const levels = new LevelsCollection(levelsRaw)
     builder.withLevels(levels)
     const { LIVES, SCORE, BONUS } = StoreMother.DEFAULT
     const player = Player.fromPrimitives({
