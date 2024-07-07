@@ -18,10 +18,10 @@ export class LevelPrize {
     return new LevelPrize(lives, bonus)
   }
 
-  toPrimitive(): LevelPrizeRawModel {
+  valueOf(): LevelPrizeRawModel {
     return {
-      lives: this.lives.toPrimitive(),
-      bonus: this.bonus.toPrimitive(),
+      lives: this.lives.valueOf(),
+      bonus: this.bonus.valueOf(),
     }
   }
 }

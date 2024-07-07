@@ -31,7 +31,7 @@ export class LevelsCollection extends AggregateRoot {
   }
 
   getLevelPrizeByLevelId(levelId: string): LevelPrize | undefined {
-    return this.levels.find((level) => level.getId().toPrimitive() === levelId)?.getLevelPrize()
+    return this.levels.find((level) => level.getId().valueOf() === levelId)?.getLevelPrize()
   }
 
   forEach(callback: (level: Level) => void): void {

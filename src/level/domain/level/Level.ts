@@ -31,15 +31,17 @@ class Level extends Entity {
   static fromPrimitive(id: string, numberOfChips: number, levelPrizeValue: LevelPrizeRawModel): Level {
     const levelId = new LevelId(id)
     const levelChips = new LevelChips(numberOfChips)
-    const levelPrize = new LevelPrize(new LevelPrizeLives(levelPrizeValue.lives), new LevelPrizeBonus(levelPrizeValue.bonus))
+    const levelPrizeLives = new LevelPrizeLives(levelPrizeValue.lives)
+    const levelPrizeBonus = new LevelPrizeBonus(levelPrizeValue.bonus)
+    const levelPrize = new LevelPrize(levelPrizeLives, levelPrizeBonus)
     return new Level(levelId, levelChips, levelPrize)
   }
 
-  static toPrimitive(level: Level): LevelRawModel {
+  static valueOf(level: Level): LevelRawModel {
     return {
-      id: level.id.toPrimitive(),
-      numberOfChips: level.numberOfChips.toPrimitive(),
-      prize: level.levelPrize.toPrimitive(),
+      id: level.id.valueOf(),
+      numberOfChips: level.numberOfChips.valueOf(),
+      prize: level.levelPrize.valueOf(),
     }
   }
 }
