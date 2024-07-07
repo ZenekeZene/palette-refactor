@@ -1,14 +1,14 @@
 import { injectable, inject } from "tsyringe"
 import { Types } from "@gameContext/shared/infrastructure/identifiers"
-import type { Player } from '@gameContext/player/domain/Player'
-import type { LevelsCollection } from '@gameContext/level/domain/LevelsCollection'
+import type { PlayerResponse } from "@gameContext/player/application/dto/player.dto"
+import type { LevelsCollectionResponse } from "@gameContext/level/application/dto/LevelsCollectionResponse.dto"
 import type { QuotesCollection } from '@gameContext/quote/domain/QuotesCollection'
 
 import type { LoadPlayerUseCase } from '@gameContext/player/application/loadPlayer.usecase'
 import type { LoadLevelsUseCase } from '@gameContext/level/application/loadLevels.usecase'
 import type { LoadQuotesUseCase } from '@gameContext/quote/application/loadQuotes.usecase'
 
-type LoadGameType = { player: Player, levels: LevelsCollection, quotes: QuotesCollection }
+type LoadGameType = { player: PlayerResponse, levels: LevelsCollectionResponse, quotes: QuotesCollection }
 
 @injectable()
 export class LoadGame {
@@ -25,11 +25,11 @@ export class LoadGame {
     return { player, levels, quotes }
   }
 
-  private async getPlayer(): Promise<Player> {
+  private async getPlayer(): Promise<PlayerResponse> {
     return await this.loadPlayerUseCase.execute()
   }
 
-  private async getLevels(): Promise<LevelsCollection> {
+  private async getLevels(): Promise<LevelsCollectionResponse> {
     return await this.loadLevelsUseCase.execute()
   }
 

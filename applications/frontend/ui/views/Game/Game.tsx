@@ -3,16 +3,11 @@ import { HeaderGame } from '@frontend/ui/components/HeaderGame/HeaderGame'
 import { Bonus } from '@frontend/ui/components/Bonus/Bonus'
 import { GameChip } from '@frontend/ui/components/GameChip/GameChip'
 import { useStore } from '@frontend/adapter/store/store'
-import { useShallow } from 'zustand/react/shallow'
 import './Game.scss'
 
 const GameView = () => {
   const navigate = useNavigate()
-  const player = useStore(
-    useShallow(({ player }) => {
-      return { ...player.toPrimitive() }
-    })
-  )
+  const player = useStore((state) => state.player)
 
   return (
     <article className="game view">

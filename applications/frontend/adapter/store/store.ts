@@ -1,7 +1,9 @@
-import { createStore } from '@frontend/adapter/store/useStore'
-import { createInitialState } from '@frontend/adapter/store/initialState'
+
+import { createStore } from './useStore'
+import { createInitialState } from './initialState'
+import { storeDependencies } from './store.dependencies'
 
 const initialState = await createInitialState()
-const useStore = createStore(initialState)
+const useStore = createStore(initialState, storeDependencies)
 
 export { useStore }

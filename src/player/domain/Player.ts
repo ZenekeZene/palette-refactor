@@ -34,10 +34,10 @@ export class Player extends AggregateRoot {
 
   toPrimitive(): Player.Primitive {
     return {
-      lives: this.lives.toPrimitive(),
-      score: this.score.toPrimitive(),
-      level: this.level.toPrimitive(),
-      bonus: this.bonus.toPrimitive(),
+      lives: this.lives.valueOf(),
+      score: this.score.valueOf(),
+      level: this.level.valueOf(),
+      bonus: this.bonus.valueOf(),
     }
   }
 
@@ -45,9 +45,9 @@ export class Player extends AggregateRoot {
     return this.id
   }
 
-  static fromPrimitives(data: Player.Primitive): Player {
+  static fromPrimitives(data: Player.Primitive, playerId?: PlayerId): Player {
     return new Player(
-      new PlayerId(),
+      playerId || new PlayerId(),
       new PlayerLives(data.lives),
       new PlayerScore(data.score),
       new PlayerLevel(data.level),

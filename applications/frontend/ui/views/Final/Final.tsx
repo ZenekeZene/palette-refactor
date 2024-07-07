@@ -1,14 +1,8 @@
 import { useStore } from '@frontend/adapter/store/store'
-import { useShallow } from 'zustand/react/shallow'
 import './Final.scss'
 
 const FinalView = () => {
-  const state = useStore(
-    useShallow(({ player }) => ({
-      level: player.toPrimitive().level,
-      score: player.toPrimitive().score,
-    }))
-  )
+  const state = useStore((state) => state.player)
 
   return (
     <article className="final view">

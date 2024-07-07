@@ -9,7 +9,7 @@ import './NextLevel.scss'
 const NextLevelView = () => {
   const state = useStore(
     useShallow(({ player, levels, quote, nextLevel }) => ({
-      level: player.toPrimitive().level,
+      level: player.level,
       totalLevels: levels.totalLevels,
       quote,
       nextLevel,

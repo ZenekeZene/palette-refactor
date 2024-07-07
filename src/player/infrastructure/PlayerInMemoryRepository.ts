@@ -5,8 +5,13 @@ import { IPlayerRepository } from "@gameContext/player/domain/IPlayerRepository"
 class PlayerInMemoryRepository implements IPlayerRepository {
   private players: Player[] = []
 
-  save(player: Player): void {
+  create(player: Player): void {
     this.players.push(player)
+  }
+
+  save(player: Player): void {
+    const index = this.players.findIndex((p) => p.getId().equals(player.getId()))
+    this.players[index] = player
   }
 
   findByPlayerId(id: PlayerId): Player | undefined {
