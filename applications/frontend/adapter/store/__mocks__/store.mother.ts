@@ -1,5 +1,7 @@
 import { Mock } from 'vitest'
 import { LevelsCollection } from '@gameContext/level/domain/LevelsCollection'
+import { LevelsCollectionResponse } from '@gameContext/level/application/dto/LevelsCollectionResponse.dto'
+import { toLevelsCollectionResponseDTO } from '@gameContext/level/application/mapper/LevelsCollectionMapper'
 import { QuoteProps } from '@gameContext/quote/domain/Quote'
 import { Player } from '@gameContext/player/domain/Player'
 import { State } from '@frontend/adapter/store/store.types'
@@ -7,14 +9,13 @@ import { createStore } from '@frontend/adapter/store/useStore'
 import { StoreBuilder } from '@frontend/adapter/store/__mocks__/store.builder'
 
 export class StoreMother {
-  private static createDefaultLevels(): LevelsCollection {
+  private static createDefaultLevels(): LevelsCollectionResponse {
     const { LEVELS_COUNT } = StoreMother.DEFAULT
     const levelsRaw = []
     for (let i = 0; i < LEVELS_COUNT; i++) {
       levelsRaw.push({ id: 'level' + i, numberOfChips: 1, prize: { lives: 0, bonus: 0 } })
     }
-    const levels = new LevelsCollection(levelsRaw)
-    return levels
+    return toLevelsCollectionResponseDTO(new LevelsCollection(levelsRaw))
   }
 
   private static createDefaultPlayer(): Player {
@@ -66,7 +67,7 @@ export class StoreMother {
     for (let i = 0; i < options.levelsCount; i++) {
       levelsRaw.push({ id: 'level' + i, numberOfChips: 1, prize: { lives: 0, bonus: 0 } })
     }
-    const levels = new LevelsCollection(levelsRaw)
+    const levels = toLevelsCollectionResponseDTO(new LevelsCollection(levelsRaw))
     builder.withLevels(levels)
     const { LIVES, SCORE, BONUS } = StoreMother.DEFAULT
     const player = Player.fromPrimitives({

@@ -10,7 +10,7 @@ const TryAgainView = () => {
   const state = useStore(
     useShallow(({ player, levels }) => ({
       level: player.toPrimitive().level,
-      totalLevels: levels.getNumberOfLevels(),
+      totalLevels: levels.totalLevels,
     }))
   )
 

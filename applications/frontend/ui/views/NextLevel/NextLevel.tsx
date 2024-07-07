@@ -10,7 +10,7 @@ const NextLevelView = () => {
   const state = useStore(
     useShallow(({ player, levels, quote, nextLevel }) => ({
       level: player.toPrimitive().level,
-      totalLevels: levels.getNumberOfLevels(),
+      totalLevels: levels.totalLevels,
       quote,
       nextLevel,
     }))

@@ -1,11 +1,11 @@
-import { LevelsCollection } from '@gameContext/level/domain/LevelsCollection'
+import { LevelsCollectionResponse } from '@gameContext/level/application/dto/LevelsCollectionResponse.dto'
 import { Quote } from '@gameContext/quote/domain/Quote'
 import { QuotesCollection } from '@gameContext/quote/domain/QuotesCollection'
 import { Player } from '@gameContext/player/domain/Player'
 
 export type State = {
   player: Player
-  levels: LevelsCollection
+  levels: LevelsCollectionResponse
   tutorialIsWatched: boolean
   quotes: QuotesCollection
   quote: Quote
