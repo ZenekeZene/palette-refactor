@@ -1,29 +1,29 @@
 import { inject, injectable } from 'tsyringe'
 import { Types } from '@gameContext/shared/infrastructure/identifiers'
 import type { UseCase } from '@gameContext/shared/domain/utils/UseCase'
-import type { IPlayerRepository } from '@gameContext/player/domain/IPlayerRepository'
-import { PlayerId } from '@gameContext/player/domain/PlayerId'
-import { PlayerNotFoundException } from '@gameContext/player/domain/PlayerNotFoundException'
-import { PlayerResponse } from './dto/player.dto'
-import { toPlayerResponseDTO } from './mapper/PlayerMapper'
-
-export interface PassLevelUseCaseType extends UseCase<PlayerResponse> {}
+import type { IPlayerRepository } from '@gameContext/player/domain/repositories/IPlayerRepository'
+import { PlayerId } from '@gameContext/player/domain/models/PlayerId'
+import { PlayerNotFoundException } from '@gameContext/player/domain/exceptions/PlayerNotFoundException'
+import { PlayerResponse } from '@gameContext/player/application/dto/PlayerResponse'
+import { toPlayerResponse } from '@gameContext/player/application/mapper/PlayerMapper'
+import { PassLevelRequest } from '@gameContext/player/application/dto/PassLevelRequest'
 
 @injectable()
-class PassLevelUseCase implements PassLevelUseCaseType {
+class PassLevelUseCase implements UseCase<PlayerResponse> {
   constructor(
     @inject(Types.IPlayerRepository) private repository: IPlayerRepository,
-    private playerId: PlayerId,
+    private passLevelRequest: PassLevelRequest,
   ) {}
 
   async execute(): Promise<PlayerResponse> {
-    const player = this.repository.findByPlayerId(this.playerId)
+    const playerId = new PlayerId(this.passLevelRequest.playerId)
+    const player = this.repository.findByPlayerId(playerId)
     if (!player) {
       throw new PlayerNotFoundException()
     }
     player.passLevel()
     this.repository.save(player)
-    return Promise.resolve(toPlayerResponseDTO(player))
+    return Promise.resolve(toPlayerResponse(player))
   }
 }
 

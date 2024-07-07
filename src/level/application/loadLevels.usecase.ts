@@ -2,15 +2,13 @@ import { injectable, inject } from 'tsyringe'
 import { Types } from '@gameContext/shared/infrastructure/identifiers'
 import type { UseCase } from '@gameContext/shared/domain/utils/UseCase'
 import { LevelsCollection } from '@gameContext/level/domain/LevelsCollection'
-import type { ILevelsLoaderRepository } from '@gameContext/level/domain/ILevelsLoaderRepository'
-import type { ILevelsRepository } from '@gameContext/level/domain/ILevelsRepository'
+import type { ILevelsLoaderRepository } from '@gameContext/level/domain/repositories/ILevelsLoaderRepository'
+import type { ILevelsRepository } from '@gameContext/level/domain/repositories/ILevelsRepository'
 import type { LevelsCollectionResponse } from './dto/LevelsCollectionResponse.dto'
-import { toLevelsCollectionResponseDTO } from './mapper/LevelsCollectionMapper'
-
-export interface LoadLevelsUseCaseType extends UseCase<LevelsCollectionResponse> {}
+import { toLevelsCollectionResponse } from './mapper/LevelsCollectionMapper'
 
 @injectable()
-class LoadLevelsUseCase implements LoadLevelsUseCaseType {
+class LoadLevelsUseCase implements UseCase<LevelsCollectionResponse> {
   constructor(
     @inject(Types.ILevelsLoaderRepository) private loaderLevelsRepository: ILevelsLoaderRepository,
     @inject(Types.ILevelsRepository) private levelsRepository: ILevelsRepository,
@@ -23,10 +21,10 @@ class LoadLevelsUseCase implements LoadLevelsUseCaseType {
       const levelsCollection = new LevelsCollection(levelsRaw)
       // this.eventBus.publish(levelsCollection.pullDomainEvents())
       this.levelsRepository.saveAllInMemory(levelsCollection)
-      return toLevelsCollectionResponseDTO(levelsCollection)
+      return toLevelsCollectionResponse(levelsCollection)
     } catch (error) {
       console.error('Error loading levels config', error)
-      return toLevelsCollectionResponseDTO(new LevelsCollection())
+      return toLevelsCollectionResponse(new LevelsCollection())
     }
   }
 }

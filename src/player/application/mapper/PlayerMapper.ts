@@ -1,7 +1,7 @@
 import { Player } from '@gameContext/player/domain/Player'
-import { PlayerResponse } from '@gameContext/player/application/dto/player.dto'
+import { PlayerResponse } from '@gameContext/player/application/dto/PlayerResponse'
 
-export const toPlayerResponseDTO = (player: Player): PlayerResponse => ({
+export const toPlayerResponse = (player: Player): PlayerResponse => ({
   id: player.getId().valueOf(),
   lives: player.lives.valueOf(),
   score: player.score.valueOf(),

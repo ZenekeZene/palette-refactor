@@ -1,9 +1,9 @@
 import { AggregateRoot } from '@gameContext/shared/domain/utils/AggregateRoot'
-import { PlayerId } from './PlayerId'
-import { PlayerLives } from './PlayerLives'
-import { PlayerScore } from './PlayerScore'
-import { PlayerLevel } from './PlayerLevel'
-import { PlayerBonus } from './PlayerBonus'
+import { PlayerId } from '@gameContext/player/domain/models/PlayerId'
+import { PlayerLives } from  '@gameContext/player/domain/models/PlayerLives'
+import { PlayerScore } from '@gameContext/player/domain/models/PlayerScore'
+import { PlayerLevel } from '@gameContext/player/domain/models/PlayerLevel'
+import { PlayerBonus } from '@gameContext/player/domain/models/PlayerBonus'
 
 export class Player extends AggregateRoot {
   constructor(

@@ -1,10 +1,12 @@
 import { State } from '@frontend/adapter/store/store.types'
 import { LevelsCollection } from '@gameContext/level/domain/LevelsCollection'
 import { LevelsCollectionResponse } from '@gameContext/level/application/dto/LevelsCollectionResponse.dto'
-import { toLevelsCollectionResponseDTO } from '@gameContext/level/application/mapper/LevelsCollectionMapper'
+import { toLevelsCollectionResponse } from '@gameContext/level/application/mapper/LevelsCollectionMapper'
 import { Quote, QuoteProps } from '@gameContext/quote/domain/Quote'
 import { QuotesCollection } from '@gameContext/quote/domain/QuotesCollection'
 import { Player } from '@gameContext/player/domain/Player'
+import { toPlayerResponse } from '@gameContext/player/application/mapper/PlayerMapper'
+import { PlayerResponse } from '@gameContext/player/application/dto/PlayerResponse'
 
 class StoreBuilder {
   private state: State
@@ -17,18 +19,20 @@ class StoreBuilder {
     const levelsRaw = [
       { id: '1', numberOfChips: 0, prize: { lives: 0, bonus: 0 } },
     ]
-    const levels = toLevelsCollectionResponseDTO(new LevelsCollection(levelsRaw))
+    const levels = toLevelsCollectionResponse(new LevelsCollection(levelsRaw))
 
     const quote = new Quote('author', 'quote')
     const quotes = new QuotesCollection()
     quotes.add(quote)
 
-    const player = Player.fromPrimitives({
+    const playerDomain = Player.fromPrimitives({
       lives: 0,
       score: 0,
       level: 0,
       bonus: 0,
     })
+
+    const player = toPlayerResponse(playerDomain)
 
     return {
       player,
@@ -49,7 +53,7 @@ class StoreBuilder {
     return this
   }
 
-  withPlayer(player: Player): StoreBuilder {
+  withPlayer(player: PlayerResponse): StoreBuilder {
     this.state.player = player
     return this
   }

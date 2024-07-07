@@ -1,8 +1,8 @@
 import { AggregateRoot } from '@gameContext/shared/domain/utils/AggregateRoot'
 import { Uuid } from '@gameContext/shared/domain/utils/Uuid'
-import { LevelPrize } from './levelPrize/LevelPrize'
-import { Level, LevelRawModel } from './level/Level'
-import { LevelsCollectionCreated } from './events/LevelsCollectionCreated'
+import { LevelPrize } from '@gameContext/level/domain/models/levelPrize/LevelPrize'
+import { Level, LevelRawModel } from '@gameContext/level/domain/models/level/Level'
+import { LevelsCollectionCreated } from '@gameContext/level/domain//events/LevelsCollectionCreated'
 
 export class LevelsCollection extends AggregateRoot {
   private levels: Level[] = []

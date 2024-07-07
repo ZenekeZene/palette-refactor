@@ -1,5 +1,5 @@
 import { injectable } from 'tsyringe'
-import { IPlayerLoaderRepository } from '@gameContext/player/domain/IPlayerLoaderRepository'
+import { IPlayerLoaderRepository } from '@gameContext/player/domain/repositories/IPlayerLoaderRepository'
 import { Player } from '@gameContext/player/domain/Player'
 
 @injectable()

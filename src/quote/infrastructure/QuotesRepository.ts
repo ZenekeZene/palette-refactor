@@ -4,7 +4,7 @@ import { QuotesCollection } from '@gameContext/quote/domain/QuotesCollection'
 
 @injectable()
 class QuotesRepository implements IQuotesLoaderRepository {
-  async loadAllFromFile(): Promise<QuotesCollection> {
+  async loadFromFile(): Promise<QuotesCollection> {
     try {
       const QuotesConfig = await import('@resources/Quotes.yaml')
       const quotes = QuotesConfig.default.quotes

@@ -1,7 +1,7 @@
 import { Mock } from 'vitest'
 import { LevelsCollection } from '@gameContext/level/domain/LevelsCollection'
 import { LevelsCollectionResponse } from '@gameContext/level/application/dto/LevelsCollectionResponse.dto'
-import { toLevelsCollectionResponseDTO } from '@gameContext/level/application/mapper/LevelsCollectionMapper'
+import { toLevelsCollectionResponse } from '@gameContext/level/application/mapper/LevelsCollectionMapper'
 import { QuoteProps } from '@gameContext/quote/domain/Quote'
 import { Player } from '@gameContext/player/domain/Player'
 import { State } from '@frontend/adapter/store/store.types'
@@ -15,7 +15,7 @@ export class StoreMother {
     for (let i = 0; i < LEVELS_COUNT; i++) {
       levelsRaw.push({ id: 'level' + i, numberOfChips: 1, prize: { lives: 0, bonus: 0 } })
     }
-    return toLevelsCollectionResponseDTO(new LevelsCollection(levelsRaw))
+    return toLevelsCollectionResponse(new LevelsCollection(levelsRaw))
   }
 
   private static createDefaultPlayer(): Player {
@@ -39,6 +39,9 @@ export class StoreMother {
     useStore: StoreMother.UseStore,
     state: State
   ): void {
+    // TODO: pass the dependencies to the store.
+    // Maybe we can pass fake dependencies to the store
+    // in testing environment.
     const store = createStore(state)
     const mocked = (selector: Function) => selector(store.getState())
     useStore.mockImplementation(mocked)
@@ -67,7 +70,7 @@ export class StoreMother {
     for (let i = 0; i < options.levelsCount; i++) {
       levelsRaw.push({ id: 'level' + i, numberOfChips: 1, prize: { lives: 0, bonus: 0 } })
     }
-    const levels = toLevelsCollectionResponseDTO(new LevelsCollection(levelsRaw))
+    const levels = toLevelsCollectionResponse(new LevelsCollection(levelsRaw))
     builder.withLevels(levels)
     const { LIVES, SCORE, BONUS } = StoreMother.DEFAULT
     const player = Player.fromPrimitives({

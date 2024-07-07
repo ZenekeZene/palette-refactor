@@ -1,6 +1,6 @@
 import { DomainEvent } from '@gameContext/shared/domain/utils/DomainEvent'
 import { Uuid } from '@gameContext/shared/domain/utils/Uuid'
-import { Level } from '../level/Level'
+import { Level } from '@gameContext/level/domain/models/level/Level'
 
 class LevelsCollectionCreated extends DomainEvent {
   private readonly eventname = 'levelsCollectionCreated'
