@@ -1,5 +1,5 @@
-import { State, StoreAPI } from '../store.types'
 import { UseCase } from '@gameContext/shared/domain/utils/UseCase'
+import { State, StoreAPI } from '../store.types'
 
 const nextLevel = async (apiStore: StoreAPI, usecase: UseCase<any>): Promise<void> => {
   apiStore.get().nextQuote()

@@ -1,6 +1,6 @@
 import { injectable } from "tsyringe"
-import { ILevelsLoaderRepository } from "@gameContext/level/domain/ILevelsLoaderRepository";
-import type { LevelRawModel } from '@gameContext/level/domain/level/Level'
+import { ILevelsLoaderRepository } from "@gameContext/level/domain/repositories/ILevelsLoaderRepository";
+import type { LevelRawModel } from '@gameContext/level/domain/models/level/Level'
 
 @injectable()
 class LevelsLoaderFromFileRepository implements ILevelsLoaderRepository {
