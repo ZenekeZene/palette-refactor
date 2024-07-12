@@ -1,6 +1,7 @@
 import { injectable, inject } from 'tsyringe'
 import { Types } from '@gameContext/shared/infrastructure/identifiers'
 import type { UseCase } from '@gameContext/shared/domain/utils/UseCase'
+import { Player } from '@gameContext/player/domain/Player'
 import type { IPlayerLoaderRepository } from '@gameContext/player/domain/repositories/IPlayerLoaderRepository'
 import type { PlayerResponse } from '@gameContext/player/application/dto/PlayerResponse'
 import { toPlayerResponse } from '@gameContext/player/application/mapper/PlayerMapper'
@@ -13,10 +14,11 @@ class LoadPlayerUseCase implements UseCase<PlayerResponse> {
   ) {}
 
   async execute(): Promise<PlayerResponse> {
-    const player = await this.loaderRepository.loadFromFile()
-    if (!player) {
+    const playerRaw = await this.loaderRepository.loadFromFile()
+    if (!playerRaw) {
       throw new PlayerNotFoundException()
     }
+    const player = Player.fromPrimitives(playerRaw)
     return Promise.resolve(toPlayerResponse(player))
   }
 }

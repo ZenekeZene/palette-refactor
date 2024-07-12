@@ -3,15 +3,15 @@ import { IPlayerLoaderRepository } from '@gameContext/player/domain/repositories
 import { Player } from '@gameContext/player/domain/Player'
 
 @injectable()
-class PlayerLoaderRepository implements IPlayerLoaderRepository {
-  async loadFromFile(): Promise<Player> {
+class PlayerLoaderFromFileRepository implements IPlayerLoaderRepository {
+  async loadFromFile(): Promise<Player.Primitive> {
     try {
       const PlayerConfig = await import('@resources/Player.yaml')
-      return Player.fromPrimitives(PlayerConfig.default.initial)
+      return PlayerConfig.default.initial as Player.Primitive
     } catch (error) {
-      throw new Error('Error loading player session config')
+      throw new Error('Error loading player session config:' + error)
     }
   }
 }
 
-export { PlayerLoaderRepository }
+export { PlayerLoaderFromFileRepository }
