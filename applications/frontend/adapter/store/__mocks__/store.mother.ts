@@ -1,12 +1,15 @@
 import { Mock } from 'vitest'
 import { LevelsCollection } from '@gameContext/level/domain/LevelsCollection'
-import { LevelsCollectionResponse } from '@gameContext/level/application/dto/LevelsCollectionResponse.dto'
+import { LevelsCollectionResponse } from '@gameContext/level/application/dto/LevelsCollectionResponse'
 import { toLevelsCollectionResponse } from '@gameContext/level/application/mapper/LevelsCollectionMapper'
 import { QuoteProps } from '@gameContext/quote/domain/Quote'
-import { Player } from '@gameContext/player/domain/Player'
 import { State } from '@frontend/adapter/store/store.types'
 import { createStore } from '@frontend/adapter/store/useStore'
 import { StoreBuilder } from '@frontend/adapter/store/__mocks__/store.builder'
+import '@gameContext/shared/infrastructure/diContainer'
+import { storeDependencies } from '@frontend/adapter/store/store.dependencies'
+import { PlayerResponse } from '@gameContext/player/application/dto/PlayerResponse'
+import { Uuid } from '@gameContext/shared/domain/utils/Uuid'
 
 export class StoreMother {
   private static createDefaultLevels(): LevelsCollectionResponse {
@@ -18,14 +21,16 @@ export class StoreMother {
     return toLevelsCollectionResponse(new LevelsCollection(levelsRaw))
   }
 
-  private static createDefaultPlayer(): Player {
+  // TODO: Search by 'test and domain' .
+  private static createDefaultPlayer(): PlayerResponse {
     const { LIVES, SCORE, LEVEL, BONUS } = StoreMother.DEFAULT
-    return Player.fromPrimitives({
+    return {
+      id: Uuid.random().valueOf(),
       lives: LIVES,
       score: SCORE,
       level: LEVEL,
       bonus: BONUS,
-    })
+    }
   }
 
   private static createDefaultBuilder(): StoreBuilder {
@@ -39,10 +44,9 @@ export class StoreMother {
     useStore: StoreMother.UseStore,
     state: State
   ): void {
-    // TODO: pass the dependencies to the store.
-    // Maybe we can pass fake dependencies to the store
+    // TODO: Maybe we can pass fake dependencies to the store
     // in testing environment.
-    const store = createStore(state)
+    const store = createStore(state, storeDependencies)
     const mocked = (selector: Function) => selector(store.getState())
     useStore.mockImplementation(mocked)
   }
@@ -58,6 +62,15 @@ export class StoreMother {
   ): void {
     const builder = StoreMother.createDefaultBuilder()
     builder.withQuote(quote)
+    const { LIVES, SCORE, BONUS } = StoreMother.DEFAULT
+    const player:PlayerResponse = {
+      id: Uuid.random().valueOf(),
+      lives: LIVES,
+      score: SCORE,
+      bonus: BONUS,
+      level: 0,
+    }
+    builder.withPlayer(player)
     StoreMother.mockStore(useStore, builder.currentState)
   }
 
@@ -73,12 +86,13 @@ export class StoreMother {
     const levels = toLevelsCollectionResponse(new LevelsCollection(levelsRaw))
     builder.withLevels(levels)
     const { LIVES, SCORE, BONUS } = StoreMother.DEFAULT
-    const player = Player.fromPrimitives({
+    const player = {
+      id: Uuid.random().valueOf(),
       lives: LIVES,
       score: SCORE,
       bonus: BONUS,
       level: options.level,
-    })
+    }
     builder.withPlayer(player)
     StoreMother.mockStore(useStore, builder.currentState)
   }

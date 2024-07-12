@@ -1,6 +1,7 @@
 import { State } from '@frontend/adapter/store/store.types'
+import { Uuid } from '@gameContext/shared/domain/utils/Uuid'
 import { LevelsCollection } from '@gameContext/level/domain/LevelsCollection'
-import { LevelsCollectionResponse } from '@gameContext/level/application/dto/LevelsCollectionResponse.dto'
+import { LevelsCollectionResponse } from '@gameContext/level/application/dto/LevelsCollectionResponse'
 import { toLevelsCollectionResponse } from '@gameContext/level/application/mapper/LevelsCollectionMapper'
 import { Quote, QuoteProps } from '@gameContext/quote/domain/Quote'
 import { QuotesCollection } from '@gameContext/quote/domain/QuotesCollection'
@@ -17,7 +18,7 @@ class StoreBuilder {
 
   private createInitialState(): State {
     const levelsRaw = [
-      { id: '1', numberOfChips: 0, prize: { lives: 0, bonus: 0 } },
+      { id: Uuid.random(), numberOfChips: 0, prize: { lives: 0, bonus: 0 } },
     ]
     const levels = toLevelsCollectionResponse(new LevelsCollection(levelsRaw))
 
