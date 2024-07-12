@@ -11,7 +11,7 @@ class LevelsLoaderFromFileRepository implements ILevelsLoaderRepository {
       return levels
     } catch (error) {
       console.error('Error loading levels config', error)
-      return new Array<LevelRawModel>()
+      throw new Error('Error loading levels config')
     }
   }
 }

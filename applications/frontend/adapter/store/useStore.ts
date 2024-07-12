@@ -1,22 +1,17 @@
 import { create,  } from 'zustand'
 import { devtools } from 'zustand/middleware'
-import { Store, State } from './store.types'
-import { StoreDependencies } from './store.dependencies'
-import { RegisterPlayerUseCase } from '@gameContext/player/application/registerPlayer.usecase'
 import { PassLevelUseCase } from '@gameContext/player/application/passLevel.usecase'
 import { PassLevelRequest } from '@gameContext/player/application/dto/PassLevelRequest'
-import { RegisterPlayerRequest } from '@gameContext/player/application/dto/RegisterPlayerRequest'
+import { Store, State } from './store.types'
+import { StoreDependencies } from './store.dependencies'
 import { actions } from './actions/actions'
 
 function createStore(propsState: State, dependencies: StoreDependencies) {
-  const { playerRepository } = dependencies
-  const registerPlayerRequest = new RegisterPlayerRequest(propsState.player.id, propsState.player)
-  const registerPlayer = new RegisterPlayerUseCase(playerRepository, registerPlayerRequest)
+  const { player, levels } = propsState
+  actions.registerInMemory(player, levels, dependencies)
 
-  const passLevelRequest = new PassLevelRequest(propsState.player.id)
-  const passLevel = new PassLevelUseCase(playerRepository, passLevelRequest)
-
-  registerPlayer.execute()
+  const passLevelRequest = new PassLevelRequest(player.id)
+  const passLevel = new PassLevelUseCase(dependencies.playerRepository, passLevelRequest)
 
   const useStore = create<Store>()(
     devtools((set, get) => {

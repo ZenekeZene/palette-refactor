@@ -1,7 +1,7 @@
 import { injectable, inject } from "tsyringe"
 import { Types } from '@gameContext/shared/infrastructure/identifiers'
 import type { PlayerResponse } from "@gameContext/player/application/dto/PlayerResponse"
-import type { LevelsCollectionResponse } from "@gameContext/level/application/dto/LevelsCollectionResponse.dto"
+import type { LevelsCollectionResponse } from "@gameContext/level/application/dto/LevelsCollectionResponse"
 import type { QuotesCollection } from '@gameContext/quote/domain/QuotesCollection'
 
 import type { LoadPlayerUseCase } from '@gameContext/player/application/loadPlayer.usecase'
