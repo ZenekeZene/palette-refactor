@@ -1,11 +1,11 @@
 import { injectable, inject } from 'tsyringe'
 import { Types } from '@gameContext/shared/infrastructure/identifiers'
-import type { UseCase } from '@gameContext/shared/domain/utils/UseCase'
+import type { Loader } from '@gameContext/shared/domain/Loader'
 import type { QuotesCollection } from '@gameContext/quote/domain/QuotesCollection'
 import type { QuotesLoaderRepository } from '@gameContext/quote/domain/QuotesLoaderRepository'
 
 @injectable()
-class LoadQuotesUseCase implements UseCase<QuotesCollection> {
+class LoadQuotesUseCase implements Loader<QuotesCollection> {
   constructor(
     @inject(Types.QuotesLoaderRepository) private repository: QuotesLoaderRepository
   ) {}

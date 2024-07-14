@@ -1,6 +1,6 @@
 import { injectable, inject } from 'tsyringe'
 import { Types } from '@gameContext/shared/infrastructure/identifiers'
-import type { UseCase } from '@gameContext/shared/domain/utils/UseCase'
+import type { Loader } from '@gameContext/shared/domain/Loader'
 import { Player } from '@gameContext/player/domain/Player'
 import type { PlayerLoaderRepository } from '@gameContext/player/domain/repositories/PlayerLoaderRepository'
 import type { PlayerResponse } from '@gameContext/player/application/dto/PlayerResponse'
@@ -8,7 +8,7 @@ import { toPlayerResponse } from '@gameContext/player/application/mapper/PlayerM
 import { PlayerNotFoundException } from '@gameContext/player/domain/exceptions/PlayerNotFoundException'
 
 @injectable()
-class LoadPlayerUseCase implements UseCase<PlayerResponse> {
+class LoadPlayerUseCase implements Loader<PlayerResponse> {
   constructor(
     @inject(Types.PlayerLoaderRepository) private loaderRepository: PlayerLoaderRepository,
   ) {}

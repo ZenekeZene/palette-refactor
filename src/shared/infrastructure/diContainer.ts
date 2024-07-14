@@ -15,9 +15,10 @@ container.registerSingleton(Types.QuotesLoaderRepository, QuotesLoaderFromFileRe
 container.registerSingleton(Types.PlayerLoaderRepository, PlayerLoaderFromFileRepository)
 container.registerSingleton(Types.LevelsLoaderRepository, LevelsLoaderFromFileRepository)
 
-container.registerSingleton(Types.LoadPlayerUseCase, LoadPlayerUseCase)
-container.registerSingleton(Types.LoadQuotesUseCase, LoadQuotesUseCase)
-container.registerSingleton(Types.LoadLevelsUseCase, LoadLevelsUseCase)
-
 container.registerSingleton(Types.LevelsRepository, LevelsInMemoryRepository)
 container.registerSingleton(Types.PlayerRepository, PlayerInMemoryRepository)
+
+container.register(Types.LoadGame, LoadPlayerUseCase)
+container.register(Types.LoadGame, LoadLevelsUseCase)
+container.register(Types.LoadGame, LoadQuotesUseCase)
+

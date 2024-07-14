@@ -1,13 +1,13 @@
 import { injectable, inject } from 'tsyringe'
 import { Types } from '@gameContext/shared/infrastructure/identifiers'
-import type { UseCase } from '@gameContext/shared/domain/utils/UseCase'
+import type { Loader } from '@gameContext/shared/domain/Loader'
 import { LevelsCollection } from '@gameContext/level/domain/LevelsCollection'
 import type { LevelsLoaderRepository } from '@gameContext/level/domain/repositories/LevelsLoaderRepository'
 import type { LevelsCollectionResponse } from './dto/LevelsCollectionResponse'
 import { toLevelsCollectionResponse } from './mapper/LevelsCollectionMapper'
 
 @injectable()
-class LoadLevelsUseCase implements UseCase<LevelsCollectionResponse> {
+class LoadLevelsUseCase implements Loader<LevelsCollectionResponse> {
   constructor(
     @inject(Types.LevelsLoaderRepository) private loaderLevelsRepository: LevelsLoaderRepository,
     // @inject(Types.IEventBus) private eventBus: IEventBus,

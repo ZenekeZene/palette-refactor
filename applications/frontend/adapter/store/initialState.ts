@@ -12,8 +12,9 @@ const getQuote = (quotesCollection: QuotesCollection): Quote => {
 
 export const createInitialState = async (): Promise<State> => {
   const loadGame = container.resolve(LoadGame)
-  const { player, levels, quotes } = await loadGame.launch()
-  const quote = getQuote(quotes)
+  const responses = await loadGame.launch()
+  const [player, levels, quotes] = responses
+  const quote = getQuote(quotes as QuotesCollection)
 
   return {
     player,
@@ -21,5 +22,5 @@ export const createInitialState = async (): Promise<State> => {
     tutorialIsWatched: false,
     quotes,
     quote,
-  }
+  } as State
 }

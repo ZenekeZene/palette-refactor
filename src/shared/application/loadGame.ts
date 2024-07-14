@@ -1,39 +1,20 @@
-import { injectable, inject } from "tsyringe"
+import { injectable, injectAll } from "tsyringe"
 import { Types } from '@gameContext/shared/infrastructure/identifiers'
 import type { PlayerResponse } from "@gameContext/player/application/dto/PlayerResponse"
 import type { LevelsCollectionResponse } from "@gameContext/level/application/dto/LevelsCollectionResponse"
 import type { QuotesCollection } from '@gameContext/quote/domain/QuotesCollection'
+import type { Loader } from '@gameContext/shared/domain/Loader'
 
-import type { LoadPlayerUseCase } from '@gameContext/player/application/loadPlayer.usecase'
-import type { LoadLevelsUseCase } from '@gameContext/level/application/loadLevels.usecase'
-import type { LoadQuotesUseCase } from '@gameContext/quote/application/loadQuotes.usecase'
-
-type LoadGameType = { player: PlayerResponse, levels: LevelsCollectionResponse, quotes: QuotesCollection }
+type LoaderResponse = PlayerResponse | LevelsCollectionResponse | QuotesCollection
 
 @injectable()
 export class LoadGame {
   constructor(
-    @inject(Types.LoadPlayerUseCase) private loadPlayerUseCase: LoadPlayerUseCase,
-    @inject(Types.LoadQuotesUseCase) private loadQuotesUseCase: LoadQuotesUseCase,
-    @inject(Types.LoadLevelsUseCase) private loadLevelsUseCase: LoadLevelsUseCase,
+    @injectAll(Types.LoadGame) private loadGame: Loader<LoaderResponse>[],
   ) {}
 
-  async launch(): Promise<LoadGameType> {
-    const player = await this.getPlayer()
-    const levels = await this.getLevels()
-    const quotes = await this.getQuotes()
-    return { player, levels, quotes }
-  }
-
-  private async getPlayer(): Promise<PlayerResponse> {
-    return await this.loadPlayerUseCase.execute()
-  }
-
-  private async getLevels(): Promise<LevelsCollectionResponse> {
-    return await this.loadLevelsUseCase.execute()
-  }
-
-  private async getQuotes(): Promise<QuotesCollection> {
-    return await this.loadQuotesUseCase.execute()
+  async launch(): Promise<LoaderResponse[]> {
+    const loadPromises = this.loadGame.map(loader => loader.execute());
+    return await Promise.all(loadPromises);
   }
 }
