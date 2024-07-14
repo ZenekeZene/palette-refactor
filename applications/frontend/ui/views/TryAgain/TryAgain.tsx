@@ -3,7 +3,7 @@ import { MdOutlineReplay as ReplayIcon } from 'react-icons/md'
 import { useShallow } from 'zustand/react/shallow'
 import { Progression } from '@frontend/ui/components/Progression/Progression'
 import { LocationDisplay } from '@frontend/ui/components/LocationDisplay/LocationDisplay'
-import { useStore } from '@frontend/adapter/store/store'
+import { useStore } from '@frontend/adapter/store/useStore'
 import './TryAgain.scss'
 
 const TryAgainView = () => {

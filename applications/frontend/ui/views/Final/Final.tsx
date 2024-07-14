@@ -1,4 +1,4 @@
-import { useStore } from '@frontend/adapter/store/store'
+import { useStore } from '@frontend/adapter/store/useStore'
 import './Final.scss'
 
 const FinalView = () => {

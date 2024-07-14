@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import { HeaderGame } from '@frontend/ui/components/HeaderGame/HeaderGame'
 import { Bonus } from '@frontend/ui/components/Bonus/Bonus'
 import { GameChip } from '@frontend/ui/components/GameChip/GameChip'
-import { useStore } from '@frontend/adapter/store/store'
+import { useStore } from '@frontend/adapter/store/useStore'
 import './Game.scss'
 
 const GameView = () => {

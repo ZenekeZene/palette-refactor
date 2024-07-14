@@ -6,7 +6,7 @@ import { NextLevelView } from './NextLevel'
 import { StoreMother } from '@frontend/adapter/store/__mocks__/store.mother'
 
 const useStore = vi.hoisted(() => vi.fn())
-vi.mock('@frontend/adapter/store/store', () => ({ useStore }))
+vi.mock('@frontend/adapter/store/useStore', () => ({ useStore }))
 
 const renderNextLevelView = () =>
   render(<NextLevelView />, { wrapper: MemoryRouter })
