@@ -1,7 +1,7 @@
 import { inject, injectable } from 'tsyringe'
 import { Types } from '@gameContext/shared/infrastructure/identifiers'
 import type { UseCase } from '@gameContext/shared/domain/utils/UseCase'
-import type { IPlayerRepository } from '@gameContext/player/domain/repositories/IPlayerRepository'
+import type { PlayerRepository } from '@gameContext/player/domain/repositories/PlayerRepository'
 import { PlayerId } from '@gameContext/player/domain/models/PlayerId'
 import { PlayerNotFoundException } from '@gameContext/player/domain/exceptions/PlayerNotFoundException'
 import { PlayerResponse } from '@gameContext/player/application/dto/PlayerResponse'
@@ -11,7 +11,7 @@ import { PassLevelRequest } from '@gameContext/player/application/dto/PassLevelR
 @injectable()
 class PassLevelUseCase implements UseCase<PlayerResponse> {
   constructor(
-    @inject(Types.IPlayerRepository) private repository: IPlayerRepository,
+    @inject(Types.PlayerRepository) private repository: PlayerRepository,
     private passLevelRequest: PassLevelRequest,
   ) {}
 

@@ -1,9 +1,9 @@
 import { injectable } from 'tsyringe'
-import { IPlayerLoaderRepository } from '@gameContext/player/domain/repositories/IPlayerLoaderRepository'
+import { PlayerLoaderRepository } from '@gameContext/player/domain/repositories/PlayerLoaderRepository'
 import { Player } from '@gameContext/player/domain/Player'
 
 @injectable()
-class PlayerLoaderFromFileRepository implements IPlayerLoaderRepository {
+class PlayerLoaderFromFileRepository implements PlayerLoaderRepository {
   async loadFromFile(): Promise<Player.Primitive> {
     try {
       const PlayerConfig = await import('@resources/Player.yaml')

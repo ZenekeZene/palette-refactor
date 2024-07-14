@@ -2,7 +2,7 @@ import { injectable, inject } from 'tsyringe'
 import { Types } from '@gameContext/shared/infrastructure/identifiers'
 import type { UseCase } from '@gameContext/shared/domain/utils/UseCase'
 import { Player } from '@gameContext/player/domain/Player'
-import type { IPlayerLoaderRepository } from '@gameContext/player/domain/repositories/IPlayerLoaderRepository'
+import type { PlayerLoaderRepository } from '@gameContext/player/domain/repositories/PlayerLoaderRepository'
 import type { PlayerResponse } from '@gameContext/player/application/dto/PlayerResponse'
 import { toPlayerResponse } from '@gameContext/player/application/mapper/PlayerMapper'
 import { PlayerNotFoundException } from '@gameContext/player/domain/exceptions/PlayerNotFoundException'
@@ -10,7 +10,7 @@ import { PlayerNotFoundException } from '@gameContext/player/domain/exceptions/P
 @injectable()
 class LoadPlayerUseCase implements UseCase<PlayerResponse> {
   constructor(
-    @inject(Types.IPlayerLoaderRepository) private loaderRepository: IPlayerLoaderRepository,
+    @inject(Types.PlayerLoaderRepository) private loaderRepository: PlayerLoaderRepository,
   ) {}
 
   async execute(): Promise<PlayerResponse> {

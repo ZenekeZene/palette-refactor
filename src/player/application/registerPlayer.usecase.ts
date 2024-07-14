@@ -1,7 +1,7 @@
 import { injectable, inject } from 'tsyringe'
 import { Types } from '@gameContext/shared/infrastructure/identifiers'
 import type { UseCase } from '@gameContext/shared/domain/utils/UseCase'
-import type { IPlayerRepository } from '@gameContext/player/domain/repositories/IPlayerRepository'
+import type { PlayerRepository } from '@gameContext/player/domain/repositories/PlayerRepository'
 import { PlayerAlreadyExists } from '@gameContext/player//domain/exceptions/PlayerAlreadyExists'
 import { Player } from '@gameContext/player/domain/Player'
 import { PlayerId } from '@gameContext/player/domain/models/PlayerId'
@@ -12,7 +12,7 @@ import { toPlayerResponse } from '@gameContext/player/application/mapper/PlayerM
 @injectable()
 class RegisterPlayerUseCase implements UseCase<PlayerResponse> {
   constructor(
-    @inject(Types.IPlayerRepository) private repository: IPlayerRepository,
+    @inject(Types.PlayerRepository) private repository: PlayerRepository,
     private registerPlayerRequest: RegisterPlayerRequest,
   ) {}
 

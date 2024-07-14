@@ -1,5 +1,5 @@
 import { Player } from '@gameContext/player/domain/Player'
 
-export interface IPlayerLoaderRepository {
+export interface PlayerLoaderRepository {
   loadFromFile(): Promise<Player.Primitive>
 }

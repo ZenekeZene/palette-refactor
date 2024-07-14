@@ -1,10 +1,10 @@
 export const Types = {
-  IPlayerLoaderRepository: Symbol.for('IPlayerLoaderRepository'),
-  IQuotesLoaderRepository: Symbol.for('IQuotesLoaderRepository'),
-  ILevelsLoaderRepository: Symbol.for('ILevelsLoaderRepository'),
+  PlayerLoaderRepository: Symbol.for('PlayerLoaderRepository'),
+  QuotesLoaderRepository: Symbol.for('QuotesLoaderRepository'),
+  LevelsLoaderRepository: Symbol.for('LevelsLoaderRepository'),
 
-  ILevelsRepository: Symbol.for('ILevelsRepository'),
-  IPlayerRepository: Symbol.for('IPlayerRepository'),
+  LevelsRepository: Symbol.for('LevelsRepository'),
+  PlayerRepository: Symbol.for('PlayerRepository'),
 
   LoadPlayerUseCase: Symbol.for('LoadPlayerUseCase'),
   LoadLevelsUseCase: Symbol.for('LoadLevelsUseCase'),

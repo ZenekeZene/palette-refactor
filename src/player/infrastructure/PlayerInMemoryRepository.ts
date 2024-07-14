@@ -1,8 +1,8 @@
 import type { Player } from "@gameContext/player/domain/Player"
 import type { PlayerId } from "@gameContext/player/domain/models/PlayerId"
-import { IPlayerRepository } from "@gameContext/player/domain/repositories/IPlayerRepository"
+import { PlayerRepository } from "@gameContext/player/domain/repositories/PlayerRepository"
 
-class PlayerInMemoryRepository implements IPlayerRepository {
+class PlayerInMemoryRepository implements PlayerRepository {
   private players: Player[] = []
 
   create(player: Player): void {

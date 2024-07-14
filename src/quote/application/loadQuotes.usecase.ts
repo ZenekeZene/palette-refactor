@@ -2,12 +2,12 @@ import { injectable, inject } from 'tsyringe'
 import { Types } from '@gameContext/shared/infrastructure/identifiers'
 import type { UseCase } from '@gameContext/shared/domain/utils/UseCase'
 import type { QuotesCollection } from '@gameContext/quote/domain/QuotesCollection'
-import type { IQuotesLoaderRepository } from '@gameContext/quote/domain/IQuotesLoaderRepository'
+import type { QuotesLoaderRepository } from '@gameContext/quote/domain/QuotesLoaderRepository'
 
 @injectable()
 class LoadQuotesUseCase implements UseCase<QuotesCollection> {
   constructor(
-    @inject(Types.IQuotesLoaderRepository) private repository: IQuotesLoaderRepository
+    @inject(Types.QuotesLoaderRepository) private repository: QuotesLoaderRepository
   ) {}
 
   async execute(): Promise<QuotesCollection> {

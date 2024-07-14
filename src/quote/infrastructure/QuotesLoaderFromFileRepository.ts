@@ -1,9 +1,9 @@
 import { injectable } from 'tsyringe'
-import { IQuotesLoaderRepository } from '@gameContext/quote/domain/IQuotesLoaderRepository'
+import { QuotesLoaderRepository } from '@gameContext/quote/domain/QuotesLoaderRepository'
 import { QuotesCollection } from '@gameContext/quote/domain/QuotesCollection'
 
 @injectable()
-class QuotesRepository implements IQuotesLoaderRepository {
+class QuotesLoaderFromFileRepository implements QuotesLoaderRepository {
   async loadFromFile(): Promise<QuotesCollection> {
     try {
       const QuotesConfig = await import('@resources/Quotes.yaml')
@@ -16,4 +16,4 @@ class QuotesRepository implements IQuotesLoaderRepository {
   }
 }
 
-export { QuotesRepository }
+export { QuotesLoaderFromFileRepository }

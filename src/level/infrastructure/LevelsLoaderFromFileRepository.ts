@@ -1,9 +1,9 @@
 import { injectable } from "tsyringe"
-import { ILevelsLoaderRepository } from "@gameContext/level/domain/repositories/ILevelsLoaderRepository";
+import { LevelsLoaderRepository } from "@gameContext/level/domain/repositories/LevelsLoaderRepository";
 import type { LevelRawModel } from '@gameContext/level/domain/models/level/Level'
 
 @injectable()
-class LevelsLoaderFromFileRepository implements ILevelsLoaderRepository {
+class LevelsLoaderFromFileRepository implements LevelsLoaderRepository {
   async loadAllFromFile(): Promise<LevelRawModel[]> {
     try {
       const LevelsConfig = await import('@resources/Levels.yaml')

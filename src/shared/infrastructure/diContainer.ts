@@ -11,13 +11,13 @@ import { LevelsLoaderFromFileRepository } from "@gameContext/level/infrastructur
 import { LevelsInMemoryRepository } from "@gameContext/level/infrastructure/LevelsInMemoryRepository"
 import { PlayerInMemoryRepository } from "@gameContext/player/infrastructure/PlayerInMemoryRepository"
 
-container.registerSingleton(Types.IQuotesLoaderRepository, QuotesLoaderFromFileRepository)
-container.registerSingleton(Types.IPlayerLoaderRepository, PlayerLoaderFromFileRepository)
-container.registerSingleton(Types.ILevelsLoaderRepository, LevelsLoaderFromFileRepository)
+container.registerSingleton(Types.QuotesLoaderRepository, QuotesLoaderFromFileRepository)
+container.registerSingleton(Types.PlayerLoaderRepository, PlayerLoaderFromFileRepository)
+container.registerSingleton(Types.LevelsLoaderRepository, LevelsLoaderFromFileRepository)
 
 container.registerSingleton(Types.LoadPlayerUseCase, LoadPlayerUseCase)
 container.registerSingleton(Types.LoadQuotesUseCase, LoadQuotesUseCase)
 container.registerSingleton(Types.LoadLevelsUseCase, LoadLevelsUseCase)
 
-container.registerSingleton(Types.ILevelsRepository, LevelsInMemoryRepository)
-container.registerSingleton(Types.IPlayerRepository, PlayerInMemoryRepository)
+container.registerSingleton(Types.LevelsRepository, LevelsInMemoryRepository)
+container.registerSingleton(Types.PlayerRepository, PlayerInMemoryRepository)
