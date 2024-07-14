@@ -3,11 +3,6 @@ import { Quote } from '@gameContext/quote/domain/Quote'
 import { QuotesCollection } from '@gameContext/quote/domain/QuotesCollection'
 import { PlayerResponse } from '@gameContext/player/application/dto/PlayerResponse'
 
-export interface StoreAPI {
-  set: (fn: (state: State) => State) => void
-  get: () => Store
-}
-
 export type State = {
   player: PlayerResponse
   levels: LevelsCollectionResponse

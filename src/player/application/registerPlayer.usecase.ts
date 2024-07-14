@@ -13,12 +13,11 @@ import { toPlayerResponse } from '@gameContext/player/application/mapper/PlayerM
 class RegisterPlayerUseCase implements UseCase<PlayerResponse> {
   constructor(
     @inject(Types.PlayerRepository) private repository: PlayerRepository,
-    private registerPlayerRequest: RegisterPlayerRequest,
   ) {}
 
-  async execute(): Promise<PlayerResponse> {
-    const playerId = new PlayerId(this.registerPlayerRequest.playerId)
-    const playerData = this.registerPlayerRequest.playerData
+  async execute(registerPlayerRequest: RegisterPlayerRequest): Promise<PlayerResponse> {
+    const playerId = new PlayerId(registerPlayerRequest.playerId)
+    const playerData = registerPlayerRequest.playerData
     const existingPlayer = this.repository.findByPlayerId(playerId);
     if (existingPlayer) {
       throw new PlayerAlreadyExists(playerId);

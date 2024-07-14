@@ -1,32 +1,33 @@
-import { UseCase } from '@gameContext/shared/domain/utils/UseCase'
+import { container } from "tsyringe"
+import { Types } from '@gameContext/shared/infrastructure/identifiers'
+import { PassLevelUseCase } from '@gameContext/player/application/passLevel.usecase'
+import { PassLevelRequest } from '@gameContext/player/application/dto/PassLevelRequest'
 import { RegisterPlayerRequest } from '@gameContext/player/application/dto/RegisterPlayerRequest'
-import { RegisterLevelsUseCase } from '@gameContext/level/application/registerLevels.usecase'
 import { RegisterLevelsRequest } from '@gameContext/level/application/dto/RegisterLevelsRequest'
-import { RegisterPlayerUseCase } from '@gameContext/player/application/registerPlayer.usecase'
 import type { PlayerResponse } from '@gameContext/player/application/dto/PlayerResponse'
 import type { LevelsCollectionResponse } from '@gameContext/level/application/dto/LevelsCollectionResponse'
-import type { StoreDependencies } from '../store.dependencies'
-import { State, StoreAPI } from '../store.types'
+import type { RegisterLevelsUseCase } from '@gameContext/level/application/registerLevels.usecase'
+import type { RegisterPlayerUseCase } from "@gameContext/player/application/registerPlayer.usecase"
 
-const registerInMemory = (playerResponse: PlayerResponse, levelsResponse: LevelsCollectionResponse, dependencies: StoreDependencies):void => {
-  const { playerRepository, levelsRepository } = dependencies
+const registerInMemory = (playerResponse: PlayerResponse, levelsResponse: LevelsCollectionResponse):void => {
   const registerPlayerRequest = new RegisterPlayerRequest(playerResponse.id, playerResponse)
-  const registerPlayer = new RegisterPlayerUseCase(playerRepository, registerPlayerRequest)
+  const registerPlayer: RegisterPlayerUseCase = container.resolve(Types.RegisterPlayer)
 
   const registerLevelsRequest = new RegisterLevelsRequest(levelsResponse)
-  const registerLevels = new RegisterLevelsUseCase(levelsRepository, registerLevelsRequest)
+  const registerLevels: RegisterLevelsUseCase = container.resolve(Types.RegisterLevels)
 
-  registerPlayer.execute()
-  registerLevels.execute()
+  registerPlayer.execute(registerPlayerRequest)
+  registerLevels.execute(registerLevelsRequest)
 }
 
-const nextLevel = async (apiStore: StoreAPI, usecase: UseCase<any>): Promise<void> => {
-  apiStore.get().nextQuote()
+const nextLevel = async (player: PlayerResponse): Promise<PlayerResponse> => {
+  const passLevelRequest = new PassLevelRequest(player.id)
+  const passLevel: PassLevelUseCase = container.resolve(Types.PassLevel)
   try {
-    const player = await usecase.execute()
-    apiStore.set((state: State) => ({ ...state, player }))
+    return await passLevel.execute(passLevelRequest)
   } catch (error) {
     console.error('Failed to pass level:', error)
+    return player
   }
 }
 

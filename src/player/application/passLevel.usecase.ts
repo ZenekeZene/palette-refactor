@@ -12,11 +12,10 @@ import { PassLevelRequest } from '@gameContext/player/application/dto/PassLevelR
 class PassLevelUseCase implements UseCase<PlayerResponse> {
   constructor(
     @inject(Types.PlayerRepository) private repository: PlayerRepository,
-    private passLevelRequest: PassLevelRequest,
   ) {}
 
-  async execute(): Promise<PlayerResponse> {
-    const playerId = new PlayerId(this.passLevelRequest.playerId)
+  async execute(passLevelRequest: PassLevelRequest): Promise<PlayerResponse> {
+    const playerId = new PlayerId(passLevelRequest.playerId)
     const player = this.repository.findByPlayerId(playerId)
     if (!player) {
       throw new PlayerNotFoundException()

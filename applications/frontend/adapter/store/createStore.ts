@@ -1,22 +1,14 @@
-import { create,  } from 'zustand'
+import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
-import { PassLevelUseCase } from '@gameContext/player/application/passLevel.usecase'
-import { PassLevelRequest } from '@gameContext/player/application/dto/PassLevelRequest'
-import { Store, State } from './store.types'
-import { StoreDependencies } from './store.dependencies'
+import type { Store, State } from './store.types'
 import { actions } from './actions/actions'
 
-function createStore(propsState: State, dependencies: StoreDependencies) {
+function createStore(propsState: State) {
   const { player, levels } = propsState
-  actions.registerInMemory(player, levels, dependencies)
-
-  const passLevelRequest = new PassLevelRequest(player.id)
-  const passLevel = new PassLevelUseCase(dependencies.playerRepository, passLevelRequest)
+  actions.registerInMemory(player, levels)
 
   const useStore = create<Store>()(
     devtools((set, get) => {
-      const apiStore = { get, set }
-
       return ({
         ...propsState,
         setTutorialIsLaunched: (value) =>
@@ -26,7 +18,9 @@ function createStore(propsState: State, dependencies: StoreDependencies) {
           set((state) => ({ ...state, quote: get().quotes.getNextQuote() }))
         },
         nextLevel: async () => {
-          await actions.nextLevel(apiStore, passLevel)
+          get().nextQuote()
+          const playerWithLevelPassed = await actions.nextLevel(player)
+          set((state) => ({ ...state, player: playerWithLevelPassed }))
         },
       })
     })
