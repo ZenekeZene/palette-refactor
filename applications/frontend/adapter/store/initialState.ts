@@ -1,26 +1,20 @@
 import { container } from 'tsyringe'
-import { QuotesCollection } from '@gameContext/quote/domain/QuotesCollection'
-import { Quote } from '@gameContext/quote/domain/Quote'
-import { GetQuoteUseCase } from '@gameContext/quote/application/getQuote.usecase'
 import { LoadGame } from '@gameContext/shared/application/loadGame'
-import { State } from '@frontend/adapter/store/store.types'
+import { StoreState, Player, Levels, Quotes } from './store.types'
 
-const getQuote = (quotesCollection: QuotesCollection): Quote => {
-  const getQuote = new GetQuoteUseCase(quotesCollection)
-  return getQuote.currentQuote
-}
-
-export const createInitialState = async (): Promise<State> => {
+export const createInitialState = async (): Promise<StoreState> => {
   const loadGame = container.resolve(LoadGame)
   const responses = await loadGame.launch()
-  const [player, levels, quotes] = responses
-  const quote = getQuote(quotes as QuotesCollection)
+  const [playerResponse, levelsResponse, quotesResponse] = responses
+  const player = playerResponse as Player
+  const levels = levelsResponse as Levels
+  const quotes = quotesResponse as Quotes
 
   return {
     player,
     levels,
-    tutorialIsWatched: false,
     quotes,
-    quote,
-  } as State
+    quote: null,
+    tutorialIsWatched: false
+  }
 }

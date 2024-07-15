@@ -1,25 +1,26 @@
 import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
-import type { Store, State } from './store.types'
+import type { Store, StoreState } from './store.types'
 import { actions } from './actions/actions'
 
-function createStore(propsState: State) {
-  const { player, levels } = propsState
-  actions.registerInMemory(player, levels)
+function createStore(propsState: StoreState) {
+  actions.registerInMemory(propsState)
 
   const useStore = create<Store>()(
     devtools((set, get) => {
+
       return ({
         ...propsState,
         setTutorialIsLaunched: (value) =>
           set(() => ({ tutorialIsWatched: value })),
         setScore: (value) => set((state) => ({ ...state, score: value })),
-        nextQuote: () => {
-          set((state) => ({ ...state, quote: get().quotes.getNextQuote() }))
+        nextQuote: async () => {
+          const quote = await actions.getNextQuote(get().quotes)
+          set((state) => ({ ...state, quote }))
         },
         nextLevel: async () => {
           get().nextQuote()
-          const playerWithLevelPassed = await actions.nextLevel(player)
+          const playerWithLevelPassed = await actions.nextLevel(get().player)
           set((state) => ({ ...state, player: playerWithLevelPassed }))
         },
       })
