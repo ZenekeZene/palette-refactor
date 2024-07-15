@@ -1,14 +1,14 @@
-import { LevelsCollectionResponse } from '@gameContext/level/application/dto/LevelsCollectionResponse'
-import { Quote } from '@gameContext/quote/domain/Quote'
-import { QuotesCollection } from '@gameContext/quote/domain/QuotesCollection'
-import { PlayerResponse } from '@gameContext/player/application/dto/PlayerResponse'
+import type { Player, Levels, Quotes, Quote } from '@gameContext/shared/infrastructure/store/store.types'
 
-export type State = {
-  player: PlayerResponse
-  levels: LevelsCollectionResponse
+export interface State {
+  player: Player
+  levels: Levels
+  quotes: Quotes
+  quote: Quote | null
+}
+
+export interface StoreState extends State {
   tutorialIsWatched: boolean
-  quotes: QuotesCollection
-  quote: Quote
 }
 
 type Actions = {
@@ -18,4 +18,6 @@ type Actions = {
   nextLevel: () => void
 }
 
-export type Store = State & Actions
+export type Store = StoreState & Actions
+
+export type { Player, Levels, Quotes, Quote }
