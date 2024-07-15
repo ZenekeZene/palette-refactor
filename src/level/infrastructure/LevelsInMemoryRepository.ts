@@ -12,7 +12,7 @@ class LevelsInMemoryRepository implements LevelsRepository {
     this.levels.set(level.getId(), level)
   }
 
-  async saveAllInMemory(levels: LevelsCollection): Promise<void> {
+  async saveInMemory(levels: LevelsCollection): Promise<void> {
     levels.forEach((level) => this.add(level))
   }
 

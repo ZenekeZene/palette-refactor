@@ -1,5 +1,5 @@
 import { injectable, inject } from 'tsyringe'
-import { Types } from '@gameContext/shared/infrastructure/identifiers'
+import { Types } from '@gameContext/shared/infrastructure/dependency-injection/identifiers'
 import type { UseCase } from '@gameContext/shared/domain/utils/UseCase'
 import type { LevelsRepository } from '@gameContext/level/domain/repositories/LevelsRepository'
 import { LevelsCollection } from '@gameContext/level/domain/LevelsCollection'
@@ -16,7 +16,7 @@ class RegisterLevelsUseCase implements UseCase<LevelsCollectionResponse> {
   async execute(registerLevelsRequest: RegisterLevelsRequest): Promise<LevelsCollectionResponse> {
     const levelsRaw = registerLevelsRequest.levels
     const levelsCollection = new LevelsCollection(levelsRaw)
-    this.levelsRepository.saveAllInMemory(levelsCollection)
+    this.levelsRepository.saveInMemory(levelsCollection)
     return toLevelsCollectionResponse(levelsCollection)
   }
 }

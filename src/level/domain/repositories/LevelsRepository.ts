@@ -3,6 +3,6 @@ import type { LevelId } from '@gameContext/level/domain/models/level/LevelId'
 import type { LevelsCollection } from '@gameContext/level/domain/LevelsCollection'
 
 export interface LevelsRepository {
-  saveAllInMemory(levels: LevelsCollection): Promise<void>
+  saveInMemory(levels: LevelsCollection): Promise<void>
   searchById(id: LevelId): Promise<Level | undefined>
 }

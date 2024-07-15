@@ -1,5 +1,5 @@
 import { injectable, inject } from 'tsyringe'
-import { Types } from '@gameContext/shared/infrastructure/identifiers'
+import { Types } from '@gameContext/shared/infrastructure/dependency-injection/identifiers'
 import type { UseCase } from '@gameContext/shared/domain/utils/UseCase'
 import type { PlayerRepository } from '@gameContext/player/domain/repositories/PlayerRepository'
 import { PlayerAlreadyExists } from '@gameContext/player//domain/exceptions/PlayerAlreadyExists'

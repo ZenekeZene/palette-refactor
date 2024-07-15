@@ -8,15 +8,16 @@ export class LevelsCollection extends AggregateRoot {
   private levels: Level[] = []
   private aggregateId: Uuid
 
-  constructor(_levels: LevelRawModel[] = []) {
+  constructor(initialLevels: LevelRawModel[] = []) {
     super()
     this.aggregateId = Uuid.random()
-    this.generate(_levels)
+    this.generate(initialLevels)
   }
 
-  private generate(_levels: LevelRawModel[]): void {
-    _levels.forEach((_level): void => {
-      const level = Level.fromPrimitive(_level.id, _level.numberOfChips, _level.prize)
+  private generate(initialLevels: LevelRawModel[]): void {
+    initialLevels.forEach((initialLevel): void => {
+      const { id, numberOfChips, prize } = initialLevel
+      const level = Level.fromPrimitive(id, numberOfChips, prize)
       this.levels.push(level)
     })
     this.recordLevelsCollectionCreated()
