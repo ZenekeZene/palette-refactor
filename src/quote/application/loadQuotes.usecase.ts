@@ -1,18 +1,28 @@
 import { injectable, inject } from 'tsyringe'
-import { Types } from '@gameContext/shared/infrastructure/identifiers'
+import { Types } from '@gameContext/shared/infrastructure/dependency-injection/identifiers'
 import type { Loader } from '@gameContext/shared/domain/Loader'
-import type { QuotesCollection } from '@gameContext/quote/domain/QuotesCollection'
+import { QuotesCollection } from '@gameContext/quote/domain/QuotesCollection'
 import type { QuotesLoaderRepository } from '@gameContext/quote/domain/QuotesLoaderRepository'
+import type { QuotesCollectionResponse } from './dto/QuotesCollectionResponse'
+import { toQuotesCollectionResponse } from './mapper/QuotesCollectionMapper'
 
 @injectable()
-class LoadQuotesUseCase implements Loader<QuotesCollection> {
+class LoadQuotesUseCase implements Loader<QuotesCollectionResponse> {
   constructor(
-    @inject(Types.QuotesLoaderRepository) private repository: QuotesLoaderRepository
+    @inject(Types.QuotesLoaderRepository) private repository: QuotesLoaderRepository,
+    // @inject(Types.IEventBus) private eventBus: IEventBus,
   ) {}
 
-  async execute(): Promise<QuotesCollection> {
-    const quotes = await this.repository.loadFromFile()
-    return quotes
+  async execute(): Promise<QuotesCollectionResponse> {
+    try {
+      const quotesRaw = await this.repository.loadAllFromFile()
+      const quotesCollection = new QuotesCollection(quotesRaw)
+      // this.eventBus.publish(quotesCollection.pullDomainEvents())
+      return toQuotesCollectionResponse(quotesCollection)
+    } catch (error) {
+      console.error('Error loading quotes config', error)
+      throw new Error('Error loading quotes config')
+    }
   }
 }
 

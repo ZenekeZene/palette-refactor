@@ -1,5 +1,5 @@
-import { QuotesCollection } from '@gameContext/quote/domain/QuotesCollection'
+import { QuoteRawModel } from '@gameContext/quote/domain/Quote'
 
 export interface QuotesLoaderRepository {
-  loadFromFile(): Promise<QuotesCollection>
+  loadAllFromFile(): Promise<QuoteRawModel[]>
 }
