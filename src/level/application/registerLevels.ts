@@ -8,7 +8,7 @@ import type { RegisterLevelsRequest } from './dto/RegisterLevelsRequest'
 import { toLevelsCollectionResponse } from './mapper/LevelsCollectionMapper'
 
 @injectable()
-class RegisterLevelsUseCase implements UseCase<LevelsCollectionResponse> {
+class RegisterLevels implements UseCase<LevelsCollectionResponse> {
   constructor(
     @inject(Types.LevelsRepository) private levelsRepository: LevelsRepository,
   ) {}
@@ -21,4 +21,4 @@ class RegisterLevelsUseCase implements UseCase<LevelsCollectionResponse> {
   }
 }
 
-export { RegisterLevelsUseCase }
+export { RegisterLevels }

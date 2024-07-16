@@ -7,7 +7,7 @@ import type { QuotesCollectionResponse } from './dto/QuotesCollectionResponse'
 import { toQuotesCollectionResponse } from './mapper/QuotesCollectionMapper'
 
 @injectable()
-class LoadQuotesUseCase implements Loader<QuotesCollectionResponse> {
+class LoadQuotes implements Loader<QuotesCollectionResponse> {
   constructor(
     @inject(Types.QuotesLoaderRepository) private repository: QuotesLoaderRepository,
     // @inject(Types.IEventBus) private eventBus: IEventBus,
@@ -26,4 +26,4 @@ class LoadQuotesUseCase implements Loader<QuotesCollectionResponse> {
   }
 }
 
-export { LoadQuotesUseCase }
+export { LoadQuotes }

@@ -1,11 +1,12 @@
 import { container } from "tsyringe"
 import { GetQuoteRequest } from '@gameContext/quote/application/dto/GetQuoteRequest'
-import { GetQuoteUseCase } from '@gameContext/quote/application/getQuote.usecase'
+import { GetQuote } from '@gameContext/quote/application/getQuote'
+import { Types } from '@gameContext/shared/infrastructure/dependency-injection/identifiers'
 import { Quotes, Quote } from '../store.types'
 
 const getNextQuote = async (quotes: Quotes): Promise<Quote> => {
   const nextQuoteRequest = new GetQuoteRequest(quotes.id)
-  const getQuote = container.resolve(GetQuoteUseCase)
+  const getQuote = container.resolve<GetQuote>(Types.GetQuote)
   try {
     return await getQuote.execute(nextQuoteRequest)
   } catch (error) {

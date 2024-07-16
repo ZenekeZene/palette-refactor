@@ -8,7 +8,7 @@ import { toPlayerResponse } from '@gameContext/player/application/mapper/PlayerM
 import { PlayerNotFoundException } from '@gameContext/player/domain/exceptions/PlayerNotFoundException'
 
 @injectable()
-class LoadPlayerUseCase implements Loader<PlayerResponse> {
+class LoadPlayer implements Loader<PlayerResponse> {
   constructor(
     @inject(Types.PlayerLoaderRepository) private loaderRepository: PlayerLoaderRepository,
   ) {}
@@ -23,4 +23,4 @@ class LoadPlayerUseCase implements Loader<PlayerResponse> {
   }
 }
 
-export { LoadPlayerUseCase }
+export { LoadPlayer }

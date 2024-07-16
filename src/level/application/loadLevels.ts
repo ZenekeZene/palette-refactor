@@ -7,7 +7,7 @@ import type { LevelsCollectionResponse } from './dto/LevelsCollectionResponse'
 import { toLevelsCollectionResponse } from './mapper/LevelsCollectionMapper'
 
 @injectable()
-class LoadLevelsUseCase implements Loader<LevelsCollectionResponse> {
+class LoadLevels implements Loader<LevelsCollectionResponse> {
   constructor(
     @inject(Types.LevelsLoaderRepository) private loaderLevelsRepository: LevelsLoaderRepository,
     // @inject(Types.IEventBus) private eventBus: IEventBus,
@@ -26,4 +26,4 @@ class LoadLevelsUseCase implements Loader<LevelsCollectionResponse> {
   }
 }
 
-export { LoadLevelsUseCase };
+export { LoadLevels }

@@ -1,36 +1,47 @@
 import { container } from "tsyringe"
+
+// Types:
 import { Types } from "./identifiers"
 
-import { LoadPlayerUseCase } from "@gameContext/player/application/loadPlayer.usecase"
-import { LoadLevelsUseCase } from "@gameContext/level/application/loadLevels.usecase"
-import { LoadQuotesUseCase } from "@gameContext/quote/application/loadQuotes.usecase"
-import { PassLevelUseCase } from "@gameContext/player/application/passLevel.usecase"
-import { GetQuoteUseCase } from '@gameContext/quote/application/getQuote.usecase'
-
+// Player use cases and repositories:
+import { LoadPlayer } from "@gameContext/player/application/loadPlayer"
+import { PassLevel } from "@gameContext/player/application/passLevel"
+import { RegisterPlayer } from "@gameContext/player/application/registerPlayer"
 import { PlayerLoaderFromFileRepository } from "@gameContext/player/infrastructure/PlayerLoaderFromFileRepository"
-import { QuotesLoaderFromFileRepository } from "@gameContext/quote/infrastructure/QuotesLoaderFromFileRepository"
+import { PlayerInMemoryRepository } from "@gameContext/player/infrastructure/PlayerInMemoryRepository"
+
+// Level use cases and repositories:
+import { LoadLevels } from "@gameContext/level/application/loadLevels"
+import { RegisterLevels } from "@gameContext/level/application/registerLevels"
 import { LevelsLoaderFromFileRepository } from "@gameContext/level/infrastructure/LevelsLoaderFromFileRepository"
 import { LevelsInMemoryRepository } from "@gameContext/level/infrastructure/LevelsInMemoryRepository"
-import { PlayerInMemoryRepository } from "@gameContext/player/infrastructure/PlayerInMemoryRepository"
+
+// Quote use cases and repositories:
+import { LoadQuotes } from "@gameContext/quote/application/loadQuotes"
+import { GetQuote } from '@gameContext/quote/application/getQuote'
+import { RegisterQuotes } from "@gameContext/quote/application/registerQuotes"
+import { QuotesLoaderFromFileRepository } from "@gameContext/quote/infrastructure/QuotesLoaderFromFileRepository"
 import { QuotesInMemoryRepository } from "@gameContext/quote/infrastructure/QuotesInMemoryRepository"
-import { RegisterLevelsUseCase } from "@gameContext/level/application/registerLevels.usecase"
-import { RegisterPlayerUseCase } from "@gameContext/player/application/registerPlayer.usecase"
-import { RegisterQuotesUseCase } from "@gameContext/quote/application/registerQuotes.usecase"
 
-container.registerSingleton(Types.QuotesLoaderRepository, QuotesLoaderFromFileRepository)
+// Player:
 container.registerSingleton(Types.PlayerLoaderRepository, PlayerLoaderFromFileRepository)
-container.registerSingleton(Types.LevelsLoaderRepository, LevelsLoaderFromFileRepository)
-container.registerSingleton(Types.RegisterPlayer, RegisterPlayerUseCase)
-container.registerSingleton(Types.RegisterLevels, RegisterLevelsUseCase)
-container.registerSingleton(Types.RegisterQuotes, RegisterQuotesUseCase)
-container.registerSingleton(Types.PassLevel, PassLevelUseCase)
-container.registerSingleton(Types.GetQuoteUse, GetQuoteUseCase)
-
-container.registerSingleton(Types.LevelsRepository, LevelsInMemoryRepository)
+container.registerSingleton(Types.RegisterPlayer, RegisterPlayer)
+container.registerSingleton(Types.PassLevel, PassLevel)
 container.registerSingleton(Types.PlayerRepository, PlayerInMemoryRepository)
+
+// Levels:
+container.registerSingleton(Types.LevelsLoaderRepository, LevelsLoaderFromFileRepository)
+container.registerSingleton(Types.RegisterLevels, RegisterLevels)
+container.registerSingleton(Types.LevelsRepository, LevelsInMemoryRepository)
+
+// Quotes:
+container.registerSingleton(Types.QuotesLoaderRepository, QuotesLoaderFromFileRepository)
+container.registerSingleton(Types.GetQuote, GetQuote)
+container.registerSingleton(Types.RegisterQuotes, RegisterQuotes)
 container.registerSingleton(Types.QuotesRepository, QuotesInMemoryRepository)
 
-container.register(Types.LoadGame, LoadPlayerUseCase)
-container.register(Types.LoadGame, LoadLevelsUseCase)
-container.register(Types.LoadGame, LoadQuotesUseCase)
+// Load game:
+container.register(Types.LoadGame, LoadPlayer)
+container.register(Types.LoadGame, LoadLevels)
+container.register(Types.LoadGame, LoadQuotes)
 

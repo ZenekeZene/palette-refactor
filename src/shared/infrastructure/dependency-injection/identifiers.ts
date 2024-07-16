@@ -10,5 +10,5 @@ export const Types = {
   LevelsRepository: Symbol.for('LevelsRepository'),
   PlayerRepository: Symbol.for('PlayerRepository'),
   QuotesRepository: Symbol.for('QuotesRepository'),
-  GetQuoteUse: Symbol.for('GetQuoteUse'),
+  GetQuote: Symbol.for('GetQuote'),
 }

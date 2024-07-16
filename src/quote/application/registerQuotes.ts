@@ -8,7 +8,7 @@ import type { RegisterQuotesRequest } from './dto/RegisterQuotesRequest'
 import { toQuotesCollectionResponse } from './mapper/QuotesCollectionMapper'
 
 @injectable()
-class RegisterQuotesUseCase implements UseCase<QuotesCollectionResponse> {
+class RegisterQuotes implements UseCase<QuotesCollectionResponse> {
   constructor(
     @inject(Types.QuotesRepository) private quotesRepository: QuotesRepository,
   ) {}
@@ -22,4 +22,4 @@ class RegisterQuotesUseCase implements UseCase<QuotesCollectionResponse> {
   }
 }
 
-export { RegisterQuotesUseCase }
+export { RegisterQuotes }

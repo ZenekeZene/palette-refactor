@@ -9,7 +9,7 @@ import { toQuoteResponse } from '@gameContext/quote/application/mapper/QuoteMapp
 import { QuotesCollectionId } from '../domain/QuotesCollectionId'
 
 @injectable()
-class GetQuoteUseCase implements UseCase<QuoteDTO>{
+class GetQuote implements UseCase<QuoteDTO>{
   constructor(
     @inject(Types.QuotesRepository) private repository: QuotesRepository
   ) {}
@@ -26,4 +26,4 @@ class GetQuoteUseCase implements UseCase<QuoteDTO>{
   }
 }
 
-export { GetQuoteUseCase }
+export { GetQuote }

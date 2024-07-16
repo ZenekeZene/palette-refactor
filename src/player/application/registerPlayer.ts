@@ -10,7 +10,7 @@ import type { RegisterPlayerRequest } from '@gameContext/player/application/dto/
 import { toPlayerResponse } from '@gameContext/player/application/mapper/PlayerMapper'
 
 @injectable()
-class RegisterPlayerUseCase implements UseCase<PlayerResponse> {
+class RegisterPlayer implements UseCase<PlayerResponse> {
   constructor(
     @inject(Types.PlayerRepository) private repository: PlayerRepository,
   ) {}
@@ -28,4 +28,4 @@ class RegisterPlayerUseCase implements UseCase<PlayerResponse> {
   }
 }
 
-export { RegisterPlayerUseCase }
+export { RegisterPlayer }
