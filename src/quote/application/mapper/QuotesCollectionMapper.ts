@@ -11,7 +11,7 @@ const toQuotesCollectionResponse = (
     author: quote.author,
   }))
   return {
-    quotes: quotesDTO,
+    items: quotesDTO,
     id: quotesCollection.getId().valueOf(),
   }
 }

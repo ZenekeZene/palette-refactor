@@ -1,6 +1,6 @@
 import { LevelDTO } from './LevelDTO'
 
 export interface LevelsCollectionResponse {
-  levels: LevelDTO[]
+  items: LevelDTO[]
   totalLevels: number
 }

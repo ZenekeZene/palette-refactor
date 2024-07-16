@@ -9,7 +9,7 @@ export interface State {
   player: Player
   levels: Levels
   quotes: Quotes
-  quote: Quote | null
+  quote: Quote
 }
 
 export interface StoreState extends State {

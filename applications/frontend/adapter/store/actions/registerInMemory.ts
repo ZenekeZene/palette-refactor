@@ -6,19 +6,18 @@ import { RegisterQuotesRequest } from '@gameContext/quote/application/dto/Regist
 import type { RegisterPlayer } from '@gameContext/player/application/registerPlayer'
 import type { RegisterLevels } from '@gameContext/level/application/registerLevels'
 import type { RegisterQuotes } from '@gameContext/quote/application/registerQuotes'
-import { StoreState } from '../store.types'
+import { Player, Levels, Quotes } from '../store.types'
 
-const registerInMemory = (propsState: StoreState): void => {
-  const { player, levels, quotes } = propsState
+const registerInMemory = (player: Player, levels: Levels, quotes: Quotes): void => {
   const registerPlayerRequest = new RegisterPlayerRequest(player.id, player)
   const registerPlayer: RegisterPlayer = container.resolve(Types.RegisterPlayer)
 
-  const registerLevelsRequest = new RegisterLevelsRequest(levels.levels)
+  const registerLevelsRequest = new RegisterLevelsRequest(levels.items)
   const registerLevels: RegisterLevels = container.resolve(Types.RegisterLevels)
 
   const registerQuotesRequest = new RegisterQuotesRequest(
     quotes.id,
-    quotes.quotes
+    quotes.items
   )
   const registerQuotes: RegisterQuotes = container.resolve(Types.RegisterQuotes)
 

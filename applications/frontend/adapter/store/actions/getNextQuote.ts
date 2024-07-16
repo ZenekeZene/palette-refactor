@@ -11,7 +11,7 @@ const getNextQuote = async (quotes: Quotes): Promise<Quote> => {
     return await getQuote.execute(nextQuoteRequest)
   } catch (error) {
     console.error('Failed to get next quote:', error)
-    return quotes.quotes[0]
+    return quotes.items[0]
   }
 }
 

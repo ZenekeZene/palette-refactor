@@ -1,8 +1,8 @@
 import { LevelsCollection } from '@gameContext/level/domain/LevelsCollection'
 import {
   LevelsCollectionResponse,
-  LevelDTO,
 } from '@gameContext/level/application/dto/LevelsCollectionResponse'
+import { LevelDTO } from '@gameContext/level/application/dto/LevelDTO'
 
 const toLevelsCollectionResponse = (
   levelsCollection: LevelsCollection
@@ -16,7 +16,7 @@ const toLevelsCollectionResponse = (
     }
   })
   return {
-    levels: levelsDTO,
+    items: levelsDTO,
     totalLevels: levelsCollection.getNumberOfLevels(),
   }
 }

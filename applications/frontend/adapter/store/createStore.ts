@@ -4,8 +4,6 @@ import type { Store, StoreState } from './store.types'
 import { actions } from './actions/actions'
 
 function createStore(propsState: StoreState) {
-  actions.registerInMemory(propsState)
-
   const useStore = create<Store>()(
     devtools((set, get) => {
       return {
