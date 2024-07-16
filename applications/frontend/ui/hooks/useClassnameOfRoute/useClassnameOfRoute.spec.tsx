@@ -1,5 +1,5 @@
 import { describe, test, expect, vi } from 'vitest'
-import { useClassnameOfRoute } from "./useClassnameOfRoute"
+import { useClassnameOfRoute } from './useClassnameOfRoute'
 
 const useLocation = vi.hoisted(() => vi.fn())
 vi.mock('react-router-dom', () => ({ useLocation }))

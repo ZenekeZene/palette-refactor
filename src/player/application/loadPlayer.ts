@@ -10,7 +10,8 @@ import { PlayerNotFoundException } from '@gameContext/player/domain/exceptions/P
 @injectable()
 class LoadPlayer implements Loader<PlayerResponse> {
   constructor(
-    @inject(Types.PlayerLoaderRepository) private loaderRepository: PlayerLoaderRepository,
+    @inject(Types.PlayerLoaderRepository)
+    private loaderRepository: PlayerLoaderRepository
   ) {}
 
   async execute(): Promise<PlayerResponse> {

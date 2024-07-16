@@ -10,10 +10,12 @@ import { toQuotesCollectionResponse } from './mapper/QuotesCollectionMapper'
 @injectable()
 class RegisterQuotes implements UseCase<QuotesCollectionResponse> {
   constructor(
-    @inject(Types.QuotesRepository) private quotesRepository: QuotesRepository,
+    @inject(Types.QuotesRepository) private quotesRepository: QuotesRepository
   ) {}
 
-  async execute(registerLevelsRequest: RegisterQuotesRequest): Promise<QuotesCollectionResponse> {
+  async execute(
+    registerLevelsRequest: RegisterQuotesRequest
+  ): Promise<QuotesCollectionResponse> {
     const quotesId = registerLevelsRequest.quotesId
     const quotesRaw = registerLevelsRequest.quotesData
     const quotesCollection = new QuotesCollection(quotesRaw, quotesId)

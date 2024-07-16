@@ -1,7 +1,6 @@
 import { QuoteDTO } from './QuoteDTO'
 
 export interface QuotesCollectionResponse {
-  id: string,
-  quotes: QuoteDTO[],
+  id: string
+  quotes: QuoteDTO[]
 }
-

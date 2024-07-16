@@ -1,7 +1,10 @@
 import { AggregateRoot } from '@gameContext/shared/domain/utils/AggregateRoot'
 import { Uuid } from '@gameContext/shared/domain/utils/Uuid'
 import { LevelPrize } from '@gameContext/level/domain/models/levelPrize/LevelPrize'
-import { Level, LevelRawModel } from '@gameContext/level/domain/models/level/Level'
+import {
+  Level,
+  LevelRawModel,
+} from '@gameContext/level/domain/models/level/Level'
 import { LevelsCollectionCreated } from '@gameContext/level/domain//events/LevelsCollectionCreated'
 
 export class LevelsCollection extends AggregateRoot {
@@ -32,7 +35,9 @@ export class LevelsCollection extends AggregateRoot {
   }
 
   getLevelPrizeByLevelId(levelId: string): LevelPrize | undefined {
-    return this.levels.find((level) => level.getId().valueOf() === levelId)?.getLevelPrize()
+    return this.levels
+      .find((level) => level.getId().valueOf() === levelId)
+      ?.getLevelPrize()
   }
 
   forEach(callback: (level: Level) => void): void {
@@ -40,7 +45,10 @@ export class LevelsCollection extends AggregateRoot {
   }
 
   private recordLevelsCollectionCreated(): void {
-    const levelsCollectionCreated = new LevelsCollectionCreated(this.levels, this.aggregateId.toPrimitive())
+    const levelsCollectionCreated = new LevelsCollectionCreated(
+      this.levels,
+      this.aggregateId.toPrimitive()
+    )
     this.record(levelsCollectionCreated)
   }
 }

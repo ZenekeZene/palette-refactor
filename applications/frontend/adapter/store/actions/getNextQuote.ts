@@ -1,4 +1,4 @@
-import { container } from "tsyringe"
+import { container } from 'tsyringe'
 import { GetQuoteRequest } from '@gameContext/quote/application/dto/GetQuoteRequest'
 import { GetQuote } from '@gameContext/quote/application/getQuote'
 import { Types } from '@gameContext/shared/infrastructure/dependency-injection/identifiers'

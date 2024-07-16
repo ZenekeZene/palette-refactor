@@ -1,6 +1,6 @@
-import { injectable } from "tsyringe"
+import { injectable } from 'tsyringe'
 import { QuotesRepository } from '@gameContext/quote/domain/QuotesRepository'
-import type { QuotesCollectionId } from "../domain/QuotesCollectionId"
+import type { QuotesCollectionId } from '../domain/QuotesCollectionId'
 import type { QuotesCollection } from '@gameContext/quote/domain/QuotesCollection'
 
 @injectable()
@@ -11,7 +11,9 @@ class QuotesInMemoryRepository implements QuotesRepository {
     this.quotesCollection.set(quotesCollection.getId(), quotesCollection)
   }
 
-  async searchById(id: QuotesCollectionId): Promise<QuotesCollection | undefined> {
+  async searchById(
+    id: QuotesCollectionId
+  ): Promise<QuotesCollection | undefined> {
     return this.quotesCollection.get(id.valueOf())
   }
 }

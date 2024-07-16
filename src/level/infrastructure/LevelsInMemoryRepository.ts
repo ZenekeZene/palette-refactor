@@ -1,4 +1,4 @@
-import { injectable } from "tsyringe"
+import { injectable } from 'tsyringe'
 import { LevelsRepository } from '@gameContext/level/domain/repositories/LevelsRepository'
 import type { Level } from '@gameContext/level/domain/models/level/Level'
 import type { LevelId } from '@gameContext/level/domain/models/level/LevelId'

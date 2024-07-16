@@ -1,6 +1,6 @@
-import type { Player } from "@gameContext/player/domain/Player"
-import type { PlayerId } from "@gameContext/player/domain/models/PlayerId"
-import { PlayerRepository } from "@gameContext/player/domain/repositories/PlayerRepository"
+import type { Player } from '@gameContext/player/domain/Player'
+import type { PlayerId } from '@gameContext/player/domain/models/PlayerId'
+import { PlayerRepository } from '@gameContext/player/domain/repositories/PlayerRepository'
 
 class PlayerInMemoryRepository implements PlayerRepository {
   private players: Player[] = []
@@ -10,7 +10,9 @@ class PlayerInMemoryRepository implements PlayerRepository {
   }
 
   save(player: Player): void {
-    const index = this.players.findIndex((p) => p.getId().equals(player.getId()))
+    const index = this.players.findIndex((p) =>
+      p.getId().equals(player.getId())
+    )
     this.players[index] = player
   }
 

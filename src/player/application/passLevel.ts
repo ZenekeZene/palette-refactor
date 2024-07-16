@@ -11,7 +11,7 @@ import { PassLevelRequest } from '@gameContext/player/application/dto/PassLevelR
 @injectable()
 class PassLevel implements UseCase<PlayerResponse> {
   constructor(
-    @inject(Types.PlayerRepository) private repository: PlayerRepository,
+    @inject(Types.PlayerRepository) private repository: PlayerRepository
   ) {}
 
   async execute(passLevelRequest: PassLevelRequest): Promise<PlayerResponse> {

@@ -10,14 +10,14 @@ export default defineConfig({
   plugins: [react(), ViteYaml(), tsconfigPaths()],
   root: './applications/frontend',
   build: {
-    outDir: "../dist",
+    outDir: '../dist',
     rollupOptions: {
       input: {
         app: indexUrl,
       },
     },
   },
-  publicDir: "./public",
+  publicDir: './public',
   server: {
     open: '/',
   },

@@ -17,7 +17,7 @@ class Quote extends Entity {
     this.id = QuoteId.random()
   }
 
-  static fromPrimitives(text: string, author:string): Quote {
+  static fromPrimitives(text: string, author: string): Quote {
     return new Quote(text, author)
   }
 

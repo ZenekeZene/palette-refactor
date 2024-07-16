@@ -10,10 +10,12 @@ import { toLevelsCollectionResponse } from './mapper/LevelsCollectionMapper'
 @injectable()
 class RegisterLevels implements UseCase<LevelsCollectionResponse> {
   constructor(
-    @inject(Types.LevelsRepository) private levelsRepository: LevelsRepository,
+    @inject(Types.LevelsRepository) private levelsRepository: LevelsRepository
   ) {}
 
-  async execute(registerLevelsRequest: RegisterLevelsRequest): Promise<LevelsCollectionResponse> {
+  async execute(
+    registerLevelsRequest: RegisterLevelsRequest
+  ): Promise<LevelsCollectionResponse> {
     const levelsRaw = registerLevelsRequest.levels
     const levelsCollection = new LevelsCollection(levelsRaw)
     this.levelsRepository.saveInMemory(levelsCollection)

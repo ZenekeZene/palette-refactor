@@ -25,7 +25,7 @@
     "paths": {
       "@gameContext/*": ["./src/*"],
       "@frontend/*": ["./applications/frontend/*"],
-      "@resources/*": ["./resources/*"],
+      "@resources/*": ["./resources/*"]
     },
     "types": [
       "@modyfi/vite-plugin-yaml/modules",
@@ -34,8 +34,6 @@
       "@testing-library/jest-dom"
     ]
   },
-  "include": [
-    "src", "applications/frontend"
-  ],
+  "include": ["src", "applications/frontend"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

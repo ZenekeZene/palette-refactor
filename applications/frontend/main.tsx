@@ -1,4 +1,4 @@
-import "reflect-metadata"
+import 'reflect-metadata'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import '@gameContext/shared/infrastructure/dependency-injection/container'

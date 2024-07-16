@@ -9,7 +9,8 @@ import { toQuotesCollectionResponse } from './mapper/QuotesCollectionMapper'
 @injectable()
 class LoadQuotes implements Loader<QuotesCollectionResponse> {
   constructor(
-    @inject(Types.QuotesLoaderRepository) private repository: QuotesLoaderRepository,
+    @inject(Types.QuotesLoaderRepository)
+    private repository: QuotesLoaderRepository
     // @inject(Types.IEventBus) private eventBus: IEventBus,
   ) {}
 

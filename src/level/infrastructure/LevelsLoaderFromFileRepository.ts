@@ -1,5 +1,5 @@
-import { injectable } from "tsyringe"
-import { LevelsLoaderRepository } from "@gameContext/level/domain/repositories/LevelsLoaderRepository";
+import { injectable } from 'tsyringe'
+import { LevelsLoaderRepository } from '@gameContext/level/domain/repositories/LevelsLoaderRepository'
 import type { LevelRawModel } from '@gameContext/level/domain/models/level/Level'
 
 @injectable()

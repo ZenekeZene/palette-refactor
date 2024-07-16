@@ -9,7 +9,8 @@ import { toLevelsCollectionResponse } from './mapper/LevelsCollectionMapper'
 @injectable()
 class LoadLevels implements Loader<LevelsCollectionResponse> {
   constructor(
-    @inject(Types.LevelsLoaderRepository) private loaderLevelsRepository: LevelsLoaderRepository,
+    @inject(Types.LevelsLoaderRepository)
+    private loaderLevelsRepository: LevelsLoaderRepository
     // @inject(Types.IEventBus) private eventBus: IEventBus,
   ) {}
 

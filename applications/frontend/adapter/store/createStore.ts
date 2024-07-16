@@ -8,12 +8,11 @@ function createStore(propsState: StoreState) {
 
   const useStore = create<Store>()(
     devtools((set, get) => {
-
-      return ({
+      return {
         ...propsState,
-        setTutorialIsLaunched: (value) =>
-          set(() => ({ tutorialIsWatched: value })),
-        setScore: (value) => set((state) => ({ ...state, score: value })),
+        setTutorialIsLaunched: (tutorialIsWatched) =>
+          set(() => ({ tutorialIsWatched })),
+        setScore: (score) => set((state) => ({ ...state, score })),
         nextQuote: async () => {
           const quote = await actions.getNextQuote(get().quotes)
           set((state) => ({ ...state, quote }))
@@ -23,7 +22,7 @@ function createStore(propsState: StoreState) {
           const playerWithLevelPassed = await actions.nextLevel(get().player)
           set((state) => ({ ...state, player: playerWithLevelPassed }))
         },
-      })
+      }
     })
   )
   return useStore

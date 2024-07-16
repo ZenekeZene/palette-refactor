@@ -5,12 +5,16 @@ abstract class DomainEvent {
   private readonly eventId: string
   private readonly occurredOn: Date
 
-  constructor(private aggregateId: string, eventId: string, occurredOn?: Date) {
-    this.eventId = eventId ? eventId: Uuid.random().toString()
-    this.occurredOn = occurredOn ? occurredOn: new Date()
+  constructor(
+    private aggregateId: string,
+    eventId: string,
+    occurredOn?: Date
+  ) {
+    this.eventId = eventId ? eventId : Uuid.random().toString()
+    this.occurredOn = occurredOn ? occurredOn : new Date()
   }
 
-  abstract eventName(): string;
+  abstract eventName(): string
 
   public getAggregateId(): string {
     return this.aggregateId

@@ -12,15 +12,17 @@ import { toPlayerResponse } from '@gameContext/player/application/mapper/PlayerM
 @injectable()
 class RegisterPlayer implements UseCase<PlayerResponse> {
   constructor(
-    @inject(Types.PlayerRepository) private repository: PlayerRepository,
+    @inject(Types.PlayerRepository) private repository: PlayerRepository
   ) {}
 
-  async execute(registerPlayerRequest: RegisterPlayerRequest): Promise<PlayerResponse> {
+  async execute(
+    registerPlayerRequest: RegisterPlayerRequest
+  ): Promise<PlayerResponse> {
     const playerId = new PlayerId(registerPlayerRequest.playerId)
     const playerData = registerPlayerRequest.playerData
-    const existingPlayer = this.repository.findByPlayerId(playerId);
+    const existingPlayer = this.repository.findByPlayerId(playerId)
     if (existingPlayer) {
-      throw new PlayerAlreadyExists(playerId);
+      throw new PlayerAlreadyExists(playerId)
     }
     const player = Player.fromPrimitives(playerData, playerId)
     this.repository.create(player)

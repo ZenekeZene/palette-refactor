@@ -28,7 +28,11 @@ class Level extends Entity {
     return this.levelPrize
   }
 
-  static fromPrimitive(id: string, numberOfChips: number, levelPrizeValue: LevelPrizeRawModel): Level {
+  static fromPrimitive(
+    id: string,
+    numberOfChips: number,
+    levelPrizeValue: LevelPrizeRawModel
+  ): Level {
     const levelId = new LevelId(id)
     const levelChips = new LevelChips(numberOfChips)
     const levelPrizeLives = new LevelPrizeLives(levelPrizeValue.lives)

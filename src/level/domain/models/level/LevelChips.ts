@@ -1,4 +1,4 @@
-import { NotNegative } from "@gameContext/shared/domain/utils/NotNegative"
+import { NotNegative } from '@gameContext/shared/domain/utils/NotNegative'
 
 class LevelChips extends NotNegative {}
 

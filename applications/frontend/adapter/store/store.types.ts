@@ -1,4 +1,9 @@
-import type { Player, Levels, Quotes, Quote } from '@gameContext/shared/infrastructure/store/store.types'
+import type {
+  Player,
+  Levels,
+  Quotes,
+  Quote,
+} from '@gameContext/shared/infrastructure/store/store.types'
 
 export interface State {
   player: Player

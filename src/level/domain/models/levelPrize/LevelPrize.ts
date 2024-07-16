@@ -9,7 +9,7 @@ export interface LevelPrizeRawModel {
 export class LevelPrize {
   constructor(
     public readonly lives: LevelPrizeLives,
-    public readonly bonus: LevelPrizeBonus,
+    public readonly bonus: LevelPrizeBonus
   ) {}
 
   public static fromPrimitive(levelPrize: LevelPrizeRawModel): LevelPrize {

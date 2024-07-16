@@ -15,6 +15,6 @@ export const createInitialState = async (): Promise<StoreState> => {
     levels,
     quotes,
     quote: null,
-    tutorialIsWatched: false
+    tutorialIsWatched: false,
   }
 }

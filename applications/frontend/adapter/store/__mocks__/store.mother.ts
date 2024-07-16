@@ -2,12 +2,10 @@ import { Mock } from 'vitest'
 import { LevelsCollection } from '@gameContext/level/domain/LevelsCollection'
 import { LevelsCollectionResponse } from '@gameContext/level/application/dto/LevelsCollectionResponse'
 import { toLevelsCollectionResponse } from '@gameContext/level/application/mapper/LevelsCollectionMapper'
-import { QuoteProps } from '@gameContext/quote/domain/Quote'
 import { State } from '@frontend/adapter/store/store.types'
-import { createStore } from '@frontend/adapter/store/useStore'
+import { createStore } from '@frontend/adapter/store/createStore'
 import { StoreBuilder } from '@frontend/adapter/store/__mocks__/store.builder'
-import '@gameContext/shared/infrastructure/diContainer'
-import { storeDependencies } from '@frontend/adapter/store/store.dependencies'
+import '@gameContext/shared/infrastructure/dependency-injection/container'
 import { PlayerResponse } from '@gameContext/player/application/dto/PlayerResponse'
 import { Uuid } from '@gameContext/shared/domain/utils/Uuid'
 
@@ -16,7 +14,11 @@ export class StoreMother {
     const { LEVELS_COUNT } = StoreMother.DEFAULT
     const levelsRaw = []
     for (let i = 0; i < LEVELS_COUNT; i++) {
-      levelsRaw.push({ id: 'level' + i, numberOfChips: 1, prize: { lives: 0, bonus: 0 } })
+      levelsRaw.push({
+        id: 'level' + i,
+        numberOfChips: 1,
+        prize: { lives: 0, bonus: 0 },
+      })
     }
     return toLevelsCollectionResponse(new LevelsCollection(levelsRaw))
   }
@@ -40,13 +42,10 @@ export class StoreMother {
     return builder
   }
 
-  private static mockStore(
-    useStore: StoreMother.UseStore,
-    state: State
-  ): void {
+  private static mockStore(useStore: StoreMother.UseStore, state: State): void {
     // TODO: Maybe we can pass fake dependencies to the store
     // in testing environment.
-    const store = createStore(state, storeDependencies)
+    const store = createStore(state)
     const mocked = (selector: Function) => selector(store.getState())
     useStore.mockImplementation(mocked)
   }
@@ -63,7 +62,7 @@ export class StoreMother {
     const builder = StoreMother.createDefaultBuilder()
     builder.withQuote(quote)
     const { LIVES, SCORE, BONUS } = StoreMother.DEFAULT
-    const player:PlayerResponse = {
+    const player: PlayerResponse = {
       id: Uuid.random().valueOf(),
       lives: LIVES,
       score: SCORE,
@@ -81,7 +80,11 @@ export class StoreMother {
     const builder = new StoreBuilder()
     const levelsRaw = []
     for (let i = 0; i < options.levelsCount; i++) {
-      levelsRaw.push({ id: 'level' + i, numberOfChips: 1, prize: { lives: 0, bonus: 0 } })
+      levelsRaw.push({
+        id: 'level' + i,
+        numberOfChips: 1,
+        prize: { lives: 0, bonus: 0 },
+      })
     }
     const levels = toLevelsCollectionResponse(new LevelsCollection(levelsRaw))
     builder.withLevels(levels)
