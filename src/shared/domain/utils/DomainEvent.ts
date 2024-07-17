@@ -1,32 +1,40 @@
 import { Uuid } from '@gameContext/shared/domain/utils/Uuid'
 
 abstract class DomainEvent {
-  // private static FULL_QUALIFIED_EVENT_NAME:string
-  private readonly eventId: string
-  private readonly occurredOn: Date
+  static EVENT_NAME:string
+  static fromPrimitives: (params: {
+    aggregateId: string
+    eventId: string
+    occurredOn: Date
+    attributes: DomainEventAttributes
+  }) => DomainEvent
 
-  constructor(
-    private aggregateId: string,
-    eventId: string,
-    occurredOn?: Date
-  ) {
-    this.eventId = eventId ? eventId : Uuid.random().toString()
-    this.occurredOn = occurredOn ? occurredOn : new Date()
+  readonly aggregateId: string
+  readonly eventId: string
+  readonly occurredOn: Date
+  readonly eventName: string
+
+  constructor(params: { eventName: string; aggregateId: string; eventId?: string; occurredOn?: Date }) {
+    const { aggregateId, eventName, eventId, occurredOn } = params
+    this.aggregateId = aggregateId
+    this.eventId = eventId || Uuid.random().valueOf()
+    this.occurredOn = occurredOn || new Date()
+    this.eventName = eventName
   }
 
-  abstract eventName(): string
-
-  public getAggregateId(): string {
-    return this.aggregateId
-  }
-
-  public getEventId(): string {
-    return this.eventId
-  }
-
-  public getOccurredOn(): Date {
-    return this.occurredOn
-  }
+  abstract toPrimitives(): any
 }
+
+export type DomainEventClass = {
+  EVENT_NAME: string;
+  fromPrimitives(params: {
+    aggregateId: string;
+    eventId: string;
+    occurredOn: Date;
+    attributes: DomainEventAttributes;
+  }): DomainEvent
+};
+
+type DomainEventAttributes = any
 
 export { DomainEvent }
