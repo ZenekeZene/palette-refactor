@@ -12,7 +12,7 @@ const toQuotesCollectionResponse = (
   }))
   return {
     items: quotesDTO,
-    id: quotesCollection.getId().valueOf(),
+    id: quotesCollection.id.valueOf(),
   }
 }
 

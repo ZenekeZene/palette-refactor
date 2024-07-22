@@ -5,13 +5,13 @@ import type { QuoteRawModel } from '@gameContext/quote/domain/Quote'
 import type { QuoteId } from '@gameContext/quote/domain/QuoteId'
 
 export class QuotesCollection extends AggregateRoot {
-  private quotes: Map<QuoteId, Quote> = new Map()
+  readonly quotes: Map<QuoteId, Quote> = new Map()
   private queue: QuoteId[] = []
-  private aggregateId: string
+  readonly id: string
 
   constructor(initialQuotes: QuoteRawModel[] = [], id?: string) {
     super()
-    this.aggregateId = id ? id : Uuid.random().toPrimitive()
+    this.id = id ? id : Uuid.random().toPrimitive()
     this.generate(initialQuotes)
   }
 
@@ -51,10 +51,6 @@ export class QuotesCollection extends AggregateRoot {
 
   forEach(callback: (level: Quote) => void): void {
     return this.quotes.forEach(callback)
-  }
-
-  getId() {
-    return this.aggregateId
   }
 
   private resetQueue() {

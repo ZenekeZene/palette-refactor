@@ -8,7 +8,7 @@ class QuotesInMemoryRepository implements QuotesRepository {
   private quotesCollection: Map<string, QuotesCollection> = new Map()
 
   async saveInMemory(quotesCollection: QuotesCollection): Promise<void> {
-    this.quotesCollection.set(quotesCollection.getId(), quotesCollection)
+    this.quotesCollection.set(quotesCollection.id, quotesCollection)
   }
 
   async searchById(
