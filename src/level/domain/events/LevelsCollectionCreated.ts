@@ -1,22 +1,39 @@
 import { DomainEvent } from '@gameContext/shared/domain/utils/DomainEvent'
-import { Uuid } from '@gameContext/shared/domain/utils/Uuid'
 import { Level } from '@gameContext/level/domain/models/level/Level'
 
-class LevelsCollectionCreated extends DomainEvent {
-  private readonly eventname = 'levelsCollectionCreated'
-  private levels: Level[] = []
+type LevelsCollectionCreatedAttributes = {
+  readonly levels: Level[]
+}
 
-  constructor(levels: Level[], aggregateId: string) {
-    super(aggregateId, Uuid.random().toString(), new Date())
+class LevelsCollectionCreated extends DomainEvent {
+  static readonly EVENT_NAME = 'levels.collection.created'
+
+  readonly levels: Level[] = []
+
+  constructor({ aggregateId, levels, eventId, occurredOn }: { aggregateId: string, levels: Level[], eventId?: string, occurredOn?: Date }) {
+    super({ eventName: LevelsCollectionCreated.EVENT_NAME, aggregateId, eventId, occurredOn })
     this.levels = levels
   }
 
-  getLevels(): Level[] {
-    return this.levels
+  toPrimitives() {
+    return {
+      levels: this.levels.map((level) => level.valueOf()),
+    }
   }
 
-  eventName(): string {
-    return this.eventname
+  static fromPrimitives(params: {
+    aggregateId: string,
+    eventId: string,
+    occurredOn: Date,
+    attributes: LevelsCollectionCreatedAttributes,
+  }): DomainEvent {
+    const { aggregateId, eventId, occurredOn, attributes } = params
+    return new LevelsCollectionCreated({
+      aggregateId,
+      levels: attributes.levels,
+      eventId,
+      occurredOn,
+    })
   }
 }
 
