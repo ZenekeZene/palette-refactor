@@ -16,8 +16,9 @@ class RegisterLevels implements UseCase<LevelsCollectionResponse> {
   async execute(
     registerLevelsRequest: RegisterLevelsRequest
   ): Promise<LevelsCollectionResponse> {
+    const levelsId = registerLevelsRequest.levelsId
     const levelsRaw = registerLevelsRequest.levels
-    const levelsCollection = new LevelsCollection(levelsRaw)
+    const levelsCollection = new LevelsCollection(levelsRaw, levelsId)
     this.levelsRepository.saveInMemory(levelsCollection)
     return toLevelsCollectionResponse(levelsCollection)
   }

@@ -13,7 +13,7 @@ export interface LevelRawModel {
 
 class Level extends Entity {
   constructor(
-    protected id: LevelId,
+    readonly id: LevelId,
     private readonly numberOfChips: LevelChips,
     private readonly levelPrize: LevelPrize
   ) {

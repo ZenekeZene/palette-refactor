@@ -8,12 +8,12 @@ import {
 import { LevelsCollectionCreated } from '@gameContext/level/domain//events/LevelsCollectionCreated'
 
 export class LevelsCollection extends AggregateRoot {
-  private levels: Level[] = []
-  private aggregateId: Uuid
+  readonly levels: Level[] = []
+  readonly id: string
 
-  constructor(initialLevels: LevelRawModel[] = []) {
+  constructor(initialLevels: LevelRawModel[] = [], id?: string) {
     super()
-    this.aggregateId = Uuid.random()
+    this.id = id? id: Uuid.random().valueOf()
     this.generate(initialLevels)
   }
 
@@ -45,10 +45,12 @@ export class LevelsCollection extends AggregateRoot {
   }
 
   private recordLevelsCollectionCreated(): void {
-    const levelsCollectionCreated = new LevelsCollectionCreated(
-      this.levels,
-      this.aggregateId.toPrimitive()
-    )
+    const levelsCollectionCreated = new LevelsCollectionCreated({
+      aggregateId: this.id.valueOf(),
+      levels: this.levels,
+      eventId: Uuid.random().valueOf(),
+      occurredOn: new Date(),
+    })
     this.record(levelsCollectionCreated)
   }
 }

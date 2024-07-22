@@ -18,6 +18,7 @@ const toLevelsCollectionResponse = (
   return {
     items: levelsDTO,
     totalLevels: levelsCollection.getNumberOfLevels(),
+    id: levelsCollection.id.valueOf(),
   }
 }
 
