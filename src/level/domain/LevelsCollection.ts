@@ -5,7 +5,7 @@ import {
   Level,
   LevelRawModel,
 } from '@gameContext/level/domain/models/level/Level'
-import { LevelsCollectionCreated } from '@gameContext/level/domain//events/LevelsCollectionCreated'
+import { LevelsCollectionCreatedDomainEvent } from '@gameContext/level/domain//events/LevelsCollectionCreated'
 
 export class LevelsCollection extends AggregateRoot {
   readonly levels: Level[] = []
@@ -45,7 +45,7 @@ export class LevelsCollection extends AggregateRoot {
   }
 
   private recordLevelsCollectionCreated(): void {
-    const levelsCollectionCreated = new LevelsCollectionCreated({
+    const levelsCollectionCreated = new LevelsCollectionCreatedDomainEvent({
       aggregateId: this.id.valueOf(),
       levels: this.levels,
       eventId: Uuid.random().valueOf(),

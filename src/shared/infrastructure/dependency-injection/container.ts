@@ -22,6 +22,9 @@ import { GetQuote } from '@gameContext/quote/application/getQuote'
 import { RegisterQuotes } from '@gameContext/quote/application/registerQuotes'
 import { QuotesLoaderFromFileRepository } from '@gameContext/quote/infrastructure/QuotesLoaderFromFileRepository'
 import { QuotesInMemoryRepository } from '@gameContext/quote/infrastructure/QuotesInMemoryRepository'
+import { OnLevelsCollectionCreated } from '@gameContext/player/application/OnLevelsCollectionCreated'
+
+import { InMemoryAsyncEventBus } from '@gameContext/shared/infrastructure/eventBus/InMemoryAsyncEventBus'
 
 // Player:
 container.registerSingleton(
@@ -53,3 +56,9 @@ container.registerSingleton(Types.QuotesRepository, QuotesInMemoryRepository)
 container.register(Types.LoadGame, LoadPlayer)
 container.register(Types.LoadGame, LoadLevels)
 container.register(Types.LoadGame, LoadQuotes)
+
+// Event Bus:
+container.registerSingleton(Types.EventBus, InMemoryAsyncEventBus)
+
+// Subscribers:
+container.register(Types.DomainEventSubscribers, OnLevelsCollectionCreated)

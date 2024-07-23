@@ -11,4 +11,6 @@ export const Types = {
   PlayerRepository: Symbol.for('PlayerRepository'),
   QuotesRepository: Symbol.for('QuotesRepository'),
   GetQuote: Symbol.for('GetQuote'),
+  DomainEventSubscribers: Symbol.for('DomainEventSubscribers'),
+  EventBus: Symbol.for('EventBus'),
 }
