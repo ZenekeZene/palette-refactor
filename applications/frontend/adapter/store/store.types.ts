@@ -3,7 +3,7 @@ import type {
   Levels,
   Quotes,
   Quote,
-} from '@gameContext/shared/infrastructure/store/store.types'
+} from '@gameContext/shared/infrastructure/store/store.d'
 
 export interface State {
   player: Player
