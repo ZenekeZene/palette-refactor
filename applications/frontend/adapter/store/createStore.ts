@@ -4,7 +4,7 @@ import type { Store, StoreState } from './store.types'
 import { actions } from './actions/actions'
 
 function createStore(propsState: StoreState) {
-  const useStore = create<Store>()(
+  const store = create<Store>()(
     devtools((set, get) => {
       return {
         ...propsState,
@@ -23,7 +23,7 @@ function createStore(propsState: StoreState) {
       }
     })
   )
-  return useStore
+  return store
 }
 
 export { createStore }
