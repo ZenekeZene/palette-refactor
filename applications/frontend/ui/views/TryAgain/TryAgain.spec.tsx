@@ -2,7 +2,7 @@ import { Mock, vi, describe, test, expect, afterEach } from 'vitest'
 import { MemoryRouter } from 'react-router-dom'
 import { screen, render, cleanup } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { StoreMother } from '@frontend/adapter/store/__mocks__/store.mother'
+import { StoreMother } from '@frontend/adapter/store/factories/store.mother'
 import { TryAgainView } from './TryAgain'
 
 const useStore: Mock<any, any> = vi.hoisted(() => vi.fn())
