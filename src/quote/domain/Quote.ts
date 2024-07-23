@@ -7,7 +7,7 @@ export interface QuoteRawModel {
 }
 
 class Quote extends Entity {
-  public id: QuoteId
+  readonly id: QuoteId
 
   constructor(
     public text: string,
@@ -19,10 +19,6 @@ class Quote extends Entity {
 
   static fromPrimitives(text: string, author: string): Quote {
     return new Quote(text, author)
-  }
-
-  getId(): QuoteId {
-    return this.id
   }
 }
 

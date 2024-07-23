@@ -11,13 +11,13 @@ class PlayerInMemoryRepository implements PlayerRepository {
 
   save(player: Player): void {
     const index = this.players.findIndex((p) =>
-      p.getId().equals(player.getId())
+      p.id.equals(player.id)
     )
     this.players[index] = player
   }
 
   findByPlayerId(id: PlayerId): Player | undefined {
-    return this.players.find((player) => player.getId().equals(id))
+    return this.players.find((player) => player.id.equals(id))
   }
 }
 

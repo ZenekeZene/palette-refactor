@@ -6,10 +6,6 @@ type EntityId = Id | Uuid
 export abstract class Entity {
   protected abstract readonly id: EntityId
 
-  public getId(): EntityId {
-    return this.id
-  }
-
   public equals(Object?: Entity): boolean {
     if (Object === null || Object === undefined) {
       return false

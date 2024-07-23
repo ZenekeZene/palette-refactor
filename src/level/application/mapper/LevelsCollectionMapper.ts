@@ -10,7 +10,7 @@ const toLevelsCollectionResponse = (
   const levelsDTO: LevelDTO[] = levelsCollection.getLevels().map((level) => {
     const prize = level.getLevelPrize().valueOf()
     return {
-      id: level.getId().valueOf(),
+      id: level.id.valueOf(),
       numberOfChips: level.getNumberOfChips().valueOf(),
       prize,
     }

@@ -7,7 +7,7 @@ import { PlayerBonus } from '@gameContext/player/domain/models/PlayerBonus'
 
 export class Player extends AggregateRoot {
   constructor(
-    private id: PlayerId,
+    readonly id: PlayerId,
     public lives: PlayerLives,
     public score: PlayerScore,
     public level: PlayerLevel,
@@ -39,10 +39,6 @@ export class Player extends AggregateRoot {
       level: this.level.valueOf(),
       bonus: this.bonus.valueOf(),
     }
-  }
-
-  getId(): PlayerId {
-    return this.id
   }
 
   static fromPrimitives(data: Player.Primitive, playerId?: PlayerId): Player {

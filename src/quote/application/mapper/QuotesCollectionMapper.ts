@@ -6,7 +6,7 @@ const toQuotesCollectionResponse = (
   quotesCollection: QuotesCollection
 ): QuotesCollectionResponse => {
   const quotesDTO: QuoteDTO[] = quotesCollection.getQuotes().map((quote) => ({
-    id: quote.getId().valueOf(),
+    id: quote.id.valueOf(),
     text: quote.text,
     author: quote.author,
   }))
