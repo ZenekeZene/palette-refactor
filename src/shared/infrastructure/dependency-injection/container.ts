@@ -26,39 +26,41 @@ import { OnLevelsCollectionCreated } from '@gameContext/player/application/OnLev
 
 import { InMemoryAsyncEventBus } from '@gameContext/shared/infrastructure/eventBus/InMemoryAsyncEventBus'
 
-// Player:
-container.registerSingleton(
-  Types.PlayerLoaderRepository,
-  PlayerLoaderFromFileRepository,
-)
-container.registerSingleton(Types.RegisterPlayer, RegisterPlayer)
-container.registerSingleton(Types.PassLevel, PassLevel)
-container.registerSingleton(Types.PlayerRepository, PlayerInMemoryRepository)
+export function configureDependencies() {
+  // Player:
+  container.registerSingleton(
+    Types.PlayerLoaderRepository,
+    PlayerLoaderFromFileRepository,
+  )
+  container.registerSingleton(Types.RegisterPlayer, RegisterPlayer)
+  container.registerSingleton(Types.PassLevel, PassLevel)
+  container.registerSingleton(Types.PlayerRepository, PlayerInMemoryRepository)
 
-// Levels:
-container.registerSingleton(
-  Types.LevelsLoaderRepository,
-  LevelsLoaderFromFileRepository,
-)
-container.registerSingleton(Types.RegisterLevels, RegisterLevels)
-container.registerSingleton(Types.LevelsRepository, LevelsInMemoryRepository)
+  // Levels:
+  container.registerSingleton(
+    Types.LevelsLoaderRepository,
+    LevelsLoaderFromFileRepository,
+  )
+  container.registerSingleton(Types.RegisterLevels, RegisterLevels)
+  container.registerSingleton(Types.LevelsRepository, LevelsInMemoryRepository)
 
-// Quotes:
-container.registerSingleton(
-  Types.QuotesLoaderRepository,
-  QuotesLoaderFromFileRepository,
-)
-container.registerSingleton(Types.GetQuote, GetQuote)
-container.registerSingleton(Types.RegisterQuotes, RegisterQuotes)
-container.registerSingleton(Types.QuotesRepository, QuotesInMemoryRepository)
+  // Quotes:
+  container.registerSingleton(
+    Types.QuotesLoaderRepository,
+    QuotesLoaderFromFileRepository,
+  )
+  container.registerSingleton(Types.GetQuote, GetQuote)
+  container.registerSingleton(Types.RegisterQuotes, RegisterQuotes)
+  container.registerSingleton(Types.QuotesRepository, QuotesInMemoryRepository)
 
-// Load game:
-container.register(Types.LoadGame, LoadPlayer)
-container.register(Types.LoadGame, LoadLevels)
-container.register(Types.LoadGame, LoadQuotes)
+  // Load game:
+  container.register(Types.LoadGame, LoadPlayer)
+  container.register(Types.LoadGame, LoadLevels)
+  container.register(Types.LoadGame, LoadQuotes)
 
-// Event Bus:
-container.registerSingleton(Types.EventBus, InMemoryAsyncEventBus)
+  // Event Bus:
+  container.registerSingleton(Types.EventBus, InMemoryAsyncEventBus)
 
-// Subscribers:
-container.register(Types.DomainEventSubscribers, OnLevelsCollectionCreated)
+  // Subscribers:
+  container.register(Types.DomainEventSubscribers, OnLevelsCollectionCreated)
+}
