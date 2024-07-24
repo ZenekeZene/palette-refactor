@@ -11,7 +11,7 @@ export class Player extends AggregateRoot {
     public lives: PlayerLives,
     public score: PlayerScore,
     public level: PlayerLevel,
-    public bonus: PlayerBonus
+    public bonus: PlayerBonus,
   ) {
     super()
   }
@@ -32,7 +32,7 @@ export class Player extends AggregateRoot {
     this.lives = this.lives.decrement()
   }
 
-  toPrimitive(): Player.Primitive {
+  toPrimitive(): PlayerPrimitive {
     return {
       lives: this.lives.valueOf(),
       score: this.score.valueOf(),
@@ -41,22 +41,20 @@ export class Player extends AggregateRoot {
     }
   }
 
-  static fromPrimitives(data: Player.Primitive, playerId?: PlayerId): Player {
+  static fromPrimitives(data: PlayerPrimitive, playerId?: PlayerId): Player {
     return new Player(
       playerId || new PlayerId(),
       new PlayerLives(data.lives),
       new PlayerScore(data.score),
       new PlayerLevel(data.level),
-      new PlayerBonus(data.bonus)
+      new PlayerBonus(data.bonus),
     )
   }
 }
 
-export namespace Player {
-  export type Primitive = {
-    lives: number
-    score: number
-    level: number
-    bonus: number
-  }
+export type PlayerPrimitive = {
+  lives: number
+  score: number
+  level: number
+  bonus: number
 }

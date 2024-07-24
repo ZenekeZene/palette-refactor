@@ -27,6 +27,7 @@ abstract class DomainEvent {
     this.eventName = eventName
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   abstract toPrimitives(): any
 }
 
@@ -40,6 +41,7 @@ export type DomainEventClass = {
   }): DomainEvent
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type DomainEventAttributes = any
 
 export { DomainEvent }
