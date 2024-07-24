@@ -4,11 +4,18 @@ import { screen, render, cleanup } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { StoreMother } from '@frontend/adapter/store/factories/store.mother'
 import { TryAgainView } from './TryAgain'
+import { configureStore } from '@frontend/adapter/store/useStore'
+
+configureStore()
 
 const useStore: Mock<any, any> = vi.hoisted(() => vi.fn())
-vi.mock('@frontend/adapter/store/store', () => ({
-  useStore,
-}))
+vi.mock('@frontend/adapter/store/useStore', async (importOriginal) => {
+  const actual = await importOriginal()
+  return {
+    ...(actual as object),
+    useStore
+  }
+})
 
 describe('Next Level view', () => {
   afterEach(() => {
