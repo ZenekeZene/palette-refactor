@@ -8,10 +8,10 @@ import { toPlayerResponse } from '@gameContext/player/application/mapper/PlayerM
 import { PlayerNotFoundException } from '@gameContext/player/domain/exceptions/PlayerNotFoundException'
 
 @injectable()
-class LoadPlayer implements Loader<PlayerResponse> {
+class LoadPlayer implements Loader {
   constructor(
     @inject(Types.PlayerLoaderRepository)
-    private loaderRepository: PlayerLoaderRepository
+    private loaderRepository: PlayerLoaderRepository,
   ) {}
 
   async execute(): Promise<PlayerResponse> {

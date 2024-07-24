@@ -8,13 +8,15 @@ import type { RegisterQuotesRequest } from './dto/RegisterQuotesRequest'
 import { toQuotesCollectionResponse } from './mapper/QuotesCollectionMapper'
 
 @injectable()
-class RegisterQuotes implements UseCase<QuotesCollectionResponse> {
+class RegisterQuotes
+  implements UseCase<RegisterQuotesRequest, QuotesCollectionResponse>
+{
   constructor(
-    @inject(Types.QuotesRepository) private quotesRepository: QuotesRepository
+    @inject(Types.QuotesRepository) private quotesRepository: QuotesRepository,
   ) {}
 
   async execute(
-    registerLevelsRequest: RegisterQuotesRequest
+    registerLevelsRequest: RegisterQuotesRequest,
   ): Promise<QuotesCollectionResponse> {
     const quotesId = registerLevelsRequest.quotesId
     const quotesRaw = registerLevelsRequest.quotesData

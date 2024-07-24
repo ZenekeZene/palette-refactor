@@ -9,9 +9,9 @@ import { toPlayerResponse } from '@gameContext/player/application/mapper/PlayerM
 import { PassLevelRequest } from '@gameContext/player/application/dto/PassLevelRequest'
 
 @injectable()
-class PassLevel implements UseCase<PlayerResponse> {
+class PassLevel implements UseCase<PassLevelRequest, PlayerResponse> {
   constructor(
-    @inject(Types.PlayerRepository) private repository: PlayerRepository
+    @inject(Types.PlayerRepository) private repository: PlayerRepository,
   ) {}
 
   async execute(passLevelRequest: PassLevelRequest): Promise<PlayerResponse> {

@@ -1,3 +1,5 @@
-import { UseCase } from './utils/UseCase'
+import type { Response } from '@gameContext/shared/domain/utils/Response'
 
-export interface Loader<T> extends UseCase<T> {}
+export interface Loader {
+  execute(): Promise<Response>
+}

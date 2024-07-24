@@ -8,13 +8,15 @@ import type { RegisterLevelsRequest } from './dto/RegisterLevelsRequest'
 import { toLevelsCollectionResponse } from './mapper/LevelsCollectionMapper'
 
 @injectable()
-class RegisterLevels implements UseCase<LevelsCollectionResponse> {
+class RegisterLevels
+  implements UseCase<RegisterLevelsRequest, LevelsCollectionResponse>
+{
   constructor(
-    @inject(Types.LevelsRepository) private levelsRepository: LevelsRepository
+    @inject(Types.LevelsRepository) private levelsRepository: LevelsRepository,
   ) {}
 
   async execute(
-    registerLevelsRequest: RegisterLevelsRequest
+    registerLevelsRequest: RegisterLevelsRequest,
   ): Promise<LevelsCollectionResponse> {
     const levelsId = registerLevelsRequest.levelsId
     const levelsRaw = registerLevelsRequest.levels

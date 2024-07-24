@@ -10,13 +10,13 @@ import type { RegisterPlayerRequest } from '@gameContext/player/application/dto/
 import { toPlayerResponse } from '@gameContext/player/application/mapper/PlayerMapper'
 
 @injectable()
-class RegisterPlayer implements UseCase<PlayerResponse> {
+class RegisterPlayer implements UseCase<RegisterPlayerRequest, PlayerResponse> {
   constructor(
-    @inject(Types.PlayerRepository) private repository: PlayerRepository
+    @inject(Types.PlayerRepository) private repository: PlayerRepository,
   ) {}
 
   async execute(
-    registerPlayerRequest: RegisterPlayerRequest
+    registerPlayerRequest: RegisterPlayerRequest,
   ): Promise<PlayerResponse> {
     const playerId = new PlayerId(registerPlayerRequest.playerId)
     const playerData = registerPlayerRequest.playerData

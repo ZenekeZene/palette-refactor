@@ -8,11 +8,11 @@ import { toLevelsCollectionResponse } from './mapper/LevelsCollectionMapper'
 import type { EventBus } from '@gameContext/shared/domain/utils/EventBus'
 
 @injectable()
-class LoadLevels implements Loader<LevelsCollectionResponse> {
+class LoadLevels implements Loader {
   constructor(
     @inject(Types.LevelsLoaderRepository)
     private loaderLevelsRepository: LevelsLoaderRepository,
-    @inject(Types.EventBus) private eventBus: EventBus
+    @inject(Types.EventBus) private eventBus: EventBus,
   ) {}
 
   async execute(): Promise<LevelsCollectionResponse> {

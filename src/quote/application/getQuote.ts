@@ -9,14 +9,14 @@ import { toQuoteResponse } from '@gameContext/quote/application/mapper/QuoteMapp
 import { QuotesCollectionId } from '../domain/QuotesCollectionId'
 
 @injectable()
-class GetQuote implements UseCase<QuoteDTO> {
+class GetQuote implements UseCase<GetQuoteRequest, QuoteDTO> {
   constructor(
-    @inject(Types.QuotesRepository) private repository: QuotesRepository
+    @inject(Types.QuotesRepository) private repository: QuotesRepository,
   ) {}
 
   async execute(getQuoteRequest: GetQuoteRequest): Promise<QuoteDTO> {
     const quotesCollectionId = new QuotesCollectionId(
-      getQuoteRequest.quotesCollectionId
+      getQuoteRequest.quotesCollectionId,
     )
     const quotesCollection =
       await this.repository.searchById(quotesCollectionId)
