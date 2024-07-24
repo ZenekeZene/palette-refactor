@@ -13,7 +13,7 @@ vi.mock('@frontend/adapter/store/useStore', async (importOriginal) => {
   const actual = await importOriginal()
   return {
     ...(actual as object),
-    useStore
+    useStore,
   }
 })
 

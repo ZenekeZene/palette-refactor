@@ -1,7 +1,5 @@
 import { LevelsCollection } from '@gameContext/level/domain/LevelsCollection'
-import {
-  LevelsCollectionResponse,
-} from '@gameContext/level/application/dto/LevelsCollectionResponse'
+import { LevelsCollectionResponse } from '@gameContext/level/application/dto/LevelsCollectionResponse'
 import { LevelDTO } from '@gameContext/level/application/dto/LevelDTO'
 
 const toLevelsCollectionResponse = (

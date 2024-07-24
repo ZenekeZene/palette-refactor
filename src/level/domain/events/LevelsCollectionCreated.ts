@@ -10,8 +10,23 @@ class LevelsCollectionCreatedDomainEvent extends DomainEvent {
 
   readonly levels: Level[] = []
 
-  constructor({ aggregateId, levels, eventId, occurredOn }: { aggregateId: string, levels: Level[], eventId?: string, occurredOn?: Date }) {
-    super({ eventName: LevelsCollectionCreatedDomainEvent.EVENT_NAME, aggregateId, eventId, occurredOn })
+  constructor({
+    aggregateId,
+    levels,
+    eventId,
+    occurredOn,
+  }: {
+    aggregateId: string
+    levels: Level[]
+    eventId?: string
+    occurredOn?: Date
+  }) {
+    super({
+      eventName: LevelsCollectionCreatedDomainEvent.EVENT_NAME,
+      aggregateId,
+      eventId,
+      occurredOn,
+    })
     this.levels = levels
   }
 
@@ -22,10 +37,10 @@ class LevelsCollectionCreatedDomainEvent extends DomainEvent {
   }
 
   static fromPrimitives(params: {
-    aggregateId: string,
-    eventId: string,
-    occurredOn: Date,
-    attributes: LevelsCollectionCreatedAttributes,
+    aggregateId: string
+    eventId: string
+    occurredOn: Date
+    attributes: LevelsCollectionCreatedAttributes
   }): DomainEvent {
     const { aggregateId, eventId, occurredOn, attributes } = params
     return new LevelsCollectionCreatedDomainEvent({

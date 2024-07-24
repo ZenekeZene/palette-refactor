@@ -8,18 +8,18 @@ export class InMemoryAsyncEventBus implements EventBus {
   }
 
   async publish(events: DomainEvent[]): Promise<void> {
-    events.map(event => {
+    events.map((event) => {
       document.dispatchEvent(this.createEvent(event))
     })
   }
 
   addSubscribers(subscribers: DomainEventSubscribers) {
-    subscribers.items.forEach(subscriber => {
-      subscriber.subscribedTo().forEach(event => {
+    subscribers.items.forEach((subscriber) => {
+      subscriber.subscribedTo().forEach((event) => {
         const handler = ((e: CustomEvent) => {
-          subscriber.on(e.detail);
-        }) as EventListener;
-        document.addEventListener(event.EVENT_NAME, handler);
+          subscriber.on(e.detail)
+        }) as EventListener
+        document.addEventListener(event.EVENT_NAME, handler)
       })
     })
   }

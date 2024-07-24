@@ -1,7 +1,7 @@
 import { Uuid } from '@gameContext/shared/domain/utils/Uuid'
 
 abstract class DomainEvent {
-  static EVENT_NAME:string
+  static EVENT_NAME: string
   static fromPrimitives: (params: {
     aggregateId: string
     eventId: string
@@ -14,7 +14,12 @@ abstract class DomainEvent {
   readonly occurredOn: Date
   readonly eventName: string
 
-  constructor(params: { eventName: string; aggregateId: string; eventId?: string; occurredOn?: Date }) {
+  constructor(params: {
+    eventName: string
+    aggregateId: string
+    eventId?: string
+    occurredOn?: Date
+  }) {
     const { aggregateId, eventName, eventId, occurredOn } = params
     this.aggregateId = aggregateId
     this.eventId = eventId || Uuid.random().valueOf()
@@ -26,14 +31,14 @@ abstract class DomainEvent {
 }
 
 export type DomainEventClass = {
-  EVENT_NAME: string;
+  EVENT_NAME: string
   fromPrimitives(params: {
-    aggregateId: string;
-    eventId: string;
-    occurredOn: Date;
-    attributes: DomainEventAttributes;
+    aggregateId: string
+    eventId: string
+    occurredOn: Date
+    attributes: DomainEventAttributes
   }): DomainEvent
-};
+}
 
 type DomainEventAttributes = any
 

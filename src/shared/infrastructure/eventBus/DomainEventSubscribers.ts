@@ -9,7 +9,9 @@ export class DomainEventSubscribers {
   constructor(public items: Array<Subscriber>) {}
 
   static from(container: DependencyContainer): DomainEventSubscribers {
-    const subscribers = container.resolveAll<Subscriber>(Types.DomainEventSubscribers)
+    const subscribers = container.resolveAll<Subscriber>(
+      Types.DomainEventSubscribers
+    )
     return new DomainEventSubscribers(subscribers)
   }
 }

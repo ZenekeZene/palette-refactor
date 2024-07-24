@@ -12,7 +12,7 @@ class LoadLevels implements Loader<LevelsCollectionResponse> {
   constructor(
     @inject(Types.LevelsLoaderRepository)
     private loaderLevelsRepository: LevelsLoaderRepository,
-    @inject(Types.EventBus) private eventBus: EventBus,
+    @inject(Types.EventBus) private eventBus: EventBus
   ) {}
 
   async execute(): Promise<LevelsCollectionResponse> {

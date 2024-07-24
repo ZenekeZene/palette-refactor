@@ -13,7 +13,7 @@ export class LevelsCollection extends AggregateRoot {
 
   constructor(initialLevels: LevelRawModel[] = [], id?: string) {
     super()
-    this.id = id? id: Uuid.random().valueOf()
+    this.id = id ? id : Uuid.random().valueOf()
     this.generate(initialLevels)
   }
 
