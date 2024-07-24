@@ -1,4 +1,4 @@
-import { Store } from './store'
+import { Store, StoreState } from './store'
 import { createStore } from './createStore'
 import { createInitialState } from './initialState'
 
@@ -9,10 +9,10 @@ export async function configureStore() {
   store = createStore(initialState)
 }
 
-function useStore(selector: (state: Store) => any) {
+function useStore(selector: (state: Store) => StoreState) {
   if (store === null) {
     throw new Error(
-      'Store has not been configured. Please call configureStore first.'
+      'Store has not been configured. Please call configureStore first.',
     )
   }
   return store(selector)
