@@ -1,4 +1,4 @@
-import { StoreState } from '@frontend/adapter/store/store.d'
+import { StoreProps } from '@frontend/adapter/store/types/store'
 import { LevelsCollection } from '@gameContext/level/domain/LevelsCollection'
 import { LevelsCollectionResponse } from '@gameContext/level/application/dto/LevelsCollectionResponse'
 import { toLevelsCollectionResponse } from '@gameContext/level/application/mapper/LevelsCollectionMapper'
@@ -10,13 +10,13 @@ import { QuoteDTO } from '@gameContext/quote/application/dto/QuoteDTO'
 import { toQuotesCollectionResponse } from '@gameContext/quote/application/mapper/QuotesCollectionMapper'
 
 class StoreBuilder {
-  private state: StoreState
+  private state: StoreProps
 
   constructor() {
     this.state = this.createInitialState()
   }
 
-  private createInitialState(): StoreState {
+  private createInitialState(): StoreProps {
     const levelsRaw = [
       { id: 'level-1', numberOfChips: 0, prize: { lives: 0, bonus: 0 } },
     ]
@@ -58,7 +58,7 @@ class StoreBuilder {
     return this
   }
 
-  get currentState(): StoreState {
+  get currentState(): StoreProps {
     return this.state
   }
 }

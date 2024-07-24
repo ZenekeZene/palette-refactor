@@ -1,21 +1,21 @@
-import { Store, StoreState } from './store'
+import type { StoreState } from './types/store'
+import { loadInitialState } from './actions/loadInitialState'
 import { createStore } from './createStore'
-import { createInitialState } from './initialState'
+
+const ErrorStoreNotConfigured = new Error(
+  'Store has not been configured. Please call configureStore first.',
+)
 
 let store: ReturnType<typeof createStore> | null = null
 
 export async function configureStore() {
-  const initialState = await createInitialState()
+  const initialState = await loadInitialState()
   store = createStore(initialState)
 }
 
-function useStore(selector: (state: Store) => StoreState) {
+export function useStore<T>(selector: (state: StoreState) => T): T {
   if (store === null) {
-    throw new Error(
-      'Store has not been configured. Please call configureStore first.',
-    )
+    throw ErrorStoreNotConfigured
   }
   return store(selector)
 }
-
-export { useStore }

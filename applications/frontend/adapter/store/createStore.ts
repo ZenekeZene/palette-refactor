@@ -1,29 +1,24 @@
 import { create } from 'zustand'
-import { devtools } from 'zustand/middleware'
-import type { Store, StoreState } from './store'
+import type { StoreProps, StoreState } from './types/store'
 import { actions } from './actions/actions'
+import { defaultState } from './defaultState'
 
-function createStore(propsState: StoreState) {
-  const store = create<Store>()(
-    devtools((set, get) => {
-      return {
-        ...propsState,
-        setTutorialIsLaunched: (tutorialIsWatched) =>
-          set(() => ({ tutorialIsWatched })),
-        setScore: (score) => set((state) => ({ ...state, score })),
-        nextQuote: async () => {
-          const quote = await actions.getNextQuote(get().quotes)
-          set((state) => ({ ...state, quote }))
-        },
-        nextLevel: async () => {
-          get().nextQuote()
-          const playerWithLevelPassed = await actions.nextLevel(get().player)
-          set((state) => ({ ...state, player: playerWithLevelPassed }))
-        },
-      }
-    }),
-  )
-  return store
-}
-
-export { createStore }
+export const createStore = (initProps: StoreProps) =>
+  create<StoreState>()((set, get) => ({
+    ...defaultState,
+    ...initProps,
+    setTutorialIsLaunched: (tutorialIsWatched) =>
+      set(() => ({ tutorialIsWatched })),
+    setScore: (score) => set((state) => ({ ...state, score })),
+    nextQuote: async () => {
+      const quotes = get().quotes
+      const quote = await actions.getNextQuote(quotes)
+      set((state) => ({ ...state, quote }))
+    },
+    nextLevel: async () => {
+      get().nextQuote()
+      const player = get().player
+      const playerWithLevelPassed = await actions.nextLevel(player)
+      set((state) => ({ ...state, player: playerWithLevelPassed }))
+    },
+  }))
