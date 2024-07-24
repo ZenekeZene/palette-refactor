@@ -3,7 +3,7 @@ import { QuotesCollectionResponse } from '@gameContext/quote/application/dto/Quo
 import { QuoteDTO } from '@gameContext/quote/application/dto/QuoteDTO'
 
 const toQuotesCollectionResponse = (
-  quotesCollection: QuotesCollection
+  quotesCollection: QuotesCollection,
 ): QuotesCollectionResponse => {
   const quotesDTO: QuoteDTO[] = quotesCollection.getQuotes().map((quote) => ({
     id: quote.id.valueOf(),

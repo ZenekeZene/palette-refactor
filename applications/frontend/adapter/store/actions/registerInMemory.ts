@@ -11,20 +11,20 @@ import { Player, Levels, Quotes } from '../store'
 const registerInMemory = (
   player: Player,
   levels: Levels,
-  quotes: Quotes
+  quotes: Quotes,
 ): void => {
   const registerPlayerRequest = new RegisterPlayerRequest(player.id, player)
   const registerPlayer: RegisterPlayer = container.resolve(Types.RegisterPlayer)
 
   const registerLevelsRequest = new RegisterLevelsRequest(
     levels.id,
-    levels.items
+    levels.items,
   )
   const registerLevels: RegisterLevels = container.resolve(Types.RegisterLevels)
 
   const registerQuotesRequest = new RegisterQuotesRequest(
     quotes.id,
-    quotes.items
+    quotes.items,
   )
   const registerQuotes: RegisterQuotes = container.resolve(Types.RegisterQuotes)
 

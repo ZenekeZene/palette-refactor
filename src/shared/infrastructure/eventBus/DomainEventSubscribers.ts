@@ -10,7 +10,7 @@ export class DomainEventSubscribers {
 
   static from(container: DependencyContainer): DomainEventSubscribers {
     const subscribers = container.resolveAll<Subscriber>(
-      Types.DomainEventSubscribers
+      Types.DomainEventSubscribers,
     )
     return new DomainEventSubscribers(subscribers)
   }

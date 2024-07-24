@@ -15,7 +15,7 @@ class Level extends Entity {
   constructor(
     readonly id: LevelId,
     private readonly numberOfChips: LevelChips,
-    private readonly levelPrize: LevelPrize
+    private readonly levelPrize: LevelPrize,
   ) {
     super()
   }
@@ -31,7 +31,7 @@ class Level extends Entity {
   static fromPrimitive(
     id: string,
     numberOfChips: number,
-    levelPrizeValue: LevelPrizeRawModel
+    levelPrizeValue: LevelPrizeRawModel,
   ): Level {
     const levelId = new LevelId(id)
     const levelChips = new LevelChips(numberOfChips)

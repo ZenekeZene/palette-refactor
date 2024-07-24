@@ -29,7 +29,7 @@ import { InMemoryAsyncEventBus } from '@gameContext/shared/infrastructure/eventB
 // Player:
 container.registerSingleton(
   Types.PlayerLoaderRepository,
-  PlayerLoaderFromFileRepository
+  PlayerLoaderFromFileRepository,
 )
 container.registerSingleton(Types.RegisterPlayer, RegisterPlayer)
 container.registerSingleton(Types.PassLevel, PassLevel)
@@ -38,7 +38,7 @@ container.registerSingleton(Types.PlayerRepository, PlayerInMemoryRepository)
 // Levels:
 container.registerSingleton(
   Types.LevelsLoaderRepository,
-  LevelsLoaderFromFileRepository
+  LevelsLoaderFromFileRepository,
 )
 container.registerSingleton(Types.RegisterLevels, RegisterLevels)
 container.registerSingleton(Types.LevelsRepository, LevelsInMemoryRepository)
@@ -46,7 +46,7 @@ container.registerSingleton(Types.LevelsRepository, LevelsInMemoryRepository)
 // Quotes:
 container.registerSingleton(
   Types.QuotesLoaderRepository,
-  QuotesLoaderFromFileRepository
+  QuotesLoaderFromFileRepository,
 )
 container.registerSingleton(Types.GetQuote, GetQuote)
 container.registerSingleton(Types.RegisterQuotes, RegisterQuotes)

@@ -3,7 +3,7 @@ import { LevelsCollectionResponse } from '@gameContext/level/application/dto/Lev
 import { LevelDTO } from '@gameContext/level/application/dto/LevelDTO'
 
 const toLevelsCollectionResponse = (
-  levelsCollection: LevelsCollection
+  levelsCollection: LevelsCollection,
 ): LevelsCollectionResponse => {
   const levelsDTO: LevelDTO[] = levelsCollection.getLevels().map((level) => {
     const prize = level.getLevelPrize().valueOf()

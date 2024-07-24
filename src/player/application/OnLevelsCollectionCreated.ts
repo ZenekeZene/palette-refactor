@@ -10,6 +10,9 @@ export class OnLevelsCollectionCreated
   }
 
   async on(domainEvent: LevelsCollectionCreatedDomainEvent): Promise<void> {
-    // console.log('[OnLevelsCollectionCreated] Event of Level module:', domainEvent);
+    console.log(
+      '[OnLevelsCollectionCreated] Event of Level module:',
+      domainEvent,
+    )
   }
 }

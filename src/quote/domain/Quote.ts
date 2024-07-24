@@ -11,7 +11,7 @@ class Quote extends Entity {
 
   constructor(
     public text: string,
-    public author: string
+    public author: string,
   ) {
     super()
     this.id = QuoteId.random()

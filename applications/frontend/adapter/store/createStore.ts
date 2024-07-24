@@ -21,7 +21,7 @@ function createStore(propsState: StoreState) {
           set((state) => ({ ...state, player: playerWithLevelPassed }))
         },
       }
-    })
+    }),
   )
   return store
 }

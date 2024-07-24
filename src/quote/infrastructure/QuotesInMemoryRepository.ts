@@ -12,7 +12,7 @@ class QuotesInMemoryRepository implements QuotesRepository {
   }
 
   async searchById(
-    id: QuotesCollectionId
+    id: QuotesCollectionId,
   ): Promise<QuotesCollection | undefined> {
     return this.quotesCollection.get(id.valueOf())
   }
