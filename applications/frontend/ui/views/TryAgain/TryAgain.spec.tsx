@@ -1,14 +1,17 @@
-import { Mock, vi, describe, test, expect, afterEach } from 'vitest'
+import { vi, describe, test, expect, afterEach } from 'vitest'
 import { MemoryRouter } from 'react-router-dom'
 import { screen, render, cleanup } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { StoreMother } from '@frontend/adapter/store/factories/store.mother'
+import {
+  type UseStore,
+  StoreMother,
+} from '@frontend/adapter/store/factories/store.mother'
 import { TryAgainView } from './TryAgain'
 import { configureStore } from '@frontend/adapter/store/useStore'
 
 configureStore()
 
-const useStore: Mock<any, any> = vi.hoisted(() => vi.fn())
+const useStore: UseStore = vi.hoisted(() => vi.fn())
 vi.mock('@frontend/adapter/store/useStore', async (importOriginal) => {
   const actual = await importOriginal()
   return {

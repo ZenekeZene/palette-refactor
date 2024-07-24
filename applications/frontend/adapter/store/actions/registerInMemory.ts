@@ -6,7 +6,7 @@ import { RegisterQuotesRequest } from '@gameContext/quote/application/dto/Regist
 import type { RegisterPlayer } from '@gameContext/player/application/registerPlayer'
 import type { RegisterLevels } from '@gameContext/level/application/registerLevels'
 import type { RegisterQuotes } from '@gameContext/quote/application/registerQuotes'
-import { Player, Levels, Quotes } from '../store'
+import { Player, Levels, Quotes } from '../types/store'
 
 const registerInMemory = (
   player: Player,

@@ -2,7 +2,7 @@ import { container } from 'tsyringe'
 import { Types } from '@gameContext/shared/infrastructure/dependency-injection/identifiers'
 import { PassLevel } from '@gameContext/player/application/passLevel'
 import { PassLevelRequest } from '@gameContext/player/application/dto/PassLevelRequest'
-import { Player } from '../store'
+import { Player } from '../types/store'
 
 const nextLevel = async (player: Player): Promise<Player> => {
   const passLevelRequest = new PassLevelRequest(player.id)

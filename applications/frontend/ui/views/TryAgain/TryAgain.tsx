@@ -11,7 +11,7 @@ const TryAgainView = () => {
     useShallow(({ player, levels }) => ({
       level: player.level,
       totalLevels: levels.totalLevels,
-    }))
+    })),
   )
 
   return (
