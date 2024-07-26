@@ -5,7 +5,6 @@ import { toLevelsCollectionResponse } from '@gameContext/level/application/mappe
 import type { StoreProps } from '@frontend/adapter/store/types/store'
 import { createStore } from '@frontend/adapter/store/createStore'
 import { StoreBuilder } from '@frontend/adapter/store/factories/store.builder'
-import '@gameContext/shared/infrastructure/dependency-injection/container'
 import { PlayerResponse } from '@gameContext/player/application/dto/PlayerResponse'
 import { Uuid } from '@gameContext/shared/domain/utils/Uuid'
 import { QuoteDTO } from '@gameContext/quote/application/dto/QuoteDTO'

@@ -1,4 +1,4 @@
-import { vi, describe, test, expect, afterEach } from 'vitest'
+import { vi, describe, test, expect, afterEach, beforeAll } from 'vitest'
 import { MemoryRouter } from 'react-router-dom'
 import { screen, render, cleanup } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
@@ -7,9 +7,7 @@ import {
   StoreMother,
 } from '@frontend/adapter/store/factories/store.mother'
 import { TryAgainView } from './TryAgain'
-import { configureStore } from '@frontend/adapter/store/useStore'
-
-configureStore()
+import { configureDependencies } from '@gameContext/shared/infrastructure/dependency-injection/container'
 
 const useStore: UseStore = vi.hoisted(() => vi.fn())
 vi.mock('@frontend/adapter/store/useStore', async (importOriginal) => {
@@ -20,7 +18,13 @@ vi.mock('@frontend/adapter/store/useStore', async (importOriginal) => {
   }
 })
 
+const renderTryAgainView = () =>
+  render(<TryAgainView />, { wrapper: MemoryRouter })
+
 describe('Next Level view', () => {
+  beforeAll(async () => {
+    configureDependencies()
+  })
   afterEach(() => {
     cleanup()
   })
@@ -29,7 +33,7 @@ describe('Next Level view', () => {
 		then she is directed to the game`, async () => {
     StoreMother.minimalStore(useStore)
     const user = userEvent.setup()
-    render(<TryAgainView />, { wrapper: MemoryRouter })
+    renderTryAgainView()
 
     const nextLevelButton = screen.getByLabelText('Replay the level')
     await user.click(nextLevelButton)
@@ -40,7 +44,7 @@ describe('Next Level view', () => {
 
   test(`the progression is displayed to the user`, () => {
     StoreMother.storeMultipleLevels(useStore, { level: 6, levelsCount: 10 })
-    render(<TryAgainView />, { wrapper: MemoryRouter })
+    renderTryAgainView()
 
     const progression = screen.getByRole('progressbar')
     expect(progression).toBeInTheDocument()

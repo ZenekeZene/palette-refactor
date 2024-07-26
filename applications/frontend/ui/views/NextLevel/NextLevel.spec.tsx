@@ -1,9 +1,10 @@
-import { vi, describe, test, expect, afterEach } from 'vitest'
+import { vi, describe, test, expect, afterEach, beforeAll } from 'vitest'
 import { MemoryRouter } from 'react-router-dom'
 import { screen, render, cleanup } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { NextLevelView } from './NextLevel'
 import { StoreMother } from '@frontend/adapter/store/factories/store.mother'
+import { configureDependencies } from '@gameContext/shared/infrastructure/dependency-injection/container'
 
 const useStore = vi.hoisted(() => vi.fn())
 vi.mock('@frontend/adapter/store/useStore', async (importOriginal) => {
@@ -18,6 +19,9 @@ const renderNextLevelView = () =>
   render(<NextLevelView />, { wrapper: MemoryRouter })
 
 describe('Next Level view', () => {
+  beforeAll(async () => {
+    configureDependencies()
+  })
   afterEach(() => {
     cleanup()
   })
