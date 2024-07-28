@@ -30,6 +30,12 @@
 
 - [x] 'Test and domain'. Should we use domain logic inside our factories to testing purposes? Is it more correct to use DTOs? Yes, it is more correct.
 
+# Color
+
+- [] Testing the library 'https://colorjs.io/dist/color.js' to mix colors. Checker: https://gradients.app/es/mix
+
+---
+
 ## Legend
 
 - [ ] To do.
