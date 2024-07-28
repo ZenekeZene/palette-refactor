@@ -5,16 +5,26 @@ import { toLevelsCollectionResponse } from '@gameContext/level/application/mappe
 import type { StoreProps } from '@frontend/adapter/store/types/store'
 import { createStore } from '@frontend/adapter/store/createStore'
 import { StoreBuilder } from '@frontend/adapter/store/factories/store.builder'
-import { PlayerResponse } from '@gameContext/player/application/dto/PlayerResponse'
+import {
+  PlayerResponse,
+  PlayerResponseProps,
+} from '@gameContext/player/application/dto/PlayerResponse'
 import { Uuid } from '@gameContext/shared/domain/utils/Uuid'
 import { QuoteDTO } from '@gameContext/quote/application/dto/QuoteDTO'
 import { actions } from '../actions/actions'
 
 export class StoreMother {
+  private static readonly defaultPlayer: PlayerResponseProps = {
+    lives: 10,
+    level: 0,
+    bonus: 0,
+    score: 0,
+  }
+
   private static createDefaultLevels(): LevelsCollectionResponse {
-    const { LEVELS_COUNT } = defaultState
     const levelsRaw = []
-    for (let i = 0; i < LEVELS_COUNT; i++) {
+    const defaultLevelsCount = 1
+    for (let i = 0; i < defaultLevelsCount; i++) {
       levelsRaw.push({
         id: 'level' + i,
         numberOfChips: 1,
@@ -25,13 +35,9 @@ export class StoreMother {
   }
 
   private static createDefaultPlayer(): PlayerResponse {
-    const { LIVES, SCORE, LEVEL, BONUS } = defaultState
     return {
       id: Uuid.random().valueOf(),
-      lives: LIVES,
-      score: SCORE,
-      level: LEVEL,
-      bonus: BONUS,
+      ...StoreMother.defaultPlayer,
     }
   }
 
@@ -55,18 +61,19 @@ export class StoreMother {
     StoreMother.mockStore(useStore, builder.currentState)
   }
 
+  public static storeWithPlayerProps(
+    useStore: UseStore,
+    props: PlayerResponseProps,
+  ): void {
+    const builder = StoreMother.createDefaultBuilder()
+    const defaultPlayer = this.createDefaultPlayer()
+    builder.withPlayer({ ...defaultPlayer, ...props })
+    StoreMother.mockStore(useStore, builder.currentState)
+  }
+
   public static storeWithQuote(useStore: UseStore, quote: QuoteDTO): void {
     const builder = StoreMother.createDefaultBuilder()
     builder.withQuote(quote)
-    const { LIVES, SCORE, BONUS } = defaultState
-    const player: PlayerResponse = {
-      id: Uuid.random().valueOf(),
-      lives: LIVES,
-      score: SCORE,
-      bonus: BONUS,
-      level: 0,
-    }
-    builder.withPlayer(player)
     StoreMother.mockStore(useStore, builder.currentState)
   }
 
@@ -79,31 +86,20 @@ export class StoreMother {
     for (let i = 0; i < options.levelsCount; i++) {
       levelsRaw.push({
         id: 'level' + i,
-        numberOfChips: 1,
+        numberOfChips: i,
         prize: { lives: 0, bonus: 0 },
       })
     }
     const levels = toLevelsCollectionResponse(new LevelsCollection(levelsRaw))
     builder.withLevels(levels)
-    const { LIVES, SCORE, BONUS } = defaultState
+    const defaultPlayer = this.createDefaultPlayer()
     const player = {
-      id: Uuid.random().valueOf(),
-      lives: LIVES,
-      score: SCORE,
-      bonus: BONUS,
+      ...defaultPlayer,
       level: options.level,
     }
     builder.withPlayer(player)
     StoreMother.mockStore(useStore, builder.currentState)
   }
-}
-
-export const defaultState = {
-  LIVES: 10,
-  LEVELS_COUNT: 1,
-  LEVEL: 0,
-  BONUS: 0,
-  SCORE: 0,
 }
 
 type MultipleLevels = { level: number; levelsCount: number }

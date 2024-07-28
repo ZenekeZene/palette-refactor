@@ -1,12 +1,12 @@
-import { StoreProps } from '@frontend/adapter/store/types/store'
+import type { StoreProps } from '@frontend/adapter/store/types/store'
 import { LevelsCollection } from '@gameContext/level/domain/LevelsCollection'
-import { LevelsCollectionResponse } from '@gameContext/level/application/dto/LevelsCollectionResponse'
+import type { LevelsCollectionResponse } from '@gameContext/level/application/dto/LevelsCollectionResponse'
 import { toLevelsCollectionResponse } from '@gameContext/level/application/mapper/LevelsCollectionMapper'
 import { QuotesCollection } from '@gameContext/quote/domain/QuotesCollection'
 import { Player } from '@gameContext/player/domain/Player'
 import { toPlayerResponse } from '@gameContext/player/application/mapper/PlayerMapper'
-import { PlayerResponse } from '@gameContext/player/application/dto/PlayerResponse'
-import { QuoteDTO } from '@gameContext/quote/application/dto/QuoteDTO'
+import type { PlayerResponse } from '@gameContext/player/application/dto/PlayerResponse'
+import type { QuoteDTO } from '@gameContext/quote/application/dto/QuoteDTO'
 import { toQuotesCollectionResponse } from '@gameContext/quote/application/mapper/QuotesCollectionMapper'
 
 class StoreBuilder {
