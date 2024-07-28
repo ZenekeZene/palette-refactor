@@ -14,7 +14,7 @@ export class MixColor implements UseCase<MixColorRequest, MixColorResponse> {
     @inject(Types.ColorMixerLogger) private logger: ColorMixerLogger,
   ) {}
 
-  async execute(mixColorRequest: MixColorRequest): Promise<MixColorResponse> {
+  execute(mixColorRequest: MixColorRequest): MixColorResponse {
     const color1 = new Color(mixColorRequest.color1)
     const color2 = new Color(mixColorRequest.color2)
     const colorMixer = new ColorMixer(color1, color2)

@@ -21,8 +21,6 @@ export const createStore = (initProps: StoreProps) =>
       const playerWithLevelPassed = await actions.nextLevel(player)
       set((state) => ({ ...state, player: playerWithLevelPassed }))
     },
-    mixColor: async (color1: Color, color2: Color) => {
-      const mixColor = await actions.mixColor(color1, color2)
-      return mixColor
-    },
+    mixColor: (color1: Color, color2: Color): Color =>
+      actions.mixColor(color1, color2),
   }))
