@@ -7,3 +7,5 @@ export interface PlayerResponse extends Response {
   level: number
   bonus: number
 }
+
+export type PlayerResponseProps = Omit<PlayerResponse, 'id'>
