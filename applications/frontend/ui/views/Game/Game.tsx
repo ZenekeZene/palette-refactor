@@ -1,12 +1,10 @@
 import { useNavigate } from 'react-router-dom'
 import { useShallow } from 'zustand/react/shallow'
-// TODO: change this import to use an action using a usecase of domain
-// to generate random colors
-import { Color } from '@gameContext/color/domain/Color'
 import { HeaderGame } from '@frontend/ui/components/HeaderGame/HeaderGame'
 import { Bonus } from '@frontend/ui/components/Bonus/Bonus'
 import { GameChip } from '@frontend/ui/components/GameChip/GameChip'
 import { useStore } from '@frontend/adapter/store/useStore'
+import { ColorMixDebug } from '@frontend/ui/components/ColorMixDebug/ColorMixDebug'
 import './Game.scss'
 
 const GameView = () => {
@@ -17,12 +15,6 @@ const GameView = () => {
       mixColor,
     })),
   )
-
-  const handleMixColor = async () => {
-    const color1 = Color.random().toPrimitive()
-    const color2 = Color.random().toPrimitive()
-    await mixColor(color1, color2)
-  }
 
   return (
     <article className="game view">
@@ -46,9 +38,7 @@ const GameView = () => {
           </div>
         )}
 
-        <button onClick={handleMixColor} className="next-level__next">
-          Mix colors
-        </button>
+        <ColorMixDebug mixColor={mixColor} />
       </section>
     </article>
   )
