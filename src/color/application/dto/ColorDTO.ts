@@ -1,3 +1,3 @@
 export interface ColorDTO {
-  readonly color: string
+  readonly value: string
 }
