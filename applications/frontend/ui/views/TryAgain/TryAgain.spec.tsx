@@ -25,6 +25,7 @@ describe('Next Level view', () => {
   beforeAll(async () => {
     configureDependencies()
   })
+
   afterEach(() => {
     cleanup()
   })

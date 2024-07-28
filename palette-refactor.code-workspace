@@ -1,10 +1,13 @@
 {
-	"folders": [
-		{
-			"path": "."
-		},
-		{
-			"path": "../typescript-ddd-example"
-		}
-	]
+  "folders": [
+    {
+      "path": ".",
+    },
+    {
+      "path": "../typescript-ddd-example",
+    },
+    {
+      "path": "../lab/palette",
+    },
+  ],
 }
