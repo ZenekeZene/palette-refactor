@@ -3,6 +3,7 @@ import type {
   Levels,
   Quotes,
   Quote,
+  Color,
 } from '@gameContext/shared/infrastructure/store/store'
 
 export interface StoreProps {
@@ -18,6 +19,7 @@ export interface StoreState extends StoreProps {
   setScore: (value: number) => void
   nextQuote: () => void
   nextLevel: () => void
+  mixColor: (color1: Color, color2: Color) => Color
 }
 
-export type { Player, Levels, Quotes, Quote }
+export type { Player, Levels, Quotes, Quote, Color }

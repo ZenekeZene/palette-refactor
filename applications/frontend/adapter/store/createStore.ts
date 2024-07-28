@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import type { StoreProps, StoreState } from './types/store'
+import type { StoreProps, StoreState, Color } from './types/store'
 import { actions } from './actions/actions'
 import { defaultState } from './defaultState'
 
@@ -20,5 +20,9 @@ export const createStore = (initProps: StoreProps) =>
       const player = get().player
       const playerWithLevelPassed = await actions.nextLevel(player)
       set((state) => ({ ...state, player: playerWithLevelPassed }))
+    },
+    mixColor: async (color1: Color, color2: Color) => {
+      const mixColor = await actions.mixColor(color1, color2)
+      return mixColor
     },
   }))

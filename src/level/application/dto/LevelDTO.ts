@@ -1,10 +1,10 @@
 export interface LevelDTO {
-  id: string
-  numberOfChips: number
-  prize: LevelPrizeDTO
+  readonly id: string
+  readonly numberOfChips: number
+  readonly prize: LevelPrizeDTO
 }
 
 interface LevelPrizeDTO {
-  lives: number
-  bonus: number
+  readonly lives: number
+  readonly bonus: number
 }

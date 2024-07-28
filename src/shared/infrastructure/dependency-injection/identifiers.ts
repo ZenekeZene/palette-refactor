@@ -11,6 +11,8 @@ export const Types = {
   PlayerRepository: Symbol.for('PlayerRepository'),
   QuotesRepository: Symbol.for('QuotesRepository'),
   GetQuote: Symbol.for('GetQuote'),
+  MixColor: Symbol.for('MixColor'),
   DomainEventSubscribers: Symbol.for('DomainEventSubscribers'),
   EventBus: Symbol.for('EventBus'),
+  ColorMixerLogger: Symbol.for('ColorMixerLogger'),
 }

@@ -1,7 +1,5 @@
-export class MixColorResponse {
-  mixedColor: string
+import type { Response } from '@gameContext/shared/domain/utils/Response'
 
-  constructor(mixedColor: string) {
-    this.mixedColor = mixedColor
-  }
+export interface MixColorResponse extends Response {
+  readonly mixedColor: string
 }

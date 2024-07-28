@@ -24,6 +24,10 @@ import { QuotesLoaderFromFileRepository } from '@gameContext/quote/infrastructur
 import { QuotesInMemoryRepository } from '@gameContext/quote/infrastructure/QuotesInMemoryRepository'
 import { OnLevelsCollectionCreated } from '@gameContext/player/application/OnLevelsCollectionCreated'
 
+// Color use cases and repositories:
+import { MixColor } from '@gameContext/color/application/mixColor'
+import { ColorMixerByConsoleLogger } from '@gameContext/color/infrastructure/ColorMixerByConsoleLogger'
+
 import { InMemoryAsyncEventBus } from '@gameContext/shared/infrastructure/eventBus/InMemoryAsyncEventBus'
 
 export function configureDependencies() {
@@ -53,6 +57,10 @@ export function configureDependencies() {
   container.registerSingleton(Types.RegisterQuotes, RegisterQuotes)
   container.registerSingleton(Types.QuotesRepository, QuotesInMemoryRepository)
 
+  // Color:
+  container.registerSingleton(Types.MixColor, MixColor)
+  container.registerSingleton(Types.ColorMixerLogger, ColorMixerByConsoleLogger)
+
   // Load game:
   container.register(Types.LoadGame, LoadPlayer)
   container.register(Types.LoadGame, LoadLevels)
@@ -63,4 +71,5 @@ export function configureDependencies() {
 
   // Subscribers:
   container.register(Types.DomainEventSubscribers, OnLevelsCollectionCreated)
+  // container.register(Types.DomainEventSubscribers, OnPlayerCreated)
 }
