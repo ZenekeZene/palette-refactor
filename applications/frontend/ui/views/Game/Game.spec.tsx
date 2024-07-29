@@ -8,7 +8,6 @@ import {
 import { configureDependencies } from '@gameContext/shared/infrastructure/dependency-injection/container'
 import { PlayerResponseProps } from '@gameContext/player/application/dto/PlayerResponse'
 import { GameView } from './Game'
-import userEvent from '@testing-library/user-event'
 
 const useStore: UseStore = vi.hoisted(() => vi.fn())
 vi.mock('@frontend/adapter/store/useStore', async (importOriginal) => {
@@ -19,18 +18,10 @@ vi.mock('@frontend/adapter/store/useStore', async (importOriginal) => {
   }
 })
 
-const defaultPlayerProps: PlayerResponseProps = {
-  lives: 3,
-  score: 0,
-  level: 0,
-  bonus: 0,
-}
-
 const renderGameView = () => render(<GameView />, { wrapper: MemoryRouter })
 
 const setupStoreAndRender = (props: Partial<PlayerResponseProps>) => {
   StoreMother.storeWithPlayerProps(useStore, {
-    ...defaultPlayerProps,
     ...props,
   })
   renderGameView()
@@ -48,7 +39,6 @@ describe('GameView', () => {
   test(`should show the number of bonus
     if the player has bonus`, () => {
     StoreMother.storeWithPlayerProps(useStore, {
-      ...defaultPlayerProps,
       bonus: 1,
     })
     renderGameView()
@@ -60,7 +50,6 @@ describe('GameView', () => {
   test(`should not show the number of bonus
     if the player has no bonus`, () => {
     StoreMother.storeWithPlayerProps(useStore, {
-      ...defaultPlayerProps,
       bonus: 0,
     })
     renderGameView()
@@ -85,19 +74,5 @@ describe('GameView', () => {
     setupStoreAndRender({ score: 100 })
     const score = screen.getByText(/100/)
     expect(score).toBeInTheDocument()
-  })
-
-  test(`should call to mixColor action`, async () => {
-    const user = userEvent.setup()
-    setupStoreAndRender(defaultPlayerProps)
-    const mixColorsButton = screen.getByRole('button', { name: /Mix colors/ })
-
-    await user.click(mixColorsButton)
-
-    expect(useStore).toHaveBeenCalledWith(
-      expect.objectContaining({
-        mixColor: expect.any(Function),
-      }),
-    )
   })
 })

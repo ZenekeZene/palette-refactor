@@ -63,7 +63,7 @@ export class StoreMother {
 
   public static storeWithPlayerProps(
     useStore: UseStore,
-    props: PlayerResponseProps,
+    props: Partial<PlayerResponseProps>,
   ): void {
     const builder = StoreMother.createDefaultBuilder()
     const defaultPlayer = this.createDefaultPlayer()
