@@ -1,7 +1,7 @@
 import { useState } from 'react'
 // TODO: change this import to use an action using a usecase of domain
 // to generate random colors
-import { Color } from '@gameContext/color/domain/Color'
+import { Color } from '@gameContext/color/domain/models/Color'
 import { Color as ColorType } from '@frontend/adapter/store/types/store'
 import './ColorMixDebug.scss'
 

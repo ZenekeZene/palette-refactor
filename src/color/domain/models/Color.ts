@@ -46,4 +46,8 @@ export class Color extends ValueObject<string> {
 
     return [parseInt(h), parseInt(s), parseInt(l)]
   }
+
+  isEqualTo(color: Color): boolean {
+    return this.valueOf() === color.valueOf()
+  }
 }

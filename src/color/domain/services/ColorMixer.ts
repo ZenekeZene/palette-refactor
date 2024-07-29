@@ -1,4 +1,4 @@
-import { Color } from './Color'
+import { Color } from '../models/Color'
 
 export class ColorMixer {
   color1: Color

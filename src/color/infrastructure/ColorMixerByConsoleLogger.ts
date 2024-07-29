@@ -1,6 +1,6 @@
 import { injectable } from 'tsyringe'
-import { ColorMixerLogger } from '../domain/ColorMixerLogger'
-import { Color } from '../domain/Color'
+import { ColorMixerLogger } from '../domain/repositories/ColorMixerLogger'
+import { Color } from '../domain/models/Color'
 
 @injectable()
 export class ColorMixerByConsoleLogger implements ColorMixerLogger {
