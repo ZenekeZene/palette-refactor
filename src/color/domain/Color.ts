@@ -34,11 +34,16 @@ export class Color extends ValueObject<string> {
     return new Color(`hsl(${h}, ${s}%, ${l}%)`)
   }
 
+  lightness(): number {
+    const [_, __, l] = this.toArray()
+    return l
+  }
+
   toArray(): [number, number, number] {
-    const result = colorRegex.exec(this.valueOf())
-    if (!result) {
-      throw new Error('Invalid HSL string')
-    }
-    return [parseInt(result[1]), parseInt(result[2]), parseInt(result[3])]
+    const [_, h, s, l] = this.valueOf().match(
+      /hsl\((\d{1,3}), (\d{1,3})%, (\d{1,3})%\)/,
+    )!
+
+    return [parseInt(h), parseInt(s), parseInt(l)]
   }
 }
