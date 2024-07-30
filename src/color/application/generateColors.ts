@@ -13,7 +13,7 @@ import { GetNumberOfChipsOfLevelService } from '@gameContext/level/domain/servic
 import { ColorGroupCollection } from '../domain/ColorGroupCollection'
 
 @injectable()
-export class generateColors
+export class GenerateColors
   implements UseCase<GenerateColorsRequest, GenerateColorsResponse>
 {
   constructor(
@@ -35,7 +35,7 @@ export class generateColors
       numberOfColorGroupsToGenerate,
     ).generate()
     const colorGroupCollection = new ColorGroupCollection(colorGroups, levelId)
-    colorGroupCollection.each(this.logger.logGroup)
+    colorGroupCollection.each(this.logger.logGroup.bind(this.logger))
     return toGenerateColorsResponse(colorGroupCollection)
   }
 }

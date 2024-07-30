@@ -35,10 +35,11 @@ export class ColorMixerByConsoleLogger implements ColorMixerLogger {
   }
 
   logGroup(colorGroup: ColorGroup) {
-    console.log('ColorGroup mixed')
+    console.group('ColorGroup mixed')
     this.message(colorGroup.swatchColor.value, 'SwatchColor')
     this.message(colorGroup.subtractedColor.value, 'SubtractedColor')
     this.message(colorGroup.resultColor.value, 'ResultColor')
     console.log('Status:', colorGroup.isMixed() ? 'Mixed' : 'Pending')
+    console.groupEnd()
   }
 }
