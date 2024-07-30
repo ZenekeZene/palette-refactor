@@ -29,6 +29,7 @@ import { MixColor } from '@gameContext/color/application/mixColor'
 import { ColorMixerByConsoleLogger } from '@gameContext/color/infrastructure/ColorMixerByConsoleLogger'
 
 import { InMemoryAsyncEventBus } from '@gameContext/shared/infrastructure/eventBus/InMemoryAsyncEventBus'
+import { GenerateColors } from '@gameContext/color/application/generateColors'
 
 export function configureDependencies() {
   // Player:
@@ -60,6 +61,7 @@ export function configureDependencies() {
   // Color:
   container.registerSingleton(Types.MixColor, MixColor)
   container.registerSingleton(Types.ColorMixerLogger, ColorMixerByConsoleLogger)
+  container.registerSingleton(Types.GenerateColors, GenerateColors)
 
   // Load game:
   container.register(Types.LoadGame, LoadPlayer)

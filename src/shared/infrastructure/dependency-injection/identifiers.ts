@@ -1,18 +1,29 @@
 export const Types = {
-  PlayerLoaderRepository: Symbol.for('PlayerLoaderRepository'),
-  QuotesLoaderRepository: Symbol.for('QuotesLoaderRepository'),
-  LevelsLoaderRepository: Symbol.for('LevelsLoaderRepository'),
   LoadGame: Symbol.for('LoadGame'),
+
+  // Player:
+  PlayerLoaderRepository: Symbol.for('PlayerLoaderRepository'),
   RegisterPlayer: Symbol.for('RegisterPlayer'),
-  RegisterLevels: Symbol.for('RegisterLevels'),
-  RegisterQuotes: Symbol.for('RegisterQuotes'),
-  PassLevel: Symbol.for('PassLevel'),
-  LevelsRepository: Symbol.for('LevelsRepository'),
   PlayerRepository: Symbol.for('PlayerRepository'),
+
+  // Level Module:
+  LevelsLoaderRepository: Symbol.for('LevelsLoaderRepository'),
+  RegisterLevels: Symbol.for('RegisterLevels'),
+  LevelsRepository: Symbol.for('LevelsRepository'),
+  PassLevel: Symbol.for('PassLevel'),
+
+  // Quote Module:
+  QuotesLoaderRepository: Symbol.for('QuotesLoaderRepository'),
+  RegisterQuotes: Symbol.for('RegisterQuotes'),
   QuotesRepository: Symbol.for('QuotesRepository'),
   GetQuote: Symbol.for('GetQuote'),
+
+  // Color Module:
   MixColor: Symbol.for('MixColor'),
+  GenerateColors: Symbol.for('GenerateColors'),
+  ColorMixerLogger: Symbol.for('ColorMixerLogger'),
+
+  // Shared:
   DomainEventSubscribers: Symbol.for('DomainEventSubscribers'),
   EventBus: Symbol.for('EventBus'),
-  ColorMixerLogger: Symbol.for('ColorMixerLogger'),
 }

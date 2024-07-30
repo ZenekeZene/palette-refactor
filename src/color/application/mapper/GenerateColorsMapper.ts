@@ -2,7 +2,5 @@ import { ColorGroupCollection } from '@gameContext/color/domain/ColorGroupCollec
 import { GenerateColorsResponse } from '../dto/GenerateColorsResponse'
 
 export const toGenerateColorsResponse = (
-  colorGroups: ColorGroupCollection,
-): GenerateColorsResponse => ({
-  colorGroups: colorGroups.toPrimitives(),
-})
+  colorGroupCollection: ColorGroupCollection,
+): GenerateColorsResponse => colorGroupCollection.toPrimitives()
