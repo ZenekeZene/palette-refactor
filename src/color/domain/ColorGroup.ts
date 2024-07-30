@@ -10,7 +10,7 @@ export class ColorGroup extends AggregateRoot {
   readonly colorResult: ColorChip
   readonly colorSustracted: ColorChip
   readonly colorSwatch: ColorChip
-  private status: ColorGroupStatus = ColorGroupStatus.PENDING
+  private status: ColorGroupStatus
   readonly levelId: LevelId
 
   constructor(
@@ -26,6 +26,7 @@ export class ColorGroup extends AggregateRoot {
     this.colorSustracted = colorSustracted
     this.colorSwatch = colorSwatch
     this.levelId = levelId
+    this.status = new ColorGroupStatus()
 
     this.validate()
   }
@@ -49,17 +50,17 @@ export class ColorGroup extends AggregateRoot {
     )
     const mixedColor = colorMixer.mix()
     if (mixedColor.isEqualTo(this.colorResult.value)) {
-      this.updateStatus(ColorGroupStatus.MIXED)
+      this.status.transitionToMixed()
     } else {
-      this.updateStatus(ColorGroupStatus.ERROR)
+      this.status.transitionToError()
     }
   }
 
-  private updateStatus(status: ColorGroupStatus) {
-    this.status = status
+  isMixed() {
+    this.status.isMixed()
   }
 
-  get isMixed() {
-    return this.status === ColorGroupStatus.MIXED
+  isPending() {
+    return !this.status.isMixed()
   }
 }
