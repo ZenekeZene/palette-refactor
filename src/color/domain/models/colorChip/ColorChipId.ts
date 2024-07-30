@@ -1,7 +1,8 @@
-import { Id } from '@gameContext/shared/domain/utils/Id'
+import { Uuid } from '@gameContext/shared/domain/utils/Uuid'
 
-export class ColorChipId extends Id {
-  constructor(value: string) {
-    super(value)
+export class ColorChipId extends Uuid {
+  constructor(id?: string) {
+    const uuid = id || Uuid.random().valueOf()
+    super(uuid)
   }
 }

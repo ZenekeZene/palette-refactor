@@ -1,4 +1,5 @@
 import { ValueObject } from '@gameContext/shared/domain/utils/ValueObject'
+import { InvalidColorException } from '../exceptions/InvalidColorException'
 
 const colorRegex = /^hsl\(\d{1,3}, \d{1,3}%, \d{1,3}%\)$/
 
@@ -10,7 +11,7 @@ export class Color extends ValueObject<string> {
 
   private validate(value: string) {
     if (!colorRegex.test(value)) {
-      throw new Error('Invalid color')
+      throw new InvalidColorException(this)
     }
   }
 

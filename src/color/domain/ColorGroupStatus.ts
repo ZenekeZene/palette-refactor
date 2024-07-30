@@ -44,7 +44,7 @@ export class ColorGroupStatus extends ValueObject<string> {
     }
   }
 
-  isMixed() {
+  isMixed(): boolean {
     return this.status === ColorGroupStatusTypes.MIXED
   }
 
