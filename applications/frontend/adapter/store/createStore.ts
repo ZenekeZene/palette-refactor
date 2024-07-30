@@ -23,4 +23,9 @@ export const createStore = (initProps: StoreProps) =>
     },
     mixColor: (color1: Color, color2: Color): Color =>
       actions.mixColor(color1, color2),
+    generateColors: async () => {
+      const levels = get().levels
+      const level = levels.items[get().player.levelIndex]
+      return await actions.generateColors(levels.id, level.id)
+    },
   }))
