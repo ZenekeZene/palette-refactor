@@ -1,4 +1,6 @@
 import { Color } from '../models/Color'
+import { ColorsAreEqualsException } from '../exceptions/ColorsAreEqualsException'
+import { InvalidColorException } from '../exceptions/InvalidColorException'
 
 export class ColorMixer {
   color1: Color
@@ -12,7 +14,7 @@ export class ColorMixer {
 
   private validate() {
     if (this.color1 === this.color2) {
-      throw new Error('Colors must be different')
+      throw new ColorsAreEqualsException(this.color1, this.color2)
     }
   }
 
@@ -20,7 +22,7 @@ export class ColorMixer {
     const regex = /hsl\((\d+),\s*(\d+)%?,\s*(\d+)%?\)/
     const result = regex.exec(hsl)
     if (!result) {
-      throw new Error('Invalid HSL string')
+      throw new InvalidColorException(new Color(hsl))
     }
     return [parseInt(result[1]), parseInt(result[2]), parseInt(result[3])]
   }
