@@ -8,7 +8,7 @@ class LevelsInMemoryRepository implements LevelsRepository {
   private levelsCollections: Map<string, LevelsCollection> = new Map()
 
   async saveInMemory(levelsCollection: LevelsCollection): Promise<void> {
-    this.levelsCollections.set(levelsCollection.id, levelsCollection)
+    this.levelsCollections.set(levelsCollection.id.valueOf(), levelsCollection)
   }
 
   async searchById(id: LevelId): Promise<LevelsCollection | undefined> {

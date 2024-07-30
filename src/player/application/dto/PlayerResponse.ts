@@ -4,7 +4,7 @@ export interface PlayerResponse extends Response {
   id: string
   lives: number
   score: number
-  level: number
+  levelIndex: number
   bonus: number
 }
 

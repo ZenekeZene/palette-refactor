@@ -5,6 +5,6 @@ export const toPlayerResponse = (player: Player): PlayerResponse => ({
   id: player.id.valueOf(),
   lives: player.lives.valueOf(),
   score: player.score.valueOf(),
-  level: player.level.valueOf(),
+  levelIndex: player.levelIndex.valueOf(),
   bonus: player.bonus.valueOf(),
 })

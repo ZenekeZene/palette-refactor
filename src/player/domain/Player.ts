@@ -2,7 +2,7 @@ import { AggregateRoot } from '@gameContext/shared/domain/utils/AggregateRoot'
 import { PlayerId } from '@gameContext/player/domain/models/PlayerId'
 import { PlayerLives } from '@gameContext/player/domain/models/PlayerLives'
 import { PlayerScore } from '@gameContext/player/domain/models/PlayerScore'
-import { PlayerLevel } from '@gameContext/player/domain/models/PlayerLevel'
+import { PlayerLevelIndex } from '@gameContext/player/domain/models/PlayerLevelIndex'
 import { PlayerBonus } from '@gameContext/player/domain/models/PlayerBonus'
 
 export class Player extends AggregateRoot {
@@ -10,14 +10,14 @@ export class Player extends AggregateRoot {
     readonly id: PlayerId,
     public lives: PlayerLives,
     public score: PlayerScore,
-    public level: PlayerLevel,
+    public levelIndex: PlayerLevelIndex,
     public bonus: PlayerBonus,
   ) {
     super()
   }
 
   passLevel() {
-    this.level = this.level.increment()
+    this.levelIndex = this.levelIndex.increment()
   }
 
   incrementScore(value: number) {
@@ -36,7 +36,7 @@ export class Player extends AggregateRoot {
     return {
       lives: this.lives.valueOf(),
       score: this.score.valueOf(),
-      level: this.level.valueOf(),
+      levelIndex: this.levelIndex.valueOf(),
       bonus: this.bonus.valueOf(),
     }
   }
@@ -46,7 +46,7 @@ export class Player extends AggregateRoot {
       playerId || new PlayerId(),
       new PlayerLives(data.lives),
       new PlayerScore(data.score),
-      new PlayerLevel(data.level),
+      new PlayerLevelIndex(data.levelIndex),
       new PlayerBonus(data.bonus),
     )
   }
@@ -55,6 +55,6 @@ export class Player extends AggregateRoot {
 export type PlayerPrimitive = {
   lives: number
   score: number
-  level: number
+  levelIndex: number
   bonus: number
 }
