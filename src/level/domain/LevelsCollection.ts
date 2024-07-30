@@ -6,14 +6,16 @@ import {
   LevelRawModel,
 } from '@gameContext/level/domain/models/level/Level'
 import { LevelsCollectionCreatedDomainEvent } from '@gameContext/level/domain//events/LevelsCollectionCreated'
+import { LevelsCollectionId } from './LevelsCollectionId'
+import { LevelId } from './models/level/LevelId'
 
 export class LevelsCollection extends AggregateRoot {
   readonly levels: Level[] = []
-  readonly id: string
+  readonly id: LevelsCollectionId
 
-  constructor(initialLevels: LevelRawModel[] = [], id?: string) {
+  constructor(initialLevels: LevelRawModel[] = [], id?: LevelsCollectionId) {
     super()
-    this.id = id ? id : Uuid.random().valueOf()
+    this.id = id ? id : new LevelsCollectionId()
     this.generate(initialLevels)
   }
 
@@ -24,6 +26,10 @@ export class LevelsCollection extends AggregateRoot {
       this.levels.push(level)
     })
     this.recordLevelsCollectionCreated()
+  }
+
+  searchLevelById(levelId: LevelId): Level | undefined {
+    return this.levels.find((level) => level.id.valueOf() === levelId.valueOf())
   }
 
   getLevels(): Level[] {

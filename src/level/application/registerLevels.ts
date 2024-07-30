@@ -6,6 +6,7 @@ import { LevelsCollection } from '@gameContext/level/domain/LevelsCollection'
 import { LevelsCollectionResponse } from './dto/LevelsCollectionResponse'
 import type { RegisterLevelsRequest } from './dto/RegisterLevelsRequest'
 import { toLevelsCollectionResponse } from './mapper/LevelsCollectionMapper'
+import { LevelsCollectionId } from '../domain/LevelsCollectionId'
 
 @injectable()
 class RegisterLevels
@@ -20,7 +21,10 @@ class RegisterLevels
   ): Promise<LevelsCollectionResponse> {
     const levelsId = registerLevelsRequest.levelsId
     const levelsRaw = registerLevelsRequest.levels
-    const levelsCollection = new LevelsCollection(levelsRaw, levelsId)
+    const levelsCollection = new LevelsCollection(
+      levelsRaw,
+      new LevelsCollectionId(levelsId),
+    )
     this.levelsRepository.saveInMemory(levelsCollection)
     return toLevelsCollectionResponse(levelsCollection)
   }
