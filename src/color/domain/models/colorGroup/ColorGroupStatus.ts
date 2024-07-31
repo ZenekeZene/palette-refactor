@@ -15,40 +15,36 @@ const ColorGroupStatusTypes = {
 type ColorGroupStatusType =
   (typeof ColorGroupStatusTypes)[keyof typeof ColorGroupStatusTypes]
 
-export class ColorGroupStatus extends ValueObject<string> {
-  private status: ColorGroupStatusType
-
-  constructor() {
-    const initialStatus = ColorGroupStatusTypes.PENDING
-    super(initialStatus)
-    this.status = initialStatus
+export class ColorGroupStatus extends ValueObject<ColorGroupStatusType> {
+  constructor(status: ColorGroupStatusType = ColorGroupStatusTypes.PENDING) {
+    super(status)
   }
 
-  private transitionTo(newStatus: ColorGroupStatusType): void {
-    this.status = newStatus
+  private transitionTo(newStatus: ColorGroupStatusType): ColorGroupStatus {
+    return new ColorGroupStatus(newStatus)
   }
 
-  transitionToMixed(): void {
-    if (this.status === ColorGroupStatusTypes.PENDING) {
-      this.transitionTo(ColorGroupStatusTypes.MIXED)
+  transitionToMixed(): ColorGroupStatus {
+    if (this.value === ColorGroupStatusTypes.PENDING) {
+      return this.transitionTo(ColorGroupStatusTypes.MIXED)
     } else {
-      throw new TransitionError(this.status, 'mixed')
+      throw new TransitionError(this.value, 'mixed')
     }
   }
 
-  transitionToError(): void {
-    if (this.status === ColorGroupStatusTypes.PENDING) {
-      this.transitionTo(ColorGroupStatusTypes.ERROR)
+  transitionToError(): ColorGroupStatus {
+    if (this.value === ColorGroupStatusTypes.PENDING) {
+      return this.transitionTo(ColorGroupStatusTypes.ERROR)
     } else {
-      throw new TransitionError(this.status, 'error')
+      throw new TransitionError(this.value, 'error')
     }
   }
 
   isMixed(): boolean {
-    return this.status === ColorGroupStatusTypes.MIXED
+    return this.value === ColorGroupStatusTypes.MIXED
   }
 
   toPrimitive(): string {
-    return this.status.toString()
+    return this.value.toString()
   }
 }

@@ -1,11 +1,11 @@
-import { AggregateRoot } from '@gameContext/shared/domain/utils/AggregateRoot'
 import { ColorMixer } from '../../services/ColorMixer'
-import { ColorChip } from '../colorChip/ColorChip'
+import { ColorChip } from '../ColorChip'
 import { ColorGroupId } from './ColorGroupId'
 import { ColorGroupStatus } from './ColorGroupStatus'
 import { ColorsAreEqualsException } from '../../exceptions/ColorsAreEqualsException'
+import { Entity } from '@gameContext/shared/domain/utils/Entity'
 
-export class ColorGroup extends AggregateRoot {
+export class ColorGroup extends Entity {
   readonly id: ColorGroupId
   readonly resultColor: ColorChip
   readonly subtractedColor: ColorChip
@@ -31,7 +31,7 @@ export class ColorGroup extends AggregateRoot {
   private validate() {
     const checkEquality = (color1: ColorChip, color2: ColorChip) => {
       if (color1.isEqualTo(color2)) {
-        throw new ColorsAreEqualsException(color1.value, color2.value)
+        throw new ColorsAreEqualsException(color1.valueOf(), color2.valueOf())
       }
     }
 
@@ -42,14 +42,14 @@ export class ColorGroup extends AggregateRoot {
 
   mix() {
     const colorMixer = new ColorMixer(
-      this.subtractedColor.value,
-      this.swatchColor.value,
+      this.subtractedColor.valueOf(),
+      this.swatchColor.valueOf(),
     )
     const mixedColor = colorMixer.mix()
-    if (mixedColor.isEqualTo(this.resultColor.value)) {
-      this.status.transitionToMixed()
+    if (mixedColor.isEqualTo(this.resultColor.valueOf())) {
+      this.status = this.status.transitionToMixed()
     } else {
-      this.status.transitionToError()
+      this.status = this.status.transitionToError()
     }
   }
 
@@ -64,9 +64,9 @@ export class ColorGroup extends AggregateRoot {
   toPrimitive() {
     return {
       id: this.id.valueOf(),
-      resultColor: this.resultColor.value.toPrimitive(),
-      subtractedColor: this.subtractedColor.value.toPrimitive(),
-      swatchColor: this.swatchColor.value.toPrimitive(),
+      resultColor: this.resultColor.valueOf().toPrimitive(),
+      subtractedColor: this.subtractedColor.valueOf().toPrimitive(),
+      swatchColor: this.swatchColor.valueOf().toPrimitive(),
     }
   }
 }
