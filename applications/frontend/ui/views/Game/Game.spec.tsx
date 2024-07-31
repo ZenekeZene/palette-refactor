@@ -1,3 +1,4 @@
+import { container } from 'tsyringe'
 import { vi, describe, test, expect, afterEach, beforeAll } from 'vitest'
 import { render, screen, cleanup } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
@@ -5,9 +6,12 @@ import {
   type UseStore,
   StoreMother,
 } from '@frontend/adapter/store/factories/store.mother'
+import { Types } from '@gameContext/shared/infrastructure/dependency-injection/identifiers'
 import { configureDependencies } from '@gameContext/shared/infrastructure/dependency-injection/container'
 import { PlayerResponseProps } from '@gameContext/player/application/dto/PlayerResponse'
 import { GameView } from './Game'
+import { ColorMixerLogger } from '@gameContext/color/domain/repositories/ColorMixerLogger'
+import { ColorMixerMockedLogger } from '@gameContext/color/infrastructure/ColorMixerMockedLogger'
 
 const useStore: UseStore = vi.hoisted(() => vi.fn())
 vi.mock('@frontend/adapter/store/useStore', async (importOriginal) => {
@@ -30,6 +34,10 @@ const setupStoreAndRender = (props: Partial<PlayerResponseProps>) => {
 describe('GameView', () => {
   beforeAll(async () => {
     configureDependencies()
+    container.registerSingleton<ColorMixerLogger>(
+      Types.ColorMixerLogger,
+      ColorMixerMockedLogger,
+    )
   })
 
   afterEach(() => {
@@ -65,8 +73,8 @@ describe('GameView', () => {
   })
 
   test(`should show the level`, () => {
-    setupStoreAndRender({ level: 5 })
-    const level = screen.getByText(/5/)
+    setupStoreAndRender({ levelIndex: 0 })
+    const level = screen.getByText(/Level 1/)
     expect(level).toBeInTheDocument()
   })
 

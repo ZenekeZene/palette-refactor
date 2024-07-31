@@ -1,4 +1,4 @@
-import { ColorGroup } from '../ColorGroup'
+import { ColorGroup } from '../models/colorGroup/ColorGroup'
 import { Color } from '../models/Color'
 import { ColorChip } from '../models/colorChip/ColorChip'
 
