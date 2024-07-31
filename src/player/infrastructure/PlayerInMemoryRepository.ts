@@ -1,21 +1,18 @@
+import { injectable } from 'tsyringe'
 import type { Player } from '@gameContext/player/domain/Player'
 import type { PlayerId } from '@gameContext/player/domain/models/PlayerId'
-import { PlayerRepository } from '@gameContext/player/domain/repositories/PlayerRepository'
+import type { PlayerRepository } from '@gameContext/player/domain/repositories/PlayerRepository'
 
+@injectable()
 class PlayerInMemoryRepository implements PlayerRepository {
-  private players: Player[] = []
-
-  create(player: Player): void {
-    this.players.push(player)
-  }
+  private players: Map<string, Player> = new Map()
 
   save(player: Player): void {
-    const index = this.players.findIndex((p) => p.id.equals(player.id))
-    this.players[index] = player
+    this.players.set(player.id.valueOf(), player)
   }
 
-  findByPlayerId(id: PlayerId): Player | undefined {
-    return this.players.find((player) => player.id.equals(id))
+  findById(id: PlayerId): Player | undefined {
+    return this.players.get(id.valueOf())
   }
 }
 

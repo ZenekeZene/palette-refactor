@@ -3,4 +3,4 @@ import { GenerateColorsResponse } from '../dto/GenerateColorsResponse'
 
 export const toGenerateColorsResponse = (
   colorGroupCollection: ColorGroupCollection,
-): GenerateColorsResponse => colorGroupCollection.toPrimitives()
+): GenerateColorsResponse => colorGroupCollection.toPrimitive()

@@ -21,11 +21,7 @@ export const useColors = () => {
   )
 
   useEffect(() => {
-    const loadColors = async () => {
-      await methods.generateColors()
-    }
-
-    loadColors()
+    methods.generateColors()
   }, [])
 
   return {

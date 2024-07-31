@@ -9,9 +9,9 @@ export const createQuoteStore: StateCreator<Store, [], [], QuoteStore> = (
 ) => ({
   quotes: undefined,
   quote: undefined,
-  nextQuote: async () => {
+  nextQuote: () => {
     const quotes = get().quotes
-    const quote = await actions.getNextQuote(quotes)
+    const quote = actions.getNextQuote(quotes)
     set((state: QuoteStore) => ({ ...state, quote }))
   },
 })

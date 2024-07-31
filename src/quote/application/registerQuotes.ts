@@ -15,13 +15,13 @@ class RegisterQuotes
     @inject(Types.QuotesRepository) private quotesRepository: QuotesRepository,
   ) {}
 
-  async execute(
+  execute(
     registerLevelsRequest: RegisterQuotesRequest,
-  ): Promise<QuotesCollectionResponse> {
+  ): QuotesCollectionResponse {
     const quotesId = registerLevelsRequest.quotesId
     const quotesRaw = registerLevelsRequest.quotesData
     const quotesCollection = new QuotesCollection(quotesRaw, quotesId)
-    this.quotesRepository.saveInMemory(quotesCollection)
+    this.quotesRepository.save(quotesCollection)
     return toQuotesCollectionResponse(quotesCollection)
   }
 }

@@ -14,15 +14,15 @@ class PassLevel implements UseCase<PassLevelRequest, PlayerResponse> {
     @inject(Types.PlayerRepository) private repository: PlayerRepository,
   ) {}
 
-  async execute(passLevelRequest: PassLevelRequest): Promise<PlayerResponse> {
+  execute(passLevelRequest: PassLevelRequest): PlayerResponse {
     const playerId = new PlayerId(passLevelRequest.playerId)
-    const player = this.repository.findByPlayerId(playerId)
+    const player = this.repository.findById(playerId)
     if (!player) {
       throw new PlayerNotFoundException()
     }
     player.passLevel()
     this.repository.save(player)
-    return Promise.resolve(toPlayerResponse(player))
+    return toPlayerResponse(player)
   }
 }
 

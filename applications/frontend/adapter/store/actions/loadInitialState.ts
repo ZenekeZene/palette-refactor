@@ -1,9 +1,9 @@
 import { container } from 'tsyringe'
 import { LoadGame } from '@gameContext/shared/application/loadGame'
-import { StoreProps, Player, Levels, Quotes } from '../types/store'
+import { Store, Player, Levels, Quotes } from '../types/store'
 import { actions } from './actions'
 
-export const loadInitialState = async (): Promise<StoreProps> => {
+export const loadInitialState = async (): Promise<Store> => {
   const loadGame = container.resolve(LoadGame)
   const responses = await loadGame.launch()
   const [playerResponse, levelsResponse, quotesResponse] = responses
@@ -11,7 +11,7 @@ export const loadInitialState = async (): Promise<StoreProps> => {
   const levels = levelsResponse as Levels
   const quotes = quotesResponse as Quotes
   actions.registerInMemory(player, levels, quotes)
-  const quote = await actions.getNextQuote(quotes)
+  const quote = actions.getNextQuote(quotes)
 
   return {
     player,

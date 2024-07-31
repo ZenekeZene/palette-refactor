@@ -7,12 +7,8 @@ import { LevelNotFoundException } from '../exceptions/LevelNotFoundException'
 export class GetNumberOfChipsOfLevelService {
   constructor(private levelsRepository: LevelsRepository) {}
 
-  async findLevel(
-    levelsCollectionId: LevelsCollectionId,
-    levelId: LevelId,
-  ): Promise<number> {
-    const levelsCollection =
-      await this.levelsRepository.searchById(levelsCollectionId)
+  findLevel(levelsCollectionId: LevelsCollectionId, levelId: LevelId): number {
+    const levelsCollection = this.levelsRepository.findById(levelsCollectionId)
     if (!levelsCollection) {
       throw new LevelsCollectionNotFoundException(levelsCollectionId)
     }

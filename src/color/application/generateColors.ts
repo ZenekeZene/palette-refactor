@@ -12,6 +12,7 @@ import { ColorGroupCollection } from '../domain/ColorGroupCollection'
 import { ColorGroupCollectionId } from '../domain/ColorGroupCollectionId'
 import type { ColorMixerLogger } from '../domain/repositories/ColorMixerLogger'
 import { GenerateColorsRequest } from './dto/GenerateColorsRequest'
+import type { ColorRepository } from '../domain/repositories/ColorRepository'
 
 @injectable()
 export class GenerateColors
@@ -22,24 +23,22 @@ export class GenerateColors
   constructor(
     @inject(Types.ColorMixerLogger) private logger: ColorMixerLogger,
     @inject(Types.LevelsRepository) private levelsRepository: LevelsRepository,
+    @inject(Types.ColorRepository) private colorRepository: ColorRepository,
   ) {
     this.getNumberOfChipsOfLevelService = new GetNumberOfChipsOfLevelService(
       this.levelsRepository,
     )
   }
 
-  async execute(
+  execute(
     generateColorsRequest: GenerateColorsRequest,
-  ): Promise<GenerateColorsResponse> {
+  ): GenerateColorsResponse {
     const levelId = new LevelId(generateColorsRequest.levelId)
     const levelsCollectionId = new LevelsCollectionId(
       generateColorsRequest.levelsCollectionId,
     )
     const colorGroupsCountToGenerate =
-      await this.getNumberOfChipsOfLevelService.findLevel(
-        levelsCollectionId,
-        levelId,
-      )
+      this.getNumberOfChipsOfLevelService.findLevel(levelsCollectionId, levelId)
     const colorGroups = new ColorGenerator(
       colorGroupsCountToGenerate,
     ).generate()
@@ -48,6 +47,7 @@ export class GenerateColors
       colorGroups,
       levelId,
     )
+    this.colorRepository.save(colorGroupCollection)
     colorGroupCollection.each(this.logger.logGroup.bind(this.logger))
     return toGenerateColorsResponse(colorGroupCollection)
   }

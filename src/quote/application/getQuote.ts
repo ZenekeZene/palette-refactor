@@ -14,17 +14,16 @@ class GetQuote implements UseCase<GetQuoteRequest, QuoteDTO> {
     @inject(Types.QuotesRepository) private repository: QuotesRepository,
   ) {}
 
-  async execute(getQuoteRequest: GetQuoteRequest): Promise<QuoteDTO> {
+  execute(getQuoteRequest: GetQuoteRequest): QuoteDTO {
     const quotesCollectionId = new QuotesCollectionId(
       getQuoteRequest.quotesCollectionId,
     )
-    const quotesCollection =
-      await this.repository.searchById(quotesCollectionId)
+    const quotesCollection = this.repository.findById(quotesCollectionId)
     if (!quotesCollection) {
       throw new Error('Quotes collection not found')
     }
     const quote = quotesCollection.getNextQuote()
-    this.repository.saveInMemory(quotesCollection)
+    this.repository.save(quotesCollection)
     return toQuoteResponse(quote)
   }
 }

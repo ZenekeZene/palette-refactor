@@ -16,16 +16,16 @@ class RegisterLevels
     @inject(Types.LevelsRepository) private levelsRepository: LevelsRepository,
   ) {}
 
-  async execute(
+  execute(
     registerLevelsRequest: RegisterLevelsRequest,
-  ): Promise<LevelsCollectionResponse> {
+  ): LevelsCollectionResponse {
     const levelsId = registerLevelsRequest.levelsId
     const levelsRaw = registerLevelsRequest.levels
     const levelsCollection = new LevelsCollection(
       levelsRaw,
       new LevelsCollectionId(levelsId),
     )
-    this.levelsRepository.saveInMemory(levelsCollection)
+    this.levelsRepository.save(levelsCollection)
     return toLevelsCollectionResponse(levelsCollection)
   }
 }

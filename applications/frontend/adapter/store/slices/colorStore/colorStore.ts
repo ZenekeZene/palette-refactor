@@ -44,13 +44,14 @@ export const createColorStore: StateCreator<Store, [], [], ColorStore> = (
   },
   mixColor: (color1: Color, color2: Color): Color =>
     actions.mixColor(color1, color2),
-  generateColors: async () => {
+  generateColors: () => {
     const levels = get().levels
     const level = levels.items[get().player.levelIndex]
     if (!level) {
       throw new Error('Level not found')
     }
-    const colors = await actions.generateColors(levels.id, level.id)
+    const colors = actions.generateColors(levels.id, level.id)
+    console.log(colors)
     set((state: ColorStore) => ({ ...state, colors }))
     get().updateAllColors()
   },

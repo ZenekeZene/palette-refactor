@@ -11,10 +11,10 @@ export const createPlayerStore = (initialProps: PlayerStoreProps) => {
     setTutorialIsLaunched: (tutorialIsWatched) =>
       set(() => ({ tutorialIsWatched })),
     setScore: (score) => set((state: PlayerStore) => ({ ...state, score })),
-    nextLevel: async () => {
+    nextLevel: () => {
       get().nextQuote()
       const player = get().player
-      const playerWithLevelPassed = await actions.nextLevel(player)
+      const playerWithLevelPassed = actions.nextLevel(player)
       set((state: PlayerStore) => ({ ...state, player: playerWithLevelPassed }))
     },
   })
