@@ -22,6 +22,7 @@ export const Types = {
   MixColor: Symbol.for('MixColor'),
   GenerateColors: Symbol.for('GenerateColors'),
   ColorMixerLogger: Symbol.for('ColorMixerLogger'),
+  ColorRepository: Symbol.for('ColorRepository'),
 
   // Shared:
   DomainEventSubscribers: Symbol.for('DomainEventSubscribers'),

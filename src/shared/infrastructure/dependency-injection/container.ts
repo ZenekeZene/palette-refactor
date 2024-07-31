@@ -27,9 +27,11 @@ import { OnLevelsCollectionCreated } from '@gameContext/player/application/OnLev
 // Color use cases and repositories:
 import { MixColor } from '@gameContext/color/application/mixColor'
 import { ColorMixerByConsoleLogger } from '@gameContext/color/infrastructure/ColorMixerByConsoleLogger'
-
-import { InMemoryAsyncEventBus } from '@gameContext/shared/infrastructure/eventBus/InMemoryAsyncEventBus'
 import { GenerateColors } from '@gameContext/color/application/generateColors'
+import { ColorInMemoryRepository } from '@gameContext/color/infrastructure/ColorInMemoryRepository'
+
+// Event Bus:
+import { InMemoryAsyncEventBus } from '@gameContext/shared/infrastructure/eventBus/InMemoryAsyncEventBus'
 
 export function configureDependencies() {
   // Player:
@@ -62,6 +64,7 @@ export function configureDependencies() {
   container.registerSingleton(Types.MixColor, MixColor)
   container.registerSingleton(Types.ColorMixerLogger, ColorMixerByConsoleLogger)
   container.registerSingleton(Types.GenerateColors, GenerateColors)
+  container.registerSingleton(Types.ColorRepository, ColorInMemoryRepository)
 
   // Load game:
   container.register(Types.LoadGame, LoadPlayer)
