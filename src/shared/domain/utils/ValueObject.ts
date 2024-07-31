@@ -1,5 +1,5 @@
 export abstract class ValueObject<T> {
-  private readonly value: T
+  protected readonly value: T
 
   constructor(value: T) {
     this.value = value
@@ -16,5 +16,5 @@ export abstract class ValueObject<T> {
     return this.value
   }
 
-  abstract toPrimitive(): T
+  abstract toPrimitive(): T | any
 }

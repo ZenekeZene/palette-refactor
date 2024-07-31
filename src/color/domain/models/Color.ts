@@ -19,7 +19,7 @@ export class Color extends ValueObject<string> {
     return this.valueOf()
   }
 
-  static fromString(value: string): Color {
+  static fromPrimitive(value: string): Color {
     return new Color(value)
   }
 
@@ -52,3 +52,5 @@ export class Color extends ValueObject<string> {
     return this.valueOf() === color.valueOf()
   }
 }
+
+export type ColorPrimitive = string
