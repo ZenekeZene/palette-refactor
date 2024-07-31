@@ -10,7 +10,7 @@
     "preview": "vite preview",
     "test": "vitest --config config/vitest.config.ts",
     "test:watch": "vitest --config config/vitest.config.ts --watch",
-    "format": "prettier --write . --config config/.prettierrc"
+    "format": "prettier --write . --config .prettierrc"
   },
   "dependencies": {
     "react": "^18.2.0",
