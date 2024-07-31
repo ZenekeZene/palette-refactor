@@ -4,7 +4,10 @@ import { LevelsCollectionResponse } from '@gameContext/level/application/dto/Lev
 import { QuotesCollectionResponse } from '@gameContext/quote/application/dto/QuotesCollectionResponse'
 import { QuoteDTO } from '@gameContext/quote/application/dto/QuoteDTO'
 import { ColorDTO } from '@gameContext/color/application/dto/ColorDTO'
-import { GenerateColorsResponse } from '@gameContext/color/application/dto/GenerateColorsResponse'
+import {
+  GenerateColorsItem,
+  GenerateColorsResponse,
+} from '@gameContext/color/application/dto/GenerateColorsResponse'
 
 export type { LevelDTO as Level }
 export type { PlayerResponse as Player }
@@ -13,3 +16,4 @@ export type { QuotesCollectionResponse as Quotes }
 export type { QuoteDTO as Quote }
 export type { ColorDTO as Color }
 export type { GenerateColorsResponse as Colors }
+export type { GenerateColorsItem as ColorGroup }
