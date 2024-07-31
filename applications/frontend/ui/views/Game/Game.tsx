@@ -1,35 +1,26 @@
-import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useShallow } from 'zustand/react/shallow'
 import { HeaderGame } from '@frontend/ui/components/HeaderGame/HeaderGame'
 import { Bonus } from '@frontend/ui/components/Bonus/Bonus'
 import { useStore } from '@frontend/adapter/store/useStore'
 import { ColorMixDebug } from '@frontend/ui/components/ColorMixDebug/ColorMixDebug'
-import { Colors } from '@gameContext/shared/infrastructure/store/store'
 import { ColorsRow } from '@frontend/ui/components/ColorRow/ColorRow'
+import { ColorSwatch } from '@frontend/ui/components/ColorSwatch/ColorSwatch'
+import { useColors } from '@frontend/ui/hooks/useColors/useColors'
 import './Game.scss'
 
 const GameView = () => {
-  const [colors, setColors] = useState<Colors>()
   const navigate = useNavigate()
-  const { player, generateColors } = useStore(
-    useShallow(({ player, generateColors }) => ({
-      player,
-      generateColors,
-    })),
-  )
+  const player = useStore((state) => state.player)
+  const {
+    colors,
+    resultColors,
+    subtractedColors,
+    swatchColors,
+    indexSwatchColor,
+    nextColor,
+  } = useColors()
 
-  useEffect(() => {
-    const loadColors = async () => {
-      const colors = await generateColors()
-      setColors(colors)
-    }
-
-    loadColors()
-  }, [])
-
-  const resultColors = colors?.items.map((color) => color.resultColor)
-  const subtractedColors = colors?.items.map((color) => color.subtractedColor)
+  const swatchColor = swatchColors[indexSwatchColor]
 
   return (
     <article className="game view">
@@ -45,7 +36,11 @@ const GameView = () => {
       {subtractedColors && <ColorsRow colors={subtractedColors} />}
 
       <section className="game__footer">
-        <div className="game__chip"></div>
+        <div className="game__swatch">
+          {swatchColor && (
+            <ColorSwatch color={swatchColor} onClick={nextColor} />
+          )}
+        </div>
 
         {player.bonus > 0 && (
           <div className="game__bonus">
@@ -53,7 +48,7 @@ const GameView = () => {
           </div>
         )}
 
-        {colors && <ColorMixDebug colors={colors} />}
+        {colors && <ColorMixDebug items={colors.items} />}
       </section>
     </article>
   )

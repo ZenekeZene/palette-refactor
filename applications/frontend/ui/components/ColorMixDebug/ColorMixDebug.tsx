@@ -1,14 +1,12 @@
-import { Colors } from '@frontend/adapter/store/types/store'
+import { Colors } from '@gameContext/shared/infrastructure/store/store'
 import './ColorMixDebug.scss'
 
-interface ColorMixDebugProps {
-  colors: Colors
-}
+type ColorMixDebugProps = Omit<Colors, 'levelId'>
 
-export const ColorMixDebug = ({ colors }: ColorMixDebugProps) => {
+export const ColorMixDebug = ({ items }: ColorMixDebugProps) => {
   return (
     <section className="color-mix-debug">
-      {colors.items.map((item) => (
+      {items.map((item) => (
         <div className="color-mix-debug__colors" key={item.id}>
           <span
             className="color-mix-debug__color"
