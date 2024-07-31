@@ -1,6 +1,6 @@
-import { StoreProps } from './types/store'
+import { Store } from './types/store'
 
-export const defaultState: StoreProps = {
+export const defaultState: Store = {
   player: {
     id: 'gordon-freeman',
     lives: 1,
