@@ -1,9 +1,9 @@
 import { AggregateRoot } from '@gameContext/shared/domain/utils/AggregateRoot'
-import { ColorMixer } from './services/ColorMixer'
-import { ColorChip } from './models/colorChip/ColorChip'
+import { ColorMixer } from '../../services/ColorMixer'
+import { ColorChip } from '../colorChip/ColorChip'
 import { ColorGroupId } from './ColorGroupId'
 import { ColorGroupStatus } from './ColorGroupStatus'
-import { ColorsAreEqualsException } from './exceptions/ColorsAreEqualsException'
+import { ColorsAreEqualsException } from '../../exceptions/ColorsAreEqualsException'
 
 export class ColorGroup extends AggregateRoot {
   readonly id: ColorGroupId

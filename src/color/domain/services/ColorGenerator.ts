@@ -1,5 +1,5 @@
-import { ColorGroup } from '../ColorGroup'
-import { ColorGroupId } from '../ColorGroupId'
+import { ColorGroup } from '../models/colorGroup/ColorGroup'
+import { ColorGroupId } from '../models/colorGroup/ColorGroupId'
 import { Color } from '../models/Color'
 import { ColorChip } from '../models/colorChip/ColorChip'
 import { ColorType } from '../models/ColorType'
