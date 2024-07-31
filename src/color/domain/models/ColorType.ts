@@ -1,11 +1,19 @@
 const types = {
   RESULT: 'result',
-  SUSTRACTED: 'sustracted',
+  SUBTRACTED: 'subtracted',
   SWATCH: 'swatch',
 } as const
+
+export type ColorTypeOf = (typeof types)[keyof typeof types]
 
 export class ColorType {
   static readonly types = types
 
-  constructor(readonly type: (typeof types)[keyof typeof types]) {}
+  constructor(readonly type: ColorTypeOf) {}
+
+  valueOf(): ColorTypeOf {
+    return this.type
+  }
 }
+
+export type ColorTypePrimitive = string
