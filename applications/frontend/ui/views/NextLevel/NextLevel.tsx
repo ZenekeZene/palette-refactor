@@ -12,7 +12,7 @@ const NextLevelView = () => {
       levels,
       quote,
       nextLevel,
-      level: player.level,
+      levelIndex: player.levelIndex,
       totalLevels: levels.totalLevels,
     })),
   )
@@ -37,7 +37,10 @@ const NextLevelView = () => {
       <button onClick={() => state.nextLevel()} className="next-level__next">
         Next
       </button>
-      <Progression currentLevel={state.level} totalLevels={state.totalLevels} />
+      <Progression
+        currentLevel={state.levelIndex}
+        totalLevels={state.totalLevels}
+      />
       <LocationDisplay />
     </article>
   )
