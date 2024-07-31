@@ -1,12 +1,10 @@
-import { Colors } from '@gameContext/shared/infrastructure/store/store'
+import { ColorGroup } from '@gameContext/shared/infrastructure/store/store'
 import './ColorMixDebug.scss'
 
-type ColorMixDebugProps = Omit<Colors, 'levelId'>
-
-export const ColorMixDebug = ({ items }: ColorMixDebugProps) => {
+export const ColorMixDebug = ({ colors }: { colors: ColorGroup[] }) => {
   return (
     <section className="color-mix-debug">
-      {items.map((item) => (
+      {colors.map((item) => (
         <div className="color-mix-debug__colors" key={item.id}>
           <span
             className="color-mix-debug__color"

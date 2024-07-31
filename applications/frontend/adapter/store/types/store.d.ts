@@ -5,20 +5,11 @@ export type {
   Quote,
   Color,
   Colors,
+  ColorGroup,
 } from '@gameContext/shared/infrastructure/store/store'
-export interface StoreProps {
-  player: Player
-  levels: Levels
-  quotes: Quotes
-  quote: Quote
-  tutorialIsWatched: boolean
-}
 
-export interface StoreState extends StoreProps {
-  setTutorialIsLaunched: (value: boolean) => void
-  setScore: (value: number) => void
-  nextQuote: () => void
-  nextLevel: () => void
-  mixColor: (color1: Color, color2: Color) => Color
-  generateColors: () => Promise<Colors>
-}
+import { ColorStore } from '../slices/colorStore/colorStore'
+import { PlayerStore } from '../slices/playerStore/playerStore'
+import { QuoteStore } from '../slices/quoteStore/quoteStore'
+
+export type Store = PlayerStore & QuoteStore & ColorStore

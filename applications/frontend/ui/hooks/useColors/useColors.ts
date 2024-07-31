@@ -1,36 +1,39 @@
-import { Colors } from '@gameContext/shared/infrastructure/store/store'
 import { useStore } from '@frontend/adapter/store/useStore'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
+import { useShallow } from 'zustand/react/shallow'
 
 export const useColors = () => {
-  const [indexSwatchColor, setIndexSwatchColor] = useState(0)
-  const [colors, setColors] = useState<Colors>()
+  const state = useStore(
+    useShallow((state) => ({
+      colors: state.colors,
+      resultColors: state.resultColors,
+      subtractedColors: state.subtractedColors,
+      swatchColors: state.swatchColors,
+      indexSwatchColor: state.indexSwatchColor,
+    })),
+  )
 
-  const generateColors = useStore((state) => state.generateColors)
+  const methods = useStore(
+    useShallow(({ generateColors, nextSwatchColor }) => ({
+      generateColors,
+      nextSwatchColor,
+    })),
+  )
 
   useEffect(() => {
     const loadColors = async () => {
-      const colors = await generateColors()
-      setColors(colors)
+      await methods.generateColors()
     }
 
     loadColors()
   }, [])
 
-  const nextColor = () => {
-    setIndexSwatchColor((prev) => (prev + 1) % swatchColors!.length)
-  }
-  const items = colors?.items ?? []
-  const resultColors = items.map((color) => color.resultColor)
-  const subtractedColors = items.map((color) => color.subtractedColor)
-  const swatchColors = items.map((color) => color.swatchColor)
-
   return {
-    colors,
-    resultColors,
-    subtractedColors,
-    swatchColors,
-    indexSwatchColor,
-    nextColor,
+    colors: state.colors,
+    resultColors: state.resultColors,
+    subtractedColors: state.subtractedColors,
+    swatchColors: state.swatchColors,
+    indexSwatchColor: state.indexSwatchColor,
+    nextColor: methods.nextSwatchColor,
   }
 }

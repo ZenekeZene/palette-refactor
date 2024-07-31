@@ -1,4 +1,4 @@
-import type { StoreState } from './types/store'
+import type { Store } from './types/store'
 import { loadInitialState } from './actions/loadInitialState'
 import { createStore } from './createStore'
 
@@ -13,7 +13,7 @@ export async function configureStore() {
   store = createStore(initialState)
 }
 
-export function useStore<T>(selector: (state: StoreState) => T): T {
+export function useStore<T>(selector: (state: Store) => T): T {
   if (store === null) {
     throw ErrorStoreNotConfigured
   }

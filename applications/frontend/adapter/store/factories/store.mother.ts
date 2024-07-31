@@ -2,7 +2,7 @@ import { Mock } from 'vitest'
 import { LevelsCollection } from '@gameContext/level/domain/LevelsCollection'
 import { LevelsCollectionResponse } from '@gameContext/level/application/dto/LevelsCollectionResponse'
 import { toLevelsCollectionResponse } from '@gameContext/level/application/mapper/LevelsCollectionMapper'
-import type { StoreProps } from '@frontend/adapter/store/types/store'
+import type { Store } from '@frontend/adapter/store/types/store'
 import { createStore } from '@frontend/adapter/store/createStore'
 import { StoreBuilder } from '@frontend/adapter/store/factories/store.builder'
 import {
@@ -16,7 +16,7 @@ import { actions } from '../actions/actions'
 export class StoreMother {
   private static readonly defaultPlayer: PlayerResponseProps = {
     lives: 10,
-    level: 0,
+    levelIndex: 0,
     bonus: 0,
     score: 0,
   }
@@ -48,9 +48,9 @@ export class StoreMother {
     return builder
   }
 
-  private static mockStore(useStore: UseStore, state: StoreProps): void {
+  private static mockStore(useStore: UseStore, state: Store): void {
     const store = createStore(state)
-    const mocked = (selector: (state: StoreProps) => void) =>
+    const mocked = (selector: (state: Store) => void) =>
       selector(store.getState())
     useStore.mockImplementation(mocked)
     actions.registerInMemory(state.player, state.levels, state.quotes)

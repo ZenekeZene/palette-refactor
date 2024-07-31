@@ -48,7 +48,7 @@ const GameView = () => {
           </div>
         )}
 
-        {colors && <ColorMixDebug items={colors.items} />}
+        {colors?.length > 0 && <ColorMixDebug colors={colors.items} />}
       </section>
     </article>
   )
