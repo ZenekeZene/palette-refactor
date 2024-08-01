@@ -67,6 +67,7 @@ export class ColorGroup extends Entity {
       resultColor: this.resultColor.valueOf().toPrimitive(),
       subtractedColor: this.subtractedColor.valueOf().toPrimitive(),
       swatchColor: this.swatchColor.valueOf().toPrimitive(),
+      status: this.status.valueOf(),
     }
   }
 }

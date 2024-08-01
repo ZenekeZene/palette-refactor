@@ -5,6 +5,7 @@ export interface GenerateColorsItem {
   readonly resultColor: string
   readonly subtractedColor: string
   readonly swatchColor: string
+  readonly status: string
 }
 
 export interface GenerateColorsResponse extends Response {
