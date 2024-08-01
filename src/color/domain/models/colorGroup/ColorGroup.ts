@@ -1,9 +1,9 @@
+import { Entity } from '@gameContext/shared/domain/utils/Entity'
 import { ColorMixer } from '../../services/ColorMixer'
 import { ColorChip } from '../ColorChip'
+import { ColorsAreEqualsException } from '../../exceptions/ColorsAreEqualsException'
 import { ColorGroupId } from './ColorGroupId'
 import { ColorGroupStatus } from './ColorGroupStatus'
-import { ColorsAreEqualsException } from '../../exceptions/ColorsAreEqualsException'
-import { Entity } from '@gameContext/shared/domain/utils/Entity'
 
 export class ColorGroup extends Entity {
   readonly id: ColorGroupId

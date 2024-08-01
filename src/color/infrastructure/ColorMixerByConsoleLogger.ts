@@ -54,8 +54,7 @@ export class ColorMixerByConsoleLogger implements ColorMixerLogger {
 
   logGroup(colorGroup: ColorGroup) {
     this.beginGroup('ColorGroup mixed')
-    const colors = colorGroup.valueOf()
-    const { resultColor, subtractedColor, swatchColor } = colors
+    const { resultColor, subtractedColor, swatchColor } = colorGroup
 
     this.messageColor(swatchColor.valueOf(), 'SwatchColor')
     this.messageColor(subtractedColor.valueOf(), 'SubtractedColor')

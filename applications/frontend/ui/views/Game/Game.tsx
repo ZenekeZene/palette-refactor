@@ -37,9 +37,7 @@ const GameView = () => {
 
       <section className="game__footer">
         <div className="game__swatch">
-          {swatchColor && (
-            <ColorSwatch color={swatchColor} onClick={nextColor} />
-          )}
+          <ColorSwatch color={swatchColor} onClick={nextColor} />
         </div>
 
         {player.bonus > 0 && (

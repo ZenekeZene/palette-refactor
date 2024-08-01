@@ -9,5 +9,8 @@
     {
       "path": "../lab/palette",
     },
+    {
+      "path": "../frontend-code-test",
+    },
   ],
 }
