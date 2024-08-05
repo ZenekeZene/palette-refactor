@@ -1,12 +1,12 @@
 import { ColorChip } from '../ColorChip/ColorChip'
-import './ColorRow.scss'
+import { Row } from './ColorRow.styled'
 
 export const ColorsRow = ({ colors }: { colors: string[] }) => {
   return (
-    <div className="colors-row">
+    <Row>
       {colors.map((color, index) => (
         <ColorChip key={index} color={color}></ColorChip>
       ))}
-    </div>
+    </Row>
   )
 }

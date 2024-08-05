@@ -1,5 +1,10 @@
-import './ColorChip.scss'
+import { Wrapper } from './ColorChip.styled'
 
 export const ColorChip = ({ color }: { color: string }) => {
-  return <div className="color-chip" style={{ backgroundColor: color }}></div>
+  return (
+    <Wrapper
+      className="color-dropzone"
+      style={{ backgroundColor: color }}
+    ></Wrapper>
+  )
 }

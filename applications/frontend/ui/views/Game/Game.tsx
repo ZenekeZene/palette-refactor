@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { HeaderGame } from '@frontend/ui/components/HeaderGame/HeaderGame'
+import { Header } from '@frontend/ui/components/Header/Header'
 import { Bonus } from '@frontend/ui/components/Bonus/Bonus'
 import { useStore } from '@frontend/adapter/store/useStore'
 import { ColorMixDebug } from '@frontend/ui/components/ColorMixDebug/ColorMixDebug'
@@ -24,7 +24,7 @@ const GameView = () => {
 
   return (
     <article className="game view">
-      <HeaderGame
+      <Header
         level={player.levelIndex + 1}
         lives={player.lives}
         score={player.score}

@@ -1,12 +1,12 @@
 import { AiFillThunderbolt as IconBonus } from 'react-icons/ai'
-import './Bonus.scss'
+import { BonusWrapper, BonusCount } from './Bonus.styled'
 
 const Bonus = ({ bonus }: { bonus: number }) => {
   return (
-    <div className="bonus">
-      <IconBonus className="bonus__icon" />
-      <span className="bonus__score">{bonus}</span>
-    </div>
+    <BonusWrapper>
+      <IconBonus />
+      <BonusCount>{bonus}</BonusCount>
+    </BonusWrapper>
   )
 }
 
