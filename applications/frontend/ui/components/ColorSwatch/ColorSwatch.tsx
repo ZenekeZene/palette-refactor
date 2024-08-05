@@ -1,14 +1,15 @@
 import { useRef } from 'react'
 import { Dragger } from '@frontend/ui/services/Dragger'
 import { useDraggable } from '@frontend/ui/hooks/useDraggable/useDraggable'
-import './ColorSwatch.scss'
+import { useDropzone } from '@frontend/ui/hooks/useDropzone/useDropzone'
+import { Swatch } from './ColorSwatch.styled'
 
-interface ColorSwatchProps {
+interface Props {
   color: string
   onClick: () => void
 }
 
-export const ColorSwatch = ({ color, onClick }: ColorSwatchProps) => {
+export const ColorSwatch = ({ color, onClick }: Props) => {
   const targetElementRef = useRef<HTMLDivElement>(null)
 
   useDraggable({
@@ -16,12 +17,17 @@ export const ColorSwatch = ({ color, onClick }: ColorSwatchProps) => {
     dragService: Dragger,
   })
 
+  useDropzone({
+    targetElementCSSSelector: '.color-dropzone',
+    relatedTargetCSSSelector: '.color-draggable',
+  })
+
   return (
-    <div
+    <Swatch
       ref={targetElementRef}
-      className="color-swatch"
+      className="color-draggable"
       style={{ backgroundColor: color }}
       onClick={onClick}
-    ></div>
+    ></Swatch>
   )
 }
