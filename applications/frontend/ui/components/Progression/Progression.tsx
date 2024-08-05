@@ -1,4 +1,10 @@
-import './Progression.scss'
+import {
+  ProgressionWrapper,
+  Text,
+  Percent,
+  List,
+  Item,
+} from './Progression.styled'
 
 const errorMessage = `Error with Progression component.
 	CurrentLevel can not be major than totalLevels`
@@ -9,21 +15,20 @@ interface Props {
 }
 
 const ProgressionList = ({ currentLevel, totalLevels }: Props) => {
-  const isCompleted = (index: number) =>
-    currentLevel > index ? '--completed' : ''
+  const isCompleted = (index: number): boolean => currentLevel > index
 
   return (
-    <ul className="progression__list">
+    <List>
       {new Array(totalLevels).fill('').map((_, index) => (
-        <li
+        <Item
           key={`level-${index}`}
-          className={`progression__item ${isCompleted(index) ? '--completed' : ''}`}
+          $completed={isCompleted(index)}
           aria-label={`Level ${index} ${isCompleted(index) ? 'unfinished ' : 'completed'}`}
         >
           {}
-        </li>
+        </Item>
       ))}
-    </ul>
+    </List>
   )
 }
 
@@ -32,13 +37,13 @@ const Progression = ({ currentLevel, totalLevels }: Props) => {
   const percent = Math.floor((currentLevel / totalLevels) * 100)
 
   return (
-    <section className="progression" role="progressbar" aria-valuenow={percent}>
-      <p className="progression__text">
+    <ProgressionWrapper role="progressbar" aria-valuenow={percent}>
+      <Text>
         Game progression: &nbsp;
-        <span className="progression__percent">{percent}%</span>
-      </p>
+        <Percent>{percent}%</Percent>
+      </Text>
       <ProgressionList currentLevel={currentLevel} totalLevels={totalLevels} />
-    </section>
+    </ProgressionWrapper>
   )
 }
 
