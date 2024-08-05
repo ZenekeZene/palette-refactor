@@ -1,33 +1,35 @@
-import { Link } from 'react-router-dom'
 import { FaPlay } from 'react-icons/fa'
 import { FaStar } from 'react-icons/fa'
 import { Title } from '@frontend/ui/components/Title/Title'
 import { useClassnameOfRoute } from '@frontend/ui/hooks/useClassnameOfRoute/useClassnameOfRoute'
 import { useStore } from '@frontend/adapter/store/useStore'
-import './Home.scss'
+import {
+  Home,
+  Illustration,
+  Buttons,
+  PlayButton,
+  RankingButton,
+} from './Home.styled'
 
 const HomeView = () => {
   useClassnameOfRoute()
   const tutorialIsWatched = useStore((state) => state.tutorialIsWatched)
 
   return (
-    <article className="home">
+    <Home>
       <Title />
-      <img className="home__illustration" src="/pet.png" alt="Illustration" />
-      <section className="home__buttons">
-        <Link
-          className="button button--play"
-          to={tutorialIsWatched ? '/game' : '/tutorial'}
-        >
+      <Illustration src="/pet.png" alt="Illustration" />
+      <Buttons>
+        <PlayButton to={tutorialIsWatched ? '/game' : '/tutorial'}>
           <FaPlay />
           Jugar
-        </Link>
-        <Link className="button button--ranking" to="/ranking">
+        </PlayButton>
+        <RankingButton to="/ranking">
           <FaStar />
           Ranking
-        </Link>
-      </section>
-    </article>
+        </RankingButton>
+      </Buttons>
+    </Home>
   )
 }
 

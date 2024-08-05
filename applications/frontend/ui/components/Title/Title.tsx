@@ -1,14 +1,14 @@
-import './Title.scss'
+import { TitleWrapper, TitleColor } from './Title.styled'
 
 const Title = () => {
   return (
-    <h1 className="title">
+    <TitleWrapper>
       The
       <br />
-      <span className="title-color">color</span>
+      <TitleColor>color</TitleColor>
       <br />
       alchemist
-    </h1>
+    </TitleWrapper>
   )
 }
 

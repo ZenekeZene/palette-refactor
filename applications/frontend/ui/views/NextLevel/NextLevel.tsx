@@ -4,7 +4,7 @@ import { useShallow } from 'zustand/react/shallow'
 import { Progression } from '@frontend/ui/components/Progression/Progression'
 import { useStore } from '@frontend/adapter/store/useStore'
 import { LocationDisplay } from '@frontend/ui/components/LocationDisplay/LocationDisplay'
-import './NextLevel.scss'
+import { NextLevel, Header, Subtitle, Title, Next } from './NextLevel.styled'
 
 const NextLevelView = () => {
   const state = useStore(
@@ -18,12 +18,12 @@ const NextLevelView = () => {
   )
 
   return (
-    <article className="next-level view">
-      <header className="next-level__header">
+    <NextLevel className="view">
+      <Header>
         {state.quote && (
           <>
-            <h1 className="next-level__title">”{state.quote.text}”</h1>
-            <h2 className="next-level__subtitle">—{state.quote.author}—</h2>
+            <Title>”{state.quote.text}”</Title>
+            <Subtitle>—{state.quote.author}—</Subtitle>
           </>
         )}
         <Link
@@ -33,16 +33,14 @@ const NextLevelView = () => {
         >
           <FaPlay />
         </Link>
-      </header>
-      <button onClick={() => state.nextLevel()} className="next-level__next">
-        Next
-      </button>
+      </Header>
+      <Next onClick={() => state.nextLevel()}>Next</Next>
       <Progression
         currentLevel={state.levelIndex}
         totalLevels={state.totalLevels}
       />
       <LocationDisplay />
-    </article>
+    </NextLevel>
   )
 }
 

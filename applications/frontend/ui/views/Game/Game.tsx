@@ -6,7 +6,13 @@ import { ColorMixDebug } from '@frontend/ui/components/ColorMixDebug/ColorMixDeb
 import { ColorsRow } from '@frontend/ui/components/ColorRow/ColorRow'
 import { ColorSwatch } from '@frontend/ui/components/ColorSwatch/ColorSwatch'
 import { useColors } from '@frontend/ui/hooks/useColors/useColors'
-import './Game.scss'
+import {
+  GameWrapper,
+  Divider,
+  Footer,
+  BonusWrapper,
+  Swatch,
+} from './Game.styled'
 
 const GameView = () => {
   const navigate = useNavigate()
@@ -23,7 +29,7 @@ const GameView = () => {
   const swatchColor = swatchColors[indexSwatchColor]
 
   return (
-    <article className="game view">
+    <GameWrapper className="view">
       <Header
         level={player.levelIndex + 1}
         lives={player.lives}
@@ -32,23 +38,23 @@ const GameView = () => {
       />
 
       {resultColors && <ColorsRow colors={resultColors} />}
-      <div className="game__divider"></div>
+      <Divider />
       {subtractedColors && <ColorsRow colors={subtractedColors} />}
 
-      <section className="game__footer">
-        <div className="game__swatch">
+      <Footer>
+        <Swatch>
           <ColorSwatch color={swatchColor} onClick={nextColor} />
-        </div>
+        </Swatch>
 
         {player.bonus > 0 && (
-          <div className="game__bonus">
+          <BonusWrapper>
             <Bonus bonus={player.bonus} />
-          </div>
+          </BonusWrapper>
         )}
 
         {colors?.length > 0 && <ColorMixDebug colors={colors.items} />}
-      </section>
-    </article>
+      </Footer>
+    </GameWrapper>
   )
 }
 

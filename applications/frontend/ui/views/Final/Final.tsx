@@ -1,26 +1,34 @@
 import { useStore } from '@frontend/adapter/store/useStore'
-import './Final.scss'
+import {
+  Final,
+  Title,
+  Subtitle,
+  Share,
+  Score,
+  Level,
+  LevelScore,
+  Laurel,
+  Illustration,
+} from './Final.styled'
 
 const FinalView = () => {
   const state = useStore((state) => state.player)
 
   return (
-    <article className="final view">
-      <header className="final__header"></header>
-      <section className="final__body">
-        <h1 className="final__title">Well done!</h1>
-        <h2 className="final__subtitle">
-          You have finished with{' '}
-          <span className="final__score">{state.score} points at level</span>
-        </h2>
-        <div className="final__level">
-          <p className="final__level-score">{state.level}</p>
-          <img className="final__laurel" src="/laurel.svg" alt="" />
-          <a className="final__share">SHARE YOUR RECORD</a>
-        </div>
+    <Final className="view">
+      <section>
+        <Title>Well done!</Title>
+        <Subtitle>
+          You have finished with <Score>{state.score} points at level</Score>
+        </Subtitle>
+        <Level>
+          <LevelScore>{state.level}</LevelScore>
+          <Laurel src="/laurel.svg" alt="" />
+          <Share>SHARE YOUR RECORD</Share>
+        </Level>
       </section>
-      <img className="final__illustration" src="/pet.png" alt="" />
-    </article>
+      <Illustration src="/pet.png" alt="" />
+    </Final>
   )
 }
 
