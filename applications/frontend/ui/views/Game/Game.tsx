@@ -10,8 +10,8 @@ import {
   GameWrapper,
   Divider,
   Footer,
-  BonusWrapper,
-  Swatch,
+  DropZone,
+  DraggableZone,
 } from './Game.styled'
 
 const GameView = () => {
@@ -30,30 +30,26 @@ const GameView = () => {
 
   return (
     <GameWrapper className="view">
-      <Header
-        level={player.levelIndex + 1}
-        lives={player.lives}
-        score={player.score}
-        onBack={() => navigate('/')}
-      />
-
-      {resultColors && <ColorsRow colors={resultColors} />}
+      <DropZone>
+        <Header
+          level={player.levelIndex + 1}
+          lives={player.lives}
+          score={player.score}
+          onBack={() => navigate('/')}
+        />
+        {resultColors && <ColorsRow colors={resultColors} />}
+      </DropZone>
       <Divider />
-      {subtractedColors && <ColorsRow colors={subtractedColors} />}
+      <DraggableZone>
+        {subtractedColors && <ColorsRow colors={subtractedColors} />}
 
-      <Footer>
-        <Swatch>
-          <ColorSwatch color={swatchColor} onClick={nextColor} />
-        </Swatch>
+        <ColorSwatch color={swatchColor} onClick={nextColor} />
+        <Footer>
+          {player.bonus > 0 && <Bonus bonus={player.bonus} />}
 
-        {player.bonus > 0 && (
-          <BonusWrapper>
-            <Bonus bonus={player.bonus} />
-          </BonusWrapper>
-        )}
-
-        {colors?.length > 0 && <ColorMixDebug colors={colors.items} />}
-      </Footer>
+          {colors?.length > 0 && <ColorMixDebug colors={colors.items} />}
+        </Footer>
+      </DraggableZone>
     </GameWrapper>
   )
 }

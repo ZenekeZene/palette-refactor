@@ -4,7 +4,7 @@ export const GameWrapper = styled.article`
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
 `
 
 export const Divider = styled.div`
@@ -17,28 +17,43 @@ export const Divider = styled.div`
   background-color: var(--cream-color);
 `
 
-export const Footer = styled.section`
-  position: relative;
-  bottom: 1rem;
+export const DropZone = styled.div`
+  position: absolute;
+  top: 0rem;
+  left: 0;
   width: 100%;
+  height: 50vh;
+  padding: 1rem;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 4rem;
+`
+
+export const DraggableZone = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50vh;
+  padding: 1rem;
+  padding-top: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+`
+
+export const Footer = styled.section`
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  display: flex;
+  justify-content: flex-end;
 `
 
 export const BonusWrapper = styled.div`
-  position: absolute;
-  right: 0;
-  top: 0.5rem;
   width: 4rem;
   height: 4rem;
   font-size: 2rem;
-`
-
-export const Swatch = styled.div`
-  position: relative;
-  width: 5rem;
-  height: 5rem;
-  font-size: 2rem;
-  box-shadow: var(--box-shadow);
-  border-radius: 50%;
 `

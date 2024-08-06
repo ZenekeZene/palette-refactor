@@ -4,8 +4,9 @@ export const BonusWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  height: 100%;
+  width: 4rem;
+  height: 4rem;
+  font-size: 2rem;
   color: var(--primary-color);
   box-shadow: var(--box-shadow);
   border-radius: var(--border-radius-large);

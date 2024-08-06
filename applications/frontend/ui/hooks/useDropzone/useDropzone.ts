@@ -6,24 +6,42 @@ interface Props {
   relatedTargetCSSSelector: string
 }
 
+function offset(el: HTMLElement) {
+  const rect = el.getBoundingClientRect()
+  return { top: rect.top, left: rect.left }
+}
+
 export const useDropzone = ({
   targetElementCSSSelector,
   relatedTargetCSSSelector,
 }: Props) => {
   useEffect(() => {
+    const origin = {
+      x: 0,
+      y: 0,
+    }
     interact(targetElementCSSSelector).dropzone({
       accept: relatedTargetCSSSelector,
-      ondrop: (event) => {
-        const draggableElement = event.relatedTarget
+      ondropactivate: function (event) {
+        // add active dropzone feedback
+        const rect = offset(event.relatedTarget)
+        origin.x = rect.left
+        origin.y = rect.top
+      },
+      ondropdeactivate: function (event) {
+        // remove active dropzone feedback
+        event.target.classList.remove('drop-active')
+        event.target.classList.remove('drop-target')
+      },
+      ondragenter: function (event) {
         const dropzoneElement = event.target
 
-        const dropzoneRect = dropzoneElement.getBoundingClientRect()
-        const draggableRect = draggableElement.getBoundingClientRect()
-
-        const x = dropzoneRect.left - draggableRect.left
-        const y = dropzoneRect.top - draggableRect.top
-
-        draggableElement.style.transform = `translate(${x}px, ${y}px)`
+        // feedback the possibility of a drop
+        dropzoneElement.classList.add('drop-target')
+      },
+      ondragleave: function (event) {
+        // remove the drop feedback style
+        event.target.classList.remove('drop-target')
       },
     })
   }, [])

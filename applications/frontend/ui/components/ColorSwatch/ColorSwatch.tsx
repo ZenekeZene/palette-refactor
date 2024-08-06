@@ -1,8 +1,8 @@
 import { useRef } from 'react'
-import { Dragger } from '@frontend/ui/services/Dragger'
+import { SwatchWrapper, Swatch } from './ColorSwatch.styled'
 import { useDraggable } from '@frontend/ui/hooks/useDraggable/useDraggable'
+import { Dragger } from '@frontend/ui/services/Dragger'
 import { useDropzone } from '@frontend/ui/hooks/useDropzone/useDropzone'
-import { Swatch } from './ColorSwatch.styled'
 
 interface Props {
   color: string
@@ -23,11 +23,14 @@ export const ColorSwatch = ({ color, onClick }: Props) => {
   })
 
   return (
-    <Swatch
-      ref={targetElementRef}
-      className="color-draggable"
-      style={{ backgroundColor: color }}
-      onClick={onClick}
-    ></Swatch>
+    <>
+      <SwatchWrapper></SwatchWrapper>
+      <Swatch
+        ref={targetElementRef}
+        className="color-draggable"
+        style={{ backgroundColor: color }}
+        onClick={onClick}
+      ></Swatch>
+    </>
   )
 }

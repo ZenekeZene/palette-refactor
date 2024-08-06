@@ -41,12 +41,14 @@ export const useDraggable = ({
       start: () => {
         targetElement.setAttribute('data-x', '0')
         targetElement.setAttribute('data-y', '0')
+        targetElement.classList.add('dragging')
       },
       move: (event: DragEvent) => {
         dragMoveListener(event)
       },
       end: () => {
         dragEndListener()
+        targetElement.classList.remove('dragging')
       },
     }
 

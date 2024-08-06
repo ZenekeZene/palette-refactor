@@ -16,13 +16,11 @@ export class DraggerFacade {
 
   private draggableConfig = {
     inertia: false,
-    modifiers: [
-      interact.modifiers.restrictRect({
-        restriction: 'parent',
-        endOnly: true,
-        elementRect: { top: 0, left: 0, bottom: 1, right: 1 },
-      }),
-    ],
+    restrict: {
+      restriction: 'parent',
+      endOnly: false,
+      elementRect: { top: 0, left: 0, bottom: 1, right: 1 },
+    },
   }
 
   constructor({ targetElement, start, move, end }: DraggerFacadeProps) {

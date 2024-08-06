@@ -6,7 +6,6 @@ const Home = styled.div`
   height: 100%;
   margin: 0 auto;
   padding: var(--spacing-double);
-  background: linear-gradient(white 0, white 45%, var(--primary-color) 150%);
 `
 
 const Illustration = styled.img`
