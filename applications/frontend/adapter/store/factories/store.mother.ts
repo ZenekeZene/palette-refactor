@@ -81,7 +81,7 @@ export class StoreMother {
     useStore: UseStore,
     options: MultipleLevels,
   ): void {
-    const builder = new StoreBuilder()
+    const builder = StoreMother.createDefaultBuilder()
     const levelsRaw = []
     for (let i = 0; i < options.levelsCount; i++) {
       levelsRaw.push({
@@ -93,15 +93,15 @@ export class StoreMother {
     const levels = toLevelsCollectionResponse(new LevelsCollection(levelsRaw))
     builder.withLevels(levels)
     const defaultPlayer = this.createDefaultPlayer()
-    const player = {
+    const player: PlayerResponse = {
       ...defaultPlayer,
-      level: options.level,
+      levelIndex: options.levelIndex,
     }
     builder.withPlayer(player)
     StoreMother.mockStore(useStore, builder.currentState)
   }
 }
 
-type MultipleLevels = { level: number; levelsCount: number }
+type MultipleLevels = { levelIndex: number; levelsCount: number }
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type UseStore = Mock<any, any>

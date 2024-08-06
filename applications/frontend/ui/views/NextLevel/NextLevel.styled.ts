@@ -39,7 +39,7 @@ const Title = styled.div`
   text-wrap: balance;
 `
 
-const Next = styled.div`
+const Next = styled.button`
   position: fixed;
   bottom: 2rem;
   right: 2rem;

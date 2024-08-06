@@ -9,7 +9,7 @@ import { TryAgain, Subtitle, Title } from './TryAgain.styled'
 const TryAgainView = () => {
   const state = useStore(
     useShallow(({ player, levels }) => ({
-      level: player.level,
+      levelIndex: player.levelIndex,
       totalLevels: levels.totalLevels,
     })),
   )
@@ -25,7 +25,10 @@ const TryAgainView = () => {
       >
         <ReplayIcon />
       </Link>
-      <Progression currentLevel={state.level} totalLevels={state.totalLevels} />
+      <Progression
+        currentLevel={state.levelIndex}
+        totalLevels={state.totalLevels}
+      />
       <LocationDisplay />
     </TryAgain>
   )

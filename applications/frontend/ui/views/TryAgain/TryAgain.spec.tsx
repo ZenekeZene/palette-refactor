@@ -44,7 +44,10 @@ describe('Next Level view', () => {
   })
 
   test(`the progression is displayed to the user`, () => {
-    StoreMother.storeMultipleLevels(useStore, { level: 6, levelsCount: 10 })
+    StoreMother.storeMultipleLevels(useStore, {
+      levelsCount: 10,
+      levelIndex: 6,
+    })
     renderTryAgainView()
 
     const progression = screen.getByRole('progressbar')

@@ -51,7 +51,6 @@ export const createColorStore: StateCreator<Store, [], [], ColorStore> = (
       throw new Error('Level not found')
     }
     const colors = actions.generateColors(levels.id, level.id)
-    console.log(colors)
     set((state: ColorStore) => ({ ...state, colors }))
     get().updateAllColors()
   },
