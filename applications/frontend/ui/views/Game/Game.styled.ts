@@ -17,7 +17,7 @@ export const Divider = styled.div`
   background-color: var(--cream-color);
 `
 
-export const DropZone = styled.div`
+export const ResultZone = styled.div`
   position: absolute;
   top: 0rem;
   left: 0;

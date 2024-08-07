@@ -5,25 +5,28 @@ import { Progression } from '@frontend/ui/components/Progression/Progression'
 import { useStore } from '@frontend/adapter/store/useStore'
 import { LocationDisplay } from '@frontend/ui/components/LocationDisplay/LocationDisplay'
 import { NextLevel, Header, Subtitle, Title, Next } from './NextLevel.styled'
+import type { PlayerStore } from '@frontend/adapter/store/slices/playerStore/playerStore.d'
+import type { QuoteStore } from '@frontend/adapter/store/slices/quoteStore/quoteStore.d'
 
 const NextLevelView = () => {
   const state = useStore(
-    useShallow(({ player, levels, quote, nextLevel }) => ({
+    useShallow(({ player, levels, nextLevel }: PlayerStore) => ({
       levels,
-      quote,
       nextLevel,
       levelIndex: player.levelIndex,
       totalLevels: levels.totalLevels,
     })),
   )
 
+  const quote = useStore((state: QuoteStore) => state.quote)
+
   return (
     <NextLevel className="view">
       <Header>
-        {state.quote && (
+        {quote && (
           <>
-            <Title>”{state.quote.text}”</Title>
-            <Subtitle>—{state.quote.author}—</Subtitle>
+            <Title>”{quote.text}”</Title>
+            <Subtitle>—{quote.author}—</Subtitle>
           </>
         )}
         <Link

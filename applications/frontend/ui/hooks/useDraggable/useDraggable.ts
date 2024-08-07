@@ -4,7 +4,7 @@ import type { DragEvent } from '@interactjs/types'
 interface useDraggableProps {
   targetElement: HTMLElement | null
   dragService: (config: any) => any
-  onDragEnd?: (box: any, position: { x: number; y: number }) => void
+  onDragEnd: (relatedTarget: Element | null) => void
 }
 
 export const useDraggable = ({
@@ -46,9 +46,11 @@ export const useDraggable = ({
       move: (event: DragEvent) => {
         dragMoveListener(event)
       },
-      end: () => {
+      end: (event: DragEvent) => {
         dragEndListener()
         targetElement.classList.remove('dragging')
+        const relatedTarget = event.relatedTarget
+        onDragEnd(relatedTarget)
       },
     }
 
