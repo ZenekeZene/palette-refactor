@@ -4,11 +4,12 @@ import { useShallow } from 'zustand/react/shallow'
 import { Progression } from '@frontend/ui/components/Progression/Progression'
 import { LocationDisplay } from '@frontend/ui/components/LocationDisplay/LocationDisplay'
 import { useStore } from '@frontend/adapter/store/useStore'
+import type { PlayerStore } from '@frontend/adapter/store/slices/playerStore/playerStore.d'
 import { TryAgain, Subtitle, Title } from './TryAgain.styled'
 
 const TryAgainView = () => {
   const state = useStore(
-    useShallow(({ player, levels }) => ({
+    useShallow(({ player, levels }: PlayerStore) => ({
       levelIndex: player.levelIndex,
       totalLevels: levels.totalLevels,
     })),

@@ -2,9 +2,9 @@ import { StateCreator } from 'zustand'
 import type { Store } from '../../types/store'
 import { actions } from '../../actions/actions'
 import { defaultState } from '../../defaultState'
-import { PlayerStore, PlayerStoreProps } from './playerStore.d'
+import { PlayerStore, PlayerStoreState } from './playerStore.d'
 
-export const createPlayerStore = (initialProps: PlayerStoreProps) => {
+export const createPlayerStore = (initialProps: PlayerStoreState) => {
   const create: StateCreator<Store, [], [], PlayerStore> = (set, get) => ({
     ...defaultState,
     ...initialProps,
