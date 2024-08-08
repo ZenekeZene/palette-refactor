@@ -1,7 +1,7 @@
 import { injectable } from 'tsyringe'
 import { ColorMixerLogger } from '../domain/repositories/ColorMixerLogger'
 import { Color } from '../domain/models/Color'
-import { ColorChip } from '../domain/models/ColorChip'
+import { ColorChip } from '../domain/models/colorChip/ColorChip'
 import { ColorGroup } from '../domain/models/colorGroup/ColorGroup'
 
 const contrastPercentage = 50
@@ -38,15 +38,15 @@ export class ColorMixerByConsoleLogger implements ColorMixerLogger {
   ) {
     this.beginGroup('MixColor:')
     this.messageColor(
-      color1 instanceof ColorChip ? color1.valueOf() : color1,
+      color1 instanceof ColorChip ? color1.value : color1,
       'Color1',
     )
     this.messageColor(
-      color2 instanceof ColorChip ? color2.valueOf() : color2,
+      color2 instanceof ColorChip ? color2.value : color2,
       'Color2',
     )
     this.messageColor(
-      mixedColor instanceof ColorChip ? mixedColor.valueOf() : mixedColor,
+      mixedColor instanceof ColorChip ? mixedColor.value : mixedColor,
       'MixedColor',
     )
     this.endGroup()
@@ -56,9 +56,9 @@ export class ColorMixerByConsoleLogger implements ColorMixerLogger {
     this.beginGroup('ColorGroup mixed')
     const { resultColor, subtractedColor, swatchColor } = colorGroup
 
-    this.messageColor(swatchColor.valueOf(), 'SwatchColor')
-    this.messageColor(subtractedColor.valueOf(), 'SubtractedColor')
-    this.messageColor(resultColor.valueOf(), 'ResultColor')
+    this.messageColor(swatchColor.value, 'SwatchColor')
+    this.messageColor(subtractedColor.value, 'SubtractedColor')
+    this.messageColor(resultColor.value, 'ResultColor')
 
     this.message('Status:' + colorGroup.isMixed() ? 'Mixed' : 'Pending')
     this.endGroup()

@@ -1,6 +1,6 @@
 import { ColorGroup } from '../models/colorGroup/ColorGroup'
 import { Color } from '../models/Color'
-import { ColorChip } from '../models/ColorChip'
+import { ColorChip } from '../models/colorChip/ColorChip'
 
 export interface ColorMixerLogger {
   log(
