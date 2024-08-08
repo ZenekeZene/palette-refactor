@@ -1,20 +1,29 @@
 import { useRef } from 'react'
-import { SwatchWrapper, Swatch } from './ColorSwatch.styled'
 import { useDraggable } from '@frontend/ui/hooks/useDraggable/useDraggable'
 import { Dragger } from '@frontend/ui/services/Dragger'
 import { useDropzone } from '@frontend/ui/hooks/useDropzone/useDropzone'
+import { Color } from '@frontend/adapter/store/types/store'
+import { SwatchWrapper, Swatch } from './ColorSwatch.styled'
 
-interface Props {
-  color: string
+export type SubtractedColorReached = Element | null
+
+interface ColorSwatchProps {
+  color: Color
   onClick: () => void
+  onDragEnd: (relatedTarget: SubtractedColorReached) => void
 }
 
-export const ColorSwatch = ({ color, onClick }: Props) => {
+export const ColorSwatch = ({
+  color,
+  onClick,
+  onDragEnd,
+}: ColorSwatchProps) => {
   const targetElementRef = useRef<HTMLDivElement>(null)
 
   useDraggable({
     targetElement: targetElementRef?.current,
     dragService: Dragger,
+    onDragEnd,
   })
 
   useDropzone({
@@ -28,7 +37,7 @@ export const ColorSwatch = ({ color, onClick }: Props) => {
       <Swatch
         ref={targetElementRef}
         className="color-draggable"
-        style={{ backgroundColor: color }}
+        style={{ backgroundColor: color.value }}
         onClick={onClick}
       ></Swatch>
     </>
