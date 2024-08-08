@@ -34,6 +34,14 @@ export class ColorChip extends Entity {
       new ColorChipType(colorChipPrimitive.type),
     )
   }
+
+  static fromResultColor(color: Color): ColorChip {
+    return new ColorChip(
+      new ColorChipId(),
+      color,
+      new ColorChipType(ColorChipType.types.RESULT),
+    )
+  }
 }
 
 export interface ColorChipPrimitive {

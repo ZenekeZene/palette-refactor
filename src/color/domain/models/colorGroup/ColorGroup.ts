@@ -1,6 +1,6 @@
 import { Entity } from '@gameContext/shared/domain/utils/Entity'
 import { ColorMixer } from '../../services/ColorMixer'
-import { ColorChip } from '../ColorChip'
+import { ColorChip } from '../colorChip/ColorChip'
 import { ColorsAreEqualsException } from '../../exceptions/ColorsAreEqualsException'
 import { ColorGroupId } from './ColorGroupId'
 import { ColorGroupStatus } from './ColorGroupStatus'
@@ -31,7 +31,7 @@ export class ColorGroup extends Entity {
   private validate() {
     const checkEquality = (color1: ColorChip, color2: ColorChip) => {
       if (color1.isEqualTo(color2)) {
-        throw new ColorsAreEqualsException(color1.valueOf(), color2.valueOf())
+        throw new ColorsAreEqualsException(color1.value, color2.value)
       }
     }
 
@@ -40,13 +40,11 @@ export class ColorGroup extends Entity {
     checkEquality(this.subtractedColor, this.swatchColor)
   }
 
+  // TODO: Are we sure that this method is not used?
   mix() {
-    const colorMixer = new ColorMixer(
-      this.subtractedColor.valueOf(),
-      this.swatchColor.valueOf(),
-    )
-    const mixedColor = colorMixer.mix()
-    if (mixedColor.isEqualTo(this.resultColor.valueOf())) {
+    const colorMixer = new ColorMixer(this.subtractedColor, this.swatchColor)
+    const mixedColor = ColorChip.fromResultColor(colorMixer.mix())
+    if (mixedColor.isEqualTo(this.resultColor)) {
       this.status = this.status.transitionToMixed()
     } else {
       this.status = this.status.transitionToError()
@@ -64,9 +62,9 @@ export class ColorGroup extends Entity {
   toPrimitive() {
     return {
       id: this.id.valueOf(),
-      resultColor: this.resultColor.valueOf().toPrimitive(),
-      subtractedColor: this.subtractedColor.valueOf().toPrimitive(),
-      swatchColor: this.swatchColor.valueOf().toPrimitive(),
+      resultColor: this.resultColor.toPrimitive(),
+      subtractedColor: this.subtractedColor.toPrimitive(),
+      swatchColor: this.swatchColor.toPrimitive(),
       status: this.status.valueOf(),
     }
   }

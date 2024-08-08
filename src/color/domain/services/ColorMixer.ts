@@ -1,12 +1,13 @@
 import { Color } from '../models/Color'
 import { ColorsAreEqualsException } from '../exceptions/ColorsAreEqualsException'
 import { InvalidColorException } from '../exceptions/InvalidColorException'
+import { ColorChip } from '../models/colorChip/ColorChip'
 
 export class ColorMixer {
-  color1: Color
-  color2: Color
+  color1: ColorChip
+  color2: ColorChip
 
-  constructor(color1: Color, color2: Color) {
+  constructor(color1: ColorChip, color2: ColorChip) {
     this.color1 = color1
     this.color2 = color2
     this.validate()
@@ -14,7 +15,7 @@ export class ColorMixer {
 
   private validate() {
     if (this.color1 === this.color2) {
-      throw new ColorsAreEqualsException(this.color1, this.color2)
+      throw new ColorsAreEqualsException(this.color1.value, this.color2.value)
     }
   }
 
@@ -28,8 +29,8 @@ export class ColorMixer {
   }
 
   mix(): Color {
-    const [h1, s1, l1] = this.parseHSL(this.color1.toPrimitive())
-    const [h2, s2, l2] = this.parseHSL(this.color2.toPrimitive())
+    const [h1, s1, l1] = this.parseHSL(this.color1.value.valueOf())
+    const [h2, s2, l2] = this.parseHSL(this.color2.value.valueOf())
 
     const h = Math.floor((h1 + h2) / 2)
     const s = Math.floor((s1 + s2) / 2)
