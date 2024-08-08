@@ -1,6 +1,6 @@
 import { Entity } from '@gameContext/shared/domain/utils/Entity'
 import { Color, ColorPrimitive } from '../Color'
-import { ColorChipType } from './ColorChipType'
+import { ColorChipType, ColorChipTypeOf } from './ColorChipType'
 import { ColorChipId } from './ColorChipId'
 
 export class ColorChip extends Entity {
@@ -41,6 +41,15 @@ export class ColorChip extends Entity {
       color,
       new ColorChipType(ColorChipType.types.RESULT),
     )
+  }
+
+  static fromTypeAndColor(
+    type: ColorChipType | ColorChipTypeOf,
+    color: Color,
+  ): ColorChip {
+    const colorChipType =
+      type instanceof ColorChipType ? type : new ColorChipType(type)
+    return new ColorChip(new ColorChipId(), color, colorChipType)
   }
 }
 
