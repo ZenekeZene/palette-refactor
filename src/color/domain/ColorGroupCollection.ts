@@ -12,7 +12,16 @@ export class ColorGroupCollection extends AggregateRoot {
     super()
   }
 
+  private isColorGroupPresent(colorGroup: ColorGroup): boolean {
+    return (
+      this.items.find((item) => item.id.equals(colorGroup.id)) !== undefined
+    )
+  }
+
   add(colorGroup: ColorGroup) {
+    if (this.isColorGroupPresent(colorGroup)) {
+      return this
+    }
     return new ColorGroupCollection(
       this.id,
       [...this.items, colorGroup],
