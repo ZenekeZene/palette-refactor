@@ -1,8 +1,9 @@
 import { registerInMemory } from './registerInMemory'
 import { nextLevel } from './nextLevel'
 import { getNextQuote } from './getNextQuote'
-import { mixColor } from './mixColor'
-import { generateColors } from './generateColors'
+import { mixColor } from './color/mixColor'
+import { generateColors } from './color/generateColors'
+import { getNextSwatchColor } from './color/getNextSwatchColor'
 
 export const actions = {
   registerInMemory,
@@ -10,4 +11,5 @@ export const actions = {
   getNextQuote,
   mixColor,
   generateColors,
+  getNextSwatchColor,
 }
