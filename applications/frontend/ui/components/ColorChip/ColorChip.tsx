@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 import { Color } from '@frontend/adapter/store/types/store'
 import { Chip } from './ColorChip.styled'
 
-export const ColorChip = ({ color }: { color: Color }) => {
+export const ColorChip = ({ id, color }: { id: string; color: Color }) => {
   const chipRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -17,6 +17,7 @@ export const ColorChip = ({ color }: { color: Color }) => {
       ref={chipRef}
       className="color-dropzone"
       style={{ backgroundColor: color.value }}
+      data-group-id={id}
       data-id={color.id}
     ></Chip>
   )
