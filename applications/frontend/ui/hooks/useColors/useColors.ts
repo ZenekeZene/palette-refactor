@@ -1,35 +1,32 @@
-import { useStore } from '@frontend/adapter/store/useStore'
 import { useEffect } from 'react'
 import { useShallow } from 'zustand/react/shallow'
+import type { ColorStoreMethods } from '@frontend/adapter/store/slices/colorStore/colorStore.d'
+import { useStore } from '@frontend/adapter/store/useStore'
 
 export const useColors = () => {
-  const state = useStore(
-    useShallow((state) => ({
-      colors: state.colors,
-      resultColors: state.resultColors,
-      subtractedColors: state.subtractedColors,
-      swatchColors: state.swatchColors,
-      indexSwatchColor: state.indexSwatchColor,
-    })),
-  )
+  const state = useStore((state) => state)
 
   const methods = useStore(
-    useShallow(({ generateColors, nextSwatchColor }) => ({
-      generateColors,
-      nextSwatchColor,
-    })),
+    useShallow(
+      ({ generateColors, nextSwatchColor, mixColor }: ColorStoreMethods) => ({
+        generateColors,
+        nextSwatchColor,
+        mixColor,
+      }),
+    ),
   )
 
   useEffect(() => {
     methods.generateColors()
-  }, [])
+  }, [methods])
+
+  // TODO: call to action and a usecase to retrieve the next swatch color?
+  const swatchColor = state.swatchColors?.[state.indexSwatchColor] ?? null
 
   return {
     colors: state.colors,
-    resultColors: state.resultColors,
-    subtractedColors: state.subtractedColors,
-    swatchColors: state.swatchColors,
-    indexSwatchColor: state.indexSwatchColor,
+    swatchColor,
     nextColor: methods.nextSwatchColor,
+    mixColor: methods.mixColor,
   }
 }

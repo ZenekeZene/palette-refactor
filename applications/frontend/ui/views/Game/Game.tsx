@@ -2,53 +2,58 @@ import { useNavigate } from 'react-router-dom'
 import { Header } from '@frontend/ui/components/Header/Header'
 import { Bonus } from '@frontend/ui/components/Bonus/Bonus'
 import { useStore } from '@frontend/adapter/store/useStore'
-import { ColorMixDebug } from '@frontend/ui/components/ColorMixDebug/ColorMixDebug'
 import { ColorsRow } from '@frontend/ui/components/ColorRow/ColorRow'
-import { ColorSwatch } from '@frontend/ui/components/ColorSwatch/ColorSwatch'
+import {
+  ColorSwatch,
+  SubtractedColorReached,
+} from '@frontend/ui/components/ColorSwatch/ColorSwatch'
 import { useColors } from '@frontend/ui/hooks/useColors/useColors'
+import type { PlayerStore } from '@frontend/adapter/store/slices/playerStore/playerStore.d'
 import {
   GameWrapper,
   Divider,
   Footer,
-  DropZone,
+  ResultZone,
   DraggableZone,
 } from './Game.styled'
+import { ColorTypes } from '@gameContext/shared/infrastructure/store/store.d'
 
 const GameView = () => {
   const navigate = useNavigate()
-  const player = useStore((state) => state.player)
-  const {
-    colors,
-    resultColors,
-    subtractedColors,
-    swatchColors,
-    indexSwatchColor,
-    nextColor,
-  } = useColors()
+  const player = useStore((state: PlayerStore) => state.player)
+  const { colors, swatchColor, nextColor, mixColor } = useColors()
 
-  const swatchColor = swatchColors[indexSwatchColor]
+  const handleDragEnd = (subtractedColorReached: SubtractedColorReached) => {
+    if (!subtractedColorReached) return
+    const subtractedColorId = subtractedColorReached.getAttribute('data-id')!
+    // mixColor(subtractedColorId)
+  }
+
+  console.log(colors)
 
   return (
     <GameWrapper className="view">
-      <DropZone>
+      <ResultZone>
         <Header
           level={player.levelIndex + 1}
           lives={player.lives}
           score={player.score}
           onBack={() => navigate('/')}
         />
-        {resultColors && <ColorsRow colors={resultColors} />}
-      </DropZone>
+        {colors && <ColorsRow colors={colors} type={ColorTypes.RESULT} />}
+      </ResultZone>
       <Divider />
       <DraggableZone>
-        {subtractedColors && <ColorsRow colors={subtractedColors} />}
+        {colors && <ColorsRow colors={colors} type={ColorTypes.SUBTRACTED} />}
 
-        <ColorSwatch color={swatchColor} onClick={nextColor} />
-        <Footer>
-          {player.bonus > 0 && <Bonus bonus={player.bonus} />}
-
-          {colors?.length > 0 && <ColorMixDebug colors={colors.items} />}
-        </Footer>
+        {swatchColor && (
+          <ColorSwatch
+            color={swatchColor}
+            onClick={nextColor}
+            onDragEnd={handleDragEnd}
+          />
+        )}
+        <Footer>{player.bonus > 0 && <Bonus bonus={player.bonus} />}</Footer>
       </DraggableZone>
     </GameWrapper>
   )

@@ -8,6 +8,8 @@ import {
   GenerateColorsItem,
   GenerateColorsResponse,
 } from '@gameContext/color/application/dto/GenerateColorsResponse'
+import type { ColorChipTypeOf } from '@gameContext/color/domain/models/colorChip/ColorChipType'
+export { ColorTypes } from '@gameContext/color/domain/models/colorChip/ColorChipType'
 
 export type { LevelDTO as Level }
 export type { PlayerResponse as Player }
@@ -17,3 +19,4 @@ export type { QuoteDTO as Quote }
 export type { ColorChipDTO as Color }
 export type { GenerateColorsResponse as Colors }
 export type { GenerateColorsItem as ColorGroup }
+export type { ColorChipTypeOf as ColorTypeOf }

@@ -6,7 +6,9 @@ export type {
   Color,
   Colors,
   ColorGroup,
+  ColorTypeOf,
 } from '@gameContext/shared/infrastructure/store/store'
+export { ColorTypes } from '@gameContext/shared/infrastructure/store/store.d'
 
 import { ColorStore } from '../slices/colorStore/colorStore'
 import { PlayerStore } from '../slices/playerStore/playerStore'

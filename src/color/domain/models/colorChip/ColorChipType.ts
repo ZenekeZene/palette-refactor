@@ -6,6 +6,8 @@ const types = {
 
 export type ColorChipTypeOf = (typeof types)[keyof typeof types]
 
+export const ColorTypes = types
+
 export class ColorChipType {
   static readonly types = types
 
