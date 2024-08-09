@@ -1,14 +1,16 @@
+import { ColorChipPrimitive } from '@gameContext/color/domain/models/colorChip/ColorChip'
 import type { Response } from '@gameContext/shared/domain/utils/Response'
 
 export interface GenerateColorsItem {
   readonly id: string
-  readonly resultColor: string
-  readonly subtractedColor: string
-  readonly swatchColor: string
+  readonly resultColor: ColorChipPrimitive
+  readonly subtractedColor: ColorChipPrimitive
+  readonly swatchColor: ColorChipPrimitive
   readonly status: string
 }
 
 export interface GenerateColorsResponse extends Response {
+  readonly id: string
   readonly items: GenerateColorsItem[]
-  levelId: string
+  readonly levelId: string
 }
