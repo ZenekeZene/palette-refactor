@@ -2,16 +2,14 @@ import type { Color, Colors } from '../../types/store'
 
 export interface ColorStoreState {
   indexSwatchColor: number
-  resultColors: Color[]
-  subtractedColors: Color[]
-  swatchColors: Color[]
   colors: Colors | undefined
+  swatchColors: Color[]
+  swatchColor: Color | undefined
 }
 
 export interface ColorStoreMethods {
-  updateAllColors: () => void
   nextSwatchColor: () => void
-  mixColor: (color1: Color, color2: Color) => Color
+  mixColor: (subtractedColorId: string, swatchColor: Color) => void
   generateColors: () => void
 }
 

@@ -1,21 +1,11 @@
 import { StateCreator } from 'zustand'
-import type { Store, Color, ColorGroup } from '../../types/store'
+import type { Store } from '../../types/store'
 import { actions } from '../../actions/actions'
-import type { ColorStore } from './colorStore.d'
+import type { ColorStore, ColorStoreState } from './colorStore.d'
 
-function extractColors(items: ColorGroup[]) {
-  const resultColors = items.map((color: ColorGroup) => color.resultColor)
-  const subtractedColors = items.map(
-    (color: ColorGroup) => color.subtractedColor,
-  )
-  const swatchColors = items.map((color: ColorGroup) => color.swatchColor)
-  return { resultColors, subtractedColors, swatchColors }
-}
-
-const initialState = {
+const initialState: ColorStoreState = {
   indexSwatchColor: 0,
-  resultColors: [],
-  subtractedColors: [],
+  swatchColor: undefined,
   swatchColors: [],
   colors: undefined,
 }
@@ -25,33 +15,21 @@ export const createColorStore: StateCreator<Store, [], [], ColorStore> = (
   get,
 ) => ({
   ...initialState,
-  updateAllColors: () => {
-    const colors = get().colors
-    set((state: ColorStore) => ({
-      ...state,
-      colors,
-      ...extractColors(colors.items),
-    }))
-  },
   nextSwatchColor: () => {
-    const prev = get().indexSwatchColor
-    const swatchColors = get().swatchColors
-    const nextIndexSwatchColor = (prev + 1) % swatchColors!.length
     set((state: ColorStore) => ({
       ...state,
-      indexSwatchColor: nextIndexSwatchColor,
+      ...actions.getNextSwatchColor(get()),
     }))
   },
-  mixColor: (color1: Color, color2: Color): Color =>
-    actions.mixColor(color1, color2),
+  mixColor: (subtractedColorId: string): void => {
+    // const response = actions.mixColor(subtractedColorId, get())
+    // if OK => get().nextSwatchColor()
+    // if KO => Lose!
+  },
   generateColors: () => {
-    const levels = get().levels
-    const level = levels.items[get().player.levelIndex]
-    if (!level) {
-      throw new Error('Level not found')
-    }
-    const colors = actions.generateColors(levels.id, level.id)
-    set((state: ColorStore) => ({ ...state, colors }))
-    get().updateAllColors()
+    set((state: ColorStore) => ({
+      ...state,
+      colors: actions.generateColors(get()),
+    }))
   },
 })
