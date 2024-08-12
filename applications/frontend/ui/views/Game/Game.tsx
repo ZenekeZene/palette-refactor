@@ -25,14 +25,15 @@ const GameView = () => {
 
   const handleDragEnd = (subtractedColorReached: SubtractedColorReached) => {
     if (!subtractedColorReached) return
+    const groupId = subtractedColorReached.getAttribute('data-group-id')!
     const subtractedColorId = subtractedColorReached.getAttribute('data-id')!
-    // mixColor(subtractedColorId)
+    const swatchColorId = swatchColor.id
+    mixColor(groupId, subtractedColorId, swatchColorId)
   }
-
-  console.log(colors)
 
   return (
     <GameWrapper className="view">
+      {/* TODO: Implement the ResultZone component */}
       <ResultZone>
         <Header
           level={player.levelIndex + 1}
@@ -43,6 +44,7 @@ const GameView = () => {
         {colors && <ColorsRow colors={colors} type={ColorTypes.RESULT} />}
       </ResultZone>
       <Divider />
+      {/* TODO: Implement the DraggableZone component */}
       <DraggableZone>
         {colors && <ColorsRow colors={colors} type={ColorTypes.SUBTRACTED} />}
 

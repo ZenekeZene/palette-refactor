@@ -1,5 +1,4 @@
 import { Entity } from '@gameContext/shared/domain/utils/Entity'
-import { ColorMixer } from '../../services/ColorMixer'
 import { ColorChip } from '../colorChip/ColorChip'
 import { ColorsAreEqualsException } from '../../exceptions/ColorsAreEqualsException'
 import { ColorGroupId } from './ColorGroupId'
@@ -40,15 +39,12 @@ export class ColorGroup extends Entity {
     checkEquality(this.subtractedColor, this.swatchColor)
   }
 
-  // TODO: Are we sure that this method is not used?
-  mix() {
-    const colorMixer = new ColorMixer(this.subtractedColor, this.swatchColor)
-    const mixedColor = ColorChip.fromResultColor(colorMixer.mix())
-    if (mixedColor.isEqualTo(this.resultColor)) {
-      this.status = this.status.transitionToMixed()
-    } else {
-      this.status = this.status.transitionToError()
-    }
+  success() {
+    this.status = this.status.transitionToMixed()
+  }
+
+  fail() {
+    this.status = this.status.transitionToFailed()
   }
 
   isMixed(): boolean {

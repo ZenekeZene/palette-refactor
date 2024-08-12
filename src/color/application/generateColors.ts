@@ -48,7 +48,7 @@ export class GenerateColors
       levelId,
     )
     this.colorRepository.save(colorGroupCollection)
-    colorGroupCollection.each(this.logger.logGroup.bind(this.logger))
+    colorGroupCollection.each((colorGroup) => this.logger.logGroup(colorGroup))
     return toGenerateColorsResponse(colorGroupCollection)
   }
 }

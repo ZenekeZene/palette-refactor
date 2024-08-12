@@ -2,6 +2,8 @@ import { LevelId } from '@gameContext/level/domain/models/level/LevelId'
 import { AggregateRoot } from '@gameContext/shared/domain/utils/AggregateRoot'
 import { ColorGroup } from './models/colorGroup/ColorGroup'
 import { ColorGroupCollectionId } from './ColorGroupCollectionId'
+import { ColorGroupId } from './models/colorGroup/ColorGroupId'
+import { ColorChipId } from './models/colorChip/ColorChipId'
 
 export class ColorGroupCollection extends AggregateRoot {
   constructor(
@@ -16,6 +18,29 @@ export class ColorGroupCollection extends AggregateRoot {
     return (
       this.items.find((item) => item.id.equals(colorGroup.id)) !== undefined
     )
+  }
+
+  private getColorGroup(colorGroup: ColorGroup): ColorGroup {
+    return this.items.find((item) => item.id.equals(colorGroup.id))!
+  }
+
+  getColorGroupById(colorGroupId: ColorGroupId): ColorGroup {
+    return this.items.find((item) => item.id.equals(colorGroupId))!
+  }
+
+  areTheSameColorGroup(
+    colorGroupReference: ColorGroup,
+    subtractedColorId: ColorChipId,
+    swatchColorId: ColorChipId,
+  ): boolean {
+    if (this.isColorGroupPresent(colorGroupReference)) {
+      const colorGroup = this.getColorGroup(colorGroupReference)
+      const sameSubstractedColor =
+        colorGroup.subtractedColor.equalsById(subtractedColorId)
+      const sameSwatchColor = colorGroup.swatchColor.equalsById(swatchColorId)
+      return sameSubstractedColor && sameSwatchColor
+    }
+    return false
   }
 
   add(colorGroup: ColorGroup) {

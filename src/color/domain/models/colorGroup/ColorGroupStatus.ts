@@ -32,7 +32,7 @@ export class ColorGroupStatus extends ValueObject<ColorGroupStatusType> {
     }
   }
 
-  transitionToError(): ColorGroupStatus {
+  transitionToFailed(): ColorGroupStatus {
     if (this.value === ColorGroupStatusTypes.PENDING) {
       return this.transitionTo(ColorGroupStatusTypes.ERROR)
     } else {

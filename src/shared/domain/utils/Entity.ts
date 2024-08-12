@@ -18,4 +18,8 @@ export abstract class Entity {
     }
     return this.id.equals(Object.id)
   }
+
+  public equalsById(id: EntityId): boolean {
+    return this.id.equals(id)
+  }
 }

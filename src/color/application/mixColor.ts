@@ -1,27 +1,48 @@
 import { injectable, inject } from 'tsyringe'
 import { Types } from '@gameContext/shared/infrastructure/dependency-injection/identifiers'
 import type { UseCase } from '@gameContext/shared/domain/utils/UseCase'
-import { ColorMixer } from '../domain/services/ColorMixer'
-import { toMixColorResponse } from './mapper/MixColorMapper'
 import type { ColorMixerLogger } from '../domain/repositories/ColorMixerLogger'
-import type { MixColorResponse } from './dto/MixColorResponse'
 import type { MixColorRequest } from './dto/MixColorRequest'
-import { ColorChip } from '../domain/models/colorChip/ColorChip'
+import type { ColorRepository } from '../domain/repositories/ColorRepository'
+import { ColorGroupId } from '../domain/models/colorGroup/ColorGroupId'
+import { ColorChipId } from '../domain/models/colorChip/ColorChipId'
+import { ColorGroupNotFoundInCollection } from '../domain/exceptions/ColorGroupCollectionNotFound'
 
 @injectable()
-export class MixColor implements UseCase<MixColorRequest, MixColorResponse> {
+export class MixColor implements UseCase<MixColorRequest, boolean> {
   constructor(
     @inject(Types.ColorMixerLogger) private logger: ColorMixerLogger,
+    @inject(Types.ColorRepository) private repository: ColorRepository,
   ) {}
 
-  execute(mixColorRequest: MixColorRequest): MixColorResponse {
-    const colorChip1 = ColorChip.fromPrimitive(mixColorRequest.color1)
-    const colorChip2 = ColorChip.fromPrimitive(mixColorRequest.color2)
-    const mixedColor = new ColorMixer(colorChip1, colorChip2).mix()
-    const mixedColorChip = ColorChip.fromResultColor(mixedColor)
-    this.logger.log(colorChip1, colorChip2, mixedColor)
-    // TODO: check if the response is correct
+  execute(mixColorRequest: MixColorRequest): boolean {
+    const colorGroupId = new ColorGroupId(mixColorRequest.colorGroupId)
+    const subtractedColorId = new ColorChipId(mixColorRequest.subtractedColorId)
+    const swatchColorId = new ColorChipId(mixColorRequest.swatchColorId)
 
-    return toMixColorResponse(mixedColorChip)
+    const colorGroupCollection =
+      this.repository.findByColorGroupId(colorGroupId)
+    if (!colorGroupCollection) {
+      throw new ColorGroupNotFoundInCollection(colorGroupId)
+    }
+    const colorGroup = colorGroupCollection.getColorGroupById(colorGroupId)
+    const areTheSameColorGroup = colorGroupCollection.areTheSameColorGroup(
+      colorGroup,
+      subtractedColorId,
+      swatchColorId,
+    )
+    // TODO: Model the response
+    // TODO: Trigger a domain event
+    if (areTheSameColorGroup) {
+      this.logger.success(colorGroup)
+      colorGroup.success()
+      return true
+    } else {
+      this.logger.fail(colorGroup)
+      colorGroup.fail()
+      return false
+    }
   }
 }
+// Note: not use here the ColorMixer service, its unnecessary
+// because the colors are already mixed when the generateColors service is called.

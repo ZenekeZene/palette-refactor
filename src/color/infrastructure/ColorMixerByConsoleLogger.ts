@@ -52,8 +52,8 @@ export class ColorMixerByConsoleLogger implements ColorMixerLogger {
     this.endGroup()
   }
 
-  logGroup(colorGroup: ColorGroup) {
-    this.beginGroup('ColorGroup mixed')
+  logGroup(colorGroup: ColorGroup, message: string = ''): void {
+    this.beginGroup(`Color Group Mixed ${message}`)
     const { resultColor, subtractedColor, swatchColor } = colorGroup
 
     this.messageColor(swatchColor.value, 'SwatchColor')
@@ -62,5 +62,13 @@ export class ColorMixerByConsoleLogger implements ColorMixerLogger {
 
     this.message('Status:' + colorGroup.isMixed() ? 'Mixed' : 'Pending')
     this.endGroup()
+  }
+
+  success(colorGroup: ColorGroup): void {
+    this.logGroup(colorGroup, 'Successfully')
+  }
+
+  fail(colorGroup: ColorGroup): void {
+    this.logGroup(colorGroup, 'Failed')
   }
 }
