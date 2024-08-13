@@ -5,13 +5,16 @@ import type { EventBus } from '@gameContext/shared/domain/utils/EventBus'
 import type { ColorMixerLogger } from '../domain/repositories/ColorMixerLogger'
 import type { MixColorRequest } from './dto/MixColorRequest'
 import type { ColorRepository } from '../domain/repositories/ColorRepository'
+import type { ColorGroupCollection } from '../domain/ColorGroupCollection'
 import { ColorGroupId } from '../domain/models/colorGroup/ColorGroupId'
 import { ColorChipId } from '../domain/models/colorChip/ColorChipId'
 import { ColorGroupNotFoundInCollection } from '../domain/exceptions/ColorGroupNotFoundInCollection'
-import type { ColorGroupCollection } from '../domain/ColorGroupCollection'
+import { ColorGroup } from '../domain/models/colorGroup/ColorGroup'
+import { MixColorResponse } from './dto/MixColorResponse'
+import { toMixColorResponse } from './mapper/MixColorMapper'
 
 @injectable()
-export class MixColor implements UseCase<MixColorRequest, boolean> {
+export class MixColor implements UseCase<MixColorRequest, MixColorResponse> {
   constructor(
     @inject(Types.ColorMixerLogger) private logger: ColorMixerLogger,
     @inject(Types.ColorRepository) private repository: ColorRepository,
@@ -29,7 +32,25 @@ export class MixColor implements UseCase<MixColorRequest, boolean> {
     return colorGroupCollection
   }
 
-  execute(mixColorRequest: MixColorRequest): boolean {
+  private handleSuccess(
+    colorGroup: ColorGroup,
+    colorGroupCollection: ColorGroupCollection,
+  ) {
+    this.logger.success(colorGroup)
+    colorGroupCollection.success(colorGroup)
+    return toMixColorResponse(colorGroup, null)
+  }
+
+  private handleFailure(
+    colorGroup: ColorGroup,
+    colorGroupCollection: ColorGroupCollection,
+  ) {
+    this.logger.fail(colorGroup)
+    colorGroupCollection.fail(colorGroup)
+    return toMixColorResponse(null, new Error('Failed to mix color'))
+  }
+
+  execute(mixColorRequest: MixColorRequest): MixColorResponse {
     const colorGroupId = new ColorGroupId(mixColorRequest.colorGroupId)
     const subtractedColorId = new ColorChipId(mixColorRequest.subtractedColorId)
     const swatchColorId = new ColorChipId(mixColorRequest.swatchColorId)
@@ -41,16 +62,12 @@ export class MixColor implements UseCase<MixColorRequest, boolean> {
       subtractedColorId,
       swatchColorId,
     )
-    // TODO: Model the response
-    if (areTheSameColorGroup) {
-      this.logger.success(colorGroup)
-      colorGroupCollection.success(colorGroup)
-    } else {
-      this.logger.fail(colorGroup)
-      colorGroupCollection.fail(colorGroup)
-    }
+
+    const response: MixColorResponse = areTheSameColorGroup
+      ? this.handleSuccess(colorGroup, colorGroupCollection)
+      : this.handleFailure(colorGroup, colorGroupCollection)
     this.eventBus.publish(colorGroupCollection.pullDomainEvents())
-    return areTheSameColorGroup
+    return response
   }
 }
 // Note: not use here the ColorMixer service, its unnecessary

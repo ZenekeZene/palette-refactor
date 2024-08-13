@@ -1,6 +1,10 @@
-import { ColorChipPrimitive } from '@gameContext/color/domain/models/colorChip/ColorChip'
-import type { Response } from '@gameContext/shared/domain/utils/Response'
+import { ColorGroup } from '@gameContext/color/domain/models/colorGroup/ColorGroup'
+import { Result } from '@gameContext/shared/domain/utils/Result'
 
-export class MixColorResponse implements Response {
-  constructor(public readonly value: ColorChipPrimitive) {}
+export class MixColorResponse {
+  readonly result: Result<ColorGroup, Error>
+
+  constructor(result: Result<ColorGroup, Error>) {
+    this.result = result
+  }
 }
