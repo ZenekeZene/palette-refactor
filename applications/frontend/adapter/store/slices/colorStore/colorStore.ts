@@ -43,9 +43,16 @@ export const createColorStore: StateCreator<Store, [], [], ColorStore> = (
       subtractedColorId,
       swatchColorId,
     )
-    // TODO: Implement response handling
-    // if OK => get().nextSwatchColor()
-    // if KO => Lose!
+    if (response instanceof Error) {
+      // TODO: go to error screen.
+    } else {
+      const { result } = response
+      if (result.isOk()) {
+        get().nextSwatchColor()
+      } else if (result.isErr()) {
+        // TODO: go to lose screen.
+      }
+    }
   },
   generateColors: () => {
     set((state: ColorStore) => ({

@@ -1,9 +1,9 @@
 import { useStore } from '@frontend/adapter/store/useStore'
 import type { PlayerStore } from '@frontend/adapter/store/slices/playerStore/playerStore.d'
-import { SubtractedColorReached } from '@frontend/ui/components/ColorSwatch/ColorSwatch'
+import { SubtractedColorReached } from '@frontend/ui/components/color/ColorSwatch/ColorSwatch'
 import { useColors } from '@frontend/ui/hooks/useColors/useColors'
-import { ResultColorsZone } from '@frontend/ui/components/ResultColorsZone/ResultColorsZone'
-import { MixerColorsZone } from '@frontend/ui/components/MixerColorsZone/MixerColorsZone'
+import { ResultColorsZone } from '@frontend/ui/components/zones/ResultColorsZone/ResultColorsZone'
+import { MixerColorsZone } from '@frontend/ui/components/zones/MixerColorsZone/MixerColorsZone'
 import { GameWrapper, Divider } from './Game.styled'
 
 const GameView = () => {

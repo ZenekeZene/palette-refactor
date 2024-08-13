@@ -1,12 +1,15 @@
-import {
+import type {
   Color,
   Colors,
-  ColorTypes,
   Player,
-} from '@gameContext/shared/infrastructure/store/store'
-import { ColorsRow } from '../ColorRow/ColorRow'
-import { ColorSwatch, SubtractedColorReached } from '../ColorSwatch/ColorSwatch'
-import { Bonus } from '../Bonus/Bonus'
+} from '@gameContext/shared/infrastructure/store/store.d'
+import { ColorTypes } from '@gameContext/shared/infrastructure/store/store.d'
+import { ColorsRow } from '../../color/ColorRow/ColorRow'
+import {
+  ColorSwatch,
+  SubtractedColorReached,
+} from '../../color/ColorSwatch/ColorSwatch'
+import { Bonus } from '../../gui/Bonus/Bonus'
 import { DraggableZone, Footer } from './MixerColorsZone.styled'
 
 interface Props {

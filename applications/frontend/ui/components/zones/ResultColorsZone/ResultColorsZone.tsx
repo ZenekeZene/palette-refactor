@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom'
 import { ColorTypes } from '@gameContext/shared/infrastructure/store/store.d'
-import type { Colors, Player } from '../../../adapter/store/types/store'
-import { Header } from '../Header/Header'
-import { ColorsRow } from '../ColorRow/ColorRow'
+import type { Colors, Player } from '@frontend/adapter/store/types/store.d'
+import { Header } from '../../gui/Header/Header'
+import { ColorsRow } from '../../color/ColorRow/ColorRow'
 import { ResultZone } from './ResultColorsZone.styled'
 
 export const ResultColorsZone = ({

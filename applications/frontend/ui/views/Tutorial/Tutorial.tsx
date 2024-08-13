@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { FaAngleRight } from 'react-icons/fa'
 import { useClassnameOfRoute } from '@frontend/ui/hooks/useClassnameOfRoute/useClassnameOfRoute'
-import { LocationDisplay } from '@frontend/ui/components/LocationDisplay/LocationDisplay'
+import { LocationDisplay } from '@frontend/ui/components/misc/LocationDisplay/LocationDisplay'
 import {
   Tutorial,
   Title,
