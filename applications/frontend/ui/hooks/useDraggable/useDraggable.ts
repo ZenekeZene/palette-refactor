@@ -1,17 +1,19 @@
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import type { DragEvent } from '@interactjs/types'
+import { DraggerType } from '@frontend/ui/services/Dragger'
 
 interface useDraggableProps {
   targetElement: HTMLElement | null
-  dragService: (config: any) => any
+  dragService: DraggerType
   onDragEnd: (relatedTarget: Element | null) => void
 }
 
 export const useDraggable = ({
-  targetElement,
   dragService,
   onDragEnd = () => {},
 }: useDraggableProps) => {
+  const [targetElement, setTargetElement] = useState<HTMLElement | null>(null)
+
   const dragMoveListener = useCallback(
     (event: DragEvent) => {
       if (!targetElement) return
@@ -26,7 +28,7 @@ export const useDraggable = ({
       targetElement.setAttribute('data-x', x.toString())
       targetElement.setAttribute('data-y', y.toString())
     },
-    [targetElement, onDragEnd, dragService],
+    [targetElement],
   )
 
   const dragEndListener = useCallback(() => {
@@ -64,5 +66,7 @@ export const useDraggable = ({
     return () => {
       unset()
     }
-  }, [targetElement, dragService, dragEndListener, dragMoveListener])
+  }, [targetElement, dragService, dragEndListener, dragMoveListener, onDragEnd])
+
+  return { setTargetElement }
 }

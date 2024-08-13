@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { useDraggable } from '@frontend/ui/hooks/useDraggable/useDraggable'
 import { Dragger } from '@frontend/ui/services/Dragger'
 import { useDropzone } from '@frontend/ui/hooks/useDropzone/useDropzone'
@@ -6,6 +6,9 @@ import { Color } from '@frontend/adapter/store/types/store'
 import { SwatchWrapper, Swatch } from './ColorSwatch.styled'
 
 export type SubtractedColorReached = Element | null
+
+const COLOR_DROPZONE_SELECTOR = '.color-dropzone'
+const COLOR_DRAGGABLE_SELECTOR = '.color-draggable'
 
 interface ColorSwatchProps {
   color: Color
@@ -20,16 +23,21 @@ export const ColorSwatch = ({
 }: ColorSwatchProps) => {
   const targetElementRef = useRef<HTMLDivElement>(null)
 
-  useDraggable({
+  const { setTargetElement } = useDraggable({
     targetElement: targetElementRef?.current,
     dragService: Dragger,
     onDragEnd,
   })
 
   useDropzone({
-    targetElementCSSSelector: '.color-dropzone',
-    relatedTargetCSSSelector: '.color-draggable',
+    targetElementCSSSelector: COLOR_DROPZONE_SELECTOR,
+    relatedTargetCSSSelector: COLOR_DRAGGABLE_SELECTOR,
   })
+
+  useEffect(() => {
+    if (!targetElementRef.current) return
+    setTargetElement(targetElementRef.current)
+  }, [targetElementRef, setTargetElement])
 
   return (
     <>

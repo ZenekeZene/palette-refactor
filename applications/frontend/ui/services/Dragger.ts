@@ -3,6 +3,10 @@ import {
   DraggerFacadeProps,
 } from '@frontend/infrastructure/DraggerFacade'
 
+export type DraggerType = (config: DraggerFacadeProps) => {
+  init: () => { unset: () => void }
+}
+
 export const Dragger = ({
   targetElement,
   start,
@@ -15,15 +19,14 @@ export const Dragger = ({
     move,
     end,
   })
-  return {
-    init: () => {
-      dragFacade.init()
 
-      return {
-        unset: () => {
-          dragFacade.unset()
-        },
-      }
-    },
+  const unset = () => {
+    dragFacade.unset()
   }
+
+  const init = () => {
+    dragFacade.init()
+    return { unset }
+  }
+  return { init }
 }
