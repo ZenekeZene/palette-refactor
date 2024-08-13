@@ -7,13 +7,10 @@ export const useColors = () => {
   const state = useStore((state) => state)
 
   const methods = useStore(
-    useShallow(
-      ({ generateColors, nextSwatchColor, mixColor }: ColorStoreMethods) => ({
-        generateColors,
-        nextSwatchColor,
-        mixColor,
-      }),
-    ),
+    useShallow(({ generateColors, mixColor }: ColorStoreMethods) => ({
+      generateColors,
+      mixColor,
+    })),
   )
 
   useEffect(() => {
@@ -26,7 +23,6 @@ export const useColors = () => {
   return {
     colors: state.colors,
     swatchColor,
-    nextColor: methods.nextSwatchColor,
     mixColor: methods.mixColor,
   }
 }
