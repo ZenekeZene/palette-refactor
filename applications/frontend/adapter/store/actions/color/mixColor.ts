@@ -6,15 +6,10 @@ import { MixColorResponse } from '@gameContext/color/application/dto/MixColorRes
 
 export const mixColor = (
   colorGroupId: string,
-  subtractedColorId: string,
   swatchColorId: string,
 ): MixColorResponse | Error => {
   try {
-    const mixColorRequest = new MixColorRequest(
-      colorGroupId,
-      subtractedColorId,
-      swatchColorId,
-    )
+    const mixColorRequest = new MixColorRequest(colorGroupId, swatchColorId)
     const mixColorUseCase = container.resolve<MixColor>(Types.MixColor)
     return mixColorUseCase.execute(mixColorRequest)
   } catch (error) {

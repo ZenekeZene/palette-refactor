@@ -52,14 +52,12 @@ export class MixColor implements UseCase<MixColorRequest, MixColorResponse> {
 
   execute(mixColorRequest: MixColorRequest): MixColorResponse {
     const colorGroupId = new ColorGroupId(mixColorRequest.colorGroupId)
-    const subtractedColorId = new ColorChipId(mixColorRequest.subtractedColorId)
     const swatchColorId = new ColorChipId(mixColorRequest.swatchColorId)
 
     const colorGroupCollection = this.getColorGroupCollection(colorGroupId)
     const colorGroup = colorGroupCollection.getColorGroupById(colorGroupId)
     const areTheSameColorGroup = colorGroupCollection.areTheSameColorGroup(
       colorGroup,
-      subtractedColorId,
       swatchColorId,
     )
 

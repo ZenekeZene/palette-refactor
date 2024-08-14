@@ -34,15 +34,11 @@ export class ColorGroupCollection extends AggregateRoot {
 
   areTheSameColorGroup(
     colorGroupReference: ColorGroup,
-    subtractedColorId: ColorChipId,
     swatchColorId: ColorChipId,
   ): boolean {
     if (this.isColorGroupPresent(colorGroupReference)) {
       const colorGroup = this.getColorGroup(colorGroupReference)
-      const sameSubstractedColor =
-        colorGroup.subtractedColor.equalsById(subtractedColorId)
-      const sameSwatchColor = colorGroup.swatchColor.equalsById(swatchColorId)
-      return sameSubstractedColor && sameSwatchColor
+      return colorGroup.swatchColor.equalsById(swatchColorId)
     }
     return false
   }

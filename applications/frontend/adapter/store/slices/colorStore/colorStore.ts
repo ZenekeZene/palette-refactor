@@ -33,16 +33,8 @@ export const createColorStore: StateCreator<Store, [], [], ColorStore> = (
       ...actions.getNextSwatchColor(get()),
     }))
   },
-  mixColor: (
-    colorGroupId: string,
-    subtractedColorId: string,
-    swatchColorId: string,
-  ): void => {
-    const response = actions.mixColor(
-      colorGroupId,
-      subtractedColorId,
-      swatchColorId,
-    )
+  mixColor: (colorGroupId: string, swatchColorId: string): void => {
+    const response = actions.mixColor(colorGroupId, swatchColorId)
     if (response instanceof Error) {
       // TODO: go to error screen.
     } else {

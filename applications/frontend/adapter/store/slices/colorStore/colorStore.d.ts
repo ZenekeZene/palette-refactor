@@ -9,11 +9,7 @@ export interface ColorStoreState {
 
 export interface ColorStoreMethods {
   nextSwatchColor: () => void
-  mixColor: (
-    groupColorId: string,
-    substractedColorId: string,
-    swatchColorId: string,
-  ) => void
+  mixColor: (groupColorId: string, swatchColorId: string) => void
   generateColors: () => void
 }
 

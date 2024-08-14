@@ -13,9 +13,8 @@ const GameView = () => {
   const handleDragEnd = (subtractedColorReached: SubtractedColorReached) => {
     if (!subtractedColorReached) return
     const groupId = subtractedColorReached.getAttribute('data-group-id')!
-    const subtractedColorId = subtractedColorReached.getAttribute('data-id')!
     const swatchColorId = swatchColor.id
-    mixColor(groupId, subtractedColorId, swatchColorId)
+    mixColor(groupId, swatchColorId)
   }
 
   return (
