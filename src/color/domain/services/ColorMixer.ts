@@ -1,6 +1,6 @@
 import { Color } from '../models/Color'
-import { ColorsAreEqualsException } from '../exceptions/ColorsAreEqualsException'
-import { InvalidColorException } from '../exceptions/InvalidColorException'
+import { ColorsAreEquals } from '../exceptions/ColorsAreEquals'
+import { InvalidColor } from '../exceptions/InvalidColor'
 import { ColorChip } from '../models/colorChip/ColorChip'
 
 export class ColorMixer {
@@ -15,7 +15,7 @@ export class ColorMixer {
 
   private validate() {
     if (this.color1 === this.color2) {
-      throw new ColorsAreEqualsException(this.color1.value, this.color2.value)
+      throw new ColorsAreEquals(this.color1.value, this.color2.value)
     }
   }
 
@@ -23,7 +23,7 @@ export class ColorMixer {
     const regex = /hsl\((\d+),\s*(\d+)%?,\s*(\d+)%?\)/
     const result = regex.exec(hsl)
     if (!result) {
-      throw new InvalidColorException(new Color(hsl))
+      throw new InvalidColor(new Color(hsl))
     }
     return [parseInt(result[1]), parseInt(result[2]), parseInt(result[3])]
   }

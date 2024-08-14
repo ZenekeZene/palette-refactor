@@ -27,10 +27,6 @@ export class ColorMixerByConsoleLogger implements ColorMixerLogger {
     )
   }
 
-  private message(message: string) {
-    console.log(message)
-  }
-
   log(
     color1: Color | ColorChip,
     color2: Color | ColorChip,
@@ -60,7 +56,6 @@ export class ColorMixerByConsoleLogger implements ColorMixerLogger {
     this.messageColor(subtractedColor.value, 'SubtractedColor')
     this.messageColor(resultColor.value, 'ResultColor')
 
-    this.message('Status:' + colorGroup.isMixed() ? 'Mixed' : 'Pending')
     this.endGroup()
   }
 
@@ -68,7 +63,11 @@ export class ColorMixerByConsoleLogger implements ColorMixerLogger {
     this.logGroup(colorGroup, 'Successfully')
   }
 
-  fail(colorGroup: ColorGroup): void {
-    this.logGroup(colorGroup, 'Failed')
+  fail(failedColorGroup: ColorGroup, correctColorGroup: ColorGroup): void {
+    this.logGroup(failedColorGroup, 'Failed')
+    this.messageColor(
+      correctColorGroup.subtractedColor.value,
+      `The correct color was:`,
+    )
   }
 }

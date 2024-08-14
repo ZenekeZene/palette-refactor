@@ -1,6 +1,6 @@
 import { Entity } from '@gameContext/shared/domain/utils/Entity'
 import { ColorChip } from '../colorChip/ColorChip'
-import { ColorsAreEqualsException } from '../../exceptions/ColorsAreEqualsException'
+import { ColorsAreEquals } from '../../exceptions/ColorsAreEquals'
 import { ColorGroupId } from './ColorGroupId'
 import { ColorGroupStatus } from './ColorGroupStatus'
 
@@ -30,7 +30,7 @@ export class ColorGroup extends Entity {
   private validate() {
     const checkEquality = (color1: ColorChip, color2: ColorChip) => {
       if (color1.isEqualTo(color2)) {
-        throw new ColorsAreEqualsException(color1.value, color2.value)
+        throw new ColorsAreEquals(color1.value, color2.value)
       }
     }
 

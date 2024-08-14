@@ -17,7 +17,6 @@ export class ColorInMemoryRepository implements ColorRepository {
       colorGroupCollection.id.valueOf(),
       colorGroupCollection,
     )
-    console.log('ColorGroupCollection saved:', colorGroupCollection)
   }
 
   findById(id: ColorGroupCollectionId): ColorGroupCollection | undefined {

@@ -1,10 +1,10 @@
 import { Color } from '../models/Color'
 
-class InvalidColorException extends Error {
+class InvalidColor extends Error {
   constructor(color: Color) {
     super(`Invalid color value: (${color.valueOf()})`)
-    this.name = 'InvalidColorException'
+    this.name = 'InvalidColor'
   }
 }
 
-export { InvalidColorException }
+export { InvalidColor }
