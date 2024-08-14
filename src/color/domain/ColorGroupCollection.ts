@@ -43,6 +43,12 @@ export class ColorGroupCollection extends AggregateRoot {
     return false
   }
 
+  searchCorrectColorGroup(swatchColorId: ColorChipId): ColorGroup {
+    return this.items.find((colorGroup) =>
+      colorGroup.swatchColor.equalsById(swatchColorId),
+    )!
+  }
+
   add(colorGroup: ColorGroup) {
     if (this.isColorGroupPresent(colorGroup)) {
       return this
@@ -89,7 +95,8 @@ export class ColorGroupCollection extends AggregateRoot {
   private recordColorGroupFailedMixed(colorGroup: ColorGroup) {
     const colorGroupMixedFailed = new ColorGroupFailedMixed({
       aggregateId: this.id.valueOf(),
-      mixed: colorGroup,
+      failedMixed: colorGroup,
+      correctMixed: this.searchCorrectColorGroup(colorGroup.swatchColor.id),
       eventId: Uuid.random().valueOf(),
       occurredOn: new Date(),
     })

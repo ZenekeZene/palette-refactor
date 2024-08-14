@@ -7,6 +7,7 @@ export type {
   Colors,
   ColorGroup,
   ColorTypeOf,
+  MixColorResponse,
 } from '@gameContext/shared/infrastructure/store/store'
 export { ColorTypes } from '@gameContext/shared/infrastructure/store/store.d'
 

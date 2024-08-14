@@ -12,6 +12,7 @@ import { ColorGroupNotFoundInCollection } from '../domain/exceptions/ColorGroupN
 import { ColorGroup } from '../domain/models/colorGroup/ColorGroup'
 import { MixColorResponse } from './dto/MixColorResponse'
 import { toMixColorResponse } from './mapper/MixColorMapper'
+import { ColorMixerFailed } from '../domain/exceptions/ColorMixerFailed'
 
 @injectable()
 export class MixColor implements UseCase<MixColorRequest, MixColorResponse> {
@@ -42,12 +43,18 @@ export class MixColor implements UseCase<MixColorRequest, MixColorResponse> {
   }
 
   private handleFailure(
-    colorGroup: ColorGroup,
+    failedColorGroup: ColorGroup,
     colorGroupCollection: ColorGroupCollection,
+    swatchColorId: ColorChipId,
   ) {
-    this.logger.fail(colorGroup)
-    colorGroupCollection.fail(colorGroup)
-    return toMixColorResponse(null, new Error('Failed to mix color'))
+    colorGroupCollection.fail(failedColorGroup)
+    const correctColorGroup =
+      colorGroupCollection.searchCorrectColorGroup(swatchColorId)
+    this.logger.fail(failedColorGroup, correctColorGroup)
+    return toMixColorResponse(
+      null,
+      new ColorMixerFailed(failedColorGroup, correctColorGroup),
+    )
   }
 
   execute(mixColorRequest: MixColorRequest): MixColorResponse {
@@ -63,10 +70,8 @@ export class MixColor implements UseCase<MixColorRequest, MixColorResponse> {
 
     const response: MixColorResponse = areTheSameColorGroup
       ? this.handleSuccess(colorGroup, colorGroupCollection)
-      : this.handleFailure(colorGroup, colorGroupCollection)
+      : this.handleFailure(colorGroup, colorGroupCollection, swatchColorId)
     this.eventBus.publish(colorGroupCollection.pullDomainEvents())
     return response
   }
 }
-// Note: not use here the ColorMixer service, its unnecessary
-// because the colors are already mixed when the generateColors service is called.
