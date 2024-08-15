@@ -1,7 +1,8 @@
 import { injectable } from 'tsyringe'
 import type { LevelsRepository } from '@gameContext/level/domain/repositories/LevelsRepository'
-import type { LevelId } from '@gameContext/level/domain/models/level/LevelId'
 import type { LevelsCollection } from '@gameContext/level/domain/LevelsCollection'
+import { Level } from '../domain/models/level/Level'
+import { LevelsCollectionId } from '../domain/LevelsCollectionId'
 
 @injectable()
 class LevelsInMemoryRepository implements LevelsRepository {
@@ -11,8 +12,15 @@ class LevelsInMemoryRepository implements LevelsRepository {
     this.levelsCollections.set(levelsCollection.id.valueOf(), levelsCollection)
   }
 
-  findById(id: LevelId): LevelsCollection | undefined {
+  findById(id: LevelsCollectionId): LevelsCollection | undefined {
     return this.levelsCollections.get(id.valueOf())
+  }
+
+  getLevelByIndex(
+    levelCollectionId: LevelsCollectionId,
+    levelIndex: number,
+  ): Level | undefined {
+    return this.findById(levelCollectionId)?.levels[levelIndex]
   }
 }
 

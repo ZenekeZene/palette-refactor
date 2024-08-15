@@ -34,6 +34,10 @@
 
 - [] Testing the library 'https://colorjs.io/dist/color.js' to mix colors. Checker: https://gradients.app/es/mix
 
+## Misc
+
+- [] Make a error boundary and style it
+
 ---
 
 ## Legend

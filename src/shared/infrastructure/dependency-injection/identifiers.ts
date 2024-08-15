@@ -11,6 +11,7 @@ export const Types = {
   RegisterLevels: Symbol.for('RegisterLevels'),
   LevelsRepository: Symbol.for('LevelsRepository'),
   PassLevel: Symbol.for('PassLevel'),
+  GetLevel: Symbol.for('GetLevel'),
 
   // Quote Module:
   QuotesLoaderRepository: Symbol.for('QuotesLoaderRepository'),

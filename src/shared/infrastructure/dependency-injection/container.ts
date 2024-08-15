@@ -15,6 +15,7 @@ import { LoadLevels } from '@gameContext/level/application/loadLevels'
 import { RegisterLevels } from '@gameContext/level/application/registerLevels'
 import { LevelsLoaderFromFileRepository } from '@gameContext/level/infrastructure/LevelsLoaderFromFileRepository'
 import { LevelsInMemoryRepository } from '@gameContext/level/infrastructure/LevelsInMemoryRepository'
+import { GetLevel } from '@gameContext/level/application/getLevel'
 
 // Quote use cases and repositories:
 import { LoadQuotes } from '@gameContext/quote/application/loadQuotes'
@@ -50,6 +51,7 @@ export function configureDependencies() {
   )
   container.registerSingleton(Types.RegisterLevels, RegisterLevels)
   container.registerSingleton(Types.LevelsRepository, LevelsInMemoryRepository)
+  container.registerSingleton(Types.GetLevel, GetLevel)
 
   // Quotes:
   container.registerSingleton(
