@@ -41,9 +41,8 @@ export const createColorStore: StateCreator<Store, [], [], ColorStore> = (
       const { result } = response
       if (result.isOk()) {
         get().nextSwatchColor()
-      } else if (result.isErr()) {
-        // TODO: go to lose screen.
       }
+      actions.notifyColorMixFailure(response)
     }
   },
   generateColors: () => {

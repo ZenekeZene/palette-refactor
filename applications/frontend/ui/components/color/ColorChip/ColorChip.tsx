@@ -1,21 +1,26 @@
-import { useEffect, useRef } from 'react'
 import { Color } from '@frontend/adapter/store/types/store'
+import { useIsCorrectColorById } from '@frontend/ui/hooks/useIsCorrectColorById/useIsCorrectColorById'
 import { Chip } from './ColorChip.styled'
+import { useDelayedClassname } from '@frontend/ui/hooks/useDelayedClassname/useDelayedClassname'
 
-export const ColorChip = ({ id, color }: { id: string; color: Color }) => {
-  const chipRef = useRef<HTMLDivElement>(null)
+interface Props {
+  id: string
+  color: Color
+}
 
-  useEffect(() => {
-    if (!chipRef.current) return
-    setTimeout(() => {
-      chipRef.current?.classList.add('color-dropzone-animated')
-    }, 100)
-  }, [])
+export const ColorChip = ({ id, color }: Props) => {
+  const { isCorrect, isEnable } = useIsCorrectColorById({ id })
+
+  const { classname } = useDelayedClassname({
+    initialClassname: 'color-dropzone',
+    delayedClassname: 'color-dropzone-animated',
+  })
 
   return (
     <Chip
-      ref={chipRef}
-      className="color-dropzone"
+      $isCorrect={isCorrect}
+      $isFailed={!isCorrect && isEnable}
+      className={classname}
       style={{ backgroundColor: color.value }}
       data-group-id={id}
       data-id={color.id}
