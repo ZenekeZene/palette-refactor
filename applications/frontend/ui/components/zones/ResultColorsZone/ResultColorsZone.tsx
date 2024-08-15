@@ -5,14 +5,17 @@ import { Header } from '../../gui/Header/Header'
 import { ColorsRow } from '../../color/ColorRow/ColorRow'
 import { ResultZone } from './ResultColorsZone.styled'
 
-export const ResultColorsZone = ({
-  player,
-  colors,
-}: {
+interface Props {
   player: Player
   colors: Colors
-}) => {
+}
+
+export const ResultColorsZone = ({ player, colors }: Props) => {
   const navigate = useNavigate()
+
+  const handleBack = () => {
+    navigate('/')
+  }
 
   return (
     <ResultZone>
@@ -20,7 +23,7 @@ export const ResultColorsZone = ({
         level={player.levelIndex + 1}
         lives={player.lives}
         score={player.score}
-        onBack={() => navigate('/')}
+        onBack={handleBack}
       />
       {colors && <ColorsRow colors={colors} type={ColorTypes.RESULT} />}
     </ResultZone>
