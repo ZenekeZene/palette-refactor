@@ -27,7 +27,7 @@ export class StoreMother {
     for (let i = 0; i < defaultLevelsCount; i++) {
       levelsRaw.push({
         id: 'level' + i,
-        numberOfChips: 1,
+        numberOfChips: i + 1,
         prize: { lives: 0, bonus: 0 },
       })
     }
@@ -86,7 +86,7 @@ export class StoreMother {
     for (let i = 0; i < options.levelsCount; i++) {
       levelsRaw.push({
         id: 'level' + i,
-        numberOfChips: i,
+        numberOfChips: i + 1,
         prize: { lives: 0, bonus: 0 },
       })
     }

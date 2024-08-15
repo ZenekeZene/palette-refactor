@@ -8,7 +8,7 @@ export class LevelChips extends NotNegative {
 
   validate(value: number): void {
     if (value < 1) {
-      throw new Error('Level chips must be greater than 1')
+      throw new Error('Level chips must be equal or greater than 1')
     }
   }
 }

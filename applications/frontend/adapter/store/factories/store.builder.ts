@@ -18,7 +18,7 @@ class StoreBuilder {
 
   private createInitialState(): Store {
     const levelsRaw = [
-      { id: 'level-1', numberOfChips: 0, prize: { lives: 0, bonus: 0 } },
+      { id: 'level-1', numberOfChips: 1, prize: { lives: 0, bonus: 0 } },
     ]
     const levels = toLevelsCollectionResponse(new LevelsCollection(levelsRaw))
 
