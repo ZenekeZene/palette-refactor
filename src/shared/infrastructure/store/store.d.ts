@@ -10,6 +10,8 @@ import {
   GenerateColorsResponse,
 } from '@gameContext/color/application/dto/GenerateColorsResponse'
 import type { ColorChipTypeOf } from '@gameContext/color/domain/models/colorChip/ColorChipType'
+import { ColorGroupStatusTypes } from '@gameContext/color/domain/models/colorGroup/ColorGroupStatus'
+import type { ColorGroupStatusType } from '@gameContext/color/domain/models/colorGroup/ColorGroupStatus'
 export { ColorTypes } from '@gameContext/color/domain/models/colorChip/ColorChipType'
 
 export type { LevelDTO as Level }
@@ -22,3 +24,5 @@ export type { GenerateColorsResponse as Colors }
 export type { GenerateColorsItem as ColorGroup }
 export type { ColorChipTypeOf as ColorTypeOf }
 export type { MixColorResponse }
+export { ColorGroupStatusTypes as ColorStatusTypes }
+export type { ColorGroupStatusType as ColorStatusType }

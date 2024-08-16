@@ -6,13 +6,13 @@ class TransitionError extends Error {
   }
 }
 
-const ColorGroupStatusTypes = {
+export const ColorGroupStatusTypes = {
   PENDING: 'pending',
   MIXED: 'mixed',
-  ERROR: 'error',
+  FAIL: 'failed',
 } as const
 
-type ColorGroupStatusType =
+export type ColorGroupStatusType =
   (typeof ColorGroupStatusTypes)[keyof typeof ColorGroupStatusTypes]
 
 export class ColorGroupStatus extends ValueObject<ColorGroupStatusType> {
@@ -28,15 +28,15 @@ export class ColorGroupStatus extends ValueObject<ColorGroupStatusType> {
     if (this.value === ColorGroupStatusTypes.PENDING) {
       return this.transitionTo(ColorGroupStatusTypes.MIXED)
     } else {
-      throw new TransitionError(this.value, 'mixed')
+      throw new TransitionError(this.value, ColorGroupStatusTypes.MIXED)
     }
   }
 
   transitionToFailed(): ColorGroupStatus {
     if (this.value === ColorGroupStatusTypes.PENDING) {
-      return this.transitionTo(ColorGroupStatusTypes.ERROR)
+      return this.transitionTo(ColorGroupStatusTypes.FAIL)
     } else {
-      throw new TransitionError(this.value, 'error')
+      throw new TransitionError(this.value, ColorGroupStatusTypes.FAIL)
     }
   }
 

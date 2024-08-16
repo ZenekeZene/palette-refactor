@@ -1,14 +1,16 @@
+import { ColorGroupCollection } from '../ColorGroupCollection'
 import { ColorGroup } from '../models/colorGroup/ColorGroup'
 
 class ColorMixerFailed extends Error {
-  readonly failedColorGroup: ColorGroup
-  readonly correctColorGroup: ColorGroup
+  readonly correctColorGroupId: string
 
-  constructor(failedColorGroup: ColorGroup, correctColorGroup: ColorGroup) {
-    super(`Fail! Invalid mix: (${failedColorGroup.id.valueOf()})`)
+  constructor(
+    failedColorGroupCollection: ColorGroupCollection,
+    correctColorGroup: ColorGroup,
+  ) {
+    super(`Fail! Invalid mix: (${failedColorGroupCollection.id.valueOf()})`)
     this.name = 'ColorMixerFailed'
-    this.failedColorGroup = failedColorGroup
-    this.correctColorGroup = correctColorGroup
+    this.correctColorGroupId = correctColorGroup.id.valueOf()
   }
 }
 
