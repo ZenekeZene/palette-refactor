@@ -5,24 +5,30 @@ export const useIsCorrectColorById = ({ id }: { id: string }) => {
   const [correctColorGroupId, setCorrectColorGroupId] = useState<
     string | undefined
   >(undefined)
-  const [isEnable, setIsEnable] = useState<boolean>(false)
+  const [isFailureEnable, setIsFailureEnable] = useState<boolean>(false)
 
   const handleColorMixFailure = ((event: CustomEvent) => {
     const { detail } = event
-    setCorrectColorGroupId(detail.correctColorGroup.id.value)
-    setIsEnable(true)
+    setCorrectColorGroupId(detail.correctColorGroupId)
+    setIsFailureEnable(true)
   }) as EventListener
 
-  const memoizedHandler = useCallback(handleColorMixFailure, [
+  const memoizedFailureHandler = useCallback(handleColorMixFailure, [
     handleColorMixFailure,
   ])
 
   useEffect(() => {
-    const unlisten = listenEvent(events.colorMixFailure, memoizedHandler)
-    return unlisten
-  }, [memoizedHandler])
+    const unlistenFailure = listenEvent(
+      events.colorMixFailure,
+      memoizedFailureHandler,
+    )
+
+    return () => {
+      unlistenFailure()
+    }
+  }, [memoizedFailureHandler])
 
   const isCorrect = correctColorGroupId === id
 
-  return { isCorrect, isEnable }
+  return { isCorrect, isFailureEnable }
 }

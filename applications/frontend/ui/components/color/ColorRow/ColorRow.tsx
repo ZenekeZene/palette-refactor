@@ -1,4 +1,8 @@
-import type { ColorTypeOf, Colors } from '@frontend/adapter/store/types/store'
+import type {
+  Color,
+  ColorTypeOf,
+  Colors,
+} from '@frontend/adapter/store/types/store'
 import { ColorTypes } from '@frontend/adapter/store/types/store.d'
 import { ColorChip } from '../ColorChip/ColorChip'
 import { Row } from './ColorRow.styled'
@@ -8,10 +12,20 @@ interface Props {
   type: ColorTypeOf
 }
 
-const extractColorsByType = (type: ColorTypeOf, colors: Colors) => {
+type ExtractedColor = {
+  color: Color
+  groupId: string
+  status: string
+}
+
+const extractColorsByType = (
+  type: ColorTypeOf,
+  colors: Colors,
+): ExtractedColor[] => {
   return colors.items.map((item) => ({
     color: type === ColorTypes.RESULT ? item.resultColor : item.subtractedColor,
-    id: item.id,
+    groupId: item.id,
+    status: item.status,
   }))
 }
 
@@ -20,9 +34,13 @@ export const ColorsRow = ({ colors, type }: Props) => {
 
   return (
     <Row data-id={colors.id}>
-      {colorsOfType.map(({ color, id }, index) => (
+      {colorsOfType.map(({ color, groupId, status }, index) => (
         <div key={index}>
-          <ColorChip id={id} color={color}></ColorChip>
+          <ColorChip
+            groupId={groupId}
+            color={color}
+            status={status}
+          ></ColorChip>
         </div>
       ))}
     </Row>

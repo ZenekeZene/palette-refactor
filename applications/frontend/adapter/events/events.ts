@@ -1,9 +1,10 @@
 export const events = {
   colorMixFailure: 'colorMixFailure',
+  colorMixSuccess: 'colorMixSuccess',
 }
 
 // TODO: make sense of use a event bus?
-export const createEvent = (eventName: string, payload: unknown) => {
+export const createEvent = (eventName: string, payload?: unknown) => {
   const event = new CustomEvent(eventName, {
     detail: payload,
   })

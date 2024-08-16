@@ -1,8 +1,8 @@
 import { StateCreator } from 'zustand'
-import { type Store } from '../../types/store.d'
-import { actions } from '../../actions/actions'
+import { ColorGroup } from '@frontend/adapter/store/types/store.d'
+import { MixColorResponse, type Store } from '../../types/store.d'
 import type { ColorStore, ColorStoreState } from './colorStore.d'
-import { GenerateColorsItem } from '@gameContext/color/application/dto/GenerateColorsResponse'
+import { actions } from '../../actions/actions'
 
 const initialState: ColorStoreState = {
   indexSwatchColor: 0,
@@ -18,13 +18,12 @@ export const createColorStore: StateCreator<Store, [], [], ColorStore> = (
   ...initialState,
   extractSwatchColors: () => {
     const swatchColors = get().colors.items.map(
-      (color: GenerateColorsItem) => color.swatchColor,
+      (colorGroup: ColorGroup) => colorGroup.swatchColor,
     )
-    const initialSwatchColor = swatchColors[get().indexSwatchColor]
     set((state: ColorStore) => ({
       ...state,
       swatchColors,
-      swatchColor: initialSwatchColor,
+      swatchColor: swatchColors[get().indexSwatchColor],
     }))
   },
   nextSwatchColor: () => {
@@ -36,14 +35,40 @@ export const createColorStore: StateCreator<Store, [], [], ColorStore> = (
   mixColor: (colorGroupId: string, swatchColorId: string): void => {
     const response = actions.mixColor(colorGroupId, swatchColorId)
     if (response instanceof Error) {
-      // TODO: go to error screen.
+      console.error(response)
     } else {
       const { result } = response
-      if (result.isOk()) {
-        get().nextSwatchColor()
-      }
-      actions.notifyColorMixFailure(response)
+      result.isOk()
+        ? get().handleSuccessColor(response, colorGroupId)
+        : get().handleFailColor(response)
     }
+  },
+  handleSuccessColor: (
+    response: MixColorResponse,
+    colorGroupId: string,
+  ): void => {
+    actions.notifyColorMixSuccess(response)
+    get().nextSwatchColor()
+    get().successColor(colorGroupId)
+  },
+  handleFailColor: (response: MixColorResponse): void => {
+    actions.notifyColorMixFailure(response)
+    get().failColor()
+    setTimeout(() => {
+      location.href = 'try-again'
+    }, 2000)
+  },
+  successColor: (colorGroupId: string): void => {
+    set((state: ColorStore) => ({
+      ...state,
+      colors: actions.successColor(get(), colorGroupId),
+    }))
+  },
+  failColor: (): void => {
+    set((state: ColorStore) => ({
+      ...state,
+      colors: actions.failColor(get()),
+    }))
   },
   generateColors: () => {
     set((state: ColorStore) => ({

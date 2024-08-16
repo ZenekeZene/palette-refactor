@@ -7,20 +7,12 @@ import { SwatchWrapper, Swatch } from './ColorSwatch.styled'
 
 export type SubtractedColorReached = Element | null
 
-const COLOR_DROPZONE_SELECTOR = '.color-dropzone'
-const COLOR_DRAGGABLE_SELECTOR = '.color-draggable'
-
-interface ColorSwatchProps {
+interface Props {
   color: Color
-  onClick: () => void
   onDragEnd: (relatedTarget: SubtractedColorReached) => void
 }
 
-export const ColorSwatch = ({
-  color,
-  onClick,
-  onDragEnd,
-}: ColorSwatchProps) => {
+export const ColorSwatch = ({ color, onDragEnd }: Props) => {
   const targetElementRef = useRef<HTMLDivElement>(null)
 
   const { setTargetElement } = useDraggable({
@@ -30,8 +22,8 @@ export const ColorSwatch = ({
   })
 
   useDropzone({
-    targetElementCSSSelector: COLOR_DROPZONE_SELECTOR,
-    relatedTargetCSSSelector: COLOR_DRAGGABLE_SELECTOR,
+    targetElementCSSSelector: '.color-dropzone',
+    relatedTargetCSSSelector: '.color-draggable',
   })
 
   useEffect(() => {
@@ -46,7 +38,6 @@ export const ColorSwatch = ({
         ref={targetElementRef}
         className="color-draggable"
         style={{ backgroundColor: color.value }}
-        onClick={onClick}
       ></Swatch>
     </>
   )

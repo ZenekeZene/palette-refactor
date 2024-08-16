@@ -53,7 +53,7 @@ export class MixColor implements UseCase<MixColorRequest, MixColorResponse> {
     this.logger.fail(failedColorGroup, correctColorGroup)
     return toMixColorResponse(
       null,
-      new ColorMixerFailed(failedColorGroup, correctColorGroup),
+      new ColorMixerFailed(colorGroupCollection, correctColorGroup),
     )
   }
 

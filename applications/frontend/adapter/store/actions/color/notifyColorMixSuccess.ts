@@ -5,14 +5,13 @@ import {
   dispatchEvent,
 } from '@frontend/adapter/events/events'
 
-const eventName = events.colorMixFailure
+const eventName = events.colorMixSuccess
 
-export const notifyColorMixFailure = (response: MixColorResponse) => {
+export const notifyColorMixSuccess = (response: MixColorResponse) => {
   const { result } = response
-  if (!result.isErr()) return
-  const { correctColorGroupId } = result.getErr()
+  if (!result.isOk()) return
   const event = createEvent(eventName, {
-    correctColorGroupId,
+    correctColorGroup: result.unwrap(),
   })
   dispatchEvent(event)
 }

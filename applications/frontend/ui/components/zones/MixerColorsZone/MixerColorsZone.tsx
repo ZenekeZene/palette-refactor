@@ -4,12 +4,12 @@ import type {
   Player,
 } from '@gameContext/shared/infrastructure/store/store.d'
 import { ColorTypes } from '@gameContext/shared/infrastructure/store/store.d'
-import { ColorsRow } from '../../color/ColorRow/ColorRow'
 import {
   ColorSwatch,
-  SubtractedColorReached,
+  type SubtractedColorReached,
 } from '../../color/ColorSwatch/ColorSwatch'
 import { Bonus } from '../../gui/Bonus/Bonus'
+import { ColorsRow } from '../../color/ColorRow/ColorRow'
 import { DraggableZone, Footer } from './MixerColorsZone.styled'
 
 interface Props {
@@ -30,11 +30,7 @@ export const MixerColorsZone = ({
       {colors && <ColorsRow colors={colors} type={ColorTypes.SUBTRACTED} />}
 
       {swatchColor && (
-        <ColorSwatch
-          color={swatchColor}
-          onClick={() => {}}
-          onDragEnd={handleDragEnd}
-        />
+        <ColorSwatch color={swatchColor} onDragEnd={handleDragEnd} />
       )}
       <Footer>{player.bonus > 0 && <Bonus bonus={player.bonus} />}</Footer>
     </DraggableZone>
