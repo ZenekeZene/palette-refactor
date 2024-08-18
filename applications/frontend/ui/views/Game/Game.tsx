@@ -6,7 +6,7 @@ import { ResultColorsZone } from '@frontend/ui/components/zones/ResultColorsZone
 import { MixerColorsZone } from '@frontend/ui/components/zones/MixerColorsZone/MixerColorsZone'
 import { GameWrapper, Divider } from './Game.styled'
 
-const GameView = () => {
+export const GameView = () => {
   const player = useStore((state: PlayerStore) => state.player)
   const { colors, swatchColor, mixColor } = useColors()
 
@@ -31,4 +31,4 @@ const GameView = () => {
   )
 }
 
-export { GameView }
+GameView.path = '/game'

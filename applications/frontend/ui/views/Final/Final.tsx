@@ -11,7 +11,7 @@ import {
   Illustration,
 } from './Final.styled'
 
-const FinalView = () => {
+export const FinalView = () => {
   const state = useStore((state) => state.player)
 
   return (
@@ -32,4 +32,4 @@ const FinalView = () => {
   )
 }
 
-export { FinalView }
+FinalView.path = '/final'

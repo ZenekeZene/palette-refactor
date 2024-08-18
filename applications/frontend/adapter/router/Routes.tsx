@@ -6,14 +6,12 @@ import { TryAgainView } from '@frontend/ui/views/TryAgain/TryAgain'
 import { NextLevelView } from '@frontend/ui/views/NextLevel/NextLevel'
 import { FinalView } from '@frontend/ui/views/Final/Final'
 
-const routes: RouteObject[] = [
-  { path: '/', element: <HomeView /> },
+export const routes: RouteObject[] = [
+  { path: HomeView.path, element: <HomeView /> },
   { path: '*', element: <HomeView /> },
-  { path: '/tutorial', element: <TutorialView /> },
-  { path: '/game', element: <GameView /> },
-  { path: '/next-level', element: <NextLevelView /> },
-  { path: '/try-again', element: <TryAgainView /> },
-  { path: '/final', element: <FinalView /> },
+  { path: TutorialView.path, element: <TutorialView /> },
+  { path: GameView.path, element: <GameView /> },
+  { path: NextLevelView.path, element: <NextLevelView /> },
+  { path: TryAgainView.path, element: <TryAgainView /> },
+  { path: FinalView.path, element: <FinalView /> },
 ]
-
-export { routes }

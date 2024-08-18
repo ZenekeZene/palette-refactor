@@ -8,7 +8,7 @@ import { NextLevel, Header, Subtitle, Title, Next } from './NextLevel.styled'
 import type { PlayerStore } from '@frontend/adapter/store/slices/playerStore/playerStore.d'
 import type { QuoteStore } from '@frontend/adapter/store/slices/quoteStore/quoteStore.d'
 
-const NextLevelView = () => {
+export const NextLevelView = () => {
   const state = useStore(
     useShallow(({ player, levels, nextLevel }: PlayerStore) => ({
       levels,
@@ -47,4 +47,4 @@ const NextLevelView = () => {
   )
 }
 
-export { NextLevelView }
+NextLevelView.path = '/next-level'

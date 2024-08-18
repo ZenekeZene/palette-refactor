@@ -1,8 +1,10 @@
 import { StateCreator } from 'zustand'
 import { ColorGroup } from '@frontend/adapter/store/types/store.d'
+import { TryAgainView } from '@frontend/ui/views/TryAgain/TryAgain'
+import { goTo } from '@frontend/adapter/router/goTo'
 import { MixColorResponse, type Store } from '../../types/store.d'
-import type { ColorStore, ColorStoreState } from './colorStore.d'
 import { actions } from '../../actions/actions'
+import type { ColorStore, ColorStoreState } from './colorStore.d'
 
 const initialState: ColorStoreState = {
   indexSwatchColor: 0,
@@ -54,9 +56,7 @@ export const createColorStore: StateCreator<Store, [], [], ColorStore> = (
   handleFailColor: (response: MixColorResponse): void => {
     actions.notifyColorMixFailure(response)
     get().failColor()
-    setTimeout(() => {
-      location.href = 'try-again'
-    }, 2000)
+    goTo(TryAgainView.path)
   },
   successColor: (colorGroupId: string): void => {
     set((state: ColorStore) => ({

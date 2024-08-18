@@ -11,7 +11,7 @@ import {
   RankingButton,
 } from './Home.styled'
 
-const HomeView = () => {
+export const HomeView = () => {
   useClassnameOfRoute()
   const tutorialIsWatched = useStore((state) => state.tutorialIsWatched)
 
@@ -33,4 +33,4 @@ const HomeView = () => {
   )
 }
 
-export { HomeView }
+HomeView.path = '/'

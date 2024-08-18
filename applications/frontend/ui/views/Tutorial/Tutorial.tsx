@@ -13,7 +13,7 @@ import {
   Next,
 } from './Tutorial.styled'
 
-const TutorialView = () => {
+export const TutorialView = () => {
   useClassnameOfRoute()
   const navigate = useNavigate()
 
@@ -38,4 +38,4 @@ const TutorialView = () => {
   )
 }
 
-export { TutorialView }
+TutorialView.path = '/tutorial'

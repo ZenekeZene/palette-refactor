@@ -7,7 +7,7 @@ import { useStore } from '@frontend/adapter/store/useStore'
 import type { PlayerStore } from '@frontend/adapter/store/slices/playerStore/playerStore.d'
 import { TryAgain, Subtitle, Title } from './TryAgain.styled'
 
-const TryAgainView = () => {
+export const TryAgainView = () => {
   const state = useStore(
     useShallow(({ player, levels }: PlayerStore) => ({
       levelIndex: player.levelIndex,
@@ -35,4 +35,4 @@ const TryAgainView = () => {
   )
 }
 
-export { TryAgainView }
+TryAgainView.path = '/try-again'
