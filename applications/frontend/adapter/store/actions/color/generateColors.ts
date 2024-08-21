@@ -16,12 +16,13 @@ const getLevelId = (levelsCollectionId: string, levelIndex: number) => {
 
 export const generateColors = ({
   levels: { id: levelsCollectionId },
-  player: { levelIndex },
+  player: { levelIndex, ...player },
 }: PlayerStoreState): Colors => {
   const levelId = getLevelId(levelsCollectionId, levelIndex)
   const generateColorsRequest = new GenerateColorsRequest(
     levelsCollectionId,
     levelId,
+    player.id,
   )
   const generateColors = container.resolve<GenerateColors>(Types.GenerateColors)
   try {

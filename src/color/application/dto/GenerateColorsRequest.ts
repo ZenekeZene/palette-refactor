@@ -4,5 +4,6 @@ export class GenerateColorsRequest implements Request {
   constructor(
     public readonly levelsCollectionId: string,
     public readonly levelId: string,
+    public readonly playerId: string,
   ) {}
 }

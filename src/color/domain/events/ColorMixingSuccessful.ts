@@ -1,12 +1,12 @@
 import { DomainEvent } from '@gameContext/shared/domain/utils/DomainEvent'
 import { ColorGroup } from '@gameContext/color/domain/models/colorGroup/ColorGroup'
 
-type ColorGroupSuccessfullyMixedAttributes = {
+type ColorMixingSuccessfulAttributes = {
   readonly mixed: ColorGroup
 }
 
-class ColorGroupSuccessfullyMixed extends DomainEvent {
-  static readonly EVENT_NAME = 'color.group.successfully.mixed'
+export class ColorMixingSuccessful extends DomainEvent {
+  static readonly EVENT_NAME = 'color.mixing.successful'
 
   readonly mixed: ColorGroup | undefined = undefined
 
@@ -22,7 +22,7 @@ class ColorGroupSuccessfullyMixed extends DomainEvent {
     occurredOn?: Date
   }) {
     super({
-      eventName: ColorGroupSuccessfullyMixed.EVENT_NAME,
+      eventName: ColorMixingSuccessful.EVENT_NAME,
       aggregateId,
       eventId,
       occurredOn,
@@ -40,10 +40,10 @@ class ColorGroupSuccessfullyMixed extends DomainEvent {
     aggregateId: string
     eventId: string
     occurredOn: Date
-    attributes: ColorGroupSuccessfullyMixedAttributes
+    attributes: ColorMixingSuccessfulAttributes
   }): DomainEvent {
     const { aggregateId, eventId, occurredOn, attributes } = params
-    return new ColorGroupSuccessfullyMixed({
+    return new ColorMixingSuccessful({
       aggregateId,
       mixed: attributes.mixed,
       eventId,
@@ -51,5 +51,3 @@ class ColorGroupSuccessfullyMixed extends DomainEvent {
     })
   }
 }
-
-export { ColorGroupSuccessfullyMixed }

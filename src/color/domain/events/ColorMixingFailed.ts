@@ -1,44 +1,50 @@
 import { DomainEvent } from '@gameContext/shared/domain/utils/DomainEvent'
 import { ColorGroup } from '@gameContext/color/domain/models/colorGroup/ColorGroup'
 
-type ColorGroupFailedMixedAttributes = {
+type ColorMixingFailedAttributes = {
   readonly failedMixed: ColorGroup
   readonly correctMixed: ColorGroup
+  readonly playerId: string
 }
 
-class ColorGroupFailedMixed extends DomainEvent {
-  static readonly EVENT_NAME = 'color.group.successfully.mixed'
+export class ColorMixingFailed extends DomainEvent {
+  static readonly EVENT_NAME = 'color.mixing.failed'
 
   readonly failedMixed: ColorGroup | undefined = undefined
   readonly correctMixed: ColorGroup | undefined = undefined
+  readonly playerId: string
 
   constructor({
     aggregateId,
     failedMixed,
     correctMixed,
     eventId,
+    playerId,
     occurredOn,
   }: {
     aggregateId: string
     failedMixed: ColorGroup
     correctMixed: ColorGroup
     eventId?: string
+    playerId: string
     occurredOn?: Date
   }) {
     super({
-      eventName: ColorGroupFailedMixed.EVENT_NAME,
+      eventName: ColorMixingFailed.EVENT_NAME,
       aggregateId,
       eventId,
       occurredOn,
     })
     this.failedMixed = failedMixed
     this.correctMixed = correctMixed
+    this.playerId = playerId
   }
 
   toPrimitives() {
     return {
       failedMixed: this.failedMixed?.toPrimitive(),
       correctMixed: this.correctMixed?.toPrimitive(),
+      playerId: this.playerId.valueOf(),
     }
   }
 
@@ -46,17 +52,16 @@ class ColorGroupFailedMixed extends DomainEvent {
     aggregateId: string
     eventId: string
     occurredOn: Date
-    attributes: ColorGroupFailedMixedAttributes
+    attributes: ColorMixingFailedAttributes
   }): DomainEvent {
     const { aggregateId, eventId, occurredOn, attributes } = params
-    return new ColorGroupFailedMixed({
+    return new ColorMixingFailed({
       aggregateId,
       failedMixed: attributes.failedMixed,
       correctMixed: attributes.correctMixed,
+      playerId: attributes.playerId,
       eventId,
       occurredOn,
     })
   }
 }
-
-export { ColorGroupFailedMixed }

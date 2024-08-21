@@ -24,6 +24,7 @@ import { RegisterQuotes } from '@gameContext/quote/application/registerQuotes'
 import { QuotesLoaderFromFileRepository } from '@gameContext/quote/infrastructure/QuotesLoaderFromFileRepository'
 import { QuotesInMemoryRepository } from '@gameContext/quote/infrastructure/QuotesInMemoryRepository'
 import { OnLevelsCollectionCreated } from '@gameContext/player/application/OnLevelsCollectionCreated'
+import { OnColorMixingFailed } from '@gameContext/player/application/OnColorMixingFailed'
 
 // Color use cases and repositories:
 import { MixColor } from '@gameContext/color/application/mixColor'
@@ -78,5 +79,5 @@ export function configureDependencies() {
 
   // Subscribers:
   container.register(Types.DomainEventSubscribers, OnLevelsCollectionCreated)
-  // container.register(Types.DomainEventSubscribers, OnPlayerCreated)
+  container.register(Types.DomainEventSubscribers, OnColorMixingFailed)
 }

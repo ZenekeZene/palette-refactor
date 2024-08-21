@@ -13,6 +13,7 @@ import { ColorGroupCollectionId } from '../domain/ColorGroupCollectionId'
 import type { ColorMixerLogger } from '../domain/repositories/ColorMixerLogger'
 import { GenerateColorsRequest } from './dto/GenerateColorsRequest'
 import type { ColorRepository } from '../domain/repositories/ColorRepository'
+import { PlayerId } from '@gameContext/player/domain/models/PlayerId'
 
 @injectable()
 export class GenerateColors
@@ -37,6 +38,7 @@ export class GenerateColors
     const levelsCollectionId = new LevelsCollectionId(
       generateColorsRequest.levelsCollectionId,
     )
+    const playerId = new PlayerId(generateColorsRequest.playerId)
     const colorGroupsCountToGenerate =
       this.getNumberOfChipsOfLevelService.findLevel(levelsCollectionId, levelId)
     const colorGroups = new ColorGenerator(
@@ -46,6 +48,7 @@ export class GenerateColors
       new ColorGroupCollectionId(),
       colorGroups,
       levelId,
+      playerId,
     )
     this.colorRepository.save(colorGroupCollection)
     colorGroupCollection.each((colorGroup) => this.logger.logGroup(colorGroup))

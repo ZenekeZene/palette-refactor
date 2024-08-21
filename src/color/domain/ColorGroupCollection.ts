@@ -4,16 +4,18 @@ import { ColorGroup } from './models/colorGroup/ColorGroup'
 import { ColorGroupCollectionId } from './ColorGroupCollectionId'
 import { ColorGroupId } from './models/colorGroup/ColorGroupId'
 import { ColorChipId } from './models/colorChip/ColorChipId'
-import { ColorGroupSuccessfullyMixed } from './events/ColorGroupSuccessfullyMixed'
+import { ColorMixingSuccessful } from './events/ColorMixingSuccessful'
 import { Uuid } from '@gameContext/shared/domain/utils/Uuid'
-import { ColorGroupFailedMixed } from './events/ColorGroupFailedMixed'
+import { ColorMixingFailed } from './events/ColorMixingFailed'
 import { ColorGroupNotFoundInCollection } from './exceptions/ColorGroupNotFoundInCollection'
+import { PlayerId } from '@gameContext/player/domain/models/PlayerId'
 
 export class ColorGroupCollection extends AggregateRoot {
   constructor(
     readonly id: ColorGroupCollectionId,
     readonly items: ColorGroup[] = [],
     readonly levelId: LevelId,
+    readonly playerId: PlayerId,
   ) {
     super()
   }
@@ -57,6 +59,7 @@ export class ColorGroupCollection extends AggregateRoot {
       this.id,
       [...this.items, colorGroup],
       this.levelId,
+      this.playerId,
     )
   }
 
@@ -67,7 +70,7 @@ export class ColorGroupCollection extends AggregateRoot {
   success(colorGroup: ColorGroup) {
     if (this.isColorGroupPresent(colorGroup)) {
       colorGroup.success()
-      this.recordColorGroupSuccessfullyMixed(colorGroup)
+      this.recordColorMixingSuccessful(colorGroup)
     } else {
       throw new ColorGroupNotFoundInCollection(colorGroup.id)
     }
@@ -76,31 +79,33 @@ export class ColorGroupCollection extends AggregateRoot {
   fail(colorGroup: ColorGroup) {
     if (this.isColorGroupPresent(colorGroup)) {
       colorGroup.fail()
-      this.recordColorGroupFailedMixed(colorGroup)
+      this.recordColorMixingFailed(colorGroup)
     } else {
       throw new ColorGroupNotFoundInCollection(colorGroup.id)
     }
   }
 
-  private recordColorGroupSuccessfullyMixed(colorGroup: ColorGroup) {
-    const colorGroupSuccessfullyMixed = new ColorGroupSuccessfullyMixed({
+  private recordColorMixingSuccessful(colorGroup: ColorGroup) {
+    const colorMixingSuccessful = new ColorMixingSuccessful({
       aggregateId: this.id.valueOf(),
       mixed: colorGroup,
       eventId: Uuid.random().valueOf(),
       occurredOn: new Date(),
+      // playerId: this.playerId.valueOf(),
     })
-    this.record(colorGroupSuccessfullyMixed)
+    this.record(colorMixingSuccessful)
   }
 
-  private recordColorGroupFailedMixed(colorGroup: ColorGroup) {
-    const colorGroupMixedFailed = new ColorGroupFailedMixed({
+  private recordColorMixingFailed(colorGroup: ColorGroup) {
+    const colorMixingFailed = new ColorMixingFailed({
       aggregateId: this.id.valueOf(),
       failedMixed: colorGroup,
       correctMixed: this.searchCorrectColorGroup(colorGroup.swatchColor.id),
       eventId: Uuid.random().valueOf(),
+      playerId: this.playerId.valueOf(),
       occurredOn: new Date(),
     })
-    this.record(colorGroupMixedFailed)
+    this.record(colorMixingFailed)
   }
 
   toPrimitive() {
@@ -108,6 +113,7 @@ export class ColorGroupCollection extends AggregateRoot {
       id: this.id.valueOf(),
       items: this.items.map((item) => item.toPrimitive()),
       levelId: this.levelId.valueOf(),
+      playerId: this.playerId.valueOf(),
     }
   }
 }
