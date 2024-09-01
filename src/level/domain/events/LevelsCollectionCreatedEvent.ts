@@ -5,7 +5,7 @@ type LevelsCollectionCreatedAttributes = {
   readonly levels: Level[]
 }
 
-class LevelsCollectionCreatedDomainEvent extends DomainEvent {
+export class LevelsCollectionCreatedEvent extends DomainEvent {
   static readonly EVENT_NAME = 'levels.collection.created'
 
   readonly levels: Level[] = []
@@ -22,7 +22,7 @@ class LevelsCollectionCreatedDomainEvent extends DomainEvent {
     occurredOn?: Date
   }) {
     super({
-      eventName: LevelsCollectionCreatedDomainEvent.EVENT_NAME,
+      eventName: LevelsCollectionCreatedEvent.EVENT_NAME,
       aggregateId,
       eventId,
       occurredOn,
@@ -43,7 +43,7 @@ class LevelsCollectionCreatedDomainEvent extends DomainEvent {
     attributes: LevelsCollectionCreatedAttributes
   }): DomainEvent {
     const { aggregateId, eventId, occurredOn, attributes } = params
-    return new LevelsCollectionCreatedDomainEvent({
+    return new LevelsCollectionCreatedEvent({
       aggregateId,
       levels: attributes.levels,
       eventId,
@@ -51,5 +51,3 @@ class LevelsCollectionCreatedDomainEvent extends DomainEvent {
     })
   }
 }
-
-export { LevelsCollectionCreatedDomainEvent }

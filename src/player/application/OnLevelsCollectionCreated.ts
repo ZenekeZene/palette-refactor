@@ -1,17 +1,17 @@
 import { injectable } from 'tsyringe'
 import { DomainEventSubscriber } from '@gameContext/shared/domain/utils/DomainEventSubscriber'
-import { LevelsCollectionCreatedDomainEvent } from '@gameContext/level/domain/events/LevelsCollectionCreated'
+import { LevelsCollectionCreatedEvent } from '@gameContext/level/domain/events/LevelsCollectionCreatedEvent'
 import { DomainEventClass } from '@gameContext/shared/domain/utils/DomainEvent'
 
 @injectable()
 export class OnLevelsCollectionCreated
-  implements DomainEventSubscriber<LevelsCollectionCreatedDomainEvent>
+  implements DomainEventSubscriber<LevelsCollectionCreatedEvent>
 {
   subscribedTo(): DomainEventClass[] {
-    return [LevelsCollectionCreatedDomainEvent]
+    return [LevelsCollectionCreatedEvent]
   }
 
-  async on(domainEvent: LevelsCollectionCreatedDomainEvent): Promise<void> {
+  async on(domainEvent: LevelsCollectionCreatedEvent): Promise<void> {
     console.log(
       '[OnLevelsCollectionCreated] Event of Level module:',
       domainEvent,
