@@ -6,8 +6,8 @@ import {
   type UseStore,
   StoreMother,
 } from '@frontend/adapter/store/factories/store.mother'
-import { Types } from '@gameContext/shared/infrastructure/dependency-injection/identifiers'
-import { configureDependencies } from '@gameContext/shared/infrastructure/dependency-injection/container'
+import { Types } from '@frontend/infrastructure/dependency-injection/identifiers'
+import { configureDependencies } from '@frontend/infrastructure/dependency-injection/container'
 import { PlayerResponseProps } from '@gameContext/player/application/dto/PlayerResponse'
 import { GameView } from './Game'
 import { ColorMixerLogger } from '@gameContext/color/domain/repositories/ColorMixerLogger'

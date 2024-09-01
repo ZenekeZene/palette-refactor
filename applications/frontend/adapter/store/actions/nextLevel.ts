@@ -1,5 +1,5 @@
 import { container } from 'tsyringe'
-import { Types } from '@gameContext/shared/infrastructure/dependency-injection/identifiers'
+import { Types } from '@frontend/infrastructure/dependency-injection/identifiers'
 import { PassLevel } from '@gameContext/player/application/passLevel'
 import { PassLevelRequest } from '@gameContext/player/application/dto/PassLevelRequest'
 import { Player } from '../types/store'

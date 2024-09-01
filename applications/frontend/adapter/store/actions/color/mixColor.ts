@@ -1,7 +1,7 @@
 import { container } from 'tsyringe'
 import { MixColorRequest } from '@gameContext/color/application/dto/MixColorRequest'
 import { MixColor } from '@gameContext/color/application/mixColor'
-import { Types } from '@gameContext/shared/infrastructure/dependency-injection/identifiers'
+import { Types } from '@frontend/infrastructure/dependency-injection/identifiers'
 import { MixColorResponse } from '@gameContext/color/application/dto/MixColorResponse'
 
 export const mixColor = (

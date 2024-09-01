@@ -7,7 +7,7 @@ import {
   StoreMother,
 } from '@frontend/adapter/store/factories/store.mother'
 import { TryAgainView } from './TryAgain'
-import { configureDependencies } from '@gameContext/shared/infrastructure/dependency-injection/container'
+import { configureDependencies } from '@frontend/infrastructure/dependency-injection/container'
 
 const useStore: UseStore = vi.hoisted(() => vi.fn())
 vi.mock('@frontend/adapter/store/useStore', async (importOriginal) => {

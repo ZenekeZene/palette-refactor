@@ -4,7 +4,7 @@ import { screen, render, cleanup } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { NextLevelView } from './NextLevel'
 import { StoreMother } from '@frontend/adapter/store/factories/store.mother'
-import { configureDependencies } from '@gameContext/shared/infrastructure/dependency-injection/container'
+import { configureDependencies } from '@frontend/infrastructure/dependency-injection/container'
 
 const useStore = vi.hoisted(() => vi.fn())
 vi.mock('@frontend/adapter/store/useStore', async (importOriginal) => {

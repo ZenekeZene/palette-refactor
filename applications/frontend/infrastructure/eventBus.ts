@@ -1,5 +1,5 @@
 import { container } from 'tsyringe'
-import { Types } from '@gameContext/shared/infrastructure/dependency-injection/identifiers'
+import { Types } from '@frontend/infrastructure/dependency-injection/identifiers'
 import { EventBus } from '@gameContext/shared/domain/utils/EventBus'
 import { DomainEventSubscribers } from '@gameContext/shared/infrastructure/eventBus/DomainEventSubscribers'
 

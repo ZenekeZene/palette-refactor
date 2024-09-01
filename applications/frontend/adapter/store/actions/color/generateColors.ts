@@ -1,5 +1,5 @@
 import { container } from 'tsyringe'
-import { Types } from '@gameContext/shared/infrastructure/dependency-injection/identifiers'
+import { Types } from '@frontend/infrastructure/dependency-injection/identifiers'
 import { GenerateColorsRequest } from '@gameContext/color/application/dto/GenerateColorsRequest'
 import { GetLevelRequest } from '@gameContext/level/application/dto/GetLevelRequest'
 import type { GenerateColors } from '@gameContext/color/application/generateColors'

@@ -1,7 +1,7 @@
 import { container } from 'tsyringe'
 import { GetQuoteRequest } from '@gameContext/quote/application/dto/GetQuoteRequest'
 import type { GetQuote } from '@gameContext/quote/application/getQuote'
-import { Types } from '@gameContext/shared/infrastructure/dependency-injection/identifiers'
+import { Types } from '@frontend/infrastructure/dependency-injection/identifiers'
 import { Quotes, Quote } from '../types/store'
 
 export const getNextQuote = (quotes: Quotes): Quote => {

@@ -1,7 +1,7 @@
 import 'reflect-metadata'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { configureDependencies } from '@gameContext/shared/infrastructure/dependency-injection/container'
+import { configureDependencies } from '@frontend/infrastructure/dependency-injection/container'
 import { RouterProvider } from '@frontend/adapter/router/RouterProvider'
 import { configureEventBus } from '@frontend/infrastructure/eventBus'
 import { configureStore } from '@frontend/adapter/store/useStore'

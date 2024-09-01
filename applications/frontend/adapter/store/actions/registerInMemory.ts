@@ -1,5 +1,5 @@
 import { container } from 'tsyringe'
-import { Types } from '@gameContext/shared/infrastructure/dependency-injection/identifiers'
+import { Types } from '@frontend/infrastructure/dependency-injection/identifiers'
 import { RegisterPlayerRequest } from '@gameContext/player/application/dto/RegisterPlayerRequest'
 import { RegisterLevelsRequest } from '@gameContext/level/application/dto/RegisterLevelsRequest'
 import { RegisterQuotesRequest } from '@gameContext/quote/application/dto/RegisterQuotesRequest'
@@ -8,7 +8,7 @@ import type { RegisterLevels } from '@gameContext/level/application/registerLeve
 import type { RegisterQuotes } from '@gameContext/quote/application/registerQuotes'
 import { Player, Levels, Quotes } from '../types/store'
 
-const registerInMemory = (
+export const registerInMemory = (
   player: Player,
   levels: Levels,
   quotes: Quotes,
@@ -32,5 +32,3 @@ const registerInMemory = (
   registerLevels.execute(registerLevelsRequest)
   registerQuotes.execute(registerQuotesRequest)
 }
-
-export { registerInMemory }
