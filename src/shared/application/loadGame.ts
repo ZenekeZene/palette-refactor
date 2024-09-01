@@ -1,5 +1,5 @@
 import { injectable, injectAll } from 'tsyringe'
-import { Types } from '@gameContext/shared/infrastructure/dependency-injection/identifiers'
+import { Types } from '@frontend/infrastructure/dependency-injection/identifiers'
 import type { Loader } from '@gameContext/shared/domain/Loader'
 import { Response } from '../domain/utils/Response'
 

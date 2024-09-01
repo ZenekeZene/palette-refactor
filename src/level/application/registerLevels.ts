@@ -1,5 +1,5 @@
 import { injectable, inject } from 'tsyringe'
-import { Types } from '@gameContext/shared/infrastructure/dependency-injection/identifiers'
+import { Types } from '@frontend/infrastructure/dependency-injection/identifiers'
 import type { UseCase } from '@gameContext/shared/domain/utils/UseCase'
 import type { LevelsRepository } from '@gameContext/level/domain/repositories/LevelsRepository'
 import { LevelsCollection } from '@gameContext/level/domain/LevelsCollection'

@@ -3,7 +3,7 @@ import { DomainEventSubscriber } from '@gameContext/shared/domain/utils/DomainEv
 import { ColorMixingFailed } from '@gameContext/color/domain/events/ColorMixingFailed'
 import { DomainEventClass } from '@gameContext/shared/domain/utils/DomainEvent'
 import type { PlayerRepository } from '../domain/repositories/PlayerRepository'
-import { Types } from '@gameContext/shared/infrastructure/dependency-injection/identifiers'
+import { Types } from '@frontend/infrastructure/dependency-injection/identifiers'
 import { PlayerNotFoundException } from '../domain/exceptions/PlayerNotFoundException'
 import { PlayerId } from '../domain/models/PlayerId'
 

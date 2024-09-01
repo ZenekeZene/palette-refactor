@@ -1,5 +1,5 @@
 import { injectable } from 'tsyringe'
-import { Types } from '@gameContext/shared/infrastructure/dependency-injection/identifiers'
+import { Types } from '@frontend/infrastructure/dependency-injection/identifiers'
 import type { UseCase } from '@gameContext/shared/domain/utils/UseCase'
 import { GetQuoteRequest } from '@gameContext/quote/application/dto/GetQuoteRequest'
 import type { QuotesRepository } from '@gameContext/quote/domain/QuotesRepository'

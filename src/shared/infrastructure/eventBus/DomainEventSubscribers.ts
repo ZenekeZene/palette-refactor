@@ -1,5 +1,5 @@
 import { DependencyContainer } from 'tsyringe'
-import { Types } from '@gameContext/shared/infrastructure/dependency-injection/identifiers'
+import { Types } from '@frontend/infrastructure/dependency-injection/identifiers'
 import { DomainEvent } from '../../domain/utils/DomainEvent'
 import { DomainEventSubscriber } from '../../domain/utils/DomainEventSubscriber'
 
