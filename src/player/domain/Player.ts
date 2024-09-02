@@ -4,6 +4,8 @@ import { PlayerLives } from '@gameContext/player/domain/models/PlayerLives'
 import { PlayerScore } from '@gameContext/player/domain/models/PlayerScore'
 import { PlayerLevelIndex } from '@gameContext/player/domain/models/PlayerLevelIndex'
 import { PlayerBonus } from '@gameContext/player/domain/models/PlayerBonus'
+import { Uuid } from '@gameContext/shared/domain/utils/Uuid'
+import { DecrementedLivesEvent } from './events/DecrementedLivesEvent'
 
 export class Player extends AggregateRoot {
   constructor(
@@ -30,6 +32,17 @@ export class Player extends AggregateRoot {
 
   decrementLives() {
     this.lives = this.lives.decrement()
+    this.recordDecrementLivesEvent()
+  }
+
+  private recordDecrementLivesEvent(): void {
+    const decrementedLives = new DecrementedLivesEvent({
+      aggregateId: this.id.valueOf(),
+      decrementedLives: this.lives,
+      eventId: Uuid.random().valueOf(),
+      occurredOn: new Date(),
+    })
+    this.record(decrementedLives)
   }
 
   toPrimitive(): PlayerPrimitive {

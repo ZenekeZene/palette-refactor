@@ -7,7 +7,7 @@ type ColorMixingFailedAttributes = {
   readonly playerId: string
 }
 
-export class ColorMixingFailed extends DomainEvent {
+export class ColorMixingFailedEvent extends DomainEvent {
   static readonly EVENT_NAME = 'color.mixing.failed'
 
   readonly failedMixed: ColorGroup | undefined = undefined
@@ -30,7 +30,7 @@ export class ColorMixingFailed extends DomainEvent {
     occurredOn?: Date
   }) {
     super({
-      eventName: ColorMixingFailed.EVENT_NAME,
+      eventName: ColorMixingFailedEvent.EVENT_NAME,
       aggregateId,
       eventId,
       occurredOn,
@@ -55,7 +55,7 @@ export class ColorMixingFailed extends DomainEvent {
     attributes: ColorMixingFailedAttributes
   }): DomainEvent {
     const { aggregateId, eventId, occurredOn, attributes } = params
-    return new ColorMixingFailed({
+    return new ColorMixingFailedEvent({
       aggregateId,
       failedMixed: attributes.failedMixed,
       correctMixed: attributes.correctMixed,

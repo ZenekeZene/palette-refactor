@@ -13,9 +13,14 @@ export async function configureStore() {
   store = createStore(initialState)
 }
 
-export function useStore<T>(selector: (state: Store) => T): T {
+export function getStore() {
   if (store === null) {
     throw ErrorStoreNotConfigured
   }
+  return store
+}
+
+export function useStore<T>(selector: (state: Store) => T): T {
+  const store = getStore()
   return store(selector)
 }

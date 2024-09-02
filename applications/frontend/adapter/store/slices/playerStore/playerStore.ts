@@ -10,7 +10,14 @@ export const createPlayerStore = (initialProps: PlayerStoreState) => {
     ...initialProps,
     setTutorialIsLaunched: (tutorialIsWatched) =>
       set(() => ({ tutorialIsWatched })),
-    setScore: (score) => set((state: PlayerStore) => ({ ...state, score })),
+    setScore: (score) => {
+      const player = get().score
+      set((state: PlayerStore) => ({ ...state, player: { ...player, score } }))
+    },
+    decrementLives: (lives) => {
+      const player = get().player
+      set((state: PlayerStore) => ({ ...state, player: { ...player, lives } }))
+    },
     nextLevel: () => {
       get().nextQuote()
       const player = get().player

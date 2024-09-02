@@ -16,6 +16,7 @@ import { RegisterLevels } from '@gameContext/level/application/registerLevels'
 import { LevelsLoaderFromFileRepository } from '@gameContext/level/infrastructure/LevelsLoaderFromFileRepository'
 import { LevelsInMemoryRepository } from '@gameContext/level/infrastructure/LevelsInMemoryRepository'
 import { GetLevel } from '@gameContext/level/application/getLevel'
+import { OnLevelsCollectionCreated } from '@gameContext/player/application/OnLevelsCollectionCreated'
 
 // Quote use cases and repositories:
 import { LoadQuotes } from '@gameContext/quote/application/loadQuotes'
@@ -23,14 +24,14 @@ import { GetQuote } from '@gameContext/quote/application/getQuote'
 import { RegisterQuotes } from '@gameContext/quote/application/registerQuotes'
 import { QuotesLoaderFromFileRepository } from '@gameContext/quote/infrastructure/QuotesLoaderFromFileRepository'
 import { QuotesInMemoryRepository } from '@gameContext/quote/infrastructure/QuotesInMemoryRepository'
-import { OnLevelsCollectionCreated } from '@gameContext/player/application/OnLevelsCollectionCreated'
-import { OnColorMixingFailed } from '@gameContext/player/application/OnColorMixingFailed'
 
 // Color use cases and repositories:
 import { MixColor } from '@gameContext/color/application/mixColor'
 import { ColorMixerByConsoleLogger } from '@gameContext/color/infrastructure/ColorMixerByConsoleLogger'
 import { GenerateColors } from '@gameContext/color/application/generateColors'
 import { ColorInMemoryRepository } from '@gameContext/color/infrastructure/ColorInMemoryRepository'
+import { OnColorMixingFailed } from '@gameContext/player/application/OnColorMixingFailed'
+import { OnDecrementedLives } from '@frontend/adapter/subscribers/OnDecrementedLives'
 
 // Event Bus:
 import { InMemoryAsyncEventBus } from '@gameContext/shared/infrastructure/eventBus/InMemoryAsyncEventBus'
@@ -80,4 +81,5 @@ export function configureDependencies() {
   // Subscribers:
   container.register(Types.DomainEventSubscribers, OnLevelsCollectionCreated)
   container.register(Types.DomainEventSubscribers, OnColorMixingFailed)
+  container.register(Types.DomainEventSubscribers, OnDecrementedLives)
 }

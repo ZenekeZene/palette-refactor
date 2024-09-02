@@ -4,9 +4,9 @@ import { ColorGroup } from './models/colorGroup/ColorGroup'
 import { ColorGroupCollectionId } from './ColorGroupCollectionId'
 import { ColorGroupId } from './models/colorGroup/ColorGroupId'
 import { ColorChipId } from './models/colorChip/ColorChipId'
-import { ColorMixingSuccessful } from './events/ColorMixingSuccessful'
+import { ColorMixingSuccessfulEvent } from './events/ColorMixingSuccessfulEvent'
 import { Uuid } from '@gameContext/shared/domain/utils/Uuid'
-import { ColorMixingFailed } from './events/ColorMixingFailed'
+import { ColorMixingFailedEvent } from './events/ColorMixingFailedEvent'
 import { ColorGroupNotFoundInCollection } from './exceptions/ColorGroupNotFoundInCollection'
 import { PlayerId } from '@gameContext/player/domain/models/PlayerId'
 
@@ -86,7 +86,7 @@ export class ColorGroupCollection extends AggregateRoot {
   }
 
   private recordColorMixingSuccessful(colorGroup: ColorGroup) {
-    const colorMixingSuccessful = new ColorMixingSuccessful({
+    const colorMixingSuccessful = new ColorMixingSuccessfulEvent({
       aggregateId: this.id.valueOf(),
       mixed: colorGroup,
       eventId: Uuid.random().valueOf(),
@@ -97,7 +97,7 @@ export class ColorGroupCollection extends AggregateRoot {
   }
 
   private recordColorMixingFailed(colorGroup: ColorGroup) {
-    const colorMixingFailed = new ColorMixingFailed({
+    const colorMixingFailed = new ColorMixingFailedEvent({
       aggregateId: this.id.valueOf(),
       failedMixed: colorGroup,
       correctMixed: this.searchCorrectColorGroup(colorGroup.swatchColor.id),
