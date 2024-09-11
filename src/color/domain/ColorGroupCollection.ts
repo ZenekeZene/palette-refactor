@@ -41,7 +41,7 @@ export class ColorGroupCollection extends AggregateRoot {
     if (!this.isColorGroupPresent(colorGroupReference)) return false
     const colorGroup = this.getColorGroup(colorGroupReference)
     const areEquals = colorGroup.swatchColor.equalsById(swatchColorId)
-    areEquals ? this.success(colorGroup) : this.fail(colorGroup)
+    areEquals ? this.success(colorGroup) : this.fail(colorGroup, swatchColorId)
     return areEquals
   }
 
@@ -76,10 +76,10 @@ export class ColorGroupCollection extends AggregateRoot {
     }
   }
 
-  fail(colorGroup: ColorGroup) {
+  fail(colorGroup: ColorGroup, swatchColorId: ColorChipId) {
     if (this.isColorGroupPresent(colorGroup)) {
       colorGroup.fail()
-      this.recordColorMixingFailed(colorGroup)
+      this.recordColorMixingFailed(colorGroup, swatchColorId)
     } else {
       throw new ColorGroupNotFoundInCollection(colorGroup.id)
     }
@@ -96,11 +96,14 @@ export class ColorGroupCollection extends AggregateRoot {
     this.record(colorMixingSuccessful)
   }
 
-  private recordColorMixingFailed(colorGroup: ColorGroup) {
+  private recordColorMixingFailed(
+    colorGroup: ColorGroup,
+    swatchColorId: ColorChipId,
+  ) {
     const colorMixingFailed = new ColorMixingFailedEvent({
       aggregateId: this.id.valueOf(),
       failedMixed: colorGroup,
-      correctMixed: this.searchCorrectColorGroup(colorGroup.swatchColor.id),
+      correctMixed: this.searchCorrectColorGroup(swatchColorId),
       eventId: Uuid.random().valueOf(),
       playerId: this.playerId.valueOf(),
       occurredOn: new Date(),
