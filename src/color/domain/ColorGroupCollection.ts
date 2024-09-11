@@ -38,11 +38,11 @@ export class ColorGroupCollection extends AggregateRoot {
     colorGroupReference: ColorGroup,
     swatchColorId: ColorChipId,
   ): boolean {
-    if (this.isColorGroupPresent(colorGroupReference)) {
-      const colorGroup = this.getColorGroup(colorGroupReference)
-      return colorGroup.swatchColor.equalsById(swatchColorId)
-    }
-    return false
+    if (!this.isColorGroupPresent(colorGroupReference)) return false
+    const colorGroup = this.getColorGroup(colorGroupReference)
+    const areEquals = colorGroup.swatchColor.equalsById(swatchColorId)
+    areEquals ? this.success(colorGroup) : this.fail(colorGroup)
+    return areEquals
   }
 
   searchCorrectColorGroup(swatchColorId: ColorChipId): ColorGroup {

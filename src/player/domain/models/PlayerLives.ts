@@ -8,4 +8,8 @@ export class PlayerLives extends NotNegative {
   decrement() {
     return new PlayerLives(this.valueOf() - 1)
   }
+
+  isZero() {
+    return this.valueOf() === 0
+  }
 }

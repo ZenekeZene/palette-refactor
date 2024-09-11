@@ -1,6 +1,9 @@
-import type { Request } from '@gameContext/shared/domain/utils/Request'
-import type { Response } from '@gameContext/shared/domain/utils/Response'
+import type { Response } from './Response'
+import type { Request } from './Request'
 
-export interface UseCase<Req extends Request, Res extends Response> {
+export interface UseCase<
+  Req extends Request,
+  Res extends Response | void = void,
+> {
   execute: (request: Req) => Promise<Res> | Res
 }

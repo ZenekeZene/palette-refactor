@@ -2,5 +2,5 @@
 initial:
   lives: 3
   score: 0
-  levelIndex: 1
+  levelIndex: 3
   bonus: 1

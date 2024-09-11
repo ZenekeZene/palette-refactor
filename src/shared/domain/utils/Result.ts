@@ -2,7 +2,7 @@ export class Result<T, E extends Error> {
   private ok: T | null = null
   private err: E | null = null
 
-  constructor(ok: T | null, err: E | null) {
+  constructor(ok: T | null, err?: E | null) {
     if (!ok && !err) {
       throw new Error('Result must have a value or an error')
     }

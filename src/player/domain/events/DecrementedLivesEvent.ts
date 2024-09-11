@@ -5,7 +5,7 @@ type DecrementedLivesEventAttributes = {
   readonly decrementedLives: PlayerLives
 }
 
-class DecrementedLivesEvent extends DomainEvent {
+export class DecrementedLivesEvent extends DomainEvent {
   static readonly EVENT_NAME = 'player.decremented.lives'
 
   readonly decrementedLives: PlayerLives = new PlayerLives(1)
@@ -32,7 +32,11 @@ class DecrementedLivesEvent extends DomainEvent {
 
   toPrimitives() {
     return {
+      eventName: DecrementedLivesEvent.EVENT_NAME,
+      aggregateId: this.aggregateId,
       decrementedLives: this.decrementedLives.valueOf(),
+      eventId: this.eventId,
+      occurredOn: this.occurredOn.toISOString(),
     }
   }
 
@@ -51,5 +55,3 @@ class DecrementedLivesEvent extends DomainEvent {
     })
   }
 }
-
-export { DecrementedLivesEvent }

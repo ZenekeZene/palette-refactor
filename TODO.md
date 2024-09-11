@@ -21,13 +21,13 @@
 
 - [x] Create the event bus and subscribers.
 - [x] Make a diagram about event bus.
-- [?] Is there an alternative to CustomEvent?
-- [ ] Publish the diagram in RRSS.
+- [?] Is there an alternative to CustomEvent? It is a concrete infra detail.
+- [x] Publish the diagram in RRSS.
   - [x] Can we change the example?
     - [x] CustomEvent instead of events module.
-  - [ ] Can it be simplified?
+  - ~~[-] Can it be simplified?~~
   - [ ] Differences between pub sub pattern, event bus and this event bus applied in arch. hexagonal or DDD (?).
-  - [ ] How we can publish this diagram?
+  - ~~[-] How we can publish this diagram?~~
 
 ## Testing
 
