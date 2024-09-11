@@ -3,6 +3,11 @@ import { DecrementedLivesEvent } from '@gameContext/player/domain/events/Decreme
 import { DomainEventClass } from '@gameContext/shared/domain/utils/DomainEvent'
 import { DomainEventSubscriber } from '@gameContext/shared/domain/utils/DomainEventSubscriber'
 import { getStore } from '@frontend/adapter/store/useStore'
+import {
+  events,
+  createEvent,
+  dispatchEvent,
+} from '@frontend/adapter/events/events'
 
 @injectable()
 export class OnDecrementedLives
@@ -13,10 +18,11 @@ export class OnDecrementedLives
   }
 
   async on(domainEvent: DecrementedLivesEvent): Promise<void> {
-    console.log('[OnDecrementedLives]', domainEvent)
     const store = getStore()
     const decrementLives = store.getState().decrementLives
     // TODO: the domain event properties has to be primitives
     decrementLives(domainEvent.decrementedLives.valueOf())
+    const event = createEvent(events.decrementedLives)
+    dispatchEvent(event)
   }
 }

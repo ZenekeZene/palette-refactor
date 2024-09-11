@@ -14,9 +14,7 @@ export class OnPlayerDead implements DomainEventSubscriber<PlayerDead> {
     return [PlayerDead]
   }
 
-  async on(domainEvent: PlayerDead): Promise<void> {
-    console.log('[OnPlayerDead]', domainEvent)
-    // TODO: launch a event to show the game over screen
+  async on(): Promise<void> {
     const gameOverEvent = createEvent(events.gameOver)
     dispatchEvent(gameOverEvent)
   }
