@@ -1,7 +1,9 @@
 import { injectable } from 'tsyringe'
 import { PlayerDead } from '@gameContext/player/domain/events/PlayerDeadEvent'
-import { DomainEventClass } from '@gameContext/shared/domain/utils/DomainEvent'
+import { DomainEvent } from '@gameContext/shared/domain/utils/DomainEvent'
 import { DomainEventSubscriber } from '@gameContext/shared/domain/utils/DomainEventSubscriber'
+import { AggregateRoot } from '@gameContext/shared/domain/utils/AggregateRoot'
+import { Class } from '@gameContext/shared/types/Class'
 import {
   events,
   createEvent,
@@ -10,7 +12,7 @@ import {
 
 @injectable()
 export class OnPlayerDead implements DomainEventSubscriber<PlayerDead> {
-  subscribedTo(): Array<DomainEventClass> {
+  subscribedTo(): Class<DomainEvent<AggregateRoot>>[] {
     return [PlayerDead]
   }
 

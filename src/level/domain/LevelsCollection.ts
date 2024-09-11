@@ -1,5 +1,4 @@
 import { AggregateRoot } from '@gameContext/shared/domain/utils/AggregateRoot'
-import { Uuid } from '@gameContext/shared/domain/utils/Uuid'
 import { LevelPrize } from '@gameContext/level/domain/models/levelPrize/LevelPrize'
 import {
   Level,
@@ -51,11 +50,9 @@ export class LevelsCollection extends AggregateRoot {
   }
 
   private recordLevelsCollectionCreated(): void {
-    const levelsCollectionCreated = new LevelsCollectionCreatedEvent({
-      aggregateId: this.id.valueOf(),
+    const levelsCollectionCreated = LevelsCollectionCreatedEvent.of({
+      aggregate: this,
       levels: this.levels,
-      eventId: Uuid.random().valueOf(),
-      occurredOn: new Date(),
     })
     this.record(levelsCollectionCreated)
   }

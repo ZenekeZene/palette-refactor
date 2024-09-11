@@ -1,53 +1,33 @@
 import { DomainEvent } from '@gameContext/shared/domain/utils/DomainEvent'
 import { Level } from '@gameContext/level/domain/models/level/Level'
+import { LevelsCollection } from '../LevelsCollection'
 
-type LevelsCollectionCreatedAttributes = {
-  readonly levels: Level[]
-}
-
-export class LevelsCollectionCreatedEvent extends DomainEvent {
+export class LevelsCollectionCreatedEvent extends DomainEvent<LevelsCollection> {
   static readonly EVENT_NAME = 'levels.collection.created'
 
   readonly levels: Level[] = []
 
-  constructor({
-    aggregateId,
+  private constructor({
+    aggregate,
     levels,
-    eventId,
-    occurredOn,
   }: {
-    aggregateId: string
+    aggregate: LevelsCollection
     levels: Level[]
-    eventId?: string
-    occurredOn?: Date
   }) {
     super({
       eventName: LevelsCollectionCreatedEvent.EVENT_NAME,
-      aggregateId,
-      eventId,
-      occurredOn,
+      aggregate,
     })
     this.levels = levels
   }
 
-  toPrimitives() {
-    return {
-      levels: this.levels.map((level) => level.valueOf()),
-    }
-  }
-
-  static fromPrimitives(params: {
-    aggregateId: string
-    eventId: string
-    occurredOn: Date
-    attributes: LevelsCollectionCreatedAttributes
-  }): DomainEvent {
-    const { aggregateId, eventId, occurredOn, attributes } = params
+  public static of(args: {
+    aggregate: LevelsCollection
+    levels: Level[]
+  }): DomainEvent<LevelsCollection> {
     return new LevelsCollectionCreatedEvent({
-      aggregateId,
-      levels: attributes.levels,
-      eventId,
-      occurredOn,
+      aggregate: args.aggregate,
+      levels: args.levels,
     })
   }
 }

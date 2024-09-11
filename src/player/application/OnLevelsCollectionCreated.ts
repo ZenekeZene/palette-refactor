@@ -1,13 +1,15 @@
 import { injectable } from 'tsyringe'
 import { DomainEventSubscriber } from '@gameContext/shared/domain/utils/DomainEventSubscriber'
 import { LevelsCollectionCreatedEvent } from '@gameContext/level/domain/events/LevelsCollectionCreatedEvent'
-import { DomainEventClass } from '@gameContext/shared/domain/utils/DomainEvent'
+import { DomainEvent } from '@gameContext/shared/domain/utils/DomainEvent'
+import { AggregateRoot } from '@gameContext/shared/domain/utils/AggregateRoot'
+import { Class } from '@gameContext/shared/types/Class'
 
 @injectable()
 export class OnLevelsCollectionCreated
   implements DomainEventSubscriber<LevelsCollectionCreatedEvent>
 {
-  subscribedTo(): DomainEventClass[] {
+  subscribedTo(): Class<DomainEvent<AggregateRoot>>[] {
     return [LevelsCollectionCreatedEvent]
   }
 

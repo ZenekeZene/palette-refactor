@@ -1,53 +1,33 @@
 import { DomainEvent } from '@gameContext/shared/domain/utils/DomainEvent'
 import { ColorGroup } from '@gameContext/color/domain/models/colorGroup/ColorGroup'
+import { ColorGroupCollection } from '../ColorGroupCollection'
 
-type ColorMixingSuccessfulAttributes = {
-  readonly mixed: ColorGroup
-}
-
-export class ColorMixingSuccessfulEvent extends DomainEvent {
+export class ColorMixingSuccessfulEvent extends DomainEvent<ColorGroupCollection> {
   static readonly EVENT_NAME = 'color.mixing.successful'
 
   readonly mixed: ColorGroup | undefined = undefined
 
-  constructor({
-    aggregateId,
-    mixed,
-    eventId,
-    occurredOn,
-  }: {
-    aggregateId: string
+  public static of(args: {
+    aggregate: ColorGroupCollection
     mixed: ColorGroup
-    eventId?: string
-    occurredOn?: Date
+  }): DomainEvent<ColorGroupCollection> {
+    return new ColorMixingSuccessfulEvent({
+      aggregate: args.aggregate,
+      mixed: args.mixed,
+    })
+  }
+
+  private constructor({
+    aggregate,
+    mixed,
+  }: {
+    aggregate: ColorGroupCollection
+    mixed: ColorGroup
   }) {
     super({
       eventName: ColorMixingSuccessfulEvent.EVENT_NAME,
-      aggregateId,
-      eventId,
-      occurredOn,
+      aggregate,
     })
     this.mixed = mixed
-  }
-
-  toPrimitives() {
-    return {
-      mixed: this.mixed?.toPrimitive(),
-    }
-  }
-
-  static fromPrimitives(params: {
-    aggregateId: string
-    eventId: string
-    occurredOn: Date
-    attributes: ColorMixingSuccessfulAttributes
-  }): DomainEvent {
-    const { aggregateId, eventId, occurredOn, attributes } = params
-    return new ColorMixingSuccessfulEvent({
-      aggregateId,
-      mixed: attributes.mixed,
-      eventId,
-      occurredOn,
-    })
   }
 }

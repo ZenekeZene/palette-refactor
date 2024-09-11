@@ -5,7 +5,6 @@ import { ColorGroupCollectionId } from './ColorGroupCollectionId'
 import { ColorGroupId } from './models/colorGroup/ColorGroupId'
 import { ColorChipId } from './models/colorChip/ColorChipId'
 import { ColorMixingSuccessfulEvent } from './events/ColorMixingSuccessfulEvent'
-import { Uuid } from '@gameContext/shared/domain/utils/Uuid'
 import { ColorMixingFailedEvent } from './events/ColorMixingFailedEvent'
 import { ColorGroupNotFoundInCollection } from './exceptions/ColorGroupNotFoundInCollection'
 import { PlayerId } from '@gameContext/player/domain/models/PlayerId'
@@ -26,7 +25,7 @@ export class ColorGroupCollection extends AggregateRoot {
     )
   }
 
-  private getColorGroup(colorGroup: ColorGroup): ColorGroup {
+  getColorGroup(colorGroup: ColorGroup): ColorGroup {
     return this.items.find((item) => item.id.equals(colorGroup.id))!
   }
 
@@ -86,12 +85,9 @@ export class ColorGroupCollection extends AggregateRoot {
   }
 
   private recordColorMixingSuccessful(colorGroup: ColorGroup) {
-    const colorMixingSuccessful = new ColorMixingSuccessfulEvent({
-      aggregateId: this.id.valueOf(),
+    const colorMixingSuccessful = ColorMixingSuccessfulEvent.of({
+      aggregate: this,
       mixed: colorGroup,
-      eventId: Uuid.random().valueOf(),
-      occurredOn: new Date(),
-      // playerId: this.playerId.valueOf(),
     })
     this.record(colorMixingSuccessful)
   }
@@ -100,13 +96,10 @@ export class ColorGroupCollection extends AggregateRoot {
     colorGroup: ColorGroup,
     swatchColorId: ColorChipId,
   ) {
-    const colorMixingFailed = new ColorMixingFailedEvent({
-      aggregateId: this.id.valueOf(),
-      failedMixed: colorGroup,
-      correctMixed: this.searchCorrectColorGroup(swatchColorId),
-      eventId: Uuid.random().valueOf(),
-      playerId: this.playerId.valueOf(),
-      occurredOn: new Date(),
+    const colorMixingFailed = ColorMixingFailedEvent.of({
+      aggregate: this,
+      colorGroup,
+      swatchColorId,
     })
     this.record(colorMixingFailed)
   }

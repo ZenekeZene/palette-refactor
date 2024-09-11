@@ -22,14 +22,14 @@ export class OnColorMixingFailed
   }
 
   async on(domainEvent: ColorMixingFailedEvent): Promise<void> {
-    const playerId = new PlayerId(domainEvent.playerId)
+    const { aggregate } = domainEvent
+    const playerId = new PlayerId(aggregate.playerId.valueOf())
     const player = this.repository.findById(playerId)
     if (!player) {
       throw new PlayerNotFoundException()
     }
     player.decrementLives()
     const domainEvents = player.pullDomainEvents()
-    console.log(domainEvents)
     this.eventBus.publish(domainEvents)
     this.repository.save(player)
   }

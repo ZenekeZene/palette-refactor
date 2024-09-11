@@ -1,14 +1,16 @@
 import { injectable } from 'tsyringe'
-import { DomainEventClass } from '@gameContext/shared/domain/utils/DomainEvent'
 import { DomainEventSubscriber } from '@gameContext/shared/domain/utils/DomainEventSubscriber'
 import { ColorMixingSuccessfulEvent } from '@gameContext/color/domain/events/ColorMixingSuccessfulEvent'
 import { getStore } from '@frontend/adapter/store/useStore'
+import { Class } from '@gameContext/shared/types/Class'
+import { DomainEvent } from '@gameContext/shared/domain/utils/DomainEvent'
+import { AggregateRoot } from '@gameContext/shared/domain/utils/AggregateRoot'
 
 @injectable()
 export class OnColorMixingSuccessful
   implements DomainEventSubscriber<ColorMixingSuccessfulEvent>
 {
-  subscribedTo(): Array<DomainEventClass> {
+  subscribedTo(): Class<DomainEvent<AggregateRoot>>[] {
     return [ColorMixingSuccessfulEvent]
   }
 

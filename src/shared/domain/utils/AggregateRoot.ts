@@ -1,18 +1,16 @@
 import { DomainEvent } from './DomainEvent'
 
-abstract class AggregateRoot {
-  private domainEvents: DomainEvent[] = []
+export abstract class AggregateRoot {
+  private domainEvents: DomainEvent<AggregateRoot>[] = []
 
-  public pullDomainEvents(): DomainEvent[] {
+  public pullDomainEvents(): DomainEvent<AggregateRoot>[] {
     const domainEvents = this.domainEvents
     this.domainEvents = []
 
     return domainEvents
   }
 
-  protected record(domainEvent: DomainEvent): void {
+  protected record(domainEvent: DomainEvent<AggregateRoot>): void {
     this.domainEvents.push(domainEvent)
   }
 }
-
-export { AggregateRoot }

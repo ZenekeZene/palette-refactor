@@ -1,6 +1,6 @@
 import { injectable } from 'tsyringe'
 import { DecrementedLivesEvent } from '@gameContext/player/domain/events/DecrementedLivesEvent'
-import { DomainEventClass } from '@gameContext/shared/domain/utils/DomainEvent'
+import { DomainEvent } from '@gameContext/shared/domain/utils/DomainEvent'
 import { DomainEventSubscriber } from '@gameContext/shared/domain/utils/DomainEventSubscriber'
 import { getStore } from '@frontend/adapter/store/useStore'
 import {
@@ -8,12 +8,14 @@ import {
   createEvent,
   dispatchEvent,
 } from '@frontend/adapter/events/events'
+import { Class } from '@gameContext/shared/types/Class'
+import { AggregateRoot } from '@gameContext/shared/domain/utils/AggregateRoot'
 
 @injectable()
 export class OnDecrementedLives
   implements DomainEventSubscriber<DecrementedLivesEvent>
 {
-  subscribedTo(): Array<DomainEventClass> {
+  subscribedTo(): Class<DomainEvent<AggregateRoot>>[] {
     return [DecrementedLivesEvent]
   }
 

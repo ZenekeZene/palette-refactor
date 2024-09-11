@@ -1,67 +1,40 @@
 import { DomainEvent } from '@gameContext/shared/domain/utils/DomainEvent'
 import { ColorGroup } from '@gameContext/color/domain/models/colorGroup/ColorGroup'
+import { ColorGroupCollection } from '../ColorGroupCollection'
+import { ColorChipId } from '../models/colorChip/ColorChipId'
 
-type ColorMixingFailedAttributes = {
-  readonly failedMixed: ColorGroup
-  readonly correctMixed: ColorGroup
-  readonly playerId: string
-}
-
-export class ColorMixingFailedEvent extends DomainEvent {
+export class ColorMixingFailedEvent extends DomainEvent<ColorGroupCollection> {
   static readonly EVENT_NAME = 'color.mixing.failed'
 
-  readonly failedMixed: ColorGroup | undefined = undefined
-  readonly correctMixed: ColorGroup | undefined = undefined
-  readonly playerId: string
+  readonly colorGroup: ColorGroup
+  readonly swatchColorId: ColorChipId
 
-  constructor({
-    aggregateId,
-    failedMixed,
-    correctMixed,
-    eventId,
-    playerId,
-    occurredOn,
+  public static of(args: {
+    aggregate: ColorGroupCollection
+    colorGroup: ColorGroup
+    swatchColorId: ColorChipId
+  }): DomainEvent<ColorGroupCollection> {
+    return new ColorMixingFailedEvent({
+      aggregate: args.aggregate,
+      colorGroup: args.colorGroup,
+      swatchColorId: args.swatchColorId,
+    })
+  }
+
+  private constructor({
+    aggregate,
+    colorGroup,
+    swatchColorId,
   }: {
-    aggregateId: string
-    failedMixed: ColorGroup
-    correctMixed: ColorGroup
-    eventId?: string
-    playerId: string
-    occurredOn?: Date
+    aggregate: ColorGroupCollection
+    colorGroup: ColorGroup
+    swatchColorId: ColorChipId
   }) {
     super({
       eventName: ColorMixingFailedEvent.EVENT_NAME,
-      aggregateId,
-      eventId,
-      occurredOn,
+      aggregate,
     })
-    this.failedMixed = failedMixed
-    this.correctMixed = correctMixed
-    this.playerId = playerId
-  }
-
-  toPrimitives() {
-    return {
-      failedMixed: this.failedMixed?.toPrimitive(),
-      correctMixed: this.correctMixed?.toPrimitive(),
-      playerId: this.playerId.valueOf(),
-    }
-  }
-
-  static fromPrimitives(params: {
-    aggregateId: string
-    eventId: string
-    occurredOn: Date
-    attributes: ColorMixingFailedAttributes
-  }): DomainEvent {
-    const { aggregateId, eventId, occurredOn, attributes } = params
-    return new ColorMixingFailedEvent({
-      aggregateId,
-      failedMixed: attributes.failedMixed,
-      correctMixed: attributes.correctMixed,
-      playerId: attributes.playerId,
-      eventId,
-      occurredOn,
-    })
+    this.colorGroup = colorGroup
+    this.swatchColorId = swatchColorId
   }
 }
