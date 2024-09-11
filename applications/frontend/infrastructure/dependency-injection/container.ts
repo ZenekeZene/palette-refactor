@@ -9,6 +9,7 @@ import { PassLevel } from '@gameContext/player/application/passLevel'
 import { RegisterPlayer } from '@gameContext/player/application/registerPlayer'
 import { PlayerLoaderFromFileRepository } from '@gameContext/player/infrastructure/PlayerLoaderFromFileRepository'
 import { PlayerInMemoryRepository } from '@gameContext/player/infrastructure/PlayerInMemoryRepository'
+import { OnPlayerDead } from '@frontend/adapter/subscribers/OnPlayerDead'
 
 // Level use cases and repositories:
 import { LoadLevels } from '@gameContext/level/application/loadLevels'
@@ -32,6 +33,8 @@ import { GenerateColors } from '@gameContext/color/application/generateColors'
 import { ColorInMemoryRepository } from '@gameContext/color/infrastructure/ColorInMemoryRepository'
 import { OnColorMixingFailed } from '@gameContext/player/application/OnColorMixingFailed'
 import { OnDecrementedLives } from '@frontend/adapter/subscribers/OnDecrementedLives'
+import { OnColorMixingFailed as OnColorMixingFailedApp } from '@frontend/adapter/subscribers/OnColorMixingFailed'
+import { OnColorMixingSuccessful as OnColorMixingSuccessfulApp } from '@frontend/adapter/subscribers/OnColorMixingSuccessful'
 
 // Event Bus:
 import { InMemoryAsyncEventBus } from '@gameContext/shared/infrastructure/eventBus/InMemoryAsyncEventBus'
@@ -81,5 +84,8 @@ export function configureDependencies() {
   // Subscribers:
   container.register(Types.DomainEventSubscribers, OnLevelsCollectionCreated)
   container.register(Types.DomainEventSubscribers, OnColorMixingFailed)
+  container.register(Types.DomainEventSubscribers, OnColorMixingFailedApp)
+  container.register(Types.DomainEventSubscribers, OnColorMixingSuccessfulApp)
   container.register(Types.DomainEventSubscribers, OnDecrementedLives)
+  container.register(Types.DomainEventSubscribers, OnPlayerDead)
 }

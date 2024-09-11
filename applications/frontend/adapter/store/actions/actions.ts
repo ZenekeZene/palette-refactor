@@ -4,8 +4,6 @@ import { getNextQuote } from './getNextQuote'
 import { mixColor } from './color/mixColor'
 import { generateColors } from './color/generateColors'
 import { getNextSwatchColor } from './color/getNextSwatchColor'
-import { notifyColorMixFailure } from './color/notifyColorMixFailure'
-import { notifyColorMixSuccess } from './color/notifyColorMixSuccess'
 import { successColor } from './color/successColor'
 import { failColor } from './color/failColor'
 
@@ -16,8 +14,6 @@ export const actions = {
   mixColor,
   generateColors,
   getNextSwatchColor,
-  notifyColorMixFailure,
-  notifyColorMixSuccess,
   successColor,
   failColor,
 }

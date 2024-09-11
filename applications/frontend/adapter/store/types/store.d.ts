@@ -7,7 +7,6 @@ export type {
   Colors,
   ColorGroup,
   ColorTypeOf,
-  MixColorResponse,
   ColorGroupStatusTypes,
   ColorStatusType,
 } from '@gameContext/shared/infrastructure/store/store'

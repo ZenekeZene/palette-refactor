@@ -1,6 +1,7 @@
 export const events = {
   colorMixFailure: 'colorMixFailure',
   colorMixSuccess: 'colorMixSuccess',
+  gameOver: 'gameOver',
 }
 
 // TODO: make sense of use a event bus?

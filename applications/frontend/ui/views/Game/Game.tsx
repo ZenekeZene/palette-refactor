@@ -4,11 +4,13 @@ import { SubtractedColorReached } from '@frontend/ui/components/color/ColorSwatc
 import { useColors } from '@frontend/ui/hooks/useColors/useColors'
 import { ResultColorsZone } from '@frontend/ui/components/zones/ResultColorsZone/ResultColorsZone'
 import { MixerColorsZone } from '@frontend/ui/components/zones/MixerColorsZone/MixerColorsZone'
+import { useGameOver } from '@frontend/ui/hooks/useGameOver/useGameOver'
 import { GameWrapper, Divider } from './Game.styled'
 
 export const GameView = () => {
   const player = useStore((state: PlayerStore) => state.player)
   const { colors, swatchColor, mixColor } = useColors()
+  useGameOver()
 
   const handleDragEnd = (subtractedColorReached: SubtractedColorReached) => {
     if (!subtractedColorReached) return

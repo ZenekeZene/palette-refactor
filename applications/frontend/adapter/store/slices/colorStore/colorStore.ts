@@ -1,6 +1,6 @@
 import { StateCreator } from 'zustand'
 import { ColorGroup } from '@frontend/adapter/store/types/store.d'
-import { MixColorResponse, type Store } from '../../types/store.d'
+import { type Store } from '../../types/store.d'
 import { actions } from '../../actions/actions'
 import type { ColorStore, ColorStoreState } from './colorStore.d'
 
@@ -33,27 +33,7 @@ export const createColorStore: StateCreator<Store, [], [], ColorStore> = (
     }))
   },
   mixColor: (colorGroupId: string, swatchColorId: string): void => {
-    const response = actions.mixColor(colorGroupId, swatchColorId)
-    if (response instanceof Error) {
-      console.error(response)
-    } else {
-      const { result } = response
-      result.isOk()
-        ? get().handleSuccessColor(response, colorGroupId)
-        : get().handleFailColor(response)
-    }
-  },
-  handleSuccessColor: (
-    response: MixColorResponse,
-    colorGroupId: string,
-  ): void => {
-    actions.notifyColorMixSuccess(response)
-    get().nextSwatchColor()
-    get().successColor(colorGroupId)
-  },
-  handleFailColor: (response: MixColorResponse): void => {
-    actions.notifyColorMixFailure(response)
-    get().failColor()
+    actions.mixColor(colorGroupId, swatchColorId)
   },
   successColor: (colorGroupId: string): void => {
     set((state: ColorStore) => ({
