@@ -1,6 +1,6 @@
 import { injectable } from 'tsyringe'
 import type { Player } from '@gameContext/player/domain/Player'
-import type { PlayerId } from '@gameContext/player/domain/models/PlayerId'
+import type { PlayerId } from '@gameContext/shared/domain/PlayerId'
 import type { PlayerRepository } from '@gameContext/player/domain/repositories/PlayerRepository'
 
 @injectable()

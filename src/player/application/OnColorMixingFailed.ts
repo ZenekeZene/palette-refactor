@@ -1,12 +1,14 @@
 import { injectable, inject } from 'tsyringe'
 import { DomainEventSubscriber } from '@gameContext/shared/domain/utils/DomainEventSubscriber'
 import { ColorMixingFailedEvent } from '@gameContext/color/domain/events/ColorMixingFailedEvent'
-import { DomainEventClass } from '@gameContext/shared/domain/utils/DomainEvent'
+import { DomainEvent } from '@gameContext/shared/domain/utils/DomainEvent'
 import type { EventBus } from '@gameContext/shared/domain/utils/EventBus'
 import { Types } from '@frontend/infrastructure/dependency-injection/identifiers'
+import { PlayerId } from '@gameContext/shared/domain/PlayerId'
+import { Class } from '@gameContext/shared/types/Class'
+import { AggregateRoot } from '@gameContext/shared/domain/utils/AggregateRoot'
 import type { PlayerRepository } from '../domain/repositories/PlayerRepository'
 import { PlayerNotFoundException } from '../domain/exceptions/PlayerNotFoundException'
-import { PlayerId } from '../domain/models/PlayerId'
 
 @injectable()
 export class OnColorMixingFailed
@@ -17,7 +19,7 @@ export class OnColorMixingFailed
     @inject(Types.EventBus) private eventBus: EventBus,
   ) {}
 
-  subscribedTo(): DomainEventClass[] {
+  subscribedTo(): Class<DomainEvent<AggregateRoot>>[] {
     return [ColorMixingFailedEvent]
   }
 

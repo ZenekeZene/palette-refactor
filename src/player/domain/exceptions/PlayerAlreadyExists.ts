@@ -1,4 +1,4 @@
-import { PlayerId } from '@gameContext/player/domain/models/PlayerId'
+import { PlayerId } from '@gameContext/shared/domain/PlayerId'
 
 class PlayerAlreadyExists extends Error {
   constructor(playerId: PlayerId) {

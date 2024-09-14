@@ -5,8 +5,8 @@ import {
   LevelRawModel,
 } from '@gameContext/level/domain/models/level/Level'
 import { LevelsCollectionCreatedEvent } from '@gameContext/level/domain/events/LevelsCollectionCreatedEvent'
+import { LevelId } from '@gameContext/shared/domain/LevelId'
 import { LevelsCollectionId } from './LevelsCollectionId'
-import { LevelId } from './models/level/LevelId'
 
 export class LevelsCollection extends AggregateRoot {
   readonly levels: Level[] = []

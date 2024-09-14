@@ -1,9 +1,9 @@
 import { Entity } from '@gameContext/shared/domain/utils/Entity'
+import { LevelId } from '@gameContext/shared/domain/LevelId'
 import { LevelPrizeBonus } from '../levelPrize/LevelPrizeBonus'
 import { LevelPrizeLives } from '../levelPrize/LevelPrizeLives'
 import { LevelPrize, LevelPrizeRawModel } from '../levelPrize/LevelPrize'
 import { LevelChips } from './LevelChips'
-import { LevelId } from './LevelId'
 
 export interface LevelRawModel {
   id: string

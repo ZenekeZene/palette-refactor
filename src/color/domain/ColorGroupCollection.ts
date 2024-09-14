@@ -1,4 +1,4 @@
-import { LevelId } from '@gameContext/level/domain/models/level/LevelId'
+import { LevelId } from '@gameContext/shared/domain/LevelId'
 import { AggregateRoot } from '@gameContext/shared/domain/utils/AggregateRoot'
 import { ColorGroup } from './models/colorGroup/ColorGroup'
 import { ColorGroupCollectionId } from './ColorGroupCollectionId'
@@ -7,7 +7,7 @@ import { ColorChipId } from './models/colorChip/ColorChipId'
 import { ColorMixingSuccessfulEvent } from './events/ColorMixingSuccessfulEvent'
 import { ColorMixingFailedEvent } from './events/ColorMixingFailedEvent'
 import { ColorGroupNotFoundInCollection } from './exceptions/ColorGroupNotFoundInCollection'
-import { PlayerId } from '@gameContext/player/domain/models/PlayerId'
+import { PlayerId } from '@gameContext/shared/domain/PlayerId'
 
 export class ColorGroupCollection extends AggregateRoot {
   constructor(

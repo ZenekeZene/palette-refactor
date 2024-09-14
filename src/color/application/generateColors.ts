@@ -3,17 +3,18 @@ import { UseCase } from '@gameContext/shared/domain/utils/UseCase'
 import { Types } from '@frontend/infrastructure/dependency-injection/identifiers'
 import type { LevelsRepository } from '@gameContext/level/domain/repositories/LevelsRepository'
 import { LevelsCollectionId } from '@gameContext/level/domain/LevelsCollectionId'
-import { LevelId } from '@gameContext/level/domain/models/level/LevelId'
-import { toGenerateColorsResponse } from './mapper/GenerateColorsMapper'
-import { GenerateColorsResponse } from './dto/GenerateColorsResponse'
-import { ColorGenerator } from '../domain/services/ColorGenerator'
+import { LevelId } from '@gameContext/shared/domain/LevelId'
+import { PlayerId } from '@gameContext/shared/domain/PlayerId'
+// TODO: Refactor this import from another module
 import { GetNumberOfChipsOfLevelService } from '@gameContext/level/domain/services/GetNumberOfChipsOfLevelService'
+import { ColorGenerator } from '../domain/services/ColorGenerator'
 import { ColorGroupCollection } from '../domain/ColorGroupCollection'
 import { ColorGroupCollectionId } from '../domain/ColorGroupCollectionId'
 import type { ColorMixerLogger } from '../domain/repositories/ColorMixerLogger'
-import { GenerateColorsRequest } from './dto/GenerateColorsRequest'
 import type { ColorRepository } from '../domain/repositories/ColorRepository'
-import { PlayerId } from '@gameContext/player/domain/models/PlayerId'
+import { GenerateColorsResponse } from './dto/GenerateColorsResponse'
+import { toGenerateColorsResponse } from './mapper/GenerateColorsMapper'
+import { GenerateColorsRequest } from './dto/GenerateColorsRequest'
 
 @injectable()
 export class GenerateColors
@@ -52,6 +53,7 @@ export class GenerateColors
     )
     this.colorRepository.save(colorGroupCollection)
     colorGroupCollection.each((colorGroup) => this.logger.logGroup(colorGroup))
+    // TODO: change to domain event, not response
     return toGenerateColorsResponse(colorGroupCollection)
   }
 }

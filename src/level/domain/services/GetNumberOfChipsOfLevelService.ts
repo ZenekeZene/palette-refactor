@@ -1,6 +1,6 @@
+import { LevelId } from '@gameContext/shared/domain/LevelId'
 import { LevelsRepository } from '../repositories/LevelsRepository'
 import { LevelsCollectionId } from '../LevelsCollectionId'
-import { LevelId } from '../models/level/LevelId'
 import { LevelsCollectionNotFound } from '../exceptions/LevelsCollectionNotFound'
 import { LevelNotFound } from '../exceptions/LevelNotFound'
 

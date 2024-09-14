@@ -1,5 +1,5 @@
 import { AggregateRoot } from '@gameContext/shared/domain/utils/AggregateRoot'
-import { PlayerId } from '@gameContext/player/domain/models/PlayerId'
+import { PlayerId } from '@gameContext/shared/domain/PlayerId'
 import { PlayerLives } from '@gameContext/player/domain/models/PlayerLives'
 import { PlayerScore } from '@gameContext/player/domain/models/PlayerScore'
 import { PlayerLevelIndex } from '@gameContext/player/domain/models/PlayerLevelIndex'

@@ -1,4 +1,4 @@
-import { LevelId } from '../models/level/LevelId'
+import { LevelId } from '@gameContext/shared/domain/LevelId'
 import { LevelsCollectionId } from '../LevelsCollectionId'
 
 class LevelNotFound extends Error {
