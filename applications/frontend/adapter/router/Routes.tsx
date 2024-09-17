@@ -5,13 +5,22 @@ import { TutorialView } from '@frontend/ui/views/Tutorial/Tutorial'
 import { TryAgainView } from '@frontend/ui/views/TryAgain/TryAgain'
 import { NextLevelView } from '@frontend/ui/views/NextLevel/NextLevel'
 import { FinalView } from '@frontend/ui/views/Final/Final'
+import { createRef } from 'react'
 
-export const routes: RouteObject[] = [
-  { path: HomeView.path, element: <HomeView /> },
-  { path: '*', element: <HomeView /> },
-  { path: TutorialView.path, element: <TutorialView /> },
-  { path: GameView.path, element: <GameView /> },
-  { path: NextLevelView.path, element: <NextLevelView /> },
-  { path: TryAgainView.path, element: <TryAgainView /> },
-  { path: FinalView.path, element: <FinalView /> },
+type ExtendedRouteObject = RouteObject & {
+  nodeRef: React.RefObject<HTMLDivElement>
+}
+
+export const routes: ExtendedRouteObject[] = [
+  { path: HomeView.path, element: <HomeView />, nodeRef: createRef() },
+  { path: '*', element: <HomeView />, nodeRef: createRef() },
+  { path: TutorialView.path, element: <TutorialView />, nodeRef: createRef() },
+  { path: GameView.path, element: <GameView />, nodeRef: createRef() },
+  {
+    path: NextLevelView.path,
+    element: <NextLevelView />,
+    nodeRef: createRef(),
+  },
+  { path: TryAgainView.path, element: <TryAgainView />, nodeRef: createRef() },
+  { path: FinalView.path, element: <FinalView />, nodeRef: createRef() },
 ]
