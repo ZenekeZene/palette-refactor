@@ -23,6 +23,7 @@ export class OnDecrementedLives
     const store = getStore()
     const decrementLives = store.getState().decrementLives
     // TODO: the domain event properties has to be primitives
+    console.log(domainEvent.decrementedLives.valueOf())
     decrementLives(domainEvent.decrementedLives.valueOf())
     const event = createEvent(events.decrementedLives)
     dispatchEvent(event)

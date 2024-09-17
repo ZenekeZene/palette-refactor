@@ -14,9 +14,13 @@ export const createPlayerStore = (initialProps: PlayerStoreState) => {
       const player = get().score
       set((state: PlayerStore) => ({ ...state, player: { ...player, score } }))
     },
-    decrementLives: (lives) => {
+    decrementLives: (livesToDecrement) => {
       const player = get().player
-      set((state: PlayerStore) => ({ ...state, player: { ...player, lives } }))
+      const currentLives = player.lives
+      set((state: PlayerStore) => ({
+        ...state,
+        player: { ...player, lives: currentLives - livesToDecrement },
+      }))
     },
     nextLevel: () => {
       get().nextQuote()
