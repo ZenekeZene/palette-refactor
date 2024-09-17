@@ -30,8 +30,9 @@
     "types": [
       "@modyfi/vite-plugin-yaml/modules",
       "node",
-      "jest",
-      "@testing-library/jest-dom"
+      "@types/jest",
+      "@testing-library/jest-dom",
+      "@types/react-transition-group"
     ]
   },
   "include": ["src", "applications/frontend"],
