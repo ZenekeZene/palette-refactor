@@ -7,28 +7,25 @@ import { GetLevel } from '@gameContext/level/application/getLevel'
 import type { Colors } from '../../types/store'
 import type { PlayerStoreState } from '../../slices/playerStore/playerStore.d'
 
-const getLevelId = (levelsCollectionId: string, levelIndex: number) => {
+const getLevel = (levelsCollectionId: string, levelIndex: number) => {
   const getLevelRequest = new GetLevelRequest(levelsCollectionId, levelIndex)
   const getLevel = container.resolve<GetLevel>(Types.GetLevel)
-  const { level } = getLevel.execute(getLevelRequest)
-  return level.id.valueOf()
+  return getLevel.execute(getLevelRequest).level
 }
 
 export const generateColors = ({
   levels: { id: levelsCollectionId },
   player: { levelIndex, ...player },
 }: PlayerStoreState): Colors => {
-  const levelId = getLevelId(levelsCollectionId, levelIndex)
+  const level = getLevel(levelsCollectionId, levelIndex)
+  const playerId = player.id
+  const levelId = level.id
+  // TODO: primitives, not models
   const generateColorsRequest = new GenerateColorsRequest(
-    levelsCollectionId,
-    levelId,
-    player.id,
+    level.getNumberOfChips().valueOf(),
+    levelId.valueOf(),
+    playerId.valueOf(),
   )
   const generateColors = container.resolve<GenerateColors>(Types.GenerateColors)
-  try {
-    return generateColors.execute(generateColorsRequest)
-  } catch (error) {
-    console.error('Failed to generate colors:', error)
-    return { items: [], levelId, id: '' }
-  }
+  return generateColors.execute(generateColorsRequest)
 }

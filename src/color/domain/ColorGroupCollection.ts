@@ -8,9 +8,11 @@ import { ColorMixingSuccessfulEvent } from './events/ColorMixingSuccessfulEvent'
 import { ColorMixingFailedEvent } from './events/ColorMixingFailedEvent'
 import { ColorGroupNotFoundInCollection } from './exceptions/ColorGroupNotFoundInCollection'
 import { PlayerId } from '@gameContext/shared/domain/PlayerId'
+import { ColorGenerator } from './services/ColorGenerator'
+import { NoColorGroupToMix } from './exceptions/NoColorGroupToMix'
 
 export class ColorGroupCollection extends AggregateRoot {
-  constructor(
+  private constructor(
     readonly id: ColorGroupCollectionId,
     readonly items: ColorGroup[] = [],
     readonly levelId: LevelId,
@@ -19,18 +21,46 @@ export class ColorGroupCollection extends AggregateRoot {
     super()
   }
 
+  static of(args: {
+    numberOfColorsToGenerate: number
+    levelId: LevelId
+    playerId: PlayerId
+  }) {
+    return new ColorGroupCollection(
+      new ColorGroupCollectionId(),
+      new ColorGenerator(args.numberOfColorsToGenerate).generate(),
+      args.levelId,
+      args.playerId,
+    )
+  }
+
   private isColorGroupPresent(colorGroup: ColorGroup): boolean {
     return (
       this.items.find((item) => item.id.equals(colorGroup.id)) !== undefined
     )
   }
 
-  getColorGroup(colorGroup: ColorGroup): ColorGroup {
+  private getColorGroup(colorGroup: ColorGroup): ColorGroup {
     return this.items.find((item) => item.id.equals(colorGroup.id))!
+  }
+
+  private getColorGroupsNotMixed(): ColorGroup[] {
+    return this.items.filter((colorGroup) => colorGroup.isPending())
   }
 
   getColorGroupById(colorGroupId: ColorGroupId): ColorGroup {
     return this.items.find((item) => item.id.equals(colorGroupId))!
+  }
+
+  mixColorGroupPending(): ColorGroup {
+    const colorGroupsNotMixed = this.getColorGroupsNotMixed()
+    if (colorGroupsNotMixed.length === 0) {
+      throw NoColorGroupToMix.of(this.id)
+    }
+    const randomIndex = Math.floor(Math.random() * colorGroupsNotMixed.length)
+    const colorGroupToMix = colorGroupsNotMixed[randomIndex]
+    this.success(colorGroupToMix)
+    return colorGroupToMix
   }
 
   areTheSameColorGroup(
@@ -48,18 +78,6 @@ export class ColorGroupCollection extends AggregateRoot {
     return this.items.find((colorGroup) =>
       colorGroup.swatchColor.equalsById(swatchColorId),
     )!
-  }
-
-  add(colorGroup: ColorGroup) {
-    if (this.isColorGroupPresent(colorGroup)) {
-      return this
-    }
-    return new ColorGroupCollection(
-      this.id,
-      [...this.items, colorGroup],
-      this.levelId,
-      this.playerId,
-    )
   }
 
   each(callback: (colorGroup: ColorGroup) => void) {
