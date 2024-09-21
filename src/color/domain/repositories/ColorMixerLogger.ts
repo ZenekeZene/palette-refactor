@@ -9,6 +9,4 @@ export interface ColorMixerLogger {
     mixedColor: Color | ColorChip,
   ): void
   logGroup(colorGroup: ColorGroup, message?: string): void
-  success(colorGroup: ColorGroup): void
-  fail(failedColorGroup: ColorGroup, correctColorGroup: ColorGroup): void
 }

@@ -1,4 +1,5 @@
 import { injectable } from 'tsyringe'
+import { isDebugMode } from '@frontend/infrastructure/isDebugMode'
 import { ColorMixerLogger } from '../domain/repositories/ColorMixerLogger'
 import { Color } from '../domain/models/Color'
 import { ColorChip } from '../domain/models/colorChip/ColorChip'
@@ -32,6 +33,7 @@ export class ColorMixerByConsoleLogger implements ColorMixerLogger {
     color2: Color | ColorChip,
     mixedColor: Color | ColorChip,
   ) {
+    if (!isDebugMode) return
     this.beginGroup('MixColor:')
     this.messageColor(
       color1 instanceof ColorChip ? color1.value : color1,
@@ -49,25 +51,14 @@ export class ColorMixerByConsoleLogger implements ColorMixerLogger {
   }
 
   logGroup(colorGroup: ColorGroup, message: string = ''): void {
+    if (!isDebugMode) return
     this.beginGroup(`Color Group Mixed ${message}`)
     const { resultColor, subtractedColor, swatchColor } = colorGroup
 
-    this.messageColor(swatchColor.value, 'SwatchColor')
-    this.messageColor(subtractedColor.value, 'SubtractedColor')
     this.messageColor(resultColor.value, 'ResultColor')
+    this.messageColor(subtractedColor.value, 'SubtractedColor')
+    this.messageColor(swatchColor.value, 'SwatchColor')
 
     this.endGroup()
-  }
-
-  success(colorGroup: ColorGroup): void {
-    this.logGroup(colorGroup, 'Successfully')
-  }
-
-  fail(failedColorGroup: ColorGroup, correctColorGroup: ColorGroup): void {
-    this.logGroup(failedColorGroup, 'Failed')
-    this.messageColor(
-      correctColorGroup.subtractedColor.value,
-      `The correct color was:`,
-    )
   }
 }

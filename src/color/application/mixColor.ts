@@ -11,7 +11,6 @@ import { ColorGroupNotFoundInCollection } from '../domain/exceptions/ColorGroupN
 @injectable()
 export class MixColor implements UseCase<MixColorRequest> {
   constructor(
-    // @inject(Types.ColorMixerLogger) private logger: ColorMixerLogger,
     @inject(Types.ColorRepository) private repository: ColorRepository,
     @inject(Types.EventBus) private eventBus: EventBus,
   ) {}

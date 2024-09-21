@@ -3,6 +3,7 @@ import { ColorGroup } from '@frontend/adapter/store/types/store.d'
 import { type Store } from '../../types/store.d'
 import { actions } from '../../actions/actions'
 import type { ColorStore, ColorStoreState } from './colorStore.d'
+import { isDebugMode } from '@frontend/infrastructure/isDebugMode'
 
 const initialState: ColorStoreState = {
   indexSwatchColor: 0,
@@ -17,10 +18,9 @@ export const createColorStore: StateCreator<Store, [], [], ColorStore> = (
 ) => ({
   ...initialState,
   extractSwatchColors: () => {
-    // TODO: only development purpose (add VITE env variables)
     const swatchColors = get().colors.items.map((colorGroup: ColorGroup) => ({
       ...colorGroup.swatchColor,
-      spy: colorGroup.spy,
+      ...(isDebugMode && { spy: colorGroup.spy }),
     }))
 
     set((state: ColorStore) => ({
@@ -52,11 +52,12 @@ export const createColorStore: StateCreator<Store, [], [], ColorStore> = (
   },
   generateColors: () => {
     const colors = actions.generateColors(get())
-    // TODO: only development purpose (add VITE env variables)
-    colors.items.map((item) => {
-      const spy = item.resultColor.id.valueOf().substring(0, 3)
-      item.spy = spy
-    })
+    if (isDebugMode) {
+      colors.items.map((item) => {
+        const spy = item.resultColor.id.valueOf().substring(0, 3)
+        item.spy = spy
+      })
+    }
 
     set((state: ColorStore) => ({
       ...state,

@@ -1,15 +1,14 @@
 import { inject, injectable } from 'tsyringe'
-import { UseCase } from '@gameContext/shared/domain/utils/UseCase'
 import { Types } from '@frontend/infrastructure/dependency-injection/identifiers'
+import { LevelId } from '@gameContext/shared/domain/LevelId'
+import { UseCase } from '@gameContext/shared/domain/utils/UseCase'
 import { PlayerId } from '@gameContext/shared/domain/PlayerId'
-// TODO: Refactor this import from another module
 import { ColorGroupCollection } from '../domain/ColorGroupCollection'
 import type { ColorMixerLogger } from '../domain/repositories/ColorMixerLogger'
 import type { ColorRepository } from '../domain/repositories/ColorRepository'
 import { GenerateColorsResponse } from './dto/GenerateColorsResponse'
 import { toGenerateColorsResponse } from './mapper/GenerateColorsMapper'
 import { GenerateColorsRequest } from './dto/GenerateColorsRequest'
-import { LevelId } from '@gameContext/shared/domain/LevelId'
 
 @injectable()
 export class GenerateColors
@@ -32,10 +31,7 @@ export class GenerateColors
       playerId,
     })
     this.colorRepository.save(colorGroupCollection)
-    // TODO: set VITE env variables to enable/disable this logger
-    // in development mode:
-    // colorGroupCollection.each((colorGroup) => this.logger.logGroup(colorGroup))
-    // TODO: change to domain event, not response
+    colorGroupCollection.each((colorGroup) => this.logger.logGroup(colorGroup))
     return toGenerateColorsResponse(colorGroupCollection)
   }
 }

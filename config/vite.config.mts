@@ -17,6 +17,8 @@ export default defineConfig({
       },
     },
   },
+  envDir: '../../config',
+  envPrefix: 'ENV_',
   publicDir: './public',
   server: {
     open: '/',

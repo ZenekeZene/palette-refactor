@@ -6,8 +6,9 @@ import { configureEventBus } from '@frontend/infrastructure/eventBus'
 import { configureStore } from '@frontend/adapter/store/useStore'
 import { setUseWhatChange } from '@simbathesailor/use-what-changed'
 import '@frontend/ui/styles/index.css'
+import { isDebugMode } from './infrastructure/isDebugMode'
 
-setUseWhatChange(process.env.NODE_ENV === 'development')
+setUseWhatChange(isDebugMode)
 
 async function init() {
   configureDependencies()
@@ -15,7 +16,7 @@ async function init() {
   await configureStore()
 
   ReactDOM.createRoot(document.getElementById('root')!).render(
-    // (1)
+    // (1) TODO
     // <React.StrictMode>
     <RouterProvider />,
     // </React.StrictMode>,
