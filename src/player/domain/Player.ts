@@ -16,8 +16,8 @@ export class Player extends AggregateRoot {
     public lives: PlayerLives,
     public score: PlayerScore,
     public levelIndex: PlayerLevelIndex,
-    public levelId: LevelId,
     public bonus: PlayerBonus,
+    public levelId?: LevelId,
   ) {
     super()
   }
@@ -78,19 +78,29 @@ export class Player extends AggregateRoot {
       lives: this.lives.valueOf(),
       score: this.score.valueOf(),
       levelIndex: this.levelIndex.valueOf(),
-      levelId: this.levelId.valueOf(),
       bonus: this.bonus.valueOf(),
+      levelId: this.levelId?.valueOf(),
     }
   }
 
-  static fromPrimitives(data: PlayerPrimitive): Player {
+  static createWithRandomId(data: PlayerPrimitive): Player {
     return new Player(
-      new PlayerId(data.id),
+      PlayerId.random(),
       new PlayerLives(data.lives),
       new PlayerScore(data.score),
       new PlayerLevelIndex(data.levelIndex),
-      new LevelId(data.levelId),
       new PlayerBonus(data.bonus),
+    )
+  }
+
+  static of(data: PlayerPrimitive): Player {
+    return new Player(
+      PlayerId.of(data.id),
+      new PlayerLives(data.lives),
+      new PlayerScore(data.score),
+      new PlayerLevelIndex(data.levelIndex),
+      new PlayerBonus(data.bonus),
+      data.levelId ? new LevelId(data.levelId) : undefined,
     )
   }
 }

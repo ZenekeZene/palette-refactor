@@ -36,7 +36,7 @@ export class StoreMother {
 
   private static createDefaultPlayer(): PlayerResponse {
     return {
-      id: Uuid.random(),
+      id: Uuid.randomValue(),
       ...StoreMother.defaultPlayer,
     }
   }

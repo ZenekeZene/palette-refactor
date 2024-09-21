@@ -23,7 +23,7 @@ export class GenerateColors
     generateColorsRequest: GenerateColorsRequest,
   ): GenerateColorsResponse {
     const { numberOfColorsToGenerate } = generateColorsRequest
-    const playerId = new PlayerId(generateColorsRequest.playerId)
+    const playerId = PlayerId.of(generateColorsRequest.playerId)
     const levelId = new LevelId(generateColorsRequest.levelId)
     const colorGroupCollection = ColorGroupCollection.of({
       numberOfColorsToGenerate,

@@ -25,7 +25,7 @@ class StoreBuilder {
     const quote = { id: 'quote', text: 'Quote', author: 'Author' }
     const quotes = toQuotesCollectionResponse(new QuotesCollection([quote]))
 
-    const playerDomain = Player.fromPrimitives({
+    const playerDomain = Player.of({
       id: 'player',
       lives: 0,
       score: 0,

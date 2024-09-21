@@ -8,7 +8,7 @@ import { toLevelsCollectionResponse } from './mapper/LevelsCollectionMapper'
 import type { EventBus } from '@gameContext/shared/domain/utils/EventBus'
 
 @injectable()
-class LoadLevels implements Loader {
+export class LoadLevels implements Loader {
   constructor(
     @inject(Types.LevelsLoaderRepository)
     private loaderLevelsRepository: LevelsLoaderRepository,
@@ -27,5 +27,3 @@ class LoadLevels implements Loader {
     }
   }
 }
-
-export { LoadLevels }

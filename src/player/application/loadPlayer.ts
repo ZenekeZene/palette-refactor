@@ -19,7 +19,7 @@ class LoadPlayer implements Loader {
     if (!playerRaw) {
       throw new PlayerNotFoundException()
     }
-    const player = Player.fromPrimitives(playerRaw)
+    const player = Player.createWithRandomId(playerRaw)
     return Promise.resolve(toPlayerResponse(player))
   }
 }

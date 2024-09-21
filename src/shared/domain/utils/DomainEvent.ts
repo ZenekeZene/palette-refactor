@@ -13,7 +13,7 @@ export abstract class DomainEvent<T extends AggregateRoot | AggregateRoot[]> {
     const { aggregate, eventName } = params
     this.aggregate = aggregate
     this.data = params.data
-    this.eventId = Uuid.random()
+    this.eventId = Uuid.randomValue()
     this.occurredOn = new Date()
     this.eventName = eventName
   }

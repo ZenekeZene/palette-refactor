@@ -16,7 +16,7 @@ export class UseBonus implements UseCase<UseBonusRequest> {
   ) {}
 
   execute(request: UseBonusRequest): void {
-    const playerId = new PlayerId(request.playerId)
+    const playerId = PlayerId.of(request.playerId)
     const player = this.repository.findById(playerId)
     if (!player) {
       throw new PlayerNotFoundException()
@@ -26,3 +26,6 @@ export class UseBonus implements UseCase<UseBonusRequest> {
     this.eventBus.publish(player.pullDomainEvents())
   }
 }
+
+// TODO: this usecase get a random color group to be resolved,
+// but the real usecase is to get the current swatch color in the view

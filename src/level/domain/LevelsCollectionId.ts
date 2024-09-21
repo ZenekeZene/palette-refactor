@@ -2,7 +2,7 @@ import { Uuid } from '@gameContext/shared/domain/utils/Uuid'
 
 export class LevelsCollectionId extends Uuid {
   constructor(id?: string) {
-    const uuid = id || Uuid.random()
+    const uuid = id || Uuid.randomValue()
     super(uuid)
   }
 }

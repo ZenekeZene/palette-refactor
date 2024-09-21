@@ -7,18 +7,16 @@ import type { QuotesCollectionResponse } from './dto/QuotesCollectionResponse'
 import { toQuotesCollectionResponse } from './mapper/QuotesCollectionMapper'
 
 @injectable()
-class LoadQuotes implements Loader {
+export class LoadQuotes implements Loader {
   constructor(
     @inject(Types.QuotesLoaderRepository)
     private repository: QuotesLoaderRepository,
-    // @inject(Types.IEventBus) private eventBus: IEventBus,
   ) {}
 
   async execute(): Promise<QuotesCollectionResponse> {
     try {
       const quotesRaw = await this.repository.loadAllFromFile()
       const quotesCollection = new QuotesCollection(quotesRaw)
-      // this.eventBus.publish(quotesCollection.pullDomainEvents())
       return toQuotesCollectionResponse(quotesCollection)
     } catch (error) {
       console.error('Error loading quotes config', error)
@@ -26,5 +24,3 @@ class LoadQuotes implements Loader {
     }
   }
 }
-
-export { LoadQuotes }

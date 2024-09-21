@@ -1,12 +1,12 @@
 import { injectable } from 'tsyringe'
 import { QuotesLoaderRepository } from '@gameContext/quote/domain/QuotesLoaderRepository'
-import { QuoteRawModel } from '@gameContext/quote/domain/Quote'
+import { QuotePrimitive } from '@gameContext/quote/domain/Quote'
 
 @injectable()
 class QuotesLoaderFromFileRepository implements QuotesLoaderRepository {
-  async loadAllFromFile(): Promise<QuoteRawModel[]> {
+  async loadAllFromFile(): Promise<QuotePrimitive[]> {
     const QuotesConfig = await import('@resources/Quotes.yaml')
-    return QuotesConfig.default.quotes as Array<QuoteRawModel>
+    return QuotesConfig.default.quotes as Array<QuotePrimitive>
   }
 }
 

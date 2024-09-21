@@ -1,12 +1,12 @@
 import { Entity } from '@gameContext/shared/domain/utils/Entity'
 import { QuoteId } from './QuoteId'
 
-export interface QuoteRawModel {
+export interface QuotePrimitive {
   text: string
   author: string
 }
 
-class Quote extends Entity {
+export class Quote extends Entity {
   readonly id: QuoteId
 
   constructor(
@@ -17,9 +17,7 @@ class Quote extends Entity {
     this.id = QuoteId.random()
   }
 
-  static fromPrimitives(text: string, author: string): Quote {
+  static of(text: string, author: string): Quote {
     return new Quote(text, author)
   }
 }
-
-export { Quote }

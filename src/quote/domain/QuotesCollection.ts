@@ -1,7 +1,7 @@
 import { AggregateRoot } from '@gameContext/shared/domain/utils/AggregateRoot'
 import { Uuid } from '@gameContext/shared/domain/utils/Uuid'
 import { Quote } from '@gameContext/quote/domain/Quote'
-import type { QuoteRawModel } from '@gameContext/quote/domain/Quote'
+import type { QuotePrimitive } from '@gameContext/quote/domain/Quote'
 import type { QuoteId } from '@gameContext/quote/domain/QuoteId'
 
 export class QuotesCollection extends AggregateRoot {
@@ -9,9 +9,9 @@ export class QuotesCollection extends AggregateRoot {
   private queue: QuoteId[] = []
   readonly id: string
 
-  constructor(initialQuotes: QuoteRawModel[] = [], id?: string) {
+  constructor(initialQuotes: QuotePrimitive[] = [], id?: string) {
     super()
-    this.id = id ? id : Uuid.random()
+    this.id = id ? id : Uuid.randomValue()
     this.generate(initialQuotes)
   }
 
@@ -19,9 +19,9 @@ export class QuotesCollection extends AggregateRoot {
     return this.quotes.values().next().value
   }
 
-  private generate(initialQuotes: QuoteRawModel[]): void {
+  private generate(initialQuotes: QuotePrimitive[]): void {
     initialQuotes.forEach((initialQuote): void => {
-      const quote = Quote.fromPrimitives(initialQuote.text, initialQuote.author)
+      const quote = Quote.of(initialQuote.text, initialQuote.author)
       this.quotes.set(quote.id, quote)
     })
   }
@@ -57,7 +57,7 @@ export class QuotesCollection extends AggregateRoot {
     this.queue = Array.from(this.quotes.keys())
   }
 
-  static fromArray(quotes: QuoteRawModel[]) {
+  static fromArray(quotes: QuotePrimitive[]) {
     const quotesCollection = new QuotesCollection(quotes)
     quotes.forEach((quote) => {
       quotesCollection.add(new Quote(quote.text, quote.author))

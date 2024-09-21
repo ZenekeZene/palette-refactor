@@ -18,13 +18,13 @@ export class RegisterPlayer
   ) {}
 
   execute(registerPlayerRequest: RegisterPlayerRequest): PlayerResponse {
-    const playerId = new PlayerId(registerPlayerRequest.playerId)
+    const playerId = PlayerId.of(registerPlayerRequest.playerId)
     const playerData = registerPlayerRequest.playerData
     const playerAlreadyExists = this.repository.findById(playerId)
     if (playerAlreadyExists) {
       throw new PlayerAlreadyExists(playerId)
     }
-    const player = Player.fromPrimitives(playerData)
+    const player = Player.of(playerData)
     this.repository.save(player)
     return toPlayerResponse(player)
   }

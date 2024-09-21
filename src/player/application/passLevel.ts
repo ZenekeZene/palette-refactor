@@ -15,7 +15,7 @@ export class PassLevel implements UseCase<PassLevelRequest, PlayerResponse> {
   ) {}
 
   execute(passLevelRequest: PassLevelRequest): PlayerResponse {
-    const playerId = new PlayerId(passLevelRequest.playerId)
+    const playerId = PlayerId.of(passLevelRequest.playerId)
     const player = this.repository.findById(playerId)
     if (!player) {
       throw new PlayerNotFoundException()

@@ -7,8 +7,16 @@ export class Uuid extends ValueObject<string> {
     this.validate(id)
   }
 
-  static random(): string {
+  static randomValue(): string {
     return new Uuid(uuidv4()).valueOf()
+  }
+
+  static random(): Uuid {
+    return new Uuid(uuidv4())
+  }
+
+  static of(id: string): Uuid {
+    return new Uuid(id)
   }
 
   validate(id: string): void {
