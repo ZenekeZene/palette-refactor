@@ -3,7 +3,7 @@ import { Color, ColorGroup } from '../../types/store'
 
 interface Response {
   indexSwatchColor: number
-  swatchColor: Color | null
+  swatchColor: Color
   swatchColors: Color[]
 }
 
@@ -17,6 +17,6 @@ export const getNextSwatchColor = (
     (swatchColor) => swatchColor.id !== swatchColorUsed.id,
   )
   const indexSwatchColor = (prev + 1) % swatchColorsFiltered.length
-  const swatchColor = swatchColorsFiltered[indexSwatchColor] ?? null
+  const swatchColor = swatchColorsFiltered[indexSwatchColor]
   return { indexSwatchColor, swatchColor, swatchColors: swatchColorsFiltered }
 }

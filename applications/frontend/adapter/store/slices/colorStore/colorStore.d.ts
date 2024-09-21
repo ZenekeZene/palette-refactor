@@ -2,9 +2,9 @@ import type { Color, ColorGroup, Colors } from '../../types/store'
 
 export interface ColorStoreState {
   indexSwatchColor: number
-  colors: Colors | undefined
+  colors: Colors
   swatchColors: Color[]
-  swatchColor: Color | undefined
+  swatchColor: Color
 }
 
 export interface ColorStoreMethods {

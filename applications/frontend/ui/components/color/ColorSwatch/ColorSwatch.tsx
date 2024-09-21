@@ -16,7 +16,7 @@ export const ColorSwatch = ({ color, onDragEnd }: Props) => {
   const targetElementRef = useRef<HTMLDivElement>(null)
 
   const { setTargetElement } = useDraggable({
-    targetElement: targetElementRef?.current,
+    targetElement: targetElementRef.current,
     dragService: Dragger,
     onDragEnd,
   })

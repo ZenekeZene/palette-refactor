@@ -8,7 +8,7 @@ export const ColorMixDebug = ({ colors }: { colors: ColorGroup[] }) => {
         <Colors key={item.id}>
           <Color
             className="color-mix-debug__color"
-            style={{ backgroundColor: item?.swatchColor.value }}
+            style={{ backgroundColor: item.swatchColor.value }}
           ></Color>
           +{' '}
           <Color
