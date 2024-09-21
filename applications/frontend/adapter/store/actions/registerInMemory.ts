@@ -13,14 +13,18 @@ export const registerInMemory = (
   levels: Levels,
   quotes: Quotes,
 ): void => {
-  const registerPlayerRequest = new RegisterPlayerRequest(player.id, player)
-  const registerPlayer: RegisterPlayer = container.resolve(Types.RegisterPlayer)
-
   const registerLevelsRequest = new RegisterLevelsRequest(
     levels.id,
     levels.items,
   )
   const registerLevels: RegisterLevels = container.resolve(Types.RegisterLevels)
+  const levelId = levels.items[player.levelIndex].id.valueOf()
+
+  const registerPlayerRequest = new RegisterPlayerRequest(player.id, {
+    ...player,
+    levelId,
+  })
+  const registerPlayer: RegisterPlayer = container.resolve(Types.RegisterPlayer)
 
   const registerQuotesRequest = new RegisterQuotesRequest(
     quotes.id,

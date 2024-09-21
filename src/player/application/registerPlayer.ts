@@ -8,6 +8,7 @@ import { PlayerId } from '@gameContext/shared/domain/PlayerId'
 import type { PlayerResponse } from '@gameContext/player/application/dto/PlayerResponse'
 import type { RegisterPlayerRequest } from '@gameContext/player/application/dto/RegisterPlayerRequest'
 import { toPlayerResponse } from '@gameContext/player/application/mapper/PlayerMapper'
+import { LevelId } from '@gameContext/shared/domain/LevelId'
 
 @injectable()
 class RegisterPlayer implements UseCase<RegisterPlayerRequest, PlayerResponse> {
@@ -18,11 +19,12 @@ class RegisterPlayer implements UseCase<RegisterPlayerRequest, PlayerResponse> {
   execute(registerPlayerRequest: RegisterPlayerRequest): PlayerResponse {
     const playerId = new PlayerId(registerPlayerRequest.playerId)
     const playerData = registerPlayerRequest.playerData
+    const levelId = new LevelId(playerData.levelId)
     const existingPlayer = this.repository.findById(playerId)
     if (existingPlayer) {
       throw new PlayerAlreadyExists(playerId)
     }
-    const player = Player.fromPrimitives(playerData, playerId)
+    const player = Player.fromPrimitives(playerData, playerId, levelId)
     this.repository.save(player)
     return toPlayerResponse(player)
   }
