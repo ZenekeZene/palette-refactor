@@ -27,6 +27,7 @@ export class OnColorMixingFailed
     const correctMixed = domainEvent.aggregate.searchCorrectColorGroup(
       domainEvent.swatchColorId,
     )
+    // TODO: change the event name to colorMixingFailed
     const event = createEvent(events.colorMixFailure, {
       correctColorGroupId: correctMixed.id.valueOf(),
     })

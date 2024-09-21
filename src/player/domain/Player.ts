@@ -4,7 +4,7 @@ import { PlayerLives } from '@gameContext/player/domain/models/PlayerLives'
 import { PlayerScore } from '@gameContext/player/domain/models/PlayerScore'
 import { PlayerLevelIndex } from '@gameContext/player/domain/models/PlayerLevelIndex'
 import { PlayerBonus } from '@gameContext/player/domain/models/PlayerBonus'
-import { DecrementedLivesEvent } from './events/DecrementedLivesEvent'
+import { LivesDecrementedEvent } from './events/LivesDecrementedEvent'
 import { PlayerDead } from './events/PlayerDeadEvent'
 
 export class Player extends AggregateRoot {
@@ -33,9 +33,9 @@ export class Player extends AggregateRoot {
   decrementLives() {
     this.lives = this.lives.decrement()
     if (this.lives.isZero()) {
-      this.recordPlayerDead()
+      this.recordPlayerDeadEvent()
     } else {
-      this.recordDecrementLivesEvent()
+      this.recordLivesDecrementedEvent()
     }
   }
 
@@ -43,7 +43,7 @@ export class Player extends AggregateRoot {
     const decrementedLivesEvent = DecrementedLivesEvent.of({
       aggregate: this,
     })
-    this.record(decrementedLivesEvent)
+    this.record(livedDecrementedEvent)
   }
 
   private recordPlayerDead(): void {

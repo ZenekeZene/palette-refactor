@@ -2,20 +2,20 @@ import { DomainEvent } from '@gameContext/shared/domain/utils/DomainEvent'
 import { PlayerLives } from '../models/PlayerLives'
 import { Player } from '../Player'
 
-export class DecrementedLivesEvent extends DomainEvent<Player> {
-  static readonly EVENT_NAME = 'player.decremented.lives'
+export class LivesDecrementedEvent extends DomainEvent<Player> {
+  static readonly EVENT_NAME = 'player.lives.decremented'
 
-  readonly decrementedLives: PlayerLives = new PlayerLives(1)
+  readonly livesDecremented: PlayerLives = new PlayerLives(1)
 
   public static of(args: { aggregate: Player }): DomainEvent<Player> {
-    return new DecrementedLivesEvent({
+    return new LivesDecrementedEvent({
       aggregate: args.aggregate,
     })
   }
 
   private constructor({ aggregate }: { aggregate: Player }) {
     super({
-      eventName: DecrementedLivesEvent.EVENT_NAME,
+      eventName: LivesDecrementedEvent.EVENT_NAME,
       aggregate,
     })
   }
