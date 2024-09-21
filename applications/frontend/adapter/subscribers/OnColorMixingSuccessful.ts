@@ -19,7 +19,7 @@ export class OnColorMixingSuccessful
     const store = getStore()
     const state = store.getState()
     state.successColor()
-    state.nextSwatchColor()
+    state.nextSwatchColor(domainEvent.mixed)
     state.successColor(domainEvent.mixed?.id.valueOf())
   }
 }

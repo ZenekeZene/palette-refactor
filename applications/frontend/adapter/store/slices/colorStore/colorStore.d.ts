@@ -1,4 +1,4 @@
-import type { Color, Colors } from '../../types/store'
+import type { Color, ColorGroup, Colors } from '../../types/store'
 
 export interface ColorStoreState {
   indexSwatchColor: number
@@ -9,7 +9,7 @@ export interface ColorStoreState {
 
 export interface ColorStoreMethods {
   extractSwatchColors: () => void
-  nextSwatchColor: () => void
+  nextSwatchColor: (colorGroupMixed: ColorGroup) => void
   mixColor: (groupColorId: string, swatchColorId: string) => void
   successColor: (colorGroupId: string) => void
   failColor: () => void

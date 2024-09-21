@@ -29,7 +29,7 @@ export const createColorStore: StateCreator<Store, [], [], ColorStore> = (
   nextSwatchColor: () => {
     set((state: ColorStore) => ({
       ...state,
-      ...actions.getNextSwatchColor(get()),
+      ...actions.getNextSwatchColor(get(), colorGroupMixed),
     }))
   },
   mixColor: (colorGroupId: string, swatchColorId: string): void => {
