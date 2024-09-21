@@ -18,7 +18,7 @@ async function init() {
 
   ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
-      <RouterProvider />,
+      <RouterProvider />
     </React.StrictMode>,
   )
 }
