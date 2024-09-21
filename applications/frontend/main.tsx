@@ -1,4 +1,5 @@
 import 'reflect-metadata'
+import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { configureDependencies } from '@frontend/infrastructure/dependency-injection/container'
 import { RouterProvider } from '@frontend/adapter/router/RouterProvider'
@@ -17,9 +18,9 @@ async function init() {
 
   ReactDOM.createRoot(document.getElementById('root')!).render(
     // (1) TODO
-    // <React.StrictMode>
-    <RouterProvider />,
-    // </React.StrictMode>,
+    <React.StrictMode>
+      <RouterProvider />,
+    </React.StrictMode>,
   )
 }
 
