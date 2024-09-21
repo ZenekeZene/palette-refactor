@@ -8,7 +8,10 @@ import { useGoToView } from '@frontend/ui/hooks/useGoToView/useGoToView'
 import { GameWrapper, Divider } from './Game.styled'
 
 export const GameView = () => {
-  const player = useStore((state: PlayerStore) => state.player)
+  const { player, launchBonus } = useStore((state: PlayerStore) => ({
+    player: state.player,
+    launchBonus: state.launchBonus,
+  }))
   const { colors, swatchColor, mixColor } = useColors()
   useGoToView()
 
@@ -19,16 +22,25 @@ export const GameView = () => {
     mixColor(groupId, swatchColorId)
   }
 
+  const handleUseBonus = () => {
+    launchBonus()
+  }
+
   return (
     <GameWrapper className="view">
-      <ResultColorsZone player={player} colors={colors} />
-      <Divider />
-      <MixerColorsZone
-        player={player}
-        colors={colors}
-        swatchColor={swatchColor}
-        handleDragEnd={handleDragEnd}
-      />
+      {colors && (
+        <>
+          <ResultColorsZone player={player} colors={colors} />
+          <Divider />
+          <MixerColorsZone
+            bonus={player.bonus}
+            colors={colors}
+            swatchColor={swatchColor}
+            handleDragEnd={handleDragEnd}
+            handleUseBonus={handleUseBonus}
+          />
+        </>
+      )}
     </GameWrapper>
   )
 }

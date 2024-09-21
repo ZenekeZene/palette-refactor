@@ -5,6 +5,7 @@ export const Types = {
   PlayerLoaderRepository: Symbol.for('PlayerLoaderRepository'),
   RegisterPlayer: Symbol.for('RegisterPlayer'),
   PlayerRepository: Symbol.for('PlayerRepository'),
+  UseBonus: Symbol.for('UseBonus'),
 
   // Level Module:
   LevelsLoaderRepository: Symbol.for('LevelsLoaderRepository'),

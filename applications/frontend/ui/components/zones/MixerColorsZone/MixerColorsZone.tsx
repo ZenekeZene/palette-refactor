@@ -1,7 +1,6 @@
 import type {
   Color,
   Colors,
-  Player,
 } from '@gameContext/shared/infrastructure/store/store.d'
 import { ColorTypes } from '@gameContext/shared/infrastructure/store/store.d'
 import {
@@ -13,17 +12,19 @@ import { ColorsRow } from '../../color/ColorRow/ColorRow'
 import { DraggableZone, Footer } from './MixerColorsZone.styled'
 
 interface Props {
-  player: Player
+  bonus: number
   colors: Colors
   swatchColor: Color
   handleDragEnd: (subtractedColor: SubtractedColorReached) => void
+  handleUseBonus: () => void
 }
 
 export const MixerColorsZone = ({
-  player,
+  bonus,
   colors,
   swatchColor,
   handleDragEnd,
+  handleUseBonus,
 }: Props) => {
   return (
     <DraggableZone>
@@ -32,7 +33,9 @@ export const MixerColorsZone = ({
       {swatchColor && (
         <ColorSwatch color={swatchColor} onDragEnd={handleDragEnd} />
       )}
-      <Footer>{player.bonus > 0 && <Bonus bonus={player.bonus} />}</Footer>
+      <Footer>
+        {bonus > 0 && <Bonus bonus={bonus} onClick={handleUseBonus} />}
+      </Footer>
     </DraggableZone>
   )
 }

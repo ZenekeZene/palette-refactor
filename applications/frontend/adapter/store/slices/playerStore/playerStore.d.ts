@@ -10,8 +10,10 @@ export interface PlayerStoreState {
 export interface PlayerStoreMethods {
   setTutorialIsLaunched: (value: boolean) => void
   setScore: (value: number) => void
-  nextLevel: () => void
   decrementLives: (lives: number) => void
+  launchBonus: () => void
+  consumeBonus: (bonus: number) => void
+  nextLevel: () => void
 }
 
 export type PlayerStore = PlayerStoreState & PlayerStoreMethods

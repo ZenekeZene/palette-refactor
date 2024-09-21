@@ -7,6 +7,7 @@ import { Types } from './identifiers'
 import { LoadPlayer } from '@gameContext/player/application/loadPlayer'
 import { PassLevel } from '@gameContext/player/application/passLevel'
 import { RegisterPlayer } from '@gameContext/player/application/registerPlayer'
+import { UseBonus } from '@gameContext/player/application/useBonus'
 import { PlayerLoaderFromFileRepository } from '@gameContext/player/infrastructure/PlayerLoaderFromFileRepository'
 import { PlayerInMemoryRepository } from '@gameContext/player/infrastructure/PlayerInMemoryRepository'
 import { OnPlayerDead } from '@frontend/adapter/subscribers/OnPlayerDead'
@@ -32,12 +33,14 @@ import { ColorMixerByConsoleLogger } from '@gameContext/color/infrastructure/Col
 import { GenerateColors } from '@gameContext/color/application/generateColors'
 import { ColorInMemoryRepository } from '@gameContext/color/infrastructure/ColorInMemoryRepository'
 import { OnColorMixingFailed } from '@gameContext/player/application/OnColorMixingFailed'
-import { OnDecrementedLives } from '@frontend/adapter/subscribers/OnDecrementedLives'
+import { MixColorOnBonusUsed } from '@gameContext/color/application/mixColorOnBonusUsed'
+import { OnLivesDecremented } from '@frontend/adapter/subscribers/OnLivesDecremented'
 import { OnColorMixingFailed as OnColorMixingFailedApp } from '@frontend/adapter/subscribers/OnColorMixingFailed'
 import { OnColorMixingSuccessful as OnColorMixingSuccessfulApp } from '@frontend/adapter/subscribers/OnColorMixingSuccessful'
 
 // Event Bus:
 import { InMemoryAsyncEventBus } from '@gameContext/shared/infrastructure/eventBus/InMemoryAsyncEventBus'
+import { OnBonusUsed } from '@frontend/adapter/subscribers/OnBonusUsed'
 
 export function configureDependencies() {
   // Player:
@@ -47,6 +50,7 @@ export function configureDependencies() {
   )
   container.registerSingleton(Types.RegisterPlayer, RegisterPlayer)
   container.registerSingleton(Types.PassLevel, PassLevel)
+  container.registerSingleton(Types.UseBonus, UseBonus)
   container.registerSingleton(Types.PlayerRepository, PlayerInMemoryRepository)
 
   // Levels:
@@ -82,10 +86,13 @@ export function configureDependencies() {
   container.registerSingleton(Types.EventBus, InMemoryAsyncEventBus)
 
   // Subscribers:
+  // TODO: Prefix the subscripters with the usecase to be executed:
   container.register(Types.DomainEventSubscribers, OnLevelsCollectionCreated)
   container.register(Types.DomainEventSubscribers, OnColorMixingFailed)
   container.register(Types.DomainEventSubscribers, OnColorMixingFailedApp)
   container.register(Types.DomainEventSubscribers, OnColorMixingSuccessfulApp)
-  container.register(Types.DomainEventSubscribers, OnDecrementedLives)
+  container.register(Types.DomainEventSubscribers, OnLivesDecremented)
   container.register(Types.DomainEventSubscribers, OnPlayerDead)
+  container.register(Types.DomainEventSubscribers, OnBonusUsed)
+  container.register(Types.DomainEventSubscribers, MixColorOnBonusUsed)
 }

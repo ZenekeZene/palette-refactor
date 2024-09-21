@@ -8,4 +8,8 @@ export class PlayerBonus extends NotNegative {
   decrement() {
     return new PlayerBonus(this.valueOf() - 1)
   }
+
+  isMinorThanZero() {
+    return this.valueOf() < 0
+  }
 }

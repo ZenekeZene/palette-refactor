@@ -22,6 +22,18 @@ export const createPlayerStore = (initialProps: PlayerStoreState) => {
         player: { ...player, lives: currentLives - livesToDecrement },
       }))
     },
+    launchBonus: () => {
+      const player = get().player
+      actions.launchBonus(player)
+    },
+    consumeBonus: (bonusToConsume: number) => {
+      const player = get().player
+      const currentBonus = player.bonus
+      set((state: PlayerStore) => ({
+        ...state,
+        player: { ...player, bonus: currentBonus - bonusToConsume },
+      }))
+    },
     nextLevel: () => {
       get().nextQuote()
       const player = get().player

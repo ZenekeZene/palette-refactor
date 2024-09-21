@@ -6,6 +6,9 @@ import { PlayerLevelIndex } from '@gameContext/player/domain/models/PlayerLevelI
 import { PlayerBonus } from '@gameContext/player/domain/models/PlayerBonus'
 import { LivesDecrementedEvent } from './events/LivesDecrementedEvent'
 import { PlayerDead } from './events/PlayerDeadEvent'
+import { BonusUsedEvent } from './events/BonusUsedEvent'
+import { PlayerWithoutBonus } from './exceptions/PlayerWithoutBonus'
+import { LevelId } from '@gameContext/shared/domain/LevelId'
 
 export class Player extends AggregateRoot {
   constructor(
@@ -13,6 +16,7 @@ export class Player extends AggregateRoot {
     public lives: PlayerLives,
     public score: PlayerScore,
     public levelIndex: PlayerLevelIndex,
+    public levelId: LevelId,
     public bonus: PlayerBonus,
   ) {
     super()
@@ -30,6 +34,14 @@ export class Player extends AggregateRoot {
     this.bonus = this.bonus.increment(value)
   }
 
+  useBonus() {
+    if (this.bonus.isMinorThanZero()) {
+      throw new PlayerWithoutBonus(this.id)
+    }
+    this.bonus = this.bonus.decrement()
+    this.recordBonusUsedEvent()
+  }
+
   decrementLives() {
     this.lives = this.lives.decrement()
     if (this.lives.isZero()) {
@@ -39,14 +51,21 @@ export class Player extends AggregateRoot {
     }
   }
 
-  private recordDecrementLivesEvent(): void {
-    const decrementedLivesEvent = DecrementedLivesEvent.of({
+  private recordBonusUsedEvent(): void {
+    const bonusUsedEvent = BonusUsedEvent.of({
       aggregate: this,
     })
-    this.record(livedDecrementedEvent)
+    this.record(bonusUsedEvent)
   }
 
-  private recordPlayerDead(): void {
+  private recordLivesDecrementedEvent(): void {
+    const decrementedLivesEvent = LivesDecrementedEvent.of({
+      aggregate: this,
+    })
+    this.record(decrementedLivesEvent)
+  }
+
+  private recordPlayerDeadEvent(): void {
     const playerDeadEvent = PlayerDead.of({
       aggregate: this,
     })
@@ -58,16 +77,22 @@ export class Player extends AggregateRoot {
       lives: this.lives.valueOf(),
       score: this.score.valueOf(),
       levelIndex: this.levelIndex.valueOf(),
+      levelId: this.levelId.valueOf(),
       bonus: this.bonus.valueOf(),
     }
   }
 
-  static fromPrimitives(data: PlayerPrimitive, playerId?: PlayerId): Player {
+  static fromPrimitives(
+    data: PlayerPrimitive,
+    playerId: PlayerId,
+    levelId: LevelId,
+  ): Player {
     return new Player(
       playerId || new PlayerId(),
       new PlayerLives(data.lives),
       new PlayerScore(data.score),
       new PlayerLevelIndex(data.levelIndex),
+      levelId,
       new PlayerBonus(data.bonus),
     )
   }
@@ -77,5 +102,6 @@ export type PlayerPrimitive = {
   lives: number
   score: number
   levelIndex: number
+  levelId: string
   bonus: number
 }

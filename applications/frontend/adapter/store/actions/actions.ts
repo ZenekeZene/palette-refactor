@@ -6,6 +6,7 @@ import { generateColors } from './color/generateColors'
 import { getNextSwatchColor } from './color/getNextSwatchColor'
 import { successColor } from './color/successColor'
 import { failColor } from './color/failColor'
+import { launchBonus } from './launchBonus'
 
 export const actions = {
   registerInMemory,
@@ -16,4 +17,5 @@ export const actions = {
   getNextSwatchColor,
   successColor,
   failColor,
+  launchBonus,
 }
