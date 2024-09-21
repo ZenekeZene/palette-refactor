@@ -12,7 +12,7 @@ import { Class } from '@gameContext/shared/types/Class'
 import { AggregateRoot } from '@gameContext/shared/domain/utils/AggregateRoot'
 
 @injectable()
-export class OnLivesDecremented
+export class TryAgainOnLivesDecremented
   implements DomainEventSubscriber<LivesDecrementedEvent>
 {
   subscribedTo(): Class<DomainEvent<AggregateRoot>>[] {

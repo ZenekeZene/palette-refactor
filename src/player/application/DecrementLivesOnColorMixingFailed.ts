@@ -11,7 +11,7 @@ import type { PlayerRepository } from '../domain/repositories/PlayerRepository'
 import { PlayerNotFoundException } from '../domain/exceptions/PlayerNotFoundException'
 
 @injectable()
-export class OnColorMixingFailed
+export class DecrementLivesOnColorMixingFailed
   implements DomainEventSubscriber<ColorMixingFailedEvent>
 {
   constructor(

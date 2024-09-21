@@ -10,7 +10,7 @@ import { RegisterPlayer } from '@gameContext/player/application/registerPlayer'
 import { UseBonus } from '@gameContext/player/application/useBonus'
 import { PlayerLoaderFromFileRepository } from '@gameContext/player/infrastructure/PlayerLoaderFromFileRepository'
 import { PlayerInMemoryRepository } from '@gameContext/player/infrastructure/PlayerInMemoryRepository'
-import { OnPlayerDead } from '@frontend/adapter/subscribers/OnPlayerDead'
+import { GameOverOnPlayerDead } from '@frontend/adapter/subscribers/GameOverOnPlayerDead'
 
 // Level use cases and repositories:
 import { LoadLevels } from '@gameContext/level/application/loadLevels'
@@ -18,7 +18,6 @@ import { RegisterLevels } from '@gameContext/level/application/registerLevels'
 import { LevelsLoaderFromFileRepository } from '@gameContext/level/infrastructure/LevelsLoaderFromFileRepository'
 import { LevelsInMemoryRepository } from '@gameContext/level/infrastructure/LevelsInMemoryRepository'
 import { GetLevel } from '@gameContext/level/application/getLevel'
-import { OnLevelsCollectionCreated } from '@gameContext/player/application/OnLevelsCollectionCreated'
 
 // Quote use cases and repositories:
 import { LoadQuotes } from '@gameContext/quote/application/loadQuotes'
@@ -32,15 +31,15 @@ import { MixColor } from '@gameContext/color/application/mixColor'
 import { ColorMixerByConsoleLogger } from '@gameContext/color/infrastructure/ColorMixerByConsoleLogger'
 import { GenerateColors } from '@gameContext/color/application/generateColors'
 import { ColorInMemoryRepository } from '@gameContext/color/infrastructure/ColorInMemoryRepository'
-import { OnColorMixingFailed } from '@gameContext/player/application/OnColorMixingFailed'
+import { DecrementLivesOnColorMixingFailed } from '@gameContext/player/application/DecrementLivesOnColorMixingFailed'
 import { MixColorOnBonusUsed } from '@gameContext/color/application/mixColorOnBonusUsed'
-import { OnLivesDecremented } from '@frontend/adapter/subscribers/OnLivesDecremented'
-import { OnColorMixingFailed as OnColorMixingFailedApp } from '@frontend/adapter/subscribers/OnColorMixingFailed'
-import { OnColorMixingSuccessful as OnColorMixingSuccessfulApp } from '@frontend/adapter/subscribers/OnColorMixingSuccessful'
+import { TryAgainOnLivesDecremented } from '@frontend/adapter/subscribers/TryAgainOnLivesDecremented'
+import { ShowCorrectOnColorMixingFailed } from '@frontend/adapter/subscribers/ShowCorrectOnColorMixingFailed'
+import { GetNextSwatchColorOnColorMixingSuccessful } from '@frontend/adapter/subscribers/GetNextSwatchColorOnColorMixingSuccessful'
 
 // Event Bus:
 import { InMemoryAsyncEventBus } from '@gameContext/shared/infrastructure/eventBus/InMemoryAsyncEventBus'
-import { OnBonusUsed } from '@frontend/adapter/subscribers/OnBonusUsed'
+import { DecrementBonusOnBonusUsed } from '@frontend/adapter/subscribers/DecrementBonusOnBonusUsed'
 
 export function configureDependencies() {
   // Player:
@@ -86,13 +85,22 @@ export function configureDependencies() {
   container.registerSingleton(Types.EventBus, InMemoryAsyncEventBus)
 
   // Subscribers:
-  // TODO: Prefix the subscripters with the usecase to be executed:
-  container.register(Types.DomainEventSubscribers, OnLevelsCollectionCreated)
-  container.register(Types.DomainEventSubscribers, OnColorMixingFailed)
-  container.register(Types.DomainEventSubscribers, OnColorMixingFailedApp)
-  container.register(Types.DomainEventSubscribers, OnColorMixingSuccessfulApp)
-  container.register(Types.DomainEventSubscribers, OnLivesDecremented)
-  container.register(Types.DomainEventSubscribers, OnPlayerDead)
-  container.register(Types.DomainEventSubscribers, OnBonusUsed)
+  container.register(
+    Types.DomainEventSubscribers,
+    DecrementLivesOnColorMixingFailed,
+  )
+  // Subscribers for the domain:
+  container.register(Types.DomainEventSubscribers, GameOverOnPlayerDead)
+  container.register(Types.DomainEventSubscribers, DecrementBonusOnBonusUsed)
   container.register(Types.DomainEventSubscribers, MixColorOnBonusUsed)
+  // Subscribers for the frontend:
+  container.register(
+    Types.DomainEventSubscribers,
+    ShowCorrectOnColorMixingFailed,
+  )
+  container.register(
+    Types.DomainEventSubscribers,
+    GetNextSwatchColorOnColorMixingSuccessful,
+  )
+  container.register(Types.DomainEventSubscribers, TryAgainOnLivesDecremented)
 }

@@ -7,7 +7,9 @@ import { Class } from '@gameContext/shared/types/Class'
 import { AggregateRoot } from '@gameContext/shared/domain/utils/AggregateRoot'
 
 @injectable()
-export class OnBonusUsed implements DomainEventSubscriber<BonusUsedEvent> {
+export class DecrementBonusOnBonusUsed
+  implements DomainEventSubscriber<BonusUsedEvent>
+{
   subscribedTo(): Class<DomainEvent<AggregateRoot>>[] {
     return [BonusUsedEvent]
   }

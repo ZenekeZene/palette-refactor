@@ -5,9 +5,10 @@ import { getStore } from '@frontend/adapter/store/useStore'
 import { Class } from '@gameContext/shared/types/Class'
 import { DomainEvent } from '@gameContext/shared/domain/utils/DomainEvent'
 import { AggregateRoot } from '@gameContext/shared/domain/utils/AggregateRoot'
+import { isDebugMode } from '@frontend/infrastructure/isDebugMode'
 
 @injectable()
-export class OnColorMixingSuccessful
+export class GetNextSwatchColorOnColorMixingSuccessful
   implements DomainEventSubscriber<ColorMixingSuccessfulEvent>
 {
   subscribedTo(): Class<DomainEvent<AggregateRoot>>[] {
@@ -15,10 +16,11 @@ export class OnColorMixingSuccessful
   }
 
   async on(domainEvent: ColorMixingSuccessfulEvent): Promise<void> {
-    console.log('[OnColorMixingSuccessful]', domainEvent)
+    if (isDebugMode) {
+      console.log('[GetNextSwatchColorOnColorMixingSuccessful]', domainEvent)
+    }
     const store = getStore()
     const state = store.getState()
-    state.successColor()
     state.nextSwatchColor(domainEvent.mixed)
     state.successColor(domainEvent.mixed?.id.valueOf())
   }

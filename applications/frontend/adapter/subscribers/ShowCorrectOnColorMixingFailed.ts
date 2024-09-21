@@ -10,9 +10,10 @@ import {
 import { DomainEvent } from '@gameContext/shared/domain/utils/DomainEvent'
 import { Class } from '@gameContext/shared/types/Class'
 import { AggregateRoot } from '@gameContext/shared/domain/utils/AggregateRoot'
+import { isDebugMode } from '@frontend/infrastructure/isDebugMode'
 
 @injectable()
-export class OnColorMixingFailed
+export class ShowCorrectOnColorMixingFailed
   implements DomainEventSubscriber<ColorMixingFailedEvent>
 {
   subscribedTo(): Class<DomainEvent<AggregateRoot>>[] {
@@ -20,7 +21,9 @@ export class OnColorMixingFailed
   }
 
   async on(domainEvent: ColorMixingFailedEvent): Promise<void> {
-    console.log('[OnColorMixingFailed]', domainEvent)
+    if (isDebugMode) {
+      console.log('[ShowCorrectOnColorMixingFailed]', domainEvent)
+    }
     const store = getStore()
     store.getState().failColor()
     // TODO: the domain event properties has to be primitives

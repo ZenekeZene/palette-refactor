@@ -11,7 +11,7 @@ import {
 } from '@frontend/adapter/events/events'
 
 @injectable()
-export class OnPlayerDead implements DomainEventSubscriber<PlayerDead> {
+export class GameOverOnPlayerDead implements DomainEventSubscriber<PlayerDead> {
   subscribedTo(): Class<DomainEvent<AggregateRoot>>[] {
     return [PlayerDead]
   }
