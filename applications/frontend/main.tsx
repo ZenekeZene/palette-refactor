@@ -17,7 +17,6 @@ async function init() {
   await configureStore()
 
   ReactDOM.createRoot(document.getElementById('root')!).render(
-    // (1) TODO
     <React.StrictMode>
       <RouterProvider />,
     </React.StrictMode>,
@@ -25,5 +24,3 @@ async function init() {
 }
 
 init()
-
-// (1): Launches twice the save in the color repository.
