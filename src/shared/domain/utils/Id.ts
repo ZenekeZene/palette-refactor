@@ -1,13 +1,9 @@
 import { ValueObject } from './ValueObject'
 
-class Id extends ValueObject<string> {
+export class Id extends ValueObject<string> {
   constructor(id: string) {
     super(id)
     this.validate(id)
-  }
-
-  get id() {
-    return this.valueOf()
   }
 
   validate(id: string): void {
@@ -24,5 +20,3 @@ class Id extends ValueObject<string> {
     return this.valueOf() === id.valueOf()
   }
 }
-
-export { Id }

@@ -6,17 +6,14 @@ type EntityId = Id | Uuid
 export abstract class Entity {
   protected abstract readonly id: EntityId
 
-  public equals(Object?: Entity): boolean {
-    if (Object === null || Object === undefined) {
-      return false
-    }
-    if (this === Object) {
+  public equals(object: Entity): boolean {
+    if (this === object) {
       return true
     }
-    if (!(Object instanceof this.constructor)) {
+    if (!(object instanceof this.constructor)) {
       return false
     }
-    return this.id.equals(Object.id)
+    return this.id.equals(object.id)
   }
 
   public equalsById(id: EntityId): boolean {

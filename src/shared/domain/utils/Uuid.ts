@@ -1,14 +1,14 @@
 import { v4 as uuidv4, validate as validateUuid } from 'uuid'
 import { ValueObject } from './ValueObject'
 
-class Uuid extends ValueObject<string> {
-  constructor(value: string) {
-    super(value)
-    this.validate(value)
+export class Uuid extends ValueObject<string> {
+  constructor(id: string) {
+    super(id)
+    this.validate(id)
   }
 
-  static random(): Uuid {
-    return new Uuid(uuidv4())
+  static random(): string {
+    return new Uuid(uuidv4()).valueOf()
   }
 
   validate(id: string): void {
@@ -25,5 +25,3 @@ class Uuid extends ValueObject<string> {
     return this.valueOf() === id.valueOf()
   }
 }
-
-export { Uuid }
