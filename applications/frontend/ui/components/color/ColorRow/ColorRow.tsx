@@ -16,6 +16,7 @@ type ExtractedColor = {
   color: Color
   groupId: string
   status: string
+  spy: string
 }
 
 const extractColorsByType = (
@@ -26,6 +27,7 @@ const extractColorsByType = (
     color: type === ColorTypes.RESULT ? item.resultColor : item.subtractedColor,
     groupId: item.id,
     status: item.status,
+    spy: item.spy!,
   }))
 }
 
@@ -34,13 +36,11 @@ export const ColorsRow = ({ colors, type }: Props) => {
 
   return (
     <Row data-id={colors.id}>
-      {colorsOfType.map(({ color, groupId, status }, index) => (
+      {colorsOfType.map(({ color, groupId, status, spy }, index) => (
         <div key={index}>
-          <ColorChip
-            groupId={groupId}
-            color={color}
-            status={status}
-          ></ColorChip>
+          <ColorChip groupId={groupId} color={color} status={status}>
+            {spy}
+          </ColorChip>
         </div>
       ))}
     </Row>

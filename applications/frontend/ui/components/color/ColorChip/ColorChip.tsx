@@ -1,19 +1,19 @@
 import {
   ColorStatusTypes,
   type Color,
-  type ColorStatusType,
 } from '@frontend/adapter/store/types/store.d'
 import { useIsCorrectColorById } from '@frontend/ui/hooks/useIsCorrectColorById/useIsCorrectColorById'
 import { useDelayedClassname } from '@frontend/ui/hooks/useDelayedClassname/useDelayedClassname'
-import { ChipWrapper, Chip, MixedChip } from './ColorChip.styled'
+import { ChipWrapper, Chip, MixedChip, ChipDebug } from './ColorChip.styled'
 
 interface Props {
   groupId: string
   color: Color
-  status: ColorStatusType
+  status: string
+  children?: React.ReactNode
 }
 
-export const ColorChip = ({ groupId, color, status }: Props) => {
+export const ColorChip = ({ groupId, color, status, children }: Props) => {
   const correctColorById = useIsCorrectColorById({ id: groupId })
   const { isCorrect, isFailureEnable } = correctColorById
 
@@ -37,6 +37,7 @@ export const ColorChip = ({ groupId, color, status }: Props) => {
     <ChipWrapper>
       {isMixed && <MixedChip {...props} />}
       <Chip style={{ backgroundColor: color.value }} {...props}></Chip>
+      <ChipDebug>{children}</ChipDebug>
     </ChipWrapper>
   )
 }

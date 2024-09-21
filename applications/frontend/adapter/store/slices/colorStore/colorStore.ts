@@ -17,16 +17,19 @@ export const createColorStore: StateCreator<Store, [], [], ColorStore> = (
 ) => ({
   ...initialState,
   extractSwatchColors: () => {
-    const swatchColors = get().colors.items.map(
-      (colorGroup: ColorGroup) => colorGroup.swatchColor,
-    )
+    // TODO: only development purpose (add VITE env variables)
+    const swatchColors = get().colors.items.map((colorGroup: ColorGroup) => ({
+      ...colorGroup.swatchColor,
+      spy: colorGroup.spy,
+    }))
+
     set((state: ColorStore) => ({
       ...state,
       swatchColors,
       swatchColor: swatchColors[get().indexSwatchColor],
     }))
   },
-  nextSwatchColor: () => {
+  nextSwatchColor: (colorGroupMixed: ColorGroup) => {
     set((state: ColorStore) => ({
       ...state,
       ...actions.getNextSwatchColor(get(), colorGroupMixed),
@@ -48,9 +51,16 @@ export const createColorStore: StateCreator<Store, [], [], ColorStore> = (
     }))
   },
   generateColors: () => {
+    const colors = actions.generateColors(get())
+    // TODO: only development purpose (add VITE env variables)
+    colors.items.map((item) => {
+      const spy = item.resultColor.id.valueOf().substring(0, 3)
+      item.spy = spy
+    })
+
     set((state: ColorStore) => ({
       ...state,
-      colors: actions.generateColors(get()),
+      colors,
     }))
     get().extractSwatchColors()
   },

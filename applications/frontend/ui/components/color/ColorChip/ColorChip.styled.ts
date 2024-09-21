@@ -48,6 +48,17 @@ export const Chip = styled.div<ChipProps>`
   }
 `
 
+export const ChipDebug = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1rem;
+  font-weight: 700;
+  color: white;
+  text-transform: uppercase;
+`
+
 export const MixedChip = styled(Chip)`
   position: absolute;
   top: 0;

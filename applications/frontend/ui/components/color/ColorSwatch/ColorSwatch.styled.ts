@@ -26,4 +26,11 @@ export const Swatch = styled.div`
   touch-action: none;
   animation: color-beat 2s ease-in-out infinite;
   z-index: 2;
+  font-size: 1rem;
+  font-weight: 700;
+  color: white;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `

@@ -8,7 +8,7 @@ import { SwatchWrapper, Swatch } from './ColorSwatch.styled'
 export type SubtractedColorReached = Element | null
 
 interface Props {
-  color: Color
+  color: Color & { spy?: string }
   onDragEnd: (relatedTarget: SubtractedColorReached) => void
 }
 
@@ -38,7 +38,9 @@ export const ColorSwatch = ({ color, onDragEnd }: Props) => {
         ref={targetElementRef}
         className="color-draggable"
         style={{ backgroundColor: color.value }}
-      ></Swatch>
+      >
+        {color.spy}
+      </Swatch>
     </>
   )
 }
