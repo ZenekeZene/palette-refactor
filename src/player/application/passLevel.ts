@@ -9,7 +9,7 @@ import { toPlayerResponse } from '@gameContext/player/application/mapper/PlayerM
 import { PassLevelRequest } from '@gameContext/player/application/dto/PassLevelRequest'
 
 @injectable()
-class PassLevel implements UseCase<PassLevelRequest, PlayerResponse> {
+export class PassLevel implements UseCase<PassLevelRequest, PlayerResponse> {
   constructor(
     @inject(Types.PlayerRepository) private repository: PlayerRepository,
   ) {}
@@ -25,5 +25,3 @@ class PassLevel implements UseCase<PassLevelRequest, PlayerResponse> {
     return toPlayerResponse(player)
   }
 }
-
-export { PassLevel }

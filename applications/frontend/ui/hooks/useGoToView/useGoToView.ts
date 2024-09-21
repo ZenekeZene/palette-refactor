@@ -12,7 +12,7 @@ const delayed = (callback: (path: string) => void, path: string) => {
 
 const views = [
   { event: events.gameOver, path: FinalView.path },
-  { event: events.decrementedLives, path: TryAgainView.path },
+  { event: events.livesDecremented, path: TryAgainView.path },
 ]
 
 export const useGoToView = () => {

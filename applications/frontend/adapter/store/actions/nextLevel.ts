@@ -4,7 +4,7 @@ import { PassLevel } from '@gameContext/player/application/passLevel'
 import { PassLevelRequest } from '@gameContext/player/application/dto/PassLevelRequest'
 import { Player } from '../types/store'
 
-const nextLevel = (player: Player): Player => {
+export const nextLevel = (player: Player): Player => {
   const passLevelRequest = new PassLevelRequest(player.id)
   const passLevel: PassLevel = container.resolve(Types.PassLevel)
   try {
@@ -14,5 +14,3 @@ const nextLevel = (player: Player): Player => {
     return player
   }
 }
-
-export { nextLevel }

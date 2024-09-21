@@ -1,7 +1,7 @@
 export const events = {
   colorMixFailure: 'colorMixFailure',
   colorMixSuccess: 'colorMixSuccess',
-  decrementedLives: 'decrementedLives',
+  livesDecremented: 'livesDecremented',
   gameOver: 'gameOver',
 }
 
