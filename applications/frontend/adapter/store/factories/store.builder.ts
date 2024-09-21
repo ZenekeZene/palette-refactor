@@ -26,9 +26,11 @@ class StoreBuilder {
     const quotes = toQuotesCollectionResponse(new QuotesCollection([quote]))
 
     const playerDomain = Player.fromPrimitives({
+      id: 'player',
       lives: 0,
       score: 0,
       levelIndex: 0,
+      levelId: levelsRaw[0].id,
       bonus: 0,
     })
 

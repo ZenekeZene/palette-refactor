@@ -83,17 +83,13 @@ export class Player extends AggregateRoot {
     }
   }
 
-  static fromPrimitives(
-    data: PlayerPrimitive,
-    playerId: PlayerId,
-    levelId: LevelId,
-  ): Player {
+  static fromPrimitives(data: PlayerPrimitive): Player {
     return new Player(
-      playerId || new PlayerId(),
+      new PlayerId(data.id),
       new PlayerLives(data.lives),
       new PlayerScore(data.score),
       new PlayerLevelIndex(data.levelIndex),
-      levelId,
+      new LevelId(data.levelId),
       new PlayerBonus(data.bonus),
     )
   }
