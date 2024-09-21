@@ -18,13 +18,10 @@ export const generateColors = ({
   player: { levelIndex, ...player },
 }: PlayerStoreState): Colors => {
   const level = getLevel(levelsCollectionId, levelIndex)
-  const playerId = player.id
-  const levelId = level.id
-  // TODO: primitives, not models
   const generateColorsRequest = new GenerateColorsRequest(
-    level.getNumberOfChips().valueOf(),
-    levelId.valueOf(),
-    playerId.valueOf(),
+    level.numberOfChips,
+    level.id,
+    player.id,
   )
   const generateColors = container.resolve<GenerateColors>(Types.GenerateColors)
   return generateColors.execute(generateColorsRequest)

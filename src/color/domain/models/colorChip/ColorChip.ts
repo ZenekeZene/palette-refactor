@@ -1,5 +1,5 @@
 import { Entity } from '@gameContext/shared/domain/utils/Entity'
-import { Color, ColorPrimitive } from '../Color'
+import { Color } from '../Color'
 import { ColorChipType, ColorChipTypeOf } from './ColorChipType'
 import { ColorChipId } from './ColorChipId'
 
@@ -19,7 +19,7 @@ export class ColorChip extends Entity {
     return this.value.isEqualTo(colorChip.value)
   }
 
-  toPrimitive(): ColorChipPrimitive {
+  toPrimitive() {
     return {
       id: this.id.valueOf(),
       value: this.value.valueOf(),
@@ -53,8 +53,4 @@ export class ColorChip extends Entity {
   }
 }
 
-export interface ColorChipPrimitive {
-  id: string
-  value: ColorPrimitive
-  type: string
-}
+export type ColorChipPrimitive = ReturnType<ColorChip['toPrimitive']>

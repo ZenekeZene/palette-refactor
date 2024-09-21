@@ -36,11 +36,13 @@ export class Color extends ValueObject<string> {
   }
 
   lightness(): number {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [_, __, l] = this.toArray()
     return l
   }
 
   toArray(): [number, number, number] {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [_, h, s, l] = this.valueOf().match(
       /hsl\((\d{1,3}), (\d{1,3})%, (\d{1,3})%\)/,
     )!
@@ -52,5 +54,3 @@ export class Color extends ValueObject<string> {
     return this.valueOf() === color.valueOf()
   }
 }
-
-export type ColorPrimitive = string

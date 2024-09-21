@@ -3,6 +3,6 @@ import type { GetLevelResponse } from '../dto/GetLevelResponse'
 
 export const toGetLevelResponse = (level: Level): GetLevelResponse => {
   return {
-    level,
+    level: level.toPrimitive(),
   }
 }

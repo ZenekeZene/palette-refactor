@@ -5,7 +5,7 @@ import { Player } from '../Player'
 export class LivesDecrementedEvent extends DomainEvent<Player> {
   static readonly EVENT_NAME = 'player.lives.decremented'
 
-  readonly livesDecremented: PlayerLives = new PlayerLives(1)
+  readonly livesDecremented: number = new PlayerLives(1).valueOf()
 
   public static of(args: { aggregate: Player }): DomainEvent<Player> {
     return new LivesDecrementedEvent({

@@ -1,11 +1,14 @@
 import { DomainEvent } from '@gameContext/shared/domain/utils/DomainEvent'
-import { ColorGroup } from '@gameContext/color/domain/models/colorGroup/ColorGroup'
+import {
+  ColorGroup,
+  ColorGroupPrimitive,
+} from '@gameContext/color/domain/models/colorGroup/ColorGroup'
 import { ColorGroupCollection } from '../ColorGroupCollection'
 
 export class ColorMixingSuccessfulEvent extends DomainEvent<ColorGroupCollection> {
   static readonly EVENT_NAME = 'color.mixing.successful'
 
-  readonly mixed: ColorGroup | undefined = undefined
+  readonly mixed: ColorGroupPrimitive
 
   public static of(args: {
     aggregate: ColorGroupCollection
@@ -13,7 +16,7 @@ export class ColorMixingSuccessfulEvent extends DomainEvent<ColorGroupCollection
   }): DomainEvent<ColorGroupCollection> {
     return new ColorMixingSuccessfulEvent({
       aggregate: args.aggregate,
-      mixed: args.mixed,
+      mixed: args.mixed.toPrimitive(),
     })
   }
 
@@ -22,7 +25,7 @@ export class ColorMixingSuccessfulEvent extends DomainEvent<ColorGroupCollection
     mixed,
   }: {
     aggregate: ColorGroupCollection
-    mixed: ColorGroup
+    mixed: ColorGroupPrimitive
   }) {
     super({
       eventName: ColorMixingSuccessfulEvent.EVENT_NAME,

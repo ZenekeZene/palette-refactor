@@ -24,7 +24,6 @@ export class MixColorOnBonusUsed
 
   async on(domainEvent: BonusUsedEvent): Promise<void> {
     const { aggregate } = domainEvent
-    // TODO: domain event should have primitive values
     const { id: playerId, levelId } = aggregate
     const colorGroupCollection = this.colorRepository.findByPlayerIdAndLevelId(
       playerId,

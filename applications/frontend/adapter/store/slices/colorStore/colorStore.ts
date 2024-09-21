@@ -54,7 +54,7 @@ export const createColorStore: StateCreator<Store, [], [], ColorStore> = (
     const colors = actions.generateColors(get())
     if (isDebugMode) {
       colors.items.map((item) => {
-        const spy = item.resultColor.id.valueOf().substring(0, 3)
+        const spy = item.resultColor.id.substring(0, 3)
         item.spy = spy
       })
     }

@@ -2,20 +2,14 @@ import { Entity } from '@gameContext/shared/domain/utils/Entity'
 import { LevelId } from '@gameContext/shared/domain/LevelId'
 import { LevelPrizeBonus } from '../levelPrize/LevelPrizeBonus'
 import { LevelPrizeLives } from '../levelPrize/LevelPrizeLives'
-import { LevelPrize, LevelPrizeRawModel } from '../levelPrize/LevelPrize'
+import { LevelPrize, LevelPrizePrimitive } from '../levelPrize/LevelPrize'
 import { LevelChips } from './LevelChips'
 
-export interface LevelRawModel {
-  id: string
-  numberOfChips: number
-  prize: LevelPrizeRawModel
-}
-
-class Level extends Entity {
-  constructor(
+export class Level extends Entity {
+  private constructor(
     readonly id: LevelId,
-    private readonly numberOfChips: LevelChips,
-    private readonly levelPrize: LevelPrize,
+    readonly numberOfChips: LevelChips,
+    readonly levelPrize: LevelPrize,
   ) {
     super()
   }
@@ -31,7 +25,7 @@ class Level extends Entity {
   static fromPrimitive(
     id: string,
     numberOfChips: number,
-    levelPrizeValue: LevelPrizeRawModel,
+    levelPrizeValue: LevelPrizePrimitive,
   ): Level {
     const levelId = new LevelId(id)
     const levelChips = new LevelChips(numberOfChips)
@@ -41,13 +35,13 @@ class Level extends Entity {
     return new Level(levelId, levelChips, levelPrize)
   }
 
-  static valueOf(level: Level): LevelRawModel {
+  toPrimitive() {
     return {
-      id: level.id.valueOf(),
-      numberOfChips: level.numberOfChips.valueOf(),
-      prize: level.levelPrize.valueOf(),
+      id: this.id.valueOf(),
+      numberOfChips: this.numberOfChips.valueOf(),
+      prize: this.levelPrize.toPrimitive(),
     }
   }
 }
 
-export { Level }
+export type LevelPrimitive = ReturnType<Level['toPrimitive']>

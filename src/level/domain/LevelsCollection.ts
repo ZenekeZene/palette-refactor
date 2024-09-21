@@ -2,7 +2,7 @@ import { AggregateRoot } from '@gameContext/shared/domain/utils/AggregateRoot'
 import { LevelPrize } from '@gameContext/level/domain/models/levelPrize/LevelPrize'
 import {
   Level,
-  LevelRawModel,
+  LevelPrimitive,
 } from '@gameContext/level/domain/models/level/Level'
 import { LevelsCollectionCreatedEvent } from '@gameContext/level/domain/events/LevelsCollectionCreatedEvent'
 import { LevelId } from '@gameContext/shared/domain/LevelId'
@@ -12,13 +12,13 @@ export class LevelsCollection extends AggregateRoot {
   readonly levels: Level[] = []
   readonly id: LevelsCollectionId
 
-  constructor(initialLevels: LevelRawModel[] = [], id?: LevelsCollectionId) {
+  constructor(initialLevels: LevelPrimitive[] = [], id?: LevelsCollectionId) {
     super()
     this.id = id ? id : new LevelsCollectionId()
     this.generate(initialLevels)
   }
 
-  private generate(initialLevels: LevelRawModel[]): void {
+  private generate(initialLevels: LevelPrimitive[]): void {
     initialLevels.forEach((initialLevel): void => {
       const { id, numberOfChips, prize } = initialLevel
       const level = Level.fromPrimitive(id, numberOfChips, prize)

@@ -18,7 +18,7 @@ export const registerInMemory = (
     levels.items,
   )
   const registerLevels: RegisterLevels = container.resolve(Types.RegisterLevels)
-  const levelId = levels.items[player.levelIndex].id.valueOf()
+  const levelId = levels.items[player.levelIndex].id
 
   const registerPlayerRequest = new RegisterPlayerRequest(player.id, {
     ...player,

@@ -48,6 +48,44 @@ export class ColorGroupCollection extends AggregateRoot {
     return this.items.filter((colorGroup) => colorGroup.isPending())
   }
 
+  private success(colorGroup: ColorGroup) {
+    if (this.isColorGroupPresent(colorGroup)) {
+      colorGroup.success()
+      this.recordColorMixingSuccessful(colorGroup)
+    } else {
+      throw new ColorGroupNotFoundInCollection(colorGroup.id)
+    }
+  }
+
+  private fail(colorGroup: ColorGroup, swatchColorId: ColorChipId) {
+    if (this.isColorGroupPresent(colorGroup)) {
+      colorGroup.fail()
+      this.recordColorMixingFailed(colorGroup.id, swatchColorId)
+    } else {
+      throw new ColorGroupNotFoundInCollection(colorGroup.id)
+    }
+  }
+
+  private recordColorMixingSuccessful(colorGroupMixed: ColorGroup) {
+    const colorMixingSuccessful = ColorMixingSuccessfulEvent.of({
+      aggregate: this,
+      mixed: colorGroupMixed,
+    })
+    this.record(colorMixingSuccessful)
+  }
+
+  private recordColorMixingFailed(
+    colorGroupIdFailed: ColorGroupId,
+    swatchColorId: ColorChipId,
+  ) {
+    const colorMixingFailed = ColorMixingFailedEvent.of({
+      aggregate: this,
+      colorGroupIdFailed,
+      swatchColorId,
+    })
+    this.record(colorMixingFailed)
+  }
+
   getColorGroupById(colorGroupId: ColorGroupId): ColorGroup {
     return this.items.find((item) => item.id.equals(colorGroupId))!
   }
@@ -82,44 +120,6 @@ export class ColorGroupCollection extends AggregateRoot {
 
   each(callback: (colorGroup: ColorGroup) => void) {
     this.items.forEach(callback)
-  }
-
-  success(colorGroup: ColorGroup) {
-    if (this.isColorGroupPresent(colorGroup)) {
-      colorGroup.success()
-      this.recordColorMixingSuccessful(colorGroup)
-    } else {
-      throw new ColorGroupNotFoundInCollection(colorGroup.id)
-    }
-  }
-
-  fail(colorGroup: ColorGroup, swatchColorId: ColorChipId) {
-    if (this.isColorGroupPresent(colorGroup)) {
-      colorGroup.fail()
-      this.recordColorMixingFailed(colorGroup, swatchColorId)
-    } else {
-      throw new ColorGroupNotFoundInCollection(colorGroup.id)
-    }
-  }
-
-  private recordColorMixingSuccessful(colorGroup: ColorGroup) {
-    const colorMixingSuccessful = ColorMixingSuccessfulEvent.of({
-      aggregate: this,
-      mixed: colorGroup,
-    })
-    this.record(colorMixingSuccessful)
-  }
-
-  private recordColorMixingFailed(
-    colorGroup: ColorGroup,
-    swatchColorId: ColorChipId,
-  ) {
-    const colorMixingFailed = ColorMixingFailedEvent.of({
-      aggregate: this,
-      colorGroup,
-      swatchColorId,
-    })
-    this.record(colorMixingFailed)
   }
 
   toPrimitive() {

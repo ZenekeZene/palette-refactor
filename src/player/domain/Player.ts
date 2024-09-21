@@ -72,8 +72,9 @@ export class Player extends AggregateRoot {
     this.record(playerDeadEvent)
   }
 
-  toPrimitive(): PlayerPrimitive {
+  toPrimitive() {
     return {
+      id: this.id.valueOf(),
       lives: this.lives.valueOf(),
       score: this.score.valueOf(),
       levelIndex: this.levelIndex.valueOf(),
@@ -98,10 +99,4 @@ export class Player extends AggregateRoot {
   }
 }
 
-export type PlayerPrimitive = {
-  lives: number
-  score: number
-  levelIndex: number
-  levelId: string
-  bonus: number
-}
+export type PlayerPrimitive = ReturnType<Player['toPrimitive']>

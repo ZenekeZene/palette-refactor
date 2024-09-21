@@ -21,7 +21,8 @@ export class GetNextSwatchColorOnColorMixingSuccessful
     }
     const store = getStore()
     const state = store.getState()
-    state.nextSwatchColor(domainEvent.mixed)
-    state.successColor(domainEvent.mixed?.id.valueOf())
+    const { mixed } = domainEvent
+    state.successColor(mixed.id)
+    state.nextSwatchColor(mixed.swatchColor)
   }
 }

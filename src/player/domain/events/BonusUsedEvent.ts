@@ -5,7 +5,7 @@ import { PlayerBonus } from '../models/PlayerBonus'
 export class BonusUsedEvent extends DomainEvent<Player> {
   static readonly EVENT_NAME = 'bonus.used'
 
-  readonly bonusUsed: PlayerBonus = new PlayerBonus(1)
+  readonly bonusUsed: number = new PlayerBonus(1).valueOf()
 
   public static of(args: { aggregate: Player }): DomainEvent<Player> {
     return new BonusUsedEvent({
@@ -17,6 +17,7 @@ export class BonusUsedEvent extends DomainEvent<Player> {
     super({
       eventName: BonusUsedEvent.EVENT_NAME,
       aggregate,
+      data: aggregate.toPrimitive(),
     })
   }
 }

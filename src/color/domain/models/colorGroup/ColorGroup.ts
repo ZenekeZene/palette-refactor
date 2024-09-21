@@ -65,3 +65,5 @@ export class ColorGroup extends Entity {
     }
   }
 }
+
+export type ColorGroupPrimitive = ReturnType<ColorGroup['toPrimitive']>

@@ -11,7 +11,7 @@ export class QuotesCollection extends AggregateRoot {
 
   constructor(initialQuotes: QuoteRawModel[] = [], id?: string) {
     super()
-    this.id = id ? id : Uuid.random().toPrimitive()
+    this.id = id ? id : Uuid.random()
     this.generate(initialQuotes)
   }
 

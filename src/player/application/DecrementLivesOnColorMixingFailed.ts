@@ -4,7 +4,6 @@ import { ColorMixingFailedEvent } from '@gameContext/color/domain/events/ColorMi
 import { DomainEvent } from '@gameContext/shared/domain/utils/DomainEvent'
 import type { EventBus } from '@gameContext/shared/domain/utils/EventBus'
 import { Types } from '@frontend/infrastructure/dependency-injection/identifiers'
-import { PlayerId } from '@gameContext/shared/domain/PlayerId'
 import { Class } from '@gameContext/shared/types/Class'
 import { AggregateRoot } from '@gameContext/shared/domain/utils/AggregateRoot'
 import type { PlayerRepository } from '../domain/repositories/PlayerRepository'
@@ -25,8 +24,7 @@ export class DecrementLivesOnColorMixingFailed
 
   async on(domainEvent: ColorMixingFailedEvent): Promise<void> {
     const { aggregate } = domainEvent
-    const playerId = new PlayerId(aggregate.playerId.valueOf())
-    const player = this.repository.findById(playerId)
+    const player = this.repository.findById(aggregate.playerId)
     if (!player) {
       throw new PlayerNotFoundException()
     }

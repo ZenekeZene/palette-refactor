@@ -17,7 +17,6 @@ export class DecrementBonusOnBonusUsed
   async on(domainEvent: BonusUsedEvent): Promise<void> {
     const store = getStore()
     const { consumeBonus } = store.getState()
-    // TODO: the domain event properties has to be primitives
-    consumeBonus(domainEvent.bonusUsed.valueOf())
+    consumeBonus(domainEvent.bonusUsed)
   }
 }

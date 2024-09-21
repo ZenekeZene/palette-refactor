@@ -26,13 +26,8 @@ export class ShowCorrectOnColorMixingFailed
     }
     const store = getStore()
     store.getState().failColor()
-    // TODO: the domain event properties has to be primitives
-    const correctMixed = domainEvent.aggregate.searchCorrectColorGroup(
-      domainEvent.swatchColorId,
-    )
-    // TODO: change the event name to colorMixingFailed
     const event = createEvent(events.colorMixFailure, {
-      correctColorGroupId: correctMixed.id.valueOf(),
+      correctColorGroupId: domainEvent.correctColorGroupId,
     })
     dispatchEvent(event)
   }

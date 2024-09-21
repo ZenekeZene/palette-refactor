@@ -5,7 +5,6 @@ export const events = {
   gameOver: 'gameOver',
 }
 
-// TODO: make sense of use a event bus?
 export const createEvent = (eventName: string, payload?: unknown) => {
   const event = new CustomEvent(eventName, {
     detail: payload,

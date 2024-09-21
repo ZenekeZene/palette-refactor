@@ -9,14 +9,12 @@ interface Response {
 
 export const getNextSwatchColor = (
   colorState: ColorStoreState,
-  colorGroupMixed: ColorGroup,
+  swatchColorUsed: ColorGroup,
 ): Response => {
   const swatchColors = colorState.swatchColors
   const prev = colorState.indexSwatchColor
-  // TODO: use primitives (search in frontend app by 'valueOf')
   const swatchColorsFiltered = swatchColors.filter(
-    (swatchColor) =>
-      swatchColor.id !== colorGroupMixed.swatchColor.id.valueOf(),
+    (swatchColor) => swatchColor.id !== swatchColorUsed.id,
   )
   const indexSwatchColor = (prev + 1) % swatchColorsFiltered.length
   const swatchColor = swatchColorsFiltered[indexSwatchColor] ?? null
