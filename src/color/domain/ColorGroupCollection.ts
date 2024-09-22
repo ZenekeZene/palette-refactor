@@ -90,13 +90,15 @@ export class ColorGroupCollection extends AggregateRoot {
     return this.items.find((item) => item.id.equals(colorGroupId))!
   }
 
-  mixColorGroupPending(): ColorGroup {
+  mixColorGroupPending(currentSwatchColorId: ColorChipId): ColorGroup {
     const colorGroupsNotMixed = this.getColorGroupsNotMixed()
     if (colorGroupsNotMixed.length === 0) {
       throw NoColorGroupToMix.of(this.id)
     }
-    const randomIndex = Math.floor(Math.random() * colorGroupsNotMixed.length)
-    const colorGroupToMix = colorGroupsNotMixed[randomIndex]
+
+    const colorGroupToMix = colorGroupsNotMixed.find((colorGroup) =>
+      colorGroup.swatchColor.id.equals(currentSwatchColorId),
+    )!
     this.success(colorGroupToMix)
     return colorGroupToMix
   }

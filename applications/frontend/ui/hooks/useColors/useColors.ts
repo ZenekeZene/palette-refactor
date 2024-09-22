@@ -5,10 +5,6 @@ import type {
   ColorStoreState,
 } from '@frontend/adapter/store/slices/colorStore/colorStore.d'
 import { useStore } from '@frontend/adapter/store/useStore'
-import { Color } from '@gameContext/shared/infrastructure/store/store'
-
-const randomizeSwatchColors = (swatchColors: Color[]) =>
-  swatchColors.sort(() => Math.random() - 0.5)
 
 export const useColors = () => {
   const state = useStore((state: ColorStoreState) => state)
@@ -24,9 +20,7 @@ export const useColors = () => {
     methods.generateColors()
   }, [methods])
 
-  // TODO: call to action and a usecase to retrieve the next swatch color?
-  const swatchColorsRandomized = randomizeSwatchColors(state.swatchColors)
-  const swatchColor = swatchColorsRandomized[state.indexSwatchColor]
+  const swatchColor = state.swatchColors?.[state.indexSwatchColor] ?? null
 
   return {
     colors: state.colors,

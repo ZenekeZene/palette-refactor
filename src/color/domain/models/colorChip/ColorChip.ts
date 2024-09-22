@@ -1,7 +1,7 @@
 import { Entity } from '@gameContext/shared/domain/utils/Entity'
+import { ColorChipId } from '@gameContext/shared/domain/ColorChipId'
 import { Color } from '../Color'
 import { ColorChipType, ColorChipTypeOf } from './ColorChipType'
-import { ColorChipId } from './ColorChipId'
 
 export class ColorChip extends Entity {
   readonly id: ColorChipId

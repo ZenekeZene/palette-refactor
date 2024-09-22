@@ -6,7 +6,7 @@ type EntityId = Id | Uuid
 export abstract class Entity {
   protected abstract readonly id: EntityId
 
-  public equals(object: Entity): boolean {
+  equals(object: Entity): boolean {
     if (this === object) {
       return true
     }
@@ -16,7 +16,7 @@ export abstract class Entity {
     return this.id.equals(object.id)
   }
 
-  public equalsById(id: EntityId): boolean {
+  equalsById(id: EntityId): boolean {
     return this.id.equals(id)
   }
 }

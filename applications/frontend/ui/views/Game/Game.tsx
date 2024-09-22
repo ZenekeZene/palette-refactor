@@ -22,10 +22,6 @@ export const GameView = () => {
     mixColor(groupId, swatchColorId)
   }
 
-  const handleUseBonus = () => {
-    launchBonus()
-  }
-
   return (
     <GameWrapper className="view">
       {colors && (
@@ -37,7 +33,7 @@ export const GameView = () => {
             colors={colors}
             swatchColor={swatchColor}
             handleDragEnd={handleDragEnd}
-            handleUseBonus={handleUseBonus}
+            handleUseBonus={launchBonus}
           />
         </>
       )}

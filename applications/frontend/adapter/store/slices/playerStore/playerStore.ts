@@ -24,7 +24,8 @@ export const createPlayerStore = (initialProps: PlayerStoreState) => {
     },
     launchBonus: () => {
       const player = get().player
-      actions.launchBonus(player)
+      const currentSwatchColor = get().swatchColor
+      actions.launchBonus(player, currentSwatchColor)
     },
     consumeBonus: (bonusToConsume: number) => {
       const player = get().player
