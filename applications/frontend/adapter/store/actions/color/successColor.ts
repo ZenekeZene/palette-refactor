@@ -1,8 +1,8 @@
 import { ColorGroup } from '@frontend/adapter/store/types/store.d'
-import { ColorStatusTypes, type Colors } from '../../types/store.d'
-import type { ColorStoreState } from '../../slices/colorStore/colorStore.d'
 import { goTo } from '@frontend/adapter/router/goTo'
 import { NextLevelView } from '@frontend/ui/views/NextLevel/NextLevel'
+import { ColorStatusTypes, type Colors } from '../../types/store.d'
+import type { ColorStoreState } from '../../slices/colorStore/colorStore.d'
 
 const areAllMixed = (colors: ColorGroup[]): boolean =>
   colors.every((color: ColorGroup) => color.status === ColorStatusTypes.MIXED)
