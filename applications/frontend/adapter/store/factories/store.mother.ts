@@ -11,7 +11,7 @@ import {
 } from '@gameContext/player/application/dto/PlayerResponse'
 import { Uuid } from '@gameContext/shared/domain/utils/Uuid'
 import { QuoteDTO } from '@gameContext/quote/application/dto/QuoteDTO'
-import { actions } from '../actions/actions'
+import { registerInMemory } from '../actions/registerInMemory'
 
 export class StoreMother {
   private static readonly defaultPlayer: PlayerResponseProps = {
@@ -53,7 +53,7 @@ export class StoreMother {
     const mocked = (selector: (state: Store) => void) =>
       selector(store.getState())
     useStore.mockImplementation(mocked)
-    actions.registerInMemory(state.player, state.levels, state.quotes)
+    registerInMemory(state.player, state.levels, state.quotes)
   }
 
   public static minimalStore(useStore: UseStore): void {

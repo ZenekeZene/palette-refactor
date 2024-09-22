@@ -20,7 +20,7 @@ export const useColors = () => {
     methods.generateColors()
   }, [methods])
 
-  const swatchColor = state.swatchColors?.[state.indexSwatchColor] ?? null
+  const swatchColor = state.swatchColors[state.indexSwatchColor]
 
   return {
     colors: state.colors,

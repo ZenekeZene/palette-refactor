@@ -25,14 +25,19 @@ export class MixColorOnBonusUsed
   async on(domainEvent: BonusUsedEvent): Promise<void> {
     const { aggregate } = domainEvent
     const { id: playerId, levelId } = aggregate
+    // TODO: remove !
     const colorGroupCollection = this.colorRepository.findByPlayerIdAndLevelId(
       playerId,
-      levelId,
+      levelId!,
     )
     if (!colorGroupCollection) {
-      throw ColorGroupCollectionNotFound.ofPlayerIdAndLevelId(playerId, levelId)
+      throw ColorGroupCollectionNotFound.ofPlayerIdAndLevelId(
+        playerId,
+        levelId!,
+      )
     }
-    colorGroupCollection.mixColorGroupPending()
+    const currentSwatchColorId = domainEvent.currentSwatchColorId
+    colorGroupCollection.mixColorGroupPending(currentSwatchColorId)
     this.colorRepository.save(colorGroupCollection)
     this.eventBus.publish(colorGroupCollection.pullDomainEvents())
   }

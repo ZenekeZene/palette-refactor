@@ -27,7 +27,7 @@ const extractColorsByType = (
     color: type === ColorTypes.RESULT ? item.resultColor : item.subtractedColor,
     groupId: item.id,
     status: item.status,
-    spy: item.spy!,
+    spy: item.spy,
   }))
 }
 

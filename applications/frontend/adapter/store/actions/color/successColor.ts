@@ -20,7 +20,7 @@ export const successColor = (
   colorState: ColorStoreState,
   colorGroupId: string,
 ): Colors => {
-  const colors = colorState.colors!
+  const colors = colorState.colors
   const updatedColors = {
     ...colors,
     items: changeColorStatusToMixed(colors.items, colorGroupId),

@@ -8,7 +8,7 @@ import { SwatchWrapper, Swatch } from './ColorSwatch.styled'
 export type SubtractedColorReached = Element | null
 
 interface Props {
-  color: Color & { spy?: string }
+  color: Color & { spy: string }
   onDragEnd: (relatedTarget: SubtractedColorReached) => void
 }
 

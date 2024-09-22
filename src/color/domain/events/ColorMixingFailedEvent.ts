@@ -1,6 +1,6 @@
 import { DomainEvent } from '@gameContext/shared/domain/utils/DomainEvent'
+import { ColorChipId } from '@gameContext/shared/domain/ColorChipId'
 import { ColorGroupCollection } from '../ColorGroupCollection'
-import { ColorChipId } from '../models/colorChip/ColorChipId'
 import { ColorGroupId } from '../models/colorGroup/ColorGroupId'
 
 export class ColorMixingFailedEvent extends DomainEvent<ColorGroupCollection> {

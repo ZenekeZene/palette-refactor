@@ -9,6 +9,7 @@ import { PlayerDead } from './events/PlayerDeadEvent'
 import { BonusUsedEvent } from './events/BonusUsedEvent'
 import { PlayerWithoutBonus } from './exceptions/PlayerWithoutBonus'
 import { LevelId } from '@gameContext/shared/domain/LevelId'
+import { ColorChipId } from '@gameContext/shared/domain/ColorChipId'
 
 export class Player extends AggregateRoot {
   constructor(
@@ -17,7 +18,7 @@ export class Player extends AggregateRoot {
     public score: PlayerScore,
     public levelIndex: PlayerLevelIndex,
     public bonus: PlayerBonus,
-    public levelId?: LevelId,
+    public levelId: LevelId | undefined = undefined,
   ) {
     super()
   }
@@ -34,12 +35,12 @@ export class Player extends AggregateRoot {
     this.bonus = this.bonus.increment(value)
   }
 
-  useBonus() {
+  useBonus(currentSwatchColorId: ColorChipId) {
     if (this.bonus.isMinorThanZero()) {
       throw new PlayerWithoutBonus(this.id)
     }
     this.bonus = this.bonus.decrement()
-    this.recordBonusUsedEvent()
+    this.recordBonusUsedEvent(currentSwatchColorId)
   }
 
   decrementLives() {
@@ -51,9 +52,10 @@ export class Player extends AggregateRoot {
     }
   }
 
-  private recordBonusUsedEvent(): void {
+  private recordBonusUsedEvent(currentSwatchColorId: ColorChipId): void {
     const bonusUsedEvent = BonusUsedEvent.of({
       aggregate: this,
+      currentSwatchColorId,
     })
     this.record(bonusUsedEvent)
   }

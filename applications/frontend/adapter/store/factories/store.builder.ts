@@ -9,7 +9,7 @@ import type { PlayerResponse } from '@gameContext/player/application/dto/PlayerR
 import type { QuoteDTO } from '@gameContext/quote/application/dto/QuoteDTO'
 import { toQuotesCollectionResponse } from '@gameContext/quote/application/mapper/QuotesCollectionMapper'
 
-class StoreBuilder {
+export class StoreBuilder {
   private state: Store
 
   constructor() {
@@ -64,5 +64,3 @@ class StoreBuilder {
     return this.state
   }
 }
-
-export { StoreBuilder }

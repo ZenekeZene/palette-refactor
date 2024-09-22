@@ -1,16 +1,15 @@
 import { StateCreator } from 'zustand'
 import { ColorGroup } from '@frontend/adapter/store/types/store.d'
-import { type Store } from '../../types/store.d'
-import { actions } from '../../actions/actions'
-import type { ColorStore, ColorStoreState } from './colorStore.d'
 import { isDebugMode } from '@frontend/infrastructure/isDebugMode'
-
-const initialState: ColorStoreState = {
-  indexSwatchColor: 0,
-  swatchColor: undefined,
-  swatchColors: [],
-  colors: undefined,
-}
+import { randomizeSwatchColors } from '../../actions/color/randomizeSwatchColors'
+import { getNextSwatchColor } from '../../actions/color/getNextSwatchColor'
+import { mixColor } from '../../actions/color/mixColor'
+import { successColor } from '../../actions/color/successColor'
+import { failColor } from '../../actions/color/failColor'
+import { generateColors } from '../../actions/color/generateColors'
+import { type Store } from '../../types/store.d'
+import type { ColorStore } from './colorStore.d'
+import { initialState } from './colorStore.initialState'
 
 export const createColorStore: StateCreator<Store, [], [], ColorStore> = (
   set,
@@ -18,40 +17,37 @@ export const createColorStore: StateCreator<Store, [], [], ColorStore> = (
 ) => ({
   ...initialState,
   extractSwatchColors: () => {
-    const swatchColors = get().colors.items.map((colorGroup: ColorGroup) => ({
-      ...colorGroup.swatchColor,
-      ...(isDebugMode && { spy: colorGroup.spy }),
-    }))
+    const swatchColorsRandomized = randomizeSwatchColors(get())
 
     set((state: ColorStore) => ({
       ...state,
-      swatchColors,
-      swatchColor: swatchColors[get().indexSwatchColor],
+      swatchColors: swatchColorsRandomized,
+      swatchColor: swatchColorsRandomized[get().indexSwatchColor],
     }))
   },
   nextSwatchColor: (colorGroupMixed: ColorGroup) => {
     set((state: ColorStore) => ({
       ...state,
-      ...actions.getNextSwatchColor(get(), colorGroupMixed),
+      ...getNextSwatchColor(get(), colorGroupMixed),
     }))
   },
-  mixColor: (colorGroupId: string, swatchColorId: string): void => {
-    actions.mixColor(colorGroupId, swatchColorId)
+  mixColor: (colorGroupId: string, swatchColorId: string) => {
+    mixColor(colorGroupId, swatchColorId)
   },
-  successColor: (colorGroupId: string): void => {
+  successColor: (colorGroupId: string) => {
     set((state: ColorStore) => ({
       ...state,
-      colors: actions.successColor(get(), colorGroupId),
+      colors: successColor(get(), colorGroupId),
     }))
   },
-  failColor: (): void => {
+  failColor: () => {
     set((state: ColorStore) => ({
       ...state,
-      colors: actions.failColor(get()),
+      colors: failColor(get()),
     }))
   },
   generateColors: () => {
-    const colors = actions.generateColors(get())
+    const colors = generateColors(get())
     if (isDebugMode) {
       colors.items.map((item) => {
         const spy = item.resultColor.id.substring(0, 3)

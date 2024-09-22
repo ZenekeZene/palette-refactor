@@ -7,7 +7,7 @@ export interface GenerateColorsItem {
   readonly subtractedColor: ColorChipPrimitive
   readonly swatchColor: ColorChipPrimitive
   status: string
-  spy?: string
+  spy: string
 }
 
 export interface GenerateColorsResponse extends Response {

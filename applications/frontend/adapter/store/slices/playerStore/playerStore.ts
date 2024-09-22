@@ -1,8 +1,9 @@
 import { StateCreator } from 'zustand'
 import type { Store } from '../../types/store'
-import { actions } from '../../actions/actions'
 import { defaultState } from '../../defaultState'
 import { PlayerStore, PlayerStoreState } from './playerStore.d'
+import { nextLevel } from '../../actions/nextLevel'
+import { launchBonus } from '../../actions/launchBonus'
 
 export const createPlayerStore = (initialProps: PlayerStoreState) => {
   const create: StateCreator<Store, [], [], PlayerStore> = (set, get) => ({
@@ -25,7 +26,7 @@ export const createPlayerStore = (initialProps: PlayerStoreState) => {
     launchBonus: () => {
       const player = get().player
       const currentSwatchColor = get().swatchColor
-      actions.launchBonus(player, currentSwatchColor)
+      launchBonus(player, currentSwatchColor)
     },
     consumeBonus: (bonusToConsume: number) => {
       const player = get().player
@@ -38,7 +39,7 @@ export const createPlayerStore = (initialProps: PlayerStoreState) => {
     nextLevel: () => {
       get().nextQuote()
       const player = get().player
-      const playerWithLevelPassed = actions.nextLevel(player)
+      const playerWithLevelPassed = nextLevel(player)
       set((state: PlayerStore) => ({ ...state, player: playerWithLevelPassed }))
     },
   })
